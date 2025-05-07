@@ -280,26 +280,21 @@
                     map.Overlays.unload(object);
                 }
 
-                let zoomLevel = 5;
-
                 if (provinceId && !districtId && !subdistrictId) {
                     object = new longdo.Overlays.Object(provinceId, 'IG', {
                         lineColor: '#0054ff',
                     });
                     map.Overlays.load(object);
-                    zoomLevel = 5;
                 } else if (districtId && !subdistrictId) {
                     object = new longdo.Overlays.Object(districtId, 'IG', {
                         lineColor: '#00ff00',
                     });
                     map.Overlays.load(object);
-                    zoomLevel = 5.5;
                 } else if (subdistrictId && districtId && provinceId) {
                     object = new longdo.Overlays.Object(subdistrictId, 'IG', {
                         lineColor: '#ff0000',
                     });
                     map.Overlays.load(object);
-                    zoomLevel = 6;
                 }
 
                 map.zoom(zoomLevel, true);
