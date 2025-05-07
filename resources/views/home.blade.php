@@ -43,8 +43,7 @@
             </div>
             <div class="mb-4">
                 <label for="district" class="block text-sm font-medium text-gray-700">เลือกอำเภอ</label>
-                <select id="district"
-                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="district" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>เลือกอำเภอ</option>
                     @foreach ($districts as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -53,8 +52,7 @@
             </div>
             <div class="mb-4">
                 <label for="subdistrict" class="block text-sm font-medium text-gray-700">เลือกตำบล</label>
-                <select id="subdistrict"
-                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="subdistrict" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>เลือกตำบล</option>
                     @foreach ($subdistricts as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -62,8 +60,7 @@
                 </select>
             </div>
             <div class="flex justify-center gap-2">
-                <button id="btn-search"
-                    class="px-4 py-2 bg-blue-500 rounded hover:bg-blue-400 text-white">ค้นหา</button>
+                <button id="btn-search" class="px-4 py-2 bg-blue-500 rounded hover:bg-blue-400 text-white">ค้นหา</button>
                 <button id="closeModal" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">ปิด</button>
             </div>
         </div>
@@ -103,31 +100,6 @@
 
         function menuChange(item) {
             $('#modal').removeClass('hidden').addClass('flex');
-            let selectHtml = '';
-            let selectId = '';
-            let placeholder = '';
-            let ajaxUrl = '';
-
-            if (item.type === 'province') {
-                selectId = 'province';
-                placeholder = 'เลือกจังหวัด';
-                ajaxUrl = '/api/provinces';
-            } else if (item.type === 'district') {
-                selectId = 'district';
-                placeholder = 'เลือกอำเภอ';
-                ajaxUrl = '/api/districts';
-            } else if (item.type === 'subdistrict') {
-                selectId = 'subdistrict';
-                placeholder = 'เลือกตำบล';
-                ajaxUrl = '/api/subdistricts';
-            }
-
-            selectHtml = `<div class="relative">
-                    <input id="searchInput" type="text" placeholder="ค้นหา... (ขั้นต่ำ 3 ตัวอักษร)" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2">
-                    <select id="${selectId}" class="form-select w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>${placeholder}</option>
-                    </select>
-                  </div>`;
 
             /* Swal.fire({
                 title: 'ค้นหา' + item.label,
@@ -222,10 +194,6 @@
             }); */
         }
 
-        $('#openModal').on('click', function() {
-            $('#modal').removeClass('hidden').addClass('flex');
-        });
-
         $('#closeModal').on('click', function() {
             $('#modal').removeClass('flex').addClass('hidden');
         });
@@ -294,6 +262,54 @@
                             $('#subdistrict').append('<option value="' + item.id + '">' + item.name + '</option>');
                         });
                     }
+                });
+            }
+        });
+
+        let object;
+
+        $('#btn-search').on('click', function() {
+            const provinceId = $('#province').val();
+            const districtId = $('#district').val();
+            const subdistrictId = $('#subdistrict').val();
+
+            if (provinceId || districtId || subdistrictId) {
+                $('#modal').removeClass('flex').addClass('hidden');
+
+                if (object) {
+                    map.Overlays.unload(object);
+                }
+
+                let zoomLevel = 5;
+
+                if (provinceId && !districtId && !subdistrictId) {
+                    object = new longdo.Overlays.Object(provinceId, 'IG', {
+                        lineColor: '#0054ff',
+                    });
+                    map.Overlays.load(object);
+                    zoomLevel = 5;
+                } else if (districtId && !subdistrictId) {
+                    object = new longdo.Overlays.Object(districtId, 'IG', {
+                        lineColor: '#00ff00',
+                    });
+                    map.Overlays.load(object);
+                    zoomLevel = 5.5;
+                } else if (subdistrictId && !districtId) {
+                    object = new longdo.Overlays.Object(subdistrictId, 'IG', {
+                        lineColor: '#ff0000',
+                    });
+                    map.Overlays.load(object);
+                    zoomLevel = 6;
+                }
+
+                map.zoom(zoomLevel, true);
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'กรุณาเลือก',
+                    text: 'จังหวัด, อำเภอ หรือ ตำบล',
+                    showConfirmButton: true,
+                    backdrop: false,
                 });
             }
         });
