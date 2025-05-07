@@ -248,10 +248,9 @@
         $('#district').on('change', function() {
             var districtId = $(this).val();
             $('#subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
-            console.log('/api/subdistricts/');
             if (districtId) {
                 $.ajax({
-                    url: '/api/subdistricts/',
+                    url: '/api/subdistricts',
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
