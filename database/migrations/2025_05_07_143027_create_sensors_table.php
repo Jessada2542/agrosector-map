@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sensors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('sensor_key_id');
+            $table->unsignedBigInteger('sensor_key_id');
             $table->float('n')->nullable();
             $table->float('p')->nullable();
             $table->float('k')->nullable();
