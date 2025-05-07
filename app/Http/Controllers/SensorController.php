@@ -11,24 +11,21 @@ class SensorController extends Controller
     public function test(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'sensor_data' => 'required|array',
-            /* 'sensor_data.*.sensor_key_id' => 'required|exists:sensor_keys,id', */
-            'sensor_data.*.n' => 'required|numeric',
-            'sensor_data.*.p' => 'required|numeric',
-            'sensor_data.*.k' => 'required|numeric',
-            'sensor_data.*.ph' => 'required|numeric',
-            'sensor_data.*.ec' => 'required|numeric',
-            'sensor_data.*.temperature' => 'required|numeric',
-            'sensor_data.*.humidity' => 'required|numeric',
+            'n' => 'required',
+            'p' => 'required',
+            'k' => 'required',
+            'ph' => 'required',
+            'ec' => 'required',
+            'temperature' => 'required',
+            'humidity' => 'required',
         ])->setAttributeNames([
-            /* 'sensor_data.*.sensor_key_id' => 'Sensor Key ID', */
-            'sensor_data.*.n' => 'Nitrogen',
-            'sensor_data.*.p' => 'Phosphorus',
-            'sensor_data.*.k' => 'Potassium',
-            'sensor_data.*.ph' => 'pH Level',
-            'sensor_data.*.ec' => 'Electrical Conductivity',
-            'sensor_data.*.temperature' => 'Temperature',
-            'sensor_data.*.humidity' => 'Humidity'
+            'n' => 'Nitrogen',
+            'p' => 'Phosphorus',
+            'k' => 'Potassium',
+            'ph' => 'pH',
+            'ec' => 'Electrical Conductivity',
+            'temperature' => 'Temperature',
+            'humidity' => 'Humidity',
         ]);
 
         if ($validator->fails()) {
