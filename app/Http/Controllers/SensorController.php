@@ -35,17 +35,15 @@ class SensorController extends Controller
             ], 422);
         }
 
-        foreach ($request->sensor_data as $value) {
-            SensorTest::create([
-                'n' => $value['n'],
-                'p' => $value['p'],
-                'k' => $value['k'],
-                'ph' => $value['ph'],
-                'ec' => $value['ec'],
-                'temperature' => $value['temperature'],
-                'humidity' => $value['humidity'],
-            ]);
-        }
+        SensorTest::create([
+            'n' => $request->input('n'),
+            'p' => $request->input('p'),
+            'k' => $request->input('k'),
+            'ph' => $request->input('ph'),
+            'ec' => $request->input('ec'),
+            'temperature' => $request->input('temperature'),
+            'humidity' => $request->input('humidity'),
+        ]);
 
         return response()->json(['status' => true, 'message' => 'Sensor data processed successfully']);
     }
