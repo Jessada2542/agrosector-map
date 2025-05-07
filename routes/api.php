@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SensorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,3 +12,5 @@ Route::get('/user', function (Request $request) {
 Route::get('/provinces', [HomeController::class, 'getProvinces'])->name('provinces');
 Route::post('/districts', [HomeController::class, 'getDistricts'])->name('districts');
 Route::post('/subdistricts', [HomeController::class, 'getSubDistricts'])->name('subdistricts');
+
+Route::post('/sensor/test', [SensorController::class, 'test'])->name('sensor.test');
