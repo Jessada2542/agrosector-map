@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_sensors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('sensor_key_id');
             $table->timestamps();
 
