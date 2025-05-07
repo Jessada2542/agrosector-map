@@ -294,7 +294,7 @@
                     });
                     map.Overlays.load(object);
                     zoomLevel = 5.5;
-                } else if (subdistrictId && !districtId) {
+                } else if (subdistrictId && districtId && provinceId) {
                     object = new longdo.Overlays.Object(subdistrictId, 'IG', {
                         lineColor: '#ff0000',
                     });
