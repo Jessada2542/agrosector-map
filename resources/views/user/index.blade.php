@@ -1,10 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="m-5">
-        <h1 class="text-2xl font-bold mb-4">ตั้งค่าผู้ใช้งาน</h1>
-        <img src="{{ asset('images/avatars/'. $data->avatar .'') }}" alt="{{ $data->avatar }}" id="profile-image" class="w-32 h-32 rounded-full mb-4" />
-        <button id="btn-upload" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">อัพโหลดรูปภาพ</button>
-        <input type="file" id="profile-image-input" accept="image/*" class="hidden" />
+        <div class="p-6 rounded-xl shadow-sm border border-green-200 mb-6">
+            <h1 class="text-2xl font-bold text-green-700"><i class="fa-solid fa-user"></i> ตั้งค่าผู้ใช้งาน</h1>
+        </div>
+
+        <div class="flex flex-col items-center justify-center mb-4">
+            <img src="{{ asset('images/avatars/'. $data->avatar .'') }}" alt="{{ $data->avatar }}" id="profile-image" class="w-32 h-32 rounded-full mb-4" />
+            <button id="btn-upload" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">อัพโหลดรูปภาพ</button>
+            <input type="file" id="profile-image-input" accept="image/*" class="hidden" />
+        </div>
 
         <div class="mb-4">
             <div class="md:columns-2">
