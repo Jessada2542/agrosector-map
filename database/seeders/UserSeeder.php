@@ -14,10 +14,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            'name' => 'DEV DIW',
-            'username' => 'dev-diw',
-            'password' => Hash::make('dev-diw'),
-            'role_id' => 3
+            'name' => 'SPTI',
+            'username' => 'SPTI',
+            'password' => Hash::make('pcru67000'),
+            'role_id' => 2
         ];
 
         User::create($data);
