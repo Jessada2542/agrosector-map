@@ -8,7 +8,9 @@ class UserSensor extends Model
 {
     protected $fillable = [
         'user_id',
-        'sensor_key_id'
+        'sensor_key_id',
+        'lat',
+        'lon',
     ];
 
     public function user()

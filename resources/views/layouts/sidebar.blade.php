@@ -11,13 +11,16 @@
         <a href="{{ route('map.index') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'map') ? 'side-active' : '' }}">
             <i class="fa-solid fa-map"></i> Map
         </a>
-        <a href="{{ route('dashboard.index') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'dasboard') ? 'side-active' : '' }}">
-            <i class="fa-solid fa-chart-line"></i> Dashboard
+        <a href="{{ route('dashboard.index') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'dashboard') ? 'side-active' : '' }}">
+            <i class="fa-solid fa-chart-line"></i> รายงาน
+        </a>
+        <a href="{{ route('user.planting') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'planting') ? 'side-active' : '' }}">
+            <i class="fa-solid fa-seedling"></i> การปลูก
         </a>
         <a href="{{ route('user.index') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'user') ? 'side-active' : '' }}">
             <i class="fa-solid fa-user"></i> ผู้ใช้
         </a>
-        <a href="#settings" class="hover:bg-green-100 px-4 py-2 rounded transition">
+        <a href="{{ route('setting.index') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'setting') ? 'side-active' : '' }}">
             <i class="fa-solid fa-gear"></i> การตั้งค่า
         </a>
         <a href="{{ route('logout') }}" class="mt-auto hover:bg-red-100 bg-red-200 px-4 py-2 rounded transition text-red-800">

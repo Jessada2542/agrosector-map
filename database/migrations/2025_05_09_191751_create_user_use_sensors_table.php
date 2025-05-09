@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_sensors', function (Blueprint $table) {
+        Schema::create('user_use_sensors', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('sensor_key_id');
-            $table->string('lat')->nullable();
-            $table->string('lon')->nullable();
+            $table->unsignedBigInteger('user_sensors_id');
+            $table->string('name')->nullable();
+            $table->string('detail')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->string('status')->default(1);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('sensor_key_id')->references('id')->on('sensor_keys');
+            $table->foreign('user_sensors_id')->references('id')->on('user_sensors');
         });
     }
 
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_sensors');
+        Schema::dropIfExists('user_use_sensors');
     }
 };

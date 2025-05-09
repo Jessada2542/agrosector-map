@@ -18,18 +18,24 @@ Route::middleware('loggedin')->group(function() {
 
 Route::middleware('auth')->group(function() {
     Route::get('/map', [MapController::class, 'index'])->name('map.index');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::controller(DashboardController::class)->group(function() {
+        Route::prefix('/dashboard')->group(function() {
+            Route::match(['get', 'post'], '/', 'index')->name('dashboard.index');
+        });
+    });
 
     Route::controller(UserController::class)->group(function() {
         Route::prefix('/user')->group(function() {
             Route::get('/', [UserController::class, 'index'])->name('user.index');
             Route::post('/update/{id}', [UserController::class, 'update'])->name('user.update');
+            Route::match(['get', 'post'], '/planting', 'planting')->name('user.planting');
         });
     });
 
     Route::controller(SettingController::class)->group(function() {
         Route::prefix('/setting')->group(function() {
-            Route::get('/', [SettingController::class, 'index'])->name('setting.index');
+            Route::match(['get', 'post'], '/', 'index')->name('setting.index');
         });
     });
 
