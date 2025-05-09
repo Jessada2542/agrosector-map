@@ -6,13 +6,23 @@
         ×
     </button>
 
-    <div class="text-2xl font-bold">🌿 NPK SYSTEM</div>
+    <div class="text-center text-2xl font-bold">Agrosector Map</div>
     <nav class="flex flex-col space-y-2">
-        <a href="#dashboard" class="hover:bg-green-100 px-4 py-2 rounded transition side-active">📊 Dashboard</a>
-        <a href="#user" class="hover:bg-green-100 px-4 py-2 rounded transition">👤 ผู้ใช้</a>
-        <a href="#settings" class="hover:bg-green-100 px-4 py-2 rounded transition">⚙️ การตั้งค่า</a>
-        <a href="#logout" class="mt-auto hover:bg-red-100 bg-red-200 px-4 py-2 rounded transition text-red-800">🚪
-            ออกจากระบบ</a>
+        <a href="{{ route('map.index') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'map') ? 'side-active' : '' }}">
+            <i class="fa-solid fa-map"></i> Map
+        </a>
+        <a href="{{ route('dashboard.index') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'dasboard') ? 'side-active' : '' }}">
+            <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+        <a href="{{ route('user.index') }}" class="hover:bg-green-100 px-4 py-2 rounded transition {{ (isset($sideAtive) && $sideAtive == 'user') ? 'side-active' : '' }}">
+            <i class="fa-solid fa-user"></i> ผู้ใช้
+        </a>
+        <a href="#settings" class="hover:bg-green-100 px-4 py-2 rounded transition">
+            <i class="fa-solid fa-gear"></i> การตั้งค่า
+        </a>
+        <a href="{{ route('logout') }}" class="mt-auto hover:bg-red-100 bg-red-200 px-4 py-2 rounded transition text-red-800">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> ออกจากระบบ
+        </a>
     </nav>
 </aside>
 

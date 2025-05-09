@@ -1,32 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Agrosector Map</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://api.longdo.com/map3/?key=297ba9a121afbb2c7818b0a2c497b131"></script>
-    <style>
-        html,
-        body {
-            margin: 0;
-            height: 100%;
-        }
-
-        #map {
-            height: 100%;
-        }
-    </style>
-</head>
-
-<body onload="init();">
+@extends('layouts.app')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://api.longdo.com/map3/?key=297ba9a121afbb2c7818b0a2c497b131"></script>
+<style>
+    #map {
+        height: 100vh;
+        width: 100%;
+    }
+</style>
+@section('content')
     <div id="map"></div>
 
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
@@ -67,7 +51,10 @@
     </div>
 
     <script>
-        const checkLogin = '{{ Auth::check() }}';
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+        });
+
         var map;
 
         function init() {
@@ -98,10 +85,6 @@
                     {
                         label: '<i class="fa-solid fa-location-dot"></i> แสดงพิกัดที่คลิก',
                         type: 'position',
-                    },
-                    {
-                        label: '<i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบ',
-                        type: 'login',
                     }
                 ],
                 change: menuChange
@@ -111,16 +94,6 @@
         }
 
         function menuChange(item) {
-            if (!checkLogin && item.type !== 'login') {
-                Swal.fire({
-                    text: 'กรุณาเข้าสู่ระบบ',
-                    icon: 'warning',
-                    backdrop: false,
-                });
-
-                return;
-            }
-
             if (item.type === 'search') {
                 $('#modal').removeClass('hidden').addClass('flex');
             } else if (item.type === 'position') {
@@ -135,8 +108,6 @@
                     text: `Lat: ${location.lat.toFixed(6)}, Lon: ${location.lon.toFixed(6)}`,
                     backdrop: false,
                 });
-            } else if (item.type === 'login') {
-                location.href = '/login';
             } else {
                 Swal.fire({
                     text: 'ไม่พบข้อมูลที่เลือก',
@@ -261,7 +232,4 @@
             }
         });
     </script>
-
-</body>
-
-</html>
+@endsection

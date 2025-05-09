@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
 
@@ -40,7 +39,7 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'status' => Response::HTTP_OK,
+            'status' => true,
             'message' => 'Login success',
         ], Response::HTTP_OK);
     }
@@ -48,6 +47,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 }
