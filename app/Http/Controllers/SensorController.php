@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log as ModelsLog;
 use App\Models\SensorTest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,7 +11,7 @@ class SensorController extends Controller
 {
     public function test(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        /* $validator = Validator::make($request->all(), [
             'n' => 'required',
             'p' => 'required',
             'k' => 'required',
@@ -33,9 +34,9 @@ class SensorController extends Controller
                 'status' => false,
                 'errors' => $validator->errors()->first()
             ], 422);
-        }
+        } */
 
-        SensorTest::create([
+        /* SensorTest::create([
             'n' => $request->input('n'),
             'p' => $request->input('p'),
             'k' => $request->input('k'),
@@ -43,7 +44,9 @@ class SensorController extends Controller
             'ec' => $request->input('ec'),
             'temperature' => $request->input('temperature'),
             'humidity' => $request->input('humidity'),
-        ]);
+        ]); */
+
+        ModelsLog::create(['detail' => $request->all()]);
 
         return response()->json(['status' => true, 'message' => 'Sensor data processed successfully']);
     }
