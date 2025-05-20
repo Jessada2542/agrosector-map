@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Log as ModelsLog;
+use App\Models\Log;
 use App\Models\SensorTest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -46,7 +46,7 @@ class SensorController extends Controller
             'humidity' => $request->input('humidity'),
         ]); */
 
-        ModelsLog::create(['detail' => $request->all()]);
+        Log::create(['detail' => $request->all()]);
 
         return response()->json(['status' => true, 'message' => 'Sensor data processed successfully']);
     }
