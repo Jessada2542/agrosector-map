@@ -76,18 +76,18 @@
             </div>
             <div class="tab-content hidden">
                 <div class="w-full overflow-x-auto">
-                    <table class="min-w-[800px] w-full bg-white border border-green-200 rounded-lg shadow-lg" id="table">
+                    <table class="min-w-[900px] bg-white border border-green-200 rounded-lg shadow-lg" id="table">
                         <thead>
-                            <tr class="bg-green-100 text-green-600">
-                                <th class="px-4 py-2 border-b">#</th>
-                                <th class="px-4 py-2 border-b">Nitrogen (N)</th>
-                                <th class="px-4 py-2 border-b">Phosphorus (P)</th>
-                                <th class="px-4 py-2 border-b">Potassium (K)</th>
-                                <th class="px-4 py-2 border-b">pH</th>
-                                <th class="px-4 py-2 border-b">EC</th>
-                                <th class="px-4 py-2 border-b">Temperature</th>
-                                <th class="px-4 py-2 border-b">Humidity</th>
-                                <th class="px-4 py-2 border-b">Datetime</th>
+                            <tr class="bg-green-100 text-green-600 text-sm">
+                                <th class="px-4 py-2 border-b whitespace-nowrap">#</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Nitrogen (N)</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Phosphorus (P)</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Potassium (K)</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">pH</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">EC</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Temperature</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Humidity</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Datetime</th>
                             </tr>
                         </thead>
                         <tbody>
