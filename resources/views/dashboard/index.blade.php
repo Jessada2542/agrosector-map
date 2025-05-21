@@ -75,8 +75,8 @@
                 ข้อมูลทั่วไปของการปลูก เช่น พื้นที่ปลูก, ประเภทพืช, วันที่เริ่มปลูก, วันที่คาดว่าจะเก็บเกี่ยว
             </div>
             <div class="tab-content hidden">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-green-200 rounded-lg shadow-lg overflow-auto" id="table">
+                <div class="overflow-auto">
+                    <table class="min-w-full bg-white border border-green-200 rounded-lg shadow-lg" id="table">
                         <thead>
                             <tr class="bg-green-100 text-green-600">
                                 <th class="px-4 py-2 border-b">#</th>
