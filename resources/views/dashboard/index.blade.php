@@ -9,19 +9,19 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                 <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> อุปกรณ์ (1)</div>
-                <div class="text-1xl font-bold text-green-800">อัพเดทล่าสุด Datetime</div>
-                <p class="text-green-700 mt-2">Nitrogen (N) : value</p>
-                <p class="text-green-700 mt-2">Phosphorus (P) : value</p>
-                <p class="text-green-700 mt-2">Potassium (K) : value</p>
-                <p class="text-green-700 mt-2">pH : value</p>
-                <p class="text-green-700 mt-2">ec : value</p>
-                <p class="text-green-700 mt-2">Temperature : value</p>
-                <p class="text-green-700 mt-2">Humidity : value</p>
+                <div class="text-1xl font-bold text-green-800">อัพเดทล่าสุด {{ $sensor->created_at->format('Y-m-d H:i') }}</div>
+                <p class="text-green-700 mt-2">Nitrogen (N) : {{ $sensor->n }}</p>
+                <p class="text-green-700 mt-2">Phosphorus (P) : {{ $sensor->p }}</p>
+                <p class="text-green-700 mt-2">Potassium (K) : {{ $sensor->k }}</p>
+                <p class="text-green-700 mt-2">pH : {{ $sensor->ph }}</p>
+                <p class="text-green-700 mt-2">ec : {{ $sensor->ec }}</p>
+                <p class="text-green-700 mt-2">Temperature : {{ $sensor->temperature }}</p>
+                <p class="text-green-700 mt-2">Humidity : {{ $sensor->humidity }}</p>
                 <div class="flex justify-center">
                     <button class="bg-green-500 text-white px-4 py-2 rounded btn-select" data-id="1">เลือก</button>
                 </div>
             </div>
-            <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
+            {{-- <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                 <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> อุปกรณ์ (2)
                 </div>
                 <div class="text-1xl font-bold text-green-800">อัพเดทล่าสุด Datetime</div>
@@ -50,7 +50,7 @@
                 <div class="flex justify-center">
                     <button class="bg-green-500 text-white px-4 py-2 rounded btn-select" data-id="3">เลือก</button>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="mt-6 p-6 rounded-xl shadow-sm border border-green-200 mb-6">

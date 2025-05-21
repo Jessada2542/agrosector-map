@@ -25,8 +25,10 @@ class DashboardController extends Controller
                 ->make(true);
         }
 
+        $sensor = SensorTest::last();
+
         $sideAtive = 'dashboard';
 
-        return view('dashboard.index', compact('sideAtive'));
+        return view('dashboard.index', compact('sideAtive', 'sensor'));
     }
 }
