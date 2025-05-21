@@ -25,7 +25,7 @@ class DashboardController extends Controller
                 ->make(true);
         }
 
-        $sensor = SensorTest::last();
+        $sensor = SensorTest::orderBy('id', 'desc')->first();
 
         $sideAtive = 'dashboard';
 
