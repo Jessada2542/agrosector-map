@@ -76,7 +76,7 @@
             </div>
             <div class="tab-content hidden">
                 <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-green-200 rounded-lg shadow-lg" id="table">
+                    <table class="min-w-full bg-white border border-green-200 rounded-lg shadow-lg overflow-auto" id="table">
                         <thead>
                             <tr class="bg-green-100 text-green-600">
                                 <th class="px-4 py-2 border-b">#</th>
