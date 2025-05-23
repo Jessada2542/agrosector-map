@@ -115,7 +115,7 @@
                 { id: '123' }
             );
 
-            const sensorData = [
+            /* const sensorData = [
                 { id: 1, name: 'Sensor A', lat: 16.441, lon: 101.129 },
                 { id: 2, name: 'Sensor B', lat: 15.442, lon: 101.131 },
                 { id: 3, name: 'Sensor C', lat: 14.443, lon: 101.128 }
@@ -133,10 +133,7 @@
                 map.Overlays.add(marker);
             });
 
-            // ผูก event overlayClick กับ map แค่ครั้งเดียว
             map.Event.bind('overlayClick', function(overlay) {
-            // console.log เพื่อ debug
-            console.log('Overlay clicked:', overlay.title);
             if (!overlay.metadata) {
                 console.warn('ไม่มี metadata ใน overlay นี้');
                 return;
@@ -146,16 +143,16 @@
                 console.log('ID ที่คลิก:', id);
                 openModal(id);
             }
-            });
+            }); */
 
 
-            /* map.Overlays.add(markerSensor);
+            map.Overlays.add(markerSensor);
             map.Event.bind('overlayClick', function(overlay) {
                 if (overlay === markerSensor) {
                     const id = overlay.id;
                     openModal(id);
                 }
-            }); */
+            });
         }
 
         function openModal(id) {
