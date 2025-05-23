@@ -111,10 +111,11 @@
         }
 
         function markSensor() {
-            var markerSensor = new longdo.Marker({ lon: 101.129354, lat: 16.440727 });
+            //var markerSensor = new longdo.Marker({ lon: 101.129354, lat: 16.440727 });
 
-            map.Overlays.clear();
-            map.Overlays.add(markerSensor);
+            var marker = new longdo.Marker({ lon: 100.56, lat: 13.74 });
+
+            map.Overlays.add(marker);
         }
 
         function menuChange(item) {
