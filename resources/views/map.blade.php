@@ -146,7 +146,7 @@
                     title: sensor.name,
                     metadata: {
                         id: sensor.id
-                    }
+                    } // ✅ ต้องอยู่ตรงนี้
                 });
                 map.Overlays.add(marker);
             });
@@ -197,9 +197,9 @@
                 dataType: 'json',
                 success: function(data) {
                     $('#sensor-content').html(`
-                    <p><strong>ชื่อ:</strong> ${data.name}</p>
-                    <p><strong>ค่า:</strong> ${data.value}</p>
-                `);
+                <p><strong>ชื่อ:</strong> ${data.name}</p>
+                <p><strong>ค่า:</strong> ${data.value}</p>
+            `);
                 },
                 error: function(xhr, status, error) {
                     $('#sensor-content').html('เกิดข้อผิดพลาดในการโหลดข้อมูล');
