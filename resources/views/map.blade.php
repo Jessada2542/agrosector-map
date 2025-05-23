@@ -92,13 +92,13 @@
 
             map.Ui.add(menuBarControl);
 
-            var popup = new longdo.Popup({ Lon: 101, Lat: 16 },
+            /* var popup = new longdo.Popup({ Lon: 101, Lat: 16 },
             {
                 title: 'ชื่อ sensor',
                 detail: 'รายการค่า sensor',
             });
 
-            map.Overlays.add(popup)
+            map.Overlays.add(popup) */
         }
 
         function menuChange(item) {
