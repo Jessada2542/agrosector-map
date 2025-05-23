@@ -95,7 +95,6 @@
             var popup2 = new longdo.Popup({ lon: 101.129354, lat: 16.440727 },
             {
                 title: 'ชื่อ sensor',
-                detail: 'รายการค่า sensor',
                 loadDetail: updateDetail,
                 size: { width: 200, height: 200 },
                 closable: false
@@ -105,7 +104,7 @@
 
             function updateDetail(element) {
                 setTimeout(function() {
-                element.innerHTML = 'Content changed';
+                element.innerHTML = 'รายการค่า sensor';
                 }, 1000);
             }
         }
