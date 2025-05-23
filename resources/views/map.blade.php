@@ -127,7 +127,7 @@
         function markSensor() {
             var markerSensor = new longdo.Marker(
                 { lon: 101.129354, lat: 16.440727 },
-                { title: 'Sensor #123', detail: 'กดเพื่อดูข้อมูล', id: '123' }
+                { id: '123' }
             );
 
             map.Overlays.add(markerSensor);
