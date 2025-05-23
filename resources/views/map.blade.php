@@ -53,6 +53,16 @@
         </div>
     </div>
 
+    <div id="modal-sensor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h2 class="text-center text-xl font-bold mb-4">ข้อมูล Sensor</h2>
+            <div id="sensor-content" class="mb-4">กำลังโหลด...</div>
+            <div class="flex justify-center">
+                <button id="closeModal" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">ปิด</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             init();
@@ -115,8 +125,39 @@
         }
 
         function markSensor() {
-            var markerSensor = new longdo.Marker({ lon: 101.129354, lat: 16.440727 });
+            var markerSensor = new longdo.Marker({ lon: 101.129354, lat: 16.440727 }, { title: 'Sensor #123', detail: 'กดเพื่อดูข้อมูล', id: '123' });
             map.Overlays.add(markerSensor);
+
+            map.Event.bind('overlayClick', function(overlay) {
+                if (overlay === markerSensor) {
+                    const id = overlay.metadata.id;
+                    openModal(id);
+                }
+            });
+        }
+
+        function openModal(id) {
+            const modal = document.getElementById('modal-sensor');
+            const content = document.getElementById('sensor-content');
+            modal.classList.remove('hidden');
+
+            // ✅ โหลดข้อมูล sensor แบบ AJAX (ใช้ fetch หรือ Axios)
+            content.innerHTML = 'กำลังโหลด...';
+            /* $.ajax({
+                url: `/api/sensor/${id}`, // หรือ route ใน Laravel เช่น route('sensor.show', id)
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#sensor-content').html(`
+                        <p><strong>ชื่อ:</strong> ${data.name}</p>
+                        <p><strong>ค่า:</strong> ${data.value}</p>
+                    `);
+                },
+                error: function(xhr, status, error) {
+                    $('#sensor-content').html('เกิดข้อผิดพลาดในการโหลดข้อมูล');
+                    console.error('AJAX Error:', status, error);
+                }
+            }); */
         }
 
         function menuChange(item) {
