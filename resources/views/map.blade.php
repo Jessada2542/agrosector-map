@@ -97,7 +97,7 @@
                 title: 'ชื่อ sensor',
                 detail: 'รายการค่า sensor',
                 size: { width: 200, height: 200 },
-                closable: true
+                closable: false
             });
 
             map.Overlays.add(popup)
