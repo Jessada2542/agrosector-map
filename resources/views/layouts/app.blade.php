@@ -15,12 +15,17 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/2.3.0/js/dataTables.min.js"></script>
+    <style>
+        .pt-15 {
+            padding-top: 3.8rem;
+        }
+    </style>
 </head>
 
-<body class="bg-white min-h-screen flex">
+<body class="pt-15 lg:pt-0 bg-white">
     @extends('layouts.sidebar')
 
-    <main id="main-content" class="flex-1 bg-white transition-all duration-300 ml-0 md:ml-64">
+    <main id="main-content" class="flex-1 bg-white transition-all duration-300 ml-0 lg:ml-64">
         @yield('content')
     </main>
 </body>
