@@ -94,6 +94,7 @@
 
             var markerSensor = new longdo.Marker({ lon: 101.129354, lat: 16.440727 });
 
+            map.Overlays.clear();
             map.Overlays.add(markerSensor);
 
             /* var popup2 = new longdo.Popup({ lon: 101.129354, lat: 16.440727 },
