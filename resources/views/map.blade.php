@@ -117,8 +117,8 @@
 
             const sensorData = [
                 { id: 1, name: 'Sensor A', lat: 16.441, lon: 101.129 },
-                { id: 2, name: 'Sensor B', lat: 16.442, lon: 101.131 },
-                { id: 3, name: 'Sensor C', lat: 16.443, lon: 101.128 }
+                { id: 2, name: 'Sensor B', lat: 15.442, lon: 101.131 },
+                { id: 3, name: 'Sensor C', lat: 14.443, lon: 101.128 }
             ];
 
             sensorData.forEach(sensor => {
@@ -146,6 +146,8 @@
         }
 
         function openModal(id) {
+            console.log(id);
+
             const modal = document.getElementById('modal-sensor');
             const content = document.getElementById('sensor-content');
             modal.classList.remove('hidden');
