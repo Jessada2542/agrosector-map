@@ -148,6 +148,7 @@
                         id: sensor.id
                     } // ✅ ต้องอยู่ตรงนี้
                 });
+                console.log('สร้าง marker:', marker);
                 map.Overlays.add(marker);
             });
 
