@@ -92,7 +92,11 @@
 
             map.Ui.add(menuBarControl);
 
-            var popup2 = new longdo.Popup({ lon: 101.129354, lat: 16.440727 },
+            var marker = new longdo.Marker({ lon: 101.129354, lat: 16.440727 });
+
+            map.Overlays.add(marker);
+
+            /* var popup2 = new longdo.Popup({ lon: 101.129354, lat: 16.440727 },
             {
                 title: 'ชื่อ sensor',
                 loadDetail: updateDetail,
@@ -106,7 +110,7 @@
                 setTimeout(function() {
                 element.innerHTML = 'รายการค่า sensor';
                 }, 1000);
-            }
+            } */
         }
 
         function menuChange(item) {
