@@ -136,7 +136,7 @@
             // ผูก event overlayClick กับ map แค่ครั้งเดียว
             map.Event.bind('overlayClick', function(overlay) {
             // console.log เพื่อ debug
-            console.log('Overlay clicked:', overlay);
+            console.log('Overlay clicked:', overlay.metadata);
             if (!overlay.metadata) {
                 console.warn('ไม่มี metadata ใน overlay นี้');
                 return;
