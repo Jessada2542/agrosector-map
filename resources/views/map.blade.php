@@ -124,7 +124,7 @@
             sensorData.forEach(sensor => {
                 const marker = new longdo.Marker(
                     { lat: sensor.lat, lon: sensor.lon },
-                    metadata: { id: sensor.id }
+                    { metadata: { id: sensor.id } }
                 );
 
                 map.Event.bind('overlayClick', function(overlay) {
