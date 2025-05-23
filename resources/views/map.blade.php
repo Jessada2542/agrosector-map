@@ -127,10 +127,10 @@
                     { id: sensor.id }
                 );
 
-                // ✅ Click to open modal
-                marker.click = () => {
-                    openModal(sensor.id); // เรียกฟังก์ชันเปิด modal พร้อมส่ง id
-                };
+                map.Event.bind('overlayClick', function(overlay) {
+                    const id = overlay.id;
+                    openModal(id);
+                });
 
                 map.Overlays.add(marker);
             });
