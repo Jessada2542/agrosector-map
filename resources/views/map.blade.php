@@ -65,10 +65,6 @@
             map.Event.bind('ready', function () {
                 console.log('Map is ready!');
 
-                // ✅ แผนที่พร้อมแล้ว ใส่ marker หรือใช้ setProps() ได้เลย
-                const marker = new longdo.Marker({ lon: 100.5, lat: 13.7 });
-                marker.setProps({ title: 'สวัสดี', visibleRange: { min: 10, max: 20 } });
-
                 map.Overlays.add(marker);
                 map.Layers.setBase(longdo.Layers.NORMAL);
             map.Ui.Toolbar.visible(false);
