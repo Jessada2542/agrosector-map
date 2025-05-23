@@ -153,7 +153,7 @@
             });
 
             map.Event.bind('overlayClick', function(overlay) {
-                console.log('Overlay clicked:', overlay);
+                console.log('Overlay clicked:', overlay._geojson.properties.metadata);
 
                 // ตรวจว่า overlay นี้เป็น Marker หรือไม่
                 if (!(overlay instanceof longdo.Marker)) {
