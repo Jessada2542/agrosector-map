@@ -125,12 +125,15 @@
         }
 
         function markSensor() {
-            var markerSensor = new longdo.Marker({ lon: 101.129354, lat: 16.440727 }, { title: 'Sensor #123', detail: 'กดเพื่อดูข้อมูล', id: '123' });
-            map.Overlays.add(markerSensor);
+            var markerSensor = new longdo.Marker(
+                { lon: 101.129354, lat: 16.440727 },
+                { title: 'Sensor #123', detail: 'กดเพื่อดูข้อมูล', id: '123' }
+            );
 
+            map.Overlays.add(markerSensor);
             map.Event.bind('overlayClick', function(overlay) {
                 if (overlay === markerSensor) {
-                    const id = overlay.metadata.id;
+                    const id = overlay.id;
                     openModal(id);
                 }
             });
