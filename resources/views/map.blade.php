@@ -121,23 +121,11 @@
                 { id: 3, name: 'Sensor C', lat: 16.443, lon: 101.128 }
             ];
 
-            const normalIcon = longdo.MarkerTheme.default;
-            const hoverIcon = longdo.MarkerTheme.yellow;
-
             sensorData.forEach(sensor => {
                 const marker = new longdo.Marker(
                     { lat: sensor.lat, lon: sensor.lon },
-                    {
-                        title: sensor.name,
-                        detail: 'คลิกเพื่อดูข้อมูล',
-                        icon: normalIcon,
-                        metadata: { id: sensor.id }
-                    }
+                    { id: sensor.id }
                 );
-
-                // ✅ Hover effect
-                marker.mouseover = () => marker.setTheme(hoverIcon);
-                marker.mouseout = () => marker.setTheme(normalIcon);
 
                 // ✅ Click to open modal
                 marker.click = () => {
