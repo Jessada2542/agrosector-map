@@ -108,6 +108,25 @@
             });
 
             map.Ui.add(menuBarControl);
+
+            if (checkLogin) {
+                var popup = new longdo.Popup({ lon: 101, lat: 14 },
+                {
+                    title: 'Popup',
+                    detail: 'Popup detail...',
+                    loadDetail: updateDetail,
+                    size: { width: 200, height: 200 },
+                    closable: false
+                });
+
+                map.Overlays.add(popup)
+
+                function updateDetail(element) {
+                    setTimeout(function() {
+                    element.innerHTML = 'Content changed';
+                    }, 1000);
+                }
+            }
         }
 
         function menuChange(item) {
@@ -248,8 +267,6 @@
                     });
                     map.Overlays.load(object);
                 }
-
-                map.zoom(zoomLevel, true);
             } else {
                 Swal.fire({
                     icon: 'warning',
