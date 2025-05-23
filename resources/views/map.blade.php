@@ -170,7 +170,6 @@
                 const location = map.location();
                 const marker = new longdo.Marker(location);
 
-                map.Overlays.clear();
                 map.Overlays.add(marker);
 
                 Swal.fire({
@@ -189,7 +188,7 @@
 
         $('.closeModal').on('click', function() {
             $('#modal').removeClass('flex').addClass('hidden');
-            $('#modal-sensor').removeClass('flex').addClass('hidden');
+            $('#modal-sensor').addClass('hidden');
         });
 
         // ปิด modal เมื่อคลิกพื้นหลัง
