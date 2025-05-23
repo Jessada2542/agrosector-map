@@ -62,8 +62,15 @@
                 placeholder: document.getElementById('map'),
                 language: 'th',
             });
+            map.Event.bind('ready', function () {
+                console.log('Map is ready!');
 
-            map.Layers.setBase(longdo.Layers.NORMAL);
+                // ✅ แผนที่พร้อมแล้ว ใส่ marker หรือใช้ setProps() ได้เลย
+                const marker = new longdo.Marker({ lon: 100.5, lat: 13.7 });
+                marker.setProps({ title: 'สวัสดี', visibleRange: { min: 10, max: 20 } });
+
+                map.Overlays.add(marker);
+                map.Layers.setBase(longdo.Layers.NORMAL);
             map.Ui.Toolbar.visible(false);
             map.Ui.Terrain.visible(false);
             map.Ui.LayerSelector.visible(false);
@@ -109,6 +116,7 @@
                 }, 1000);
             } */
            markSensor();
+            });
         }
 
         function markSensor() {
