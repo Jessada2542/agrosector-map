@@ -48,7 +48,7 @@
             </div>
             <div class="flex justify-center gap-2">
                 <button id="btn-search" class="px-4 py-2 bg-blue-500 rounded hover:bg-blue-400 text-white">ค้นหา</button>
-                <button id="closeModal" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">ปิด</button>
+                <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
             <h2 class="text-center text-xl font-bold mb-4">ข้อมูล Sensor</h2>
             <div id="sensor-content" class="mb-4">กำลังโหลด...</div>
             <div class="flex justify-center">
-                <button id="closeModal" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">ปิด</button>
+                <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
             </div>
         </div>
     </div>
@@ -187,7 +187,7 @@
             }
         }
 
-        $('#closeModal').on('click', function() {
+        $('.closeModal').on('click', function() {
             $('#modal').removeClass('flex').addClass('hidden');
             $('#modal-sensor').removeClass('flex').addClass('hidden');
         });
