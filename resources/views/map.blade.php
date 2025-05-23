@@ -110,30 +110,23 @@
         }
 
         function markSensor() {
-            var markerSensor = new longdo.Marker({
-                lon: 101.129354,
-                lat: 16.440727
-            }, {
-                id: '123'
-            });
-
             const sensorData = [{
                     id: 1,
                     name: 'Sensor A',
-                    lat: 16.441,
-                    lon: 101.129
+                    lon: 101.129354,
+                    lat: 16.440727
                 },
                 {
                     id: 2,
                     name: 'Sensor B',
-                    lat: 15.442,
-                    lon: 101.131
+                    lon: 101.129354,
+                    lat: 15.440727
                 },
                 {
                     id: 3,
                     name: 'Sensor C',
-                    lat: 14.443,
-                    lon: 101.128
+                    lon: 101.129354,
+                    lat: 14.440727
                 }
             ];
 
@@ -146,46 +139,20 @@
                     title: sensor.name,
                     metadata: {
                         id: sensor.id
-                    } // ✅ ต้องอยู่ตรงนี้
+                    }
                 });
-                console.log('สร้าง marker:', marker);
+
                 map.Overlays.add(marker);
             });
 
             map.Event.bind('overlayClick', function(overlay) {
-                console.log('Overlay clicked:', overlay._geojson.properties.metadata);
-
-                // ตรวจว่า overlay นี้เป็น Marker หรือไม่
-                if (!(overlay instanceof longdo.Marker)) {
-                    console.warn('คลิก overlay ที่ไม่ใช่ Marker');
-                    return;
-                }
-
-                const metadata = overlay.options?.metadata;
-                if (!metadata || typeof metadata.id === 'undefined') {
-                    console.warn('ไม่มี metadata.id ใน overlay นี้');
-                    return;
-                }
-
-                const id = metadata.id;
+                const id = overlay._geojson?.properties?.metadata?.id;
                 console.log('ID ที่คลิก:', id);
                 openModal(id);
             });
-
-
-
-            /* map.Overlays.add(markerSensor);
-            map.Event.bind('overlayClick', function(overlay) {
-                if (overlay === markerSensor) {
-                    const id = overlay.id;
-                    openModal(id);
-                }
-            }); */
         }
 
         function openModal(id) {
-            console.log(id);
-
             const modal = document.getElementById('modal-sensor');
             const content = document.getElementById('sensor-content');
             modal.classList.remove('hidden');
