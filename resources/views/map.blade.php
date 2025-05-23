@@ -189,6 +189,7 @@
 
         $('#closeModal').on('click', function() {
             $('#modal').removeClass('flex').addClass('hidden');
+            $('#modal-sensor').removeClass('flex').addClass('hidden');
         });
 
         // ปิด modal เมื่อคลิกพื้นหลัง
