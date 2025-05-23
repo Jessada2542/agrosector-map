@@ -121,21 +121,31 @@
                 { id: 3, name: 'Sensor C', lat: 14.443, lon: 101.128 }
             ];
 
-            // สร้าง markers แล้วใส่ metadata id ให้ครบทุกตัว
+            // สร้าง markers
             sensorData.forEach(sensor => {
-                const marker = new longdo.Marker(
-                    { lat: sensor.lat, lon: sensor.lon },
-                    { metadata: { id: sensor.id } }
-                );
-                map.Overlays.add(marker);
+            const marker = new longdo.Marker(
+                { lat: sensor.lat, lon: sensor.lon },
+                {
+                title: sensor.name,
+                metadata: { id: sensor.id }
+                }
+            );
+            map.Overlays.add(marker);
             });
 
             // ผูก event overlayClick กับ map แค่ครั้งเดียว
             map.Event.bind('overlayClick', function(overlay) {
-                const id = overlay.metadata?.id;
-                if (id) {
-                    openModal(id);
-                }
+            // console.log เพื่อ debug
+            console.log('Overlay clicked:', overlay);
+            if (!overlay.metadata) {
+                console.warn('ไม่มี metadata ใน overlay นี้');
+                return;
+            }
+            const id = overlay.metadata.id;
+            if (id) {
+                console.log('ID ที่คลิก:', id);
+                openModal(id);
+            }
             });
 
 
