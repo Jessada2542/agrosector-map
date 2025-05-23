@@ -110,49 +110,67 @@
         }
 
         function markSensor() {
-            var markerSensor = new longdo.Marker(
-                { lon: 101.129354, lat: 16.440727 },
-                { id: '123' }
-            );
+            var markerSensor = new longdo.Marker({
+                lon: 101.129354,
+                lat: 16.440727
+            }, {
+                id: '123'
+            });
 
-            const sensorData = [
-      { id: 1, name: 'Sensor A', lat: 16.441, lon: 101.129 },
-      { id: 2, name: 'Sensor B', lat: 15.442, lon: 101.131 },
-      { id: 3, name: 'Sensor C', lat: 14.443, lon: 101.128 }
-    ];
+            const sensorData = [{
+                    id: 1,
+                    name: 'Sensor A',
+                    lat: 16.441,
+                    lon: 101.129
+                },
+                {
+                    id: 2,
+                    name: 'Sensor B',
+                    lat: 15.442,
+                    lon: 101.131
+                },
+                {
+                    id: 3,
+                    name: 'Sensor C',
+                    lat: 14.443,
+                    lon: 101.128
+                }
+            ];
 
-    // เพิ่ม marker พร้อม metadata
-    sensorData.forEach(sensor => {
-      const marker = new longdo.Marker(
-        { lat: sensor.lat, lon: sensor.lon },
-        {
-          title: sensor.name,
-          metadata: { id: sensor.id }
-        }
-      );
-      map.Overlays.add(marker);
-    });
+            // เพิ่ม marker พร้อม metadata
+            sensorData.forEach(sensor => {
+                const marker = new longdo.Marker({
+                    lat: sensor.lat,
+                    lon: sensor.lon
+                }, {
+                    title: sensor.name,
+                    metadata: {
+                        id: sensor.id
+                    }
+                });
+                map.Overlays.add(marker);
+            });
 
-    // กดที่ marker แล้วแสดง ID
-    map.Event.bind('overlayClick', function(overlay) {
-      console.log('Overlay clicked:', overlay);
+            map.Event.bind('overlayClick', function(overlay) {
+                console.log('Overlay clicked:', overlay);
 
-      // ตรวจหาว่า metadata อยู่ที่ไหน
-      const metadata = overlay.metadata ||
-                       (overlay.options && overlay.options.metadata) ||
-                       (overlay.data && overlay.data.metadata);
+                // ตรวจว่า overlay นี้เป็น Marker หรือไม่
+                if (!(overlay instanceof longdo.Marker)) {
+                    console.warn('คลิก overlay ที่ไม่ใช่ Marker');
+                    return;
+                }
 
-      if (!metadata) {
-        console.warn('ไม่มี metadata ใน overlay นี้');
-        return;
-      }
+                const metadata = overlay.options?.metadata;
+                if (!metadata || typeof metadata.id === 'undefined') {
+                    console.warn('ไม่มี metadata.id ใน overlay นี้');
+                    return;
+                }
 
-      const id = metadata.id;
-      if (id !== undefined) {
-        console.log('ID ที่คลิก:', id);
-        openModal(id); // เรียกฟังก์ชันตาม ID
-      }
-    });
+                const id = metadata.id;
+                console.log('ID ที่คลิก:', id);
+                openModal(id);
+            });
+
 
 
             /* map.Overlays.add(markerSensor);
@@ -179,9 +197,9 @@
                 dataType: 'json',
                 success: function(data) {
                     $('#sensor-content').html(`
-                        <p><strong>ชื่อ:</strong> ${data.name}</p>
-                        <p><strong>ค่า:</strong> ${data.value}</p>
-                    `);
+                    <p><strong>ชื่อ:</strong> ${data.name}</p>
+                    <p><strong>ค่า:</strong> ${data.value}</p>
+                `);
                 },
                 error: function(xhr, status, error) {
                     $('#sensor-content').html('เกิดข้อผิดพลาดในการโหลดข้อมูล');
