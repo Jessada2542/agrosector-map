@@ -123,20 +123,20 @@
 
             // สร้าง markers
             sensorData.forEach(sensor => {
-            const marker = new longdo.Marker(
-                { lat: sensor.lat, lon: sensor.lon },
-                {
-                title: sensor.name,
-                metadata: { id: sensor.id }
-                }
-            );
-            map.Overlays.add(marker);
+                const marker = new longdo.Marker(
+                    { lat: sensor.lat, lon: sensor.lon },
+                    {
+                    title: sensor.name,
+                    metadata: { id: sensor.id }
+                    }
+                );
+                map.Overlays.add(marker);
             });
 
             // ผูก event overlayClick กับ map แค่ครั้งเดียว
             map.Event.bind('overlayClick', function(overlay) {
             // console.log เพื่อ debug
-            console.log('Overlay clicked:', overlay.metadata);
+            console.log('Overlay clicked:', overlay.title);
             if (!overlay.metadata) {
                 console.warn('ไม่มี metadata ใน overlay นี้');
                 return;
