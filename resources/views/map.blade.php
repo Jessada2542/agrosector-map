@@ -92,22 +92,15 @@
 
             map.Ui.add(menuBarControl);
 
-            var popup = new longdo.Popup({ lon: 101, lat: 14 },
+            var popup = new longdo.Popup({ Lon: 101.129281, Lat: 16.440699 },
             {
-                title: 'Popup',
-                detail: 'Popup detail...',
-                loadDetail: updateDetail,
+                title: 'ชื่อ sensor',
+                detail: 'รายการค่า sensor',
                 size: { width: 200, height: 200 },
-                closable: false
+                closable: true
             });
 
             map.Overlays.add(popup)
-
-            function updateDetail(element) {
-                setTimeout(function() {
-                element.innerHTML = 'Content changed';
-                }, 1000);
-            }
         }
 
         function menuChange(item) {
