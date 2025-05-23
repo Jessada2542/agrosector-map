@@ -18,7 +18,8 @@
             <h2 class="text-center text-xl font-bold mb-4">ค้นหาพื้นที่ที่ต้องการ</h2>
             <div class="mb-4">
                 <label for="province" class="block text-sm font-medium text-gray-700">เลือกจังหวัด</label>
-                <select id="province" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="province"
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>เลือกจังหวัด</option>
                     @foreach ($provinces as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -27,7 +28,8 @@
             </div>
             <div class="mb-4">
                 <label for="district" class="block text-sm font-medium text-gray-700">เลือกอำเภอ</label>
-                <select id="district" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="district"
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>เลือกอำเภอ</option>
                     @foreach ($districts as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -36,7 +38,8 @@
             </div>
             <div class="mb-4">
                 <label for="subdistrict" class="block text-sm font-medium text-gray-700">เลือกตำบล</label>
-                <select id="subdistrict" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="subdistrict"
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>เลือกตำบล</option>
                     @foreach ($subdistricts as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -62,63 +65,62 @@
                 placeholder: document.getElementById('map'),
                 language: 'th',
             });
-            map.Event.bind('ready', function () {
+            map.Event.bind('ready', function() {
                 console.log('Map is ready!');
+                map.Ui.Toolbar.visible(false);
+                map.Ui.Terrain.visible(false);
+                map.Ui.LayerSelector.visible(false);
+                /* map.Ui.Crosshair.visible(false); */
+                map.Ui.Scale.visible(false);
 
-                map.Overlays.add(marker);
-                map.Layers.setBase(longdo.Layers.NORMAL);
-            map.Ui.Toolbar.visible(false);
-            map.Ui.Terrain.visible(false);
-            map.Ui.LayerSelector.visible(false);
-            /* map.Ui.Crosshair.visible(false); */
-            map.Ui.Scale.visible(false);
+                map.bound({
+                    minLon: 97.0,
+                    minLat: 5.5,
+                    maxLon: 105.0,
+                    maxLat: 20.5
+                });
 
-            map.bound({
-                minLon: 97.0,
-                minLat: 5.5,
-                maxLon: 105.0,
-                maxLat: 20.5
-            });
+                var menuBarControl = new longdo.MenuBar({
+                    button: [{
+                            label: '<i class="fa fa-search mr-1"></i> ค้นหาพื้นที่ได้ที่นี้',
+                            type: 'search',
+                        },
+                        {
+                            label: '<i class="fa-solid fa-location-dot"></i> แสดงพิกัดที่คลิก',
+                            type: 'position',
+                        }
+                    ],
+                    change: menuChange
+                });
 
-            var menuBarControl = new longdo.MenuBar({
-                button: [
-                    {
-                        label: '<i class="fa fa-search mr-1"></i> ค้นหาพื้นที่ได้ที่นี้',
-                        type: 'search',
-                    },
-                    {
-                        label: '<i class="fa-solid fa-location-dot"></i> แสดงพิกัดที่คลิก',
-                        type: 'position',
-                    }
-                ],
-                change: menuChange
-            });
+                map.Ui.add(menuBarControl);
 
-            map.Ui.add(menuBarControl);
+                /* var popup2 = new longdo.Popup({ lon: 101.129354, lat: 16.440727 },
+                {
+                    title: 'ชื่อ sensor',
+                    loadDetail: updateDetail,
+                    size: { width: 200, height: 200 },
+                    closable: false
+                });
 
-            /* var popup2 = new longdo.Popup({ lon: 101.129354, lat: 16.440727 },
-            {
-                title: 'ชื่อ sensor',
-                loadDetail: updateDetail,
-                size: { width: 200, height: 200 },
-                closable: false
-            });
+                map.Overlays.add(popup2)
 
-            map.Overlays.add(popup2)
-
-            function updateDetail(element) {
-                setTimeout(function() {
-                element.innerHTML = 'รายการค่า sensor';
-                }, 1000);
-            } */
-           markSensor();
+                function updateDetail(element) {
+                    setTimeout(function() {
+                    element.innerHTML = 'รายการค่า sensor';
+                    }, 1000);
+                } */
+                markSensor();
             });
         }
 
         function markSensor() {
             //var markerSensor = new longdo.Marker({ lon: 101.129354, lat: 16.440727 });
 
-            var marker = new longdo.Marker({ lon: 100.56, lat: 13.74 });
+            var marker = new longdo.Marker({
+                lon: 100.56,
+                lat: 13.74
+            });
 
             map.Overlays.add(marker);
         }
@@ -191,7 +193,8 @@
                     dataType: 'json',
                     success: function(data) {
                         $.each(data, function(index, item) {
-                            $('#district').append('<option value="' + item.id + '">' + item.name + '</option>');
+                            $('#district').append('<option value="' + item.id + '">' + item
+                                .name + '</option>');
                         });
                     }
                 });
@@ -212,7 +215,8 @@
                     dataType: 'json',
                     success: function(data) {
                         $.each(data, function(index, item) {
-                            $('#subdistrict').append('<option value="' + item.id + '">' + item.name + '</option>');
+                            $('#subdistrict').append('<option value="' + item.id + '">' + item
+                                .name + '</option>');
                         });
                     }
                 });
