@@ -63,6 +63,7 @@
                 language: 'th',
             });
 
+            map.Layers.setBase(longdo.Layers.NORMAL);
             map.Ui.Toolbar.visible(false);
             map.Ui.Terrain.visible(false);
             map.Ui.LayerSelector.visible(false);
