@@ -105,21 +105,6 @@
 
                 map.Ui.add(menuBarControl);
 
-                /* var popup2 = new longdo.Popup({ lon: 101.129354, lat: 16.440727 },
-                {
-                    title: 'ชื่อ sensor',
-                    loadDetail: updateDetail,
-                    size: { width: 200, height: 200 },
-                    closable: false
-                });
-
-                map.Overlays.add(popup2)
-
-                function updateDetail(element) {
-                    setTimeout(function() {
-                    element.innerHTML = 'รายการค่า sensor';
-                    }, 1000);
-                } */
                 markSensor();
             });
         }
@@ -130,13 +115,46 @@
                 { id: '123' }
             );
 
-            map.Overlays.add(markerSensor);
+            const sensorData = [
+                { id: 1, name: 'Sensor A', lat: 16.441, lon: 101.129 },
+                { id: 2, name: 'Sensor B', lat: 16.442, lon: 101.131 },
+                { id: 3, name: 'Sensor C', lat: 16.443, lon: 101.128 }
+            ];
+
+            const normalIcon = longdo.MarkerTheme.default;
+            const hoverIcon = longdo.MarkerTheme.yellow;
+
+            sensorData.forEach(sensor => {
+                const marker = new longdo.Marker(
+                    { lat: sensor.lat, lon: sensor.lon },
+                    {
+                        title: sensor.name,
+                        detail: 'คลิกเพื่อดูข้อมูล',
+                        icon: normalIcon,
+                        metadata: { id: sensor.id }
+                    }
+                );
+
+                // ✅ Hover effect
+                marker.mouseover = () => marker.setTheme(hoverIcon);
+                marker.mouseout = () => marker.setTheme(normalIcon);
+
+                // ✅ Click to open modal
+                marker.click = () => {
+                    openModal(sensor.id); // เรียกฟังก์ชันเปิด modal พร้อมส่ง id
+                };
+
+                map.Overlays.add(marker);
+            });
+
+
+            /* map.Overlays.add(markerSensor);
             map.Event.bind('overlayClick', function(overlay) {
                 if (overlay === markerSensor) {
                     const id = overlay.id;
                     openModal(id);
                 }
-            });
+            }); */
         }
 
         function openModal(id) {
