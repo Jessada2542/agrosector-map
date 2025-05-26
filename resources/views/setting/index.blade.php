@@ -43,7 +43,7 @@
                         <label for="device-province">จังหวัด</label>
                         <select id="device-province" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="" selected>เลือกจังหวัด</option>
-                            @foreach ($provinces as $item)
+                            @foreach ($province as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
