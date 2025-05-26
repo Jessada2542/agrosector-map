@@ -39,6 +39,33 @@
                         <label for="device-position-lon">ตำแหน่ง Longitude</label>
                         <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lon" id="device-position-lon">
                     </div>
+                    <div class="mb-3">
+                        <label for="device-province">จังหวัด</label>
+                        <select id="device-province" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" selected>เลือกจังหวัด</option>
+                            @foreach ($provinces as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="device-district">อำเภอ</label>
+                        <select id="device-district" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" selected>เลือกอำเภอ</option>
+                            @foreach ($district as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="device-subdistrict">ตำบล</label>
+                        <select id="device-subdistrict" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" selected>เลือกตำบล</option>
+                            @foreach ($subdistrict as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <input type="hidden" id="device-id">
                 <div class="flex justify-center">

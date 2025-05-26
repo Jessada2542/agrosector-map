@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GeoCode;
 use App\Models\UserSensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,9 +45,19 @@ class SettingController extends Controller
                 ->make(true);
         }
 
+        $province = GeoCode::select('province_code as id', 'province_name_th as name')
+            ->groupBy('province_code', 'province_name_th')
+            ->get();
+        $district = GeoCode::select('district_code as id', 'district_name_th as name')
+            ->groupBy('district_code', 'district_name_th')
+            ->get();
+        $subdistrict = GeoCode::select('subdistrict_code as id', 'subdistrict_name_th as name')
+            ->groupBy('subdistrict_code', 'subdistrict_name_th')
+            ->get();
+
         $sideAtive = 'setting';
 
-        return view('setting.index', compact('sideAtive'));
+        return view('setting.index', compact('sideAtive', 'province', 'district', 'subdistrict'));
     }
 
     public function edit($id)
