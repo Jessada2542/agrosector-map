@@ -171,9 +171,17 @@
                 var deviceId = $('#device-id').val();
                 var positionLat = $('#device-position-lat').val();
                 var positionLon = $('#device-position-lon').val();
+                var provinceId = $('#device-province').val();
+                var districtId = $('#device-district').val();
+                var subdistrictId = $('#device-subdistrict').val();
 
                 if (!positionLat || !positionLon) {
                     Swal.fire('Error!', 'กรุณากรอกตำแหน่ง Latitude และ Longitude.', 'error');
+                    return;
+                }
+
+                if (!provinceId || !districtId || !subdistrictId) {
+                    Swal.fire('Error!', 'กรุณาเลือกจังหวัด, อำเภอ และตำบล.', 'error');
                     return;
                 }
 
@@ -184,7 +192,10 @@
                         _token: '{{ csrf_token() }}',
                         id: deviceId,
                         lat: positionLat,
-                        lon: positionLon
+                        lon: positionLon,
+                        province_id: provinceId,
+                        district_id: districtId,
+                        subdistrict_id: subdistrictId
                     },
                     success: function(response) {
                         if (response.status) {
