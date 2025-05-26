@@ -75,6 +75,8 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
+                        console.log(response);
+
                         $('#modal-edit-sensor').removeClass('hidden');
                         $('#text-sensor-name').text('Edit Device: ' + response.sensor_key.key);
                     },
@@ -83,7 +85,7 @@
                     }
                 });
 
-                Swal.fire({
+                /* Swal.fire({
                     title: 'Edit Device',
                     text: 'You can edit the device here.',
                     icon: 'info',
@@ -94,7 +96,7 @@
                     if (result.isConfirmed) {
                         console.log('Device edited:', deviceId);
                     }
-                });
+                }); */
             });
 
             $(document).on('click', '.closeModal', function() {
