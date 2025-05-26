@@ -23,9 +23,9 @@ class SettingController extends Controller
                     return $row->lat && $row->lon ? $row->lat . ', ' . $row->lon : 'N/A';
                 })
                 ->addColumn('address', function ($row) {
-                    return $row->province->province_name_th . ' ' .
-                        $row->district->district_name_th . ' ' .
-                        $row->subdistrict->subdistrict_name_th;
+                    return $row->province->province_name_th ?? '' . ', ' .
+                        $row->district->district_name_th ?? '' . ', ' .
+                        $row->subdistrict->subdistrict_name_th ?? '';
                 })
                 /* ->editColumn('status', function ($row) {
                     return $row->sensorKey->is_active == 1
