@@ -205,6 +205,9 @@
                         $('#device-key').val(response.data.sensor_key.key);
                         $('#device-position-lat').val(response.data.lat ?? '');
                         $('#device-position-lon').val(response.data.lon ?? '');
+                        $('#device-province').val(response.data.province_code).trigger('change');
+                        $('#device-district').val(response.data.district_code).trigger('change');
+                        $('#device-subdistrict').val(response.data.subdistrict_code).trigger('change');
                         $('#device-id').val(response.data.id);
                     },
                     error: function(xhr) {
