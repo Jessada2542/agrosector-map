@@ -28,6 +28,60 @@
 
 <body onload="init();">
     <div id="map"></div>
+    <!-- ปุ่มเปิด Modal -->
+<button onclick="document.getElementById('myModal-test').classList.remove('hidden')" class="bg-green-600 text-white px-4 py-2 rounded">
+  เปิด Modal
+</button>
+
+<!-- Modal -->
+<div id="myModal-test" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white w-[700px] h-[400px] rounded-lg shadow-lg flex">
+
+    <!-- ปิด Modal -->
+    <button onclick="document.getElementById('myModal-test').classList.add('hidden')" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl font-bold">&times;</button>
+
+    <!-- Content ซ้าย -->
+    <div class="flex-1 p-6">
+      <div id="tabContent1" class="tab-content">
+        <h2 class="text-xl font-semibold mb-2">แท็บที่ 1</h2>
+        <p>เนื้อหาของแท็บที่ 1</p>
+      </div>
+      <div id="tabContent2" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-2">แท็บที่ 2</h2>
+        <p>เนื้อหาของแท็บที่ 2</p>
+      </div>
+      <div id="tabContent3" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-2">แท็บที่ 3</h2>
+        <p>เนื้อหาของแท็บที่ 3</p>
+      </div>
+    </div>
+
+    <!-- Tab ด้านขวา -->
+    <div class="w-40 border-l border-gray-200 p-4 bg-gray-50">
+      <ul class="space-y-2">
+        <li>
+          <button onclick="changeTab(1)" class="w-full text-left px-3 py-2 rounded hover:bg-green-100 text-green-700 font-medium">แท็บที่ 1</button>
+        </li>
+        <li>
+          <button onclick="changeTab(2)" class="w-full text-left px-3 py-2 rounded hover:bg-green-100 text-green-700 font-medium">แท็บที่ 2</button>
+        </li>
+        <li>
+          <button onclick="changeTab(3)" class="w-full text-left px-3 py-2 rounded hover:bg-green-100 text-green-700 font-medium">แท็บที่ 3</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript สำหรับเปลี่ยน Tab -->
+<script>
+  function changeTab(tabNumber) {
+    document.querySelectorAll('.tab-content').forEach((el, i) => {
+      el.classList.toggle('hidden', i !== tabNumber - 1);
+    });
+  }
+</script>
+
 
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
