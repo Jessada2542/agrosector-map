@@ -115,6 +115,7 @@
                     },
                     {
                         data: 'address',
+                        width: '30%'
                     },
                     /* {
                         data: 'status'
