@@ -60,10 +60,14 @@ class SettingController extends Controller
             'lon' => 'required',
         ]);
 
-        $userSensor = UserSensor::findOrFail($request->input('id'));
-        $userSensor->lat = $request->input('lat');
-        $userSensor->lon = $request->input('lon');
-        $userSensor->save();
+        $userSensor = UserSensor::whereId($request->input('id'))->first();
+        if (!$userSensor) {
+            return response()->json(['status' => false, 'message' => 'Device not found'], 404);
+        }
+        $userSensor->update([
+            'lat' => $request->input('lat'),
+            'lon' => $request->input('lon'),
+        ]);
 
         return response()->json(['status' => true, 'message' => 'Device settings updated successfully']);
     }

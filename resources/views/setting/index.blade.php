@@ -138,9 +138,13 @@
                         lon: positionLon
                     },
                     success: function(response) {
-                        Swal.fire('Success!', 'อัพเดตข้อมูลอุปกรณ์เรียบร้อยแล้ว.', 'success');
-                        table.ajax.reload();
-                        $('#modal-edit-sensor').addClass('hidden');
+                        if (response.status) {
+                            Swal.fire('Success!', 'อัพเดตข้อมูลอุปกรณ์เรียบร้อยแล้ว.', 'success');
+                            table.ajax.reload();
+                            $('#modal-edit-sensor').addClass('hidden');
+                        } else {
+                            Swal.fire('Error!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
+                        }
                     },
                     error: function(xhr) {
                         Swal.fire('Error!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
