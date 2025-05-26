@@ -109,6 +109,24 @@
                 reponsive: true,
             });
 
+            $('#province').select2({
+                placeholder: 'เลือกจังหวัด',
+                allowClear: true,
+                width: '100%',
+            });
+
+            $('#district').select2({
+                placeholder: 'เลือกอำเภอ',
+                allowClear: true,
+                width: '100%',
+            });
+
+            $('#subdistrict').select2({
+                placeholder: 'เลือกตำบล',
+                allowClear: true,
+                width: '100%',
+            });
+
             $('#table').on('click', '.btn-edit', function() {
                 var deviceId = $(this).data('id');
 
