@@ -1,4 +1,18 @@
 @extends('layouts.app')
+<style>
+    .select2-container .select2-selection--single {
+        height: 40px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #000000 !important;
+        line-height: 38px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 38px !important;
+    }
+</style>
 @section('content')
     <div class="m-5">
         <div class="p-6 rounded-xl shadow-sm border border-green-200 mb-6">
