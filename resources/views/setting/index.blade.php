@@ -238,9 +238,9 @@
                         id: deviceId,
                         lat: positionLat,
                         lon: positionLon,
-                        province_id: provinceId,
-                        district_id: districtId,
-                        subdistrict_id: subdistrictId
+                        province_code: provinceId,
+                        district_code: districtId,
+                        subdistrict_code: subdistrictId
                     },
                     success: function(response) {
                         if (response.status) {
