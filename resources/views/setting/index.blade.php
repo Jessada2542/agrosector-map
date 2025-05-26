@@ -69,7 +69,7 @@
                 console.log('Edit device with ID:', deviceId);
 
                 $.ajax({
-                    url: '/edit/device/' + deviceId,
+                    url: '/setting/edit/device/' + deviceId,
                     method: 'GET',
                     data: {
                         _token: '{{ csrf_token() }}'
