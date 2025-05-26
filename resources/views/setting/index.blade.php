@@ -13,7 +13,7 @@
                         <th class="px-4 py-2 border-b">#</th>
                         <th class="px-4 py-2 border-b">รหัสอุปกรณ์</th>
                         <th class="px-4 py-2 border-b">ตำแหน่ง</th>
-                        <th class="px-4 py-2 border-b">สถานะ</th>
+                        <th class="px-4 py-2 border-b">ที่ตั้ง</th>
                         <th class="px-4 py-2 border-b">การจัดการ</th>
                     </tr>
                 </thead>
@@ -81,7 +81,6 @@
 
             $('#table').on('click', '.btn-edit', function() {
                 var deviceId = $(this).data('id');
-                console.log('Edit device with ID:', deviceId);
 
                 $.ajax({
                     url: '/setting/edit/device/' + deviceId,
@@ -90,8 +89,6 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        console.log(response);
-
                         $('#modal-edit-sensor').removeClass('hidden');
                         $('#text-sensor-name').text('แก้ไข : ' + response.data.sensor_key.key);
                         $('#device-key').val(response.data.sensor_key.key);
