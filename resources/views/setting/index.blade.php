@@ -103,19 +103,6 @@
                         Swal.fire('Error!', 'ไม่พบอุปกรณ์ device.', 'error');
                     }
                 });
-
-                /* Swal.fire({
-                    title: 'Edit Device',
-                    text: 'You can edit the device here.',
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        console.log('Device edited:', deviceId);
-                    }
-                }); */
             });
 
             $('#btn-save-sensor').on('click', function() {
