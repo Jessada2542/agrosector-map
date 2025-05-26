@@ -117,7 +117,7 @@
 
                 $.ajax({
                     url: '/setting/update/device/',
-                    method: 'POST',
+                    method: 'PUT',
                     data: {
                         _token: '{{ csrf_token() }}',
                         id: deviceId,
