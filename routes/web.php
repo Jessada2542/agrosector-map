@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\SensorController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 
@@ -38,6 +39,8 @@ Route::middleware('auth')->group(function() {
             Route::match(['get', 'post'], '/', 'index')->name('setting.index');
         });
     });
+
+    Route::get('/sensor/generate', [SensorController::class, 'generateSensor'])->name('sensor.generate');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
