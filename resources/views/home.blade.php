@@ -275,45 +275,6 @@
                 }
 
                 map.Overlays.load(object);
-
-                const apiKey = '297ba9a121afbb2c7818b0a2c497b131'; // ใส่ API key ของคุณ
-                const query = $('#province option:selected').text(); // ชื่อจังหวัด
-
-                $.ajax({
-                    url: 'https://search.longdo.com/search/json',
-                    method: 'GET',
-                    data: {
-                        query: query,
-                        key: apiKey,
-                        limit: 1,
-                    },
-                    success: function(data) {
-                        if (data && data.length > 0) {
-                            const loc = {
-                                lon: data[0].lon,
-                                lat: data[0].lat
-                            };
-                            map.location(loc, true);
-                            map.zoom(10);
-
-                            if (window.currentMarker) {
-                                map.Overlays.remove(window.currentMarker);
-                            }
-                            window.currentMarker = new longdo.Marker(loc, {
-                                icon: longdo.Marker.CROSS,
-                                title: query,
-                            });
-                            map.Overlays.add(window.currentMarker);
-                        } else {
-                            alert('ไม่พบข้อมูลตำแหน่ง');
-                        }
-                    },
-                    error: function(err) {
-                        console.error('เกิดข้อผิดพลาดในการค้นหา:', err);
-                    }
-                });
-
-
             } else {
                 Swal.fire({
                     icon: 'warning',
