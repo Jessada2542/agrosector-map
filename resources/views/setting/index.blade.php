@@ -70,8 +70,11 @@
                         data: 'position'
                     },
                     {
-                        data: 'status'
+                        data: 'address',
                     },
+                    /* {
+                        data: 'status'
+                    }, */
                     {
                         data: 'action'
                     }

@@ -35,7 +35,7 @@ class SettingController extends Controller
                 ->addColumn('action', function ($row) {
                     return '<button class="px-3 py-1 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded btn-edit" data-id="' . $row->id . '"><i class="fa-solid fa-gear"></i> แก้ไข</button>';
                 })
-                ->rawColumns(['device_key', 'position'/* , 'status' */, 'action'])
+                ->rawColumns(['device_key', 'position', 'address'/* , 'status' */, 'action'])
                 ->make(true);
         }
 
