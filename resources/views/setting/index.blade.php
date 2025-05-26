@@ -78,7 +78,7 @@
                         console.log(response);
 
                         $('#modal-edit-sensor').removeClass('hidden');
-                        $('#text-sensor-name').text('Edit Device: ' + response.sensor_key.key);
+                        $('#text-sensor-name').text('Edit Device: ' + response.data.sensor_key.key);
                     },
                     error: function(xhr) {
                         Swal.fire('Error!', 'ไม่พบอุปกรณ์ device.', 'error');
