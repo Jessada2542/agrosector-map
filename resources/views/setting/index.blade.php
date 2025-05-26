@@ -26,7 +26,12 @@
         <div id="modal-edit-sensor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
             <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
                 <h2 class="text-center text-xl font-bold mb-4" id="text-sensor-name">ข้อมูล Sensor</h2>
-                <div id="sensor-content" class="mb-4">กำลังโหลด...</div>
+                <div class="mb-4">
+                    <p class="text-gray-700">กรุณาแก้ไขข้อมูลอุปกรณ์ที่นี่</p>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="รหัสอุปกรณ์" id="device-key" readonly>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lat" id="device-position-lat">
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lon" id="device-position-lon">
+                </div>
                 <div class="flex justify-center">
                     <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
                 </div>
@@ -79,6 +84,9 @@
 
                         $('#modal-edit-sensor').removeClass('hidden');
                         $('#text-sensor-name').text('Edit Device: ' + response.data.sensor_key.key);
+                        $('#device-key').val(response.data.sensor_key.key);
+                        $('#device-position-lat').val(response.data.lat);
+                        $('#device-position-lng').val(response.data.lon);
                     },
                     error: function(xhr) {
                         Swal.fire('Error!', 'ไม่พบอุปกรณ์ device.', 'error');
