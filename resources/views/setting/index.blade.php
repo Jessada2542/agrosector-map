@@ -108,10 +108,12 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'device_key'
+                        data: 'device_key',
+                        width: '20%',
                     },
                     {
-                        data: 'position'
+                        data: 'position',
+                        width: '20%',
                     },
                     {
                         data: 'address',
