@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function() {
         Route::prefix('/setting')->group(function() {
             Route::match(['get', 'post'], '/', 'index')->name('setting.index');
             Route::get('/edit/device/{id}', 'edit')->name('setting.edit.device');
+            Route::post('/update/device', 'update')->name('setting.update.device');
         });
     });
 

@@ -27,12 +27,22 @@
             <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
                 <h2 class="text-center text-xl font-bold mb-4" id="text-sensor-name">ข้อมูล Sensor</h2>
                 <div class="mb-4">
-                    <p class="text-gray-700">กรุณาแก้ไขข้อมูลอุปกรณ์ที่นี่</p>
-                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="รหัสอุปกรณ์" id="device-key" readonly>
-                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lat" id="device-position-lat">
-                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lon" id="device-position-lon">
+                    <div class="mb-3">
+                        <label for="device-key">รหัสอุปกรณ์</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="รหัสอุปกรณ์" id="device-key" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="device-position-lat">ตำแหน่ง Latitude</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lat" id="device-position-lat">
+                    </div>
+                    <div class="mb-3">
+                        <label for="device-position-lon">ตำแหน่ง Longitude</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lon" id="device-position-lon">
+                    </div>
                 </div>
+                <input type="hidden" id="device-id">
                 <div class="flex justify-center">
+                    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2" id="btn-save-sensor">บันทึก</button>
                     <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
                 </div>
             </div>
@@ -83,10 +93,11 @@
                         console.log(response);
 
                         $('#modal-edit-sensor').removeClass('hidden');
-                        $('#text-sensor-name').text('Edit Device: ' + response.data.sensor_key.key);
+                        $('#text-sensor-name').text('แก้ไข : ' + response.data.sensor_key.key);
                         $('#device-key').val(response.data.sensor_key.key);
                         $('#device-position-lat').val(response.data.lat);
                         $('#device-position-lng').val(response.data.lon);
+                        $('#device-id').val(response.data.id);
                     },
                     error: function(xhr) {
                         Swal.fire('Error!', 'ไม่พบอุปกรณ์ device.', 'error');
@@ -105,6 +116,36 @@
                         console.log('Device edited:', deviceId);
                     }
                 }); */
+            });
+
+            $('#btn-save-sensor').on('click', function() {
+                var deviceId = $('#device-id').val();
+                var positionLat = $('#device-position-lat').val();
+                var positionLon = $('#device-position-lon').val();
+
+                if (!positionLat || !positionLon) {
+                    Swal.fire('Error!', 'กรุณากรอกตำแหน่ง Latitude และ Longitude.', 'error');
+                    return;
+                }
+
+                $.ajax({
+                    url: '/setting/update/device/',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: deviceId,
+                        lat: positionLat,
+                        lon: positionLon
+                    },
+                    success: function(response) {
+                        Swal.fire('Success!', 'อัพเดตข้อมูลอุปกรณ์เรียบร้อยแล้ว.', 'success');
+                        table.ajax.reload();
+                        $('#modal-edit-sensor').addClass('hidden');
+                    },
+                    error: function(xhr) {
+                        Swal.fire('Error!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
+                    }
+                });
             });
 
             $(document).on('click', '.closeModal', function() {

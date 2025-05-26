@@ -51,4 +51,20 @@ class SettingController extends Controller
             'data' => $userSensor
         ]);
     }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:user_sensors,id',
+            'lat' => 'required',
+            'lon' => 'required',
+        ]);
+
+        $userSensor = UserSensor::findOrFail($request->input('id'));
+        $userSensor->lat = $request->input('lat');
+        $userSensor->lon = $request->input('lon');
+        $userSensor->save();
+
+        return response()->json(['status' => true, 'message' => 'Device settings updated successfully']);
+    }
 }
