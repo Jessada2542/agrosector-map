@@ -95,8 +95,8 @@
                         $('#modal-edit-sensor').removeClass('hidden');
                         $('#text-sensor-name').text('แก้ไข : ' + response.data.sensor_key.key);
                         $('#device-key').val(response.data.sensor_key.key);
-                        $('#device-position-lat').val(response.data.lat);
-                        $('#device-position-lng').val(response.data.lon);
+                        $('#device-position-lat').val(response.data.lat ?? '');
+                        $('#device-position-lon').val(response.data.lon ?? '');
                         $('#device-id').val(response.data.id);
                     },
                     error: function(xhr) {
