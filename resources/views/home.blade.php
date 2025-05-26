@@ -28,68 +28,38 @@
 
 <body onload="init();">
     <div id="map"></div>
-    <!-- ปุ่มเปิด Modal -->
-<button onclick="document.getElementById('myModal-test').classList.remove('hidden')" class="bg-green-600 text-white px-4 py-2 rounded">
-  เปิด Modal
-</button>
+    {{-- <button onclick="document.getElementById('rightModal').classList.remove('hidden')"
+        class="bg-green-600 text-white px-4 py-2 rounded">
+        เปิด Modal ขวา
+    </button> --}}
 
-<!-- Modal -->
-<div id="myModal-test" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-  <div class="bg-white w-[700px] h-[400px] rounded-lg shadow-lg flex">
-
-    <!-- ปิด Modal -->
-    <button onclick="document.getElementById('myModal-test').classList.add('hidden')" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl font-bold">&times;</button>
-
-    <!-- Content ซ้าย -->
-    <div class="flex-1 p-6">
-      <div id="tabContent1" class="tab-content">
-        <h2 class="text-xl font-semibold mb-2">แท็บที่ 1</h2>
-        <p>เนื้อหาของแท็บที่ 1</p>
-      </div>
-      <div id="tabContent2" class="tab-content hidden">
-        <h2 class="text-xl font-semibold mb-2">แท็บที่ 2</h2>
-        <p>เนื้อหาของแท็บที่ 2</p>
-      </div>
-      <div id="tabContent3" class="tab-content hidden">
-        <h2 class="text-xl font-semibold mb-2">แท็บที่ 3</h2>
-        <p>เนื้อหาของแท็บที่ 3</p>
-      </div>
+    <!-- Modal แบบชิดขวา -->
+    <div id="rightModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end hidden">
+        <div class="relative bg-white w-[400px] h-full shadow-lg flex flex-col">
+            <div class="flex items-center justify-between p-6 border-b">
+                <h2 class="text-xl font-semibold">หัวเรื่อง</h2>
+                <button onclick="document.getElementById('rightModal').classList.add('hidden')"
+                    class="text-gray-500 hover:text-red-600 text-2xl font-bold">
+                    &times;
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <p class="text-gray-700">
+                    นี่คือเนื้อหาภายใน Modal ที่อยู่ด้านขวาของหน้าจอ คุณสามารถใส่ข้อความ รูปภาพ หรือแบบฟอร์มต่าง ๆ
+                    ได้ที่นี่
+                </p>
+            </div>
+        </div>
     </div>
-
-    <!-- Tab ด้านขวา -->
-    <div class="w-40 border-l border-gray-200 p-4 bg-gray-50">
-      <ul class="space-y-2">
-        <li>
-          <button onclick="changeTab(1)" class="w-full text-left px-3 py-2 rounded hover:bg-green-100 text-green-700 font-medium">แท็บที่ 1</button>
-        </li>
-        <li>
-          <button onclick="changeTab(2)" class="w-full text-left px-3 py-2 rounded hover:bg-green-100 text-green-700 font-medium">แท็บที่ 2</button>
-        </li>
-        <li>
-          <button onclick="changeTab(3)" class="w-full text-left px-3 py-2 rounded hover:bg-green-100 text-green-700 font-medium">แท็บที่ 3</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- JavaScript สำหรับเปลี่ยน Tab -->
-<script>
-  function changeTab(tabNumber) {
-    document.querySelectorAll('.tab-content').forEach((el, i) => {
-      el.classList.toggle('hidden', i !== tabNumber - 1);
-    });
-  }
-</script>
-
 
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
             <h2 class="text-center text-xl font-bold mb-4">ค้นหาพื้นที่ที่ต้องการ</h2>
             <div class="mb-4">
                 <label for="province" class="block text-sm font-medium text-gray-700">เลือกจังหวัด</label>
-                <select id="province" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled selected>เลือกจังหวัด</option>
+                <select id="province"
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" selected>เลือกจังหวัด</option>
                     @foreach ($provinces as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
@@ -97,8 +67,9 @@
             </div>
             <div class="mb-4">
                 <label for="district" class="block text-sm font-medium text-gray-700">เลือกอำเภอ</label>
-                <select id="district" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled selected>เลือกอำเภอ</option>
+                <select id="district"
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" selected>เลือกอำเภอ</option>
                     @foreach ($districts as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
@@ -106,15 +77,17 @@
             </div>
             <div class="mb-4">
                 <label for="subdistrict" class="block text-sm font-medium text-gray-700">เลือกตำบล</label>
-                <select id="subdistrict" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled selected>เลือกตำบล</option>
+                <select id="subdistrict"
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" selected>เลือกตำบล</option>
                     @foreach ($subdistricts as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="flex justify-center gap-2">
-                <button id="btn-search" class="px-4 py-2 bg-blue-500 rounded hover:bg-blue-400 text-white">ค้นหา</button>
+                <button id="btn-search"
+                    class="px-4 py-2 bg-blue-500 rounded hover:bg-blue-400 text-white">ค้นหา</button>
                 <button id="closeModal" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">ปิด</button>
             </div>
         </div>
@@ -144,8 +117,7 @@
             });
 
             var menuBarControl = new longdo.MenuBar({
-                button: [
-                    {
+                button: [{
                         label: '<i class="fa fa-search mr-1"></i> ค้นหาพื้นที่ได้ที่นี้',
                         type: 'search',
                     },
@@ -165,7 +137,7 @@
         }
 
         function menuChange(item) {
-            if (!checkLogin && item.type !== 'login') {
+            /* if (!checkLogin && item.type !== 'login') {
                 Swal.fire({
                     text: 'กรุณาเข้าสู่ระบบ',
                     icon: 'warning',
@@ -173,7 +145,7 @@
                 });
 
                 return;
-            }
+            } */
 
             if (item.type === 'search') {
                 $('#modal').removeClass('hidden').addClass('flex');
@@ -244,7 +216,8 @@
                     dataType: 'json',
                     success: function(data) {
                         $.each(data, function(index, item) {
-                            $('#district').append('<option value="' + item.id + '">' + item.name + '</option>');
+                            $('#district').append('<option value="' + item.id + '">' + item
+                                .name + '</option>');
                         });
                     }
                 });
@@ -265,7 +238,8 @@
                     dataType: 'json',
                     success: function(data) {
                         $.each(data, function(index, item) {
-                            $('#subdistrict').append('<option value="' + item.id + '">' + item.name + '</option>');
+                            $('#subdistrict').append('<option value="' + item.id + '">' + item
+                                .name + '</option>');
                         });
                     }
                 });
@@ -290,18 +264,56 @@
                     object = new longdo.Overlays.Object(provinceId, 'IG', {
                         lineColor: '#0054ff',
                     });
-                    map.Overlays.load(object);
                 } else if (districtId && !subdistrictId) {
                     object = new longdo.Overlays.Object(districtId, 'IG', {
                         lineColor: '#00ff00',
                     });
-                    map.Overlays.load(object);
                 } else if (subdistrictId && districtId && provinceId) {
                     object = new longdo.Overlays.Object(subdistrictId, 'IG', {
                         lineColor: '#ff0000',
                     });
-                    map.Overlays.load(object);
                 }
+
+                map.Overlays.load(object);
+
+                const apiKey = '297ba9a121afbb2c7818b0a2c497b131'; // ใส่ API key ของคุณ
+                const query = $('#province option:selected').text(); // ชื่อจังหวัด
+
+                $.ajax({
+                    url: 'https://search.longdo.com/search/json',
+                    method: 'GET',
+                    data: {
+                        query: query,
+                        key: apiKey,
+                        limit: 1,
+                    },
+                    success: function(data) {
+                        if (data && data.length > 0) {
+                            const loc = {
+                                lon: data[0].lon,
+                                lat: data[0].lat
+                            };
+                            map.location(loc, true);
+                            map.zoom(10);
+
+                            if (window.currentMarker) {
+                                map.Overlays.remove(window.currentMarker);
+                            }
+                            window.currentMarker = new longdo.Marker(loc, {
+                                icon: longdo.Marker.CROSS,
+                                title: query,
+                            });
+                            map.Overlays.add(window.currentMarker);
+                        } else {
+                            alert('ไม่พบข้อมูลตำแหน่ง');
+                        }
+                    },
+                    error: function(err) {
+                        console.error('เกิดข้อผิดพลาดในการค้นหา:', err);
+                    }
+                });
+
+
             } else {
                 Swal.fire({
                     icon: 'warning',
