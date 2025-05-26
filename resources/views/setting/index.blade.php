@@ -144,6 +144,51 @@
                 width: '100%',
             });
 
+            $('#device-province').on('change', function() {
+                var provinceId = $(this).val();
+                $('#device-district').empty().append('<option value="" disabled selected>เลือกอำเภอ</option>');
+                $('#device-subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
+                if (provinceId) {
+                    $.ajax({
+                        url: '/api/districts',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            province_code: provinceId
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(index, item) {
+                                $('#device-district').append('<option value="' + item.id + '">' + item
+                                    .name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#device-district').on('change', function() {
+                var districtId = $(this).val();
+                $('#device-subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
+                if (districtId) {
+                    $.ajax({
+                        url: '/api/subdistricts',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            district_code: districtId
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(index, item) {
+                                $('#device-subdistrict').append('<option value="' + item.id + '">' + item
+                                    .name + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+
             $('#table').on('click', '.btn-edit', function() {
                 var deviceId = $(this).data('id');
 
