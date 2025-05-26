@@ -38,4 +38,17 @@ class SettingController extends Controller
 
         return view('setting.index', compact('sideAtive'));
     }
+
+    public function edit($id)
+    {
+        $userSensor = UserSensor::where('sensor_key_id', $id)
+            ->where('user_id', Auth::id())
+            ->with('sensorKey')
+            ->first();
+
+        return response()->json([
+            'status' => true,
+            'data' => $userSensor
+        ]);
+    }
 }

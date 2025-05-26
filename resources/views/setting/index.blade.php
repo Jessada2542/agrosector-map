@@ -22,6 +22,16 @@
                 </tbody>
             </table>
         </div>
+
+        <div id="modal-edit-sensor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+                <h2 class="text-center text-xl font-bold mb-4" id="text-sensor-name">ข้อมูล Sensor</h2>
+                <div id="sensor-content" class="mb-4">กำลังโหลด...</div>
+                <div class="flex justify-center">
+                    <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -34,12 +44,22 @@
                         _token: '{{ csrf_token() }}'
                     },
                 },
-                columns: [
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-                    { data: 'device_key' },
-                    { data: 'position' },
-                    { data: 'status' },
-                    { data: 'action' }
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'device_key'
+                    },
+                    {
+                        data: 'position'
+                    },
+                    {
+                        data: 'status'
+                    },
+                    {
+                        data: 'action'
+                    }
                 ],
                 reponsive: true,
             });
@@ -47,6 +67,21 @@
             $('#table').on('click', '.btn-edit', function() {
                 var deviceId = $(this).data('id');
                 console.log('Edit device with ID:', deviceId);
+
+                $.ajax({
+                    url: '/edit/device/' + deviceId,
+                    method: 'GET',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#modal-edit-sensor').removeClass('hidden');
+                        $('#text-sensor-name').text('Edit Device: ' + response.sensor_key.key);
+                    },
+                    error: function(xhr) {
+                        Swal.fire('Error!', 'ไม่พบอุปกรณ์ device.', 'error');
+                    }
+                });
 
                 Swal.fire({
                     title: 'Edit Device',
@@ -60,6 +95,10 @@
                         console.log('Device edited:', deviceId);
                     }
                 });
+            });
+
+            $(document).on('click', '.closeModal', function() {
+                $('#modal-edit-sensor').addClass('hidden');
             });
         });
     </script>
