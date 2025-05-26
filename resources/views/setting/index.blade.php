@@ -109,19 +109,19 @@
                 reponsive: true,
             });
 
-            $('#province').select2({
+            $('#device-province').select2({
                 placeholder: 'เลือกจังหวัด',
                 allowClear: true,
                 width: '100%',
             });
 
-            $('#district').select2({
+            $('#device-district').select2({
                 placeholder: 'เลือกอำเภอ',
                 allowClear: true,
                 width: '100%',
             });
 
-            $('#subdistrict').select2({
+            $('#device-subdistrict').select2({
                 placeholder: 'เลือกตำบล',
                 allowClear: true,
                 width: '100%',
