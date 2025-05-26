@@ -22,12 +22,15 @@ class SettingController extends Controller
                 ->editColumn('position', function ($row) {
                     return $row->lat && $row->lon ? $row->lat . ', ' . $row->lon : 'N/A';
                 })
-                ->addColumn('address', function ($row) {
-                    $province = $row->province?->province_name_th ?? '';
-                    $district = $row->district?->district_name_th ?? '';
-                    $subdistrict = $row->subdistrict?->subdistrict_name_th ?? '';
+               ->addColumn('address', function ($row) {
+                    $parts = [
+                        $row->province?->province_name_th ?? null,
+                        $row->district?->district_name_th ?? null,
+                        $row->subdistrict?->subdistrict_name_th ?? null,
+                    ];
 
-                    return "$province, $district, $subdistrict";
+                    // ลบค่าว่างหรือ null ออก และรวมด้วย ', '
+                    return implode(', ', array_filter($parts));
                 })
                 /* ->editColumn('status', function ($row) {
                     return $row->sensorKey->is_active == 1
