@@ -119,9 +119,7 @@ class UserController extends Controller
     {
         $plantingData = UserSensor::with('sensorKey', 'useSensor')
             ->where('user_id', $id)
-            ->whereHas('useSensor', function ($query) {
-                $query->where('status', 0);
-            })
+            ->whereDoesntHave('useSensor')
             ->get();
 
         if (!$plantingData) {
