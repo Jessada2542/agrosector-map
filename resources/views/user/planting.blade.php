@@ -103,6 +103,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
         $(document).ready(function() {
             var table = $('#table').DataTable({
@@ -148,8 +149,8 @@
                             $('#planting-device-edit').append('<option value="' + response.data.user_sensor.sensor_key.id + ' selected">' + response.data.user_sensor.sensor_key.key + '</option>');
                             $('#planting-name-edit').val(response.data.name);
                             $('#planting-detail-edit').val(response.data.detail);
-                            $('#planting-date-start-edit').val(response.data.start_date.format('d-m-Y'));
-                            $('#planting-date-end-edit').val(response.data.end_date.format('d-m-Y'));
+                            $('#planting-date-start-edit').val(dayjs(response.data.start_date).format('DD-MM-YYYY'));
+                            $('#planting-date-end-edit').val(dayjs(response.data.end_date).format('DD-MM-YYYY'));
                         } else {
                             Swal.fire('ผิดพลาด!', 'ไม่พบข้อมูลอุปกรณ์', 'error');
                         }
