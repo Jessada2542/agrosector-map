@@ -114,7 +114,7 @@ class SensorController extends Controller
                     'latitude' => $item->userSensor->latitude,
                     'longitude' => $item->userSensor->longitude,
                     'latest_sensor' => $item->latestSensor ? $item->latestSensor->toArray() : null,
-                    'item' => $item
+                    'item' => $item->userSensor
                 ];
             })
         ]);
