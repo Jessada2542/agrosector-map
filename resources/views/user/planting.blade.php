@@ -242,11 +242,11 @@
                         }
                     });
                 });
+            });
 
-                $('.closeModal').on('click', function() {
-                    $('#modal-planting').addClass('hidden');
-                    $('#modal-planting-edit').addClass('hidden');
-                });
+            $('.closeModal').on('click', function() {
+                $('#modal-planting').addClass('hidden');
+                $('#modal-planting-edit').addClass('hidden');
             });
         });
     </script>
