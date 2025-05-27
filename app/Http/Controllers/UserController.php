@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserSensor;
 use App\Models\UserUseSensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -109,7 +110,7 @@ class UserController extends Controller
                 ->make(true);
         }
 
-        $plantingData = UserUseSensor::with('sensorKey')
+        $plantingData = UserSensor::with('sensorKey')
             ->where('user_id', Auth::id())
             ->get();
 
@@ -120,9 +121,8 @@ class UserController extends Controller
 
     public function plantingData($id)
     {
-        $plantingData = UserUseSensor::with('sensorKey')
-            ->where('id', $id)
-            ->where('user_id', Auth::id())
+        $plantingData = UserSensor::with('sensorKey')
+            ->where('user_id', $id)
             ->first();
 
         if (!$plantingData) {
