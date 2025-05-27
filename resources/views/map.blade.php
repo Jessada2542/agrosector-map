@@ -281,6 +281,8 @@
                         lineColor: '#ff0000',
                     });
                 }
+
+                map.Overlays.clear();
                 map.Overlays.load(object);
 
                 $.ajax({
