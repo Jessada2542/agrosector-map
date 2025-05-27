@@ -78,7 +78,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="planting-detail">รายละเอียด</label>
-                        <textarea id="planting-detail" class="w-full p-2 border border-gray-300 rounded mt-2" cols="30" rows="3"></textarea>
+                        <textarea id="planting-detail-edit" class="w-full p-2 border border-gray-300 rounded mt-2" cols="30" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="planting-date-start-edit">วันที่เริ่มปลูก <span class="text-red">(แก้ไขไม่ได้)</span></label>
