@@ -10,11 +10,11 @@
         width: 100%;
     }
 
-    canvas {
+    /* canvas {
         max-width: 600px;
         margin: 50px auto;
         display: block;
-    }
+    } */
 </style>
 @section('content')
     <div id="map"></div>
