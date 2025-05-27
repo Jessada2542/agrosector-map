@@ -209,7 +209,7 @@
                 success: function(response) {
                     if (response.status) {
                         $('#general-info').html(`
-                            <h2 class="text-lg font-semibold mb-4">ชื่อ ${response.data.name}</h2>
+                            <h2 class="text-lg font-semibold mb-4">${response.data.name}</h2>
                             <p>${response.data.detail}</p>
                         `);
                     } else {
