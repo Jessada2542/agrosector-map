@@ -21,13 +21,13 @@ class UserUseSensor extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function sensor()
+    public function userSensor()
     {
         return $this->belongsTo(UserSensor::class, 'user_sensors_id');
     }
 
-    public function userSensor()
+    public function sensor()
     {
-        return $this->belongsTo(UserSensor::class, 'user_sensors_id');
+        return $this->belongsTo(Sensor::class, 'use_user_sensor_id', 'id');
     }
 }

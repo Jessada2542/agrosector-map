@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sensor extends Model
 {
     protected $fillable = [
+        'use_user_sensor_id',
         'sensor_key_id',
         'n',
         'p',
@@ -20,5 +21,10 @@ class Sensor extends Model
     public function sensorKey()
     {
         return $this->belongsTo(SensorKey::class);
+    }
+
+    public function useUserSensor()
+    {
+        return $this->belongsTo(UserUseSensor::class, 'use_user_sensor_id');
     }
 }

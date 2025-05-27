@@ -186,7 +186,6 @@
                         _token: '{{ csrf_token() }}',
                     },
                     success: function(response) {
-                        console.log(response);
                         if (response.status) {
                             $('#modal-planting').removeClass('hidden');
                             $.each(response.data, function(index, item) {
