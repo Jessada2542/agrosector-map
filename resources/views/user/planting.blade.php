@@ -146,6 +146,12 @@
                     },
                     success: function(response) {
                         if (response.status) {
+                            if (response.data.status == 0) {
+                                Swal.fire('ผิดพลาด!', 'อุปกรณ์นี้ถูกปิดใช้งานแล้ว', 'error');
+                                $('#modal-planting-edit').addClass('hidden');
+                                return;
+                            }
+
                             $('#planting-device-edit').append('<option value="' + response.data.user_sensor.sensor_key.id + '" selected>' + response.data.user_sensor.sensor_key.key + '</option>');
                             $('#planting-name-edit').val(response.data.name);
                             $('#planting-detail-edit').val(response.data.detail);
