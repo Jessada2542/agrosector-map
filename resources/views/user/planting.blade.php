@@ -130,13 +130,6 @@
             $('#table').on('click', '.btn-edit', function() {
                 var deviceId = $(this).data('id');
 
-                $('#modal-planting-edit').removeClass('hidden');
-                $('#planting-device-edit').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
-                $('#planting-name-edit').val('');
-                $('#planting-detail').val('');
-                $('#planting-date-start-edit').val('');
-                $('#planting-date-end-edit').val('');
-                $('#planting-id-edit').val(deviceId);
                 $.ajax({
                     url: '/user/planting/edit/' + deviceId,
                     type: 'GET',
@@ -147,10 +140,18 @@
                     success: function(response) {
                         if (response.status) {
                             if (response.data.status == 0) {
-                                Swal.fire('ผิดพลาด!', 'อุปกรณ์นี้ถูกปิดใช้งานแล้ว', 'error');
+                                Swal.fire('คำเตือน!', 'อุปกรณ์นี้ถูกปิดใช้งานแล้ว', 'warning');
                                 $('#modal-planting-edit').addClass('hidden');
                                 return;
                             }
+
+                            $('#modal-planting-edit').removeClass('hidden');
+                            $('#planting-device-edit').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
+                            $('#planting-name-edit').val('');
+                            $('#planting-detail').val('');
+                            $('#planting-date-start-edit').val('');
+                            $('#planting-date-end-edit').val('');
+                            $('#planting-id-edit').val(deviceId);
 
                             $('#planting-device-edit').append('<option value="' + response.data.user_sensor.sensor_key.id + '" selected>' + response.data.user_sensor.sensor_key.key + '</option>');
                             $('#planting-name-edit').val(response.data.name);
