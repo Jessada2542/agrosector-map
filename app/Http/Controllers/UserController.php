@@ -117,10 +117,16 @@ class UserController extends Controller
 
     public function plantingData($id)
     {
+        // ดึง user_sensor_id ที่มี useSensor.status = 1
+        $excludedSensorIds = UserUseSensor::where('status', 1)
+            ->pluck('sensor_id');
+
+        // Query หลัก
         $plantingData = UserSensor::with('sensorKey', 'useSensor')
             ->where('user_id', $id)
+            ->whereNotIn('id', $excludedSensorIds) // ตัดพวกที่มี status = 1 ทิ้ง
             ->where(function ($query) {
-                $query->whereDoesntHave('useSensor') // ยังไม่มี useSensor
+                $query->whereDoesntHave('useSensor') // ยังไม่มี
                     ->orWhereHas('useSensor', function ($q) {
                         $q->where('status', 0); // หรือมี แต่ status = 0
                     });
