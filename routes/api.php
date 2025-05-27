@@ -14,5 +14,6 @@ Route::post('/districts', [HomeController::class, 'getDistricts'])->name('distri
 Route::post('/subdistricts', [HomeController::class, 'getSubDistricts'])->name('subdistricts');
 
 Route::post('/sensor/marker', [SensorController::class, 'marker'])->name('sensor.marker');
+Route::get('/sensor/data/{id}', [SensorController::class, 'data'])->name('sensor.data');
 
 Route::post('/sensor/test', [SensorController::class, 'test'])->name('sensor.test');

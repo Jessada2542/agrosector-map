@@ -9,6 +9,12 @@
         height: 100vh;
         width: 100%;
     }
+
+    canvas {
+        max-width: 600px;
+        margin: 50px auto;
+        display: block;
+    }
 </style>
 @section('content')
     <div id="map"></div>
@@ -64,6 +70,12 @@
                 </button>
             </div>
             <div class="p-6 overflow-y-auto" id="sensor-content">
+                <p class="text-gray-700">ชื่อ sensor</p>
+                <p class="text-gray-700">Nitrogen (N)</p>
+                <p class="text-gray-700">Phosphorus (P)</p>
+                <p class="text-gray-700">Potassium (K)</p>
+                <p class="text-gray-700">pH</p>
+                <canvas id="myLineChart"></canvas>
             </div>
         </div>
     </div>
@@ -139,21 +151,58 @@
             $('#modal-sensor').removeClass('hidden');
             $('#sensor-content').empty().html('<p>กำลังโหลดข้อมูล...</p>');
 
-            /* $.ajax({
-                url: `/api/sensor/${id}`,
+            $.ajax({
+                url: `/api/sensor/data/${id}`,
                 type: 'GET',
                 dataType: 'json',
-                success: function(data) {
-                    $('#sensor-content').html(`
-                        <p><strong>ชื่อ:</strong> ${data.name}</p>
-                        <p><strong>ค่า:</strong> ${data.value}</p>
-                    `);
+                success: function(response) {
+                    console.log('Sensor data:', response);
+                    if (response.status) {
+                        const sensor = response.data;
+                        $('#sensor-content').html(`
+                            <p class="text-gray-700">ชื่อ Sensor: ${sensor.name}</p>
+                            <p class="text-gray-700">Nitrogen (N): ${sensor.nitrogen}</p>
+                            <p class="text-gray-700">Phosphorus (P): ${sensor.phosphorus}</p>
+                            <p class="text-gray-700">Potassium (K): ${sensor.potassium}</p>
+                            <p class="text-gray-700">pH: ${sensor.ph}</p>
+                        `);
+
+                        // สร้างกราฟ
+                        const ctx = document.getElementById('myLineChart').getContext('2d');
+                        const myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                            labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.'], // แกน X
+                            datasets: [{
+                                label: 'อุณหภูมิ (°C)',         // คำอธิบายเส้น
+                                data: [25, 27, 30, 32, 29],      // แกน Y
+                                borderColor: 'rgba(75, 192, 192, 1)', // สีเส้น
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)', // สีพื้นที่ใต้เส้น
+                                borderWidth: 2,
+                                tension: 0.4, // ความโค้งของเส้น
+                                fill: true,
+                                pointRadius: 4
+                            }]
+                            },
+                            options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                beginAtZero: false
+                                }
+                            }
+                            }
+                        });
+                    } else {
+                        $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
+                    }
+
                 },
                 error: function(xhr, status, error) {
                     $('#sensor-content').html('เกิดข้อผิดพลาดในการโหลดข้อมูล');
                     console.error('AJAX Error:', status, error);
                 }
-            }); */
+            });
         }
 
         function menuChange(item) {
@@ -297,27 +346,6 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.status) {
-                            console.log(response.data);
-
-                            const sensorData = [{
-                                    id: 1,
-                                    name: 'Sensor A',
-                                    lon: 101.129354,
-                                    lat: 16.440727
-                                },
-                                {
-                                    id: 2,
-                                    name: 'Sensor B',
-                                    lon: 101.129354,
-                                    lat: 15.440727
-                                },
-                                {
-                                    id: 3,
-                                    name: 'Sensor C',
-                                    lon: 101.129354,
-                                    lat: 14.440727
-                                }
-                            ];
                             markSensor(response.data);
                         }
                     },

@@ -117,4 +117,20 @@ class SensorController extends Controller
             })
         ]);
     }
+
+    public function data($id)
+    {
+        $sensorData = UserUseSensor::with('userSensor', 'latestSensor', 'sensors')
+            ->whereId($id)
+            ->first();
+
+        if (!$sensorData) {
+            return response()->json(['error' => 'Sensor not found'], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $sensorData,
+        ]);
+    }
 }
