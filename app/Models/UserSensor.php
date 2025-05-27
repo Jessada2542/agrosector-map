@@ -26,6 +26,11 @@ class UserSensor extends Model
         return $this->belongsTo(SensorKey::class);
     }
 
+    public function useSensor()
+    {
+        return $this->hasMany(UserUseSensor::class, 'user_sensor_id');
+    }
+
     public function province()
     {
         return $this->belongsTo(GeoCode::class, 'province_code', 'province_code');

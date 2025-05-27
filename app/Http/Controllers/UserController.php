@@ -117,8 +117,8 @@ class UserController extends Controller
 
     public function plantingData($id)
     {
-        $plantingData = UserSensor::with('sensorKey')
-            ->where('user_id', Auth::id())
+        $plantingData = UserSensor::with('sensorKey', 'useSensor')
+            ->where('user_id', $id)
             ->get();
 
         if (!$plantingData) {
@@ -132,5 +132,47 @@ class UserController extends Controller
             'status' => true,
             'data' => $plantingData
         ]);
+    }
+
+    public function plantingAdd(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'device_id' => 'required|exists:user_sensors,id',
+        ])->setAttributeNames([
+            'device_id' => 'Device ID',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $sensorKey = UserSensor::whereId($request->input('device_id'))->first();
+
+            if (!$sensorKey) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Device key not found'
+                ], 404);
+            }
+
+            UserUseSensor::create([
+                'user_id' => Auth::id(),
+                'user_sensor_id' => $sensorKey->id
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Planting data added successfully'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to add planting data'
+            ], 500);
+        }
     }
 }
