@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function() {
             Route::group(['prefix' => 'planting'], function() {
                 Route::match(['get', 'post'], '/', 'planting')->name('user.planting');
                 Route::get('/data/{id}', 'plantingData')->name('user.planting.data');
+                Route::get('/edit/{id}', 'plantingEdit')->name('user.planting.edit');
                 Route::post('/add', 'plantingAdd')->name('user.planting.add');
             });
         });

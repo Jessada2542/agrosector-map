@@ -196,4 +196,21 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    public function plantingEdit($id)
+    {
+        $planting = UserUseSensor::with('userSensor.sensorKey')->whereId($id)->first();
+
+        if (!$planting) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Planting data not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $planting
+        ]);
+    }
 }

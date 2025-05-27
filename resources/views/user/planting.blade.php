@@ -30,7 +30,7 @@
 
         <div id="modal-planting" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
             <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
-                <h2 class="text-center text-xl font-bold mb-4">กรุณาเลือกอุปกรณ์ที่ต้องการเพิ่มในการปลูก</h2>
+                <h2 class="text-center text-xl font-bold mb-4">สร้างอุปกรณ์ในการปลูก</h2>
                 <div class="mb-4">
                     <div class="mb-3">
                         <label for="planting-device">อุปกรณ์ (S/N)</label>
@@ -55,6 +55,47 @@
                 <div class="flex justify-center gap-3">
                     <button id="btn-add-planting" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="fa-solid fa-plus"></i> เพิ่ม
+                    </button>
+                    <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-planting-edit" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+                <h2 class="text-center text-xl font-bold mb-4">แก้ไขอุปกรณ์ในการปลูก</h2>
+                <div class="mb-4">
+                    <div class="mb-3">
+                        <label for="planting-device-edit">อุปกรณ์ (S/N) <span class="text-red">(แก้ไขไม่ได้)</span></label>
+                        <select id="planting-device-edit" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" disabled>
+                            <option value="" selected>เลือกอุปกรณ์</option>
+                            <!-- js -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="planting-name-edit">ชื่อในการปลูก <span class="text-red">(แก้ไขไม่ได้)</span></label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ชื่อในการปลูก" id="planting-name-edit" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="planting-detail">รายละเอียด</label>
+                        <textarea id="planting-detail" class="w-full p-2 border border-gray-300 rounded mt-2" cols="30" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="planting-date-start-edit">วันที่เริ่มปลูก <span class="text-red">(แก้ไขไม่ได้)</span></label>
+                        <input type="date" id="planting-date-start-edit" class="w-full p-2 border border-gray-300 rounded mt-2" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="planting-date-end-edit">วันที่สิ้นสุด</label>
+                        <input type="date" id="planting-date-end-edit" class="w-full p-2 border border-gray-300 rounded mt-2">
+                    </div>
+                </div>
+                <input type="hidden" id="planting-id-edit">
+                <div class="flex justify-center gap-3">
+                    <button id="btn-edit-planting" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                        <i class="fa-solid fa-plus"></i> แก้ไข
+                    </button>
+                    <button id="btn-edit-planting-off" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                        ปิดใช้งาน
                     </button>
                     <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
                 </div>
@@ -87,18 +128,34 @@
 
             $('#table').on('click', '.btn-edit', function() {
                 var deviceId = $(this).data('id');
-                console.log('Edit device with ID:', deviceId);
 
-                Swal.fire({
-                    title: 'Edit Device',
-                    text: 'You can edit the device here.',
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        console.log('Device edited:', deviceId);
+                $('#modal-planting-edit').removeClass('hidden');
+                $('#planting-device-edit').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
+                $('#planting-name-edit').val('');
+                $('#planting-detail').val('');
+                $('#planting-date-start-edit').val('');
+                $('#planting-date-end-edit').val('');
+                $('#planting-id-edit').val(deviceId);
+                $.ajax({
+                    url: '/user/planting/edit/' + deviceId,
+                    type: 'GET',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        planting_id: deviceId
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            $('#planting-device-edit').append('<option value="' + response.data.id + '">' + response.data.sensor_key.key + '</option>');
+                            $('#planting-name-edit').val(response.data.name);
+                            $('#planting-detail').val(response.data.detail);
+                            $('#planting-date-start-edit').val(response.data.date_start);
+                            $('#planting-date-end-edit').val(response.data.date_end);
+                        } else {
+                            Swal.fire('ผิดพลาด!', 'ไม่พบข้อมูลอุปกรณ์', 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('ผิดพลาด!', 'ไม่สามารถดึงข้อมูลอุปกรณ์ได้', 'error');
                     }
                 });
             });
