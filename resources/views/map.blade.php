@@ -114,8 +114,6 @@
 
         function markSensor(sensorData) {
             // เพิ่ม marker พร้อม metadata
-            console.log('sensorData:', sensorData);
-
             sensorData.forEach(sensor => {
                 const marker = new longdo.Marker({
                     lat: sensor.lat,
@@ -138,15 +136,18 @@
         }
 
         function openModal(id) {
+            $('#modal-sensor').removeClass('hidden');
+            $('#sensor-content').empty().html('<p>กำลังโหลดข้อมูล...</p>');
+
             /* $.ajax({
-                url: `/api/sensor/${id}`, // หรือ route ใน Laravel เช่น route('sensor.show', id)
+                url: `/api/sensor/${id}`,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
                     $('#sensor-content').html(`
-                <p><strong>ชื่อ:</strong> ${data.name}</p>
-                <p><strong>ค่า:</strong> ${data.value}</p>
-            `);
+                        <p><strong>ชื่อ:</strong> ${data.name}</p>
+                        <p><strong>ค่า:</strong> ${data.value}</p>
+                    `);
                 },
                 error: function(xhr, status, error) {
                     $('#sensor-content').html('เกิดข้อผิดพลาดในการโหลดข้อมูล');
