@@ -70,7 +70,7 @@
                 </button>
             </div>
             <div class="p-6 overflow-y-auto" id="sensor-content">
-                <strong id="sensor-name">ชื่อ sensor</ห>
+                <strong id="sensor-name">ชื่อ sensor</strong>
                 <p class="text-gray-700" id="sensor-n">Nitrogen (N)</p>
                 <p class="text-gray-700" id="sensor-p">Phosphorus (P)</p>
                 <p class="text-gray-700" id="sensor-k">Potassium (K)</p>
@@ -148,8 +148,7 @@
         }
 
         function openModal(id) {
-            $('#modal-sensor').removeClass('hidden');
-            $('#sensor-content').empty().html('<p>กำลังโหลดข้อมูล...</p>');
+            $('#modal-sensor').removeClass('hidden');ล
 
             $.ajax({
                 url: `/api/sensor/data/${id}`,
@@ -159,7 +158,6 @@
                     console.log('Sensor Data:', response);
 
                     if (response.status) {
-                        $('#sensor-content').empty();
                         const sensor = response.data;
                         $('#sensor-name').text(sensor.name);
                         $('#sensor-n').text(`Nitrogen (N): ${sensor.latest_sensor.n} mg/kg`);
