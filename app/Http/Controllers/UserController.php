@@ -96,7 +96,7 @@ class UserController extends Controller
                     return $row->start_date ? date('Y-m-d', strtotime($row->start_date)) : '';
                 })
                 ->editColumn('date_end', function ($row) {
-                    return $row->end_date ? date('Y-m-d', strtotime($row->end_date)) : '';
+                    return $row->end_date ? date('Y-m-d', strtotime($row->end_date)) : '-';
                 })
                 ->editColumn('status', function ($row) {
                     return $row->status == 1
