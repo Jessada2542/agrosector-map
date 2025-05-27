@@ -85,24 +85,24 @@ class SensorController extends Controller
             ], 422);
         }
 
-        $marker = UserUseSensor::with('userSensor', 'latestSensor')
-            ->where('status', 1)
-            ->when($request->input('province_code'), function ($query) use ($request) {
-                return $query->whereHas('userSensor', function ($q) use ($request) {
-                    $q->where('province_code', $request->input('province_code'));
-                });
-            })
-            ->when($request->input('district_code'), function ($query) use ($request) {
-                return $query->whereHas('userSensor', function ($q) use ($request) {
-                    $q->where('district_code', $request->input('district_code'));
-                });
-            })
-            ->when($request->input('subdistrict_code'), function ($query) use ($request) {
-                return $query->whereHas('userSensor', function ($q) use ($request) {
-                    $q->where('subdistrict_code', $request->input('subdistrict_code'));
-                });
-            })
-            ->get();
+        $markerQuery = UserUseSensor::with('userSensor', 'latestSensor')
+            ->where('status', 1);
+
+        if ($request->filled('subdistrict_code')) {
+            $markerQuery->whereHas('userSensor', function ($q) use ($request) {
+                $q->where('subdistrict_code', $request->input('subdistrict_code'));
+            });
+        } elseif ($request->filled('district_code')) {
+            $markerQuery->whereHas('userSensor', function ($q) use ($request) {
+                $q->where('district_code', $request->input('district_code'));
+            });
+        } elseif ($request->filled('province_code')) {
+            $markerQuery->whereHas('userSensor', function ($q) use ($request) {
+                $q->where('province_code', $request->input('province_code'));
+            });
+        }
+
+        $marker = $markerQuery->get();
 
         return response()->json([
             'status' => true,
