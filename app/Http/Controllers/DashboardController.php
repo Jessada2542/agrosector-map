@@ -26,7 +26,7 @@ class DashboardController extends Controller
                 ->make(true);
         }
 
-        $sensor = UserUseSensor::with('sensor')->where('user_id', Auth::id())->get();
+        $sensor = UserUseSensor::with('sensors')->where('user_id', Auth::id())->get();
         dd($sensor);
 
         $sideAtive = 'dashboard';
