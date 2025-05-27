@@ -3,7 +3,7 @@
     <div class="m-5">
         <div class="p-6 rounded-xl shadow-sm border border-green-200 mb-6">
             <h1 class="text-2xl font-bold text-green-700"><i class="fa-solid fa-seedling"></i> การปลูก</h1>
-            <button class="btn btn-primary mt-4" id="addDeviceBtn">
+            <button id="btn-add-device" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
                 <i class="fa-solid fa-plus"></i> เพิ่มอุปกรณ์
             </button>
         </div>
