@@ -37,7 +37,7 @@
                         <select id="planting-device" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="" selected>เลือกอุปกรณ์</option>
                             @foreach ($plantingData as $item)
-                                <option value="{{ $item->id }}">{{ $item->sensor_key->key }}</option>
+                                <option value="{{ $item->id }}">{{ $item->sensor_key }}</option>
                             @endforeach
                         </select>
                     </div>
