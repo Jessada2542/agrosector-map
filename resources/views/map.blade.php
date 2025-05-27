@@ -243,21 +243,36 @@
                             }
                         ];
 
+                        // แมป label ของกราฟแต่ละตัว
+                        const typeLabelMap = {
+                            n: 'Nitrogen (N)',
+                            p: 'Phosphorus (P)',
+                            k: 'Potassium (K)',
+                            ph: 'pH'
+                        };
+
+                        // สร้างกราฟแต่ละตัว
                         ['n', 'p', 'k', 'ph'].forEach((type) => {
                             const ctx = document.getElementById(`grap-sensor-${type}`).getContext('2d');
                             new Chart(ctx, {
                                 type: 'line',
                                 data: {
-                                    labels: labels, // ใช้ label ที่ format แล้ว
-                                    datasets: datasets.filter(ds => ds.label.toLowerCase().includes(type))
+                                labels: labels,
+                                datasets: datasets.filter(ds => ds.label === typeLabelMap[type])
                                 },
                                 options: {
-                                    responsive: true,
-                                    scales: {
-                                        y: {
-                                            beginAtZero: false
-                                        }
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                    display: true,
+                                    position: 'top'
                                     }
+                                },
+                                scales: {
+                                    y: {
+                                    beginAtZero: false
+                                    }
+                                }
                                 }
                             });
                         });
