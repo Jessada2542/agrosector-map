@@ -10,11 +10,11 @@
         width: 100%;
     }
 
-    /* canvas {
+    canvas {
         max-width: 600px;
         margin: 50px auto;
         display: block;
-    } */
+    }
 </style>
 @section('content')
     <div id="map"></div>
@@ -156,7 +156,6 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    console.log('Sensor data:', response);
                     if (response.status) {
                         const sensor = response.data;
                         $('#sensor-content').html(`
@@ -169,6 +168,7 @@
 
                         // สร้างกราฟ
                         const ctx = document.getElementById('myLineChart').getContext('2d');
+
                         const myChart = new Chart(ctx, {
                             type: 'line',
                             data: {
@@ -193,6 +193,28 @@
                             }
                             }
                         });
+                        /* const ctx = document.getElementById('myLineChart').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: sensor.dates,
+                                datasets: [{
+                                    label: 'ค่าพารามิเตอร์',
+                                    data: sensor.values,
+                                    borderColor: '#42A5F5',
+                                    backgroundColor: 'rgba(66, 165, 245, 0.2)',
+                                    fill: true,
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        }); */
                     } else {
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
                     }
