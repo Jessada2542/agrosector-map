@@ -99,7 +99,7 @@ class UserController extends Controller
                     return $row->end_date ? date('Y-m-d H:i', strtotime($row->end_date)) : 'N/A';
                 })
                 ->editColumn('status', function ($row) {
-                    return $row->is_active == 1
+                    return $row->status == 1
                         ? '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-green-500 rounded">ออนไลน์</span>'
                         : '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-red-500 rounded">ออฟไลน์</span>';
                 })
