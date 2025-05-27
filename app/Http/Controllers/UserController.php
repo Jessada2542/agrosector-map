@@ -90,7 +90,7 @@ class UserController extends Controller
             return DataTables::eloquent($query)
                 ->addIndexColumn()
                 ->editColumn('device_key', function ($row) {
-                    return $row->sensorKey->key ?? 'N/A';
+                    return $row->userSensor ?? 'N/A';
                 })
                 ->editColumn('date_start', function ($row) {
                     return $row->start_date ? date('Y-m-d H:i', strtotime($row->start_date)) : 'N/A';
