@@ -26,7 +26,7 @@ class DashboardController extends Controller
                 ->make(true);
         }
 
-        $sensors = UserUseSensor::with('latestSensor')
+        $sensor = UserUseSensor::with('latestSensor')
             ->where('user_id', Auth::id())
             ->get();
 
