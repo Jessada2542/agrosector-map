@@ -15,7 +15,9 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Sensor::where('sensor_key_id', $request->device_id)->orderBy('created_at', 'desc');;
+            $query = UserUseSensor::with('sensors')
+                ->where('user_id', Auth::id())
+                ->orderBy('created_at', 'desc');
 
             return DataTables::eloquent($query)
                 ->addIndexColumn()

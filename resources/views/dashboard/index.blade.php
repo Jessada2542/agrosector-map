@@ -233,7 +233,7 @@
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
-                        //device_id: deviceId
+                        device_id: deviceId
                     },
                 },
                 columns: [{
