@@ -148,7 +148,7 @@
         }
 
         function openModal(id) {
-            $('#modal-sensor').removeClass('hidden');ล
+            $('#modal-sensor').removeClass('hidden');
 
             $.ajax({
                 url: `/api/sensor/data/${id}`,
