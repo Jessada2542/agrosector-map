@@ -111,8 +111,8 @@ class SensorController extends Controller
                 return [
                     'id' => $item->id,
                     'name' => $item->name,
-                    'lon' => $item->userSensor->lon,
-                    'lat' => $item->userSensor->lat,
+                    'lon' => floatval($item->userSensor->lon),
+                    'lat' => floatval($item->userSensor->lat),
                 ];
             })
         ]);
