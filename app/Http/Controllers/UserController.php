@@ -85,7 +85,7 @@ class UserController extends Controller
     public function planting(Request $request)
     {
         if ($request->ajax()) {
-            $query = UserUseSensor::with('sensorKey')->where('user_id', Auth::id());
+            $query = UserUseSensor::with('userSensor')->where('user_id', Auth::id());
 
             return DataTables::eloquent($query)
                 ->addIndexColumn()
