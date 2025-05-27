@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function() {
                 Route::get('/edit/{id}', 'plantingEdit')->name('user.planting.edit');
                 Route::post('/add', 'plantingAdd')->name('user.planting.add');
                 Route::put('/update', 'plantingUpdate')->name('user.planting.update');
+                Route::put('/off', 'plantingOff')->name('user.planting.off');
             });
         });
     });

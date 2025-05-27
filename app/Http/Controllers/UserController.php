@@ -259,4 +259,43 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    public function plantingOff(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'planting_id' => 'required|exists:user_use_sensors,id',
+        ])->setAttributeNames([
+            'planting_id' => 'ID',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $planting = UserUseSensor::whereId($request->input('planting_id'))->first();
+
+            if (!$planting) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Planting data not found'
+                ], 404);
+            }
+
+            $planting->update(['status' => 0]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Planting data deactivated successfully'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to deactivate planting data'
+            ], 500);
+        }
+    }
 }

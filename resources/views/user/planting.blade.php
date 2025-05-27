@@ -293,6 +293,45 @@
                 });
             });
 
+            $('#btn-edit-planting-off').on('click', function() {
+                var deviceId = $('#planting-id-edit').val();
+                var plantingEndDate = $('#planting-date-end-edit').val();
+
+                if (!plantingEndDate) {
+                    Swal.fire('ผิดพลาด!', 'กรุณากรอกวันที่สิ้นสุดการปลูก', 'error');
+                    return;
+                }
+
+                Swal.fire({
+                    title: 'ยืนยันการปิดใช้งานอุปกรณ์',
+                    text: 'คุณต้องการปิดใช้งานอุปกรณ์นี้ในการปลูกหรือไม่?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ไม่'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/user/planting/off',
+                            type: 'PUT',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                planting_id: deviceId
+                            },
+                            success: function(response) {
+                                Swal.fire('สำเร็จ!', 'ปิดใช้งานอุปกรณ์เรียบร้อยแล้ว', 'success');
+                                $('#modal-planting-edit').addClass('hidden');
+                                $('#planting-device-edit').val('').trigger('change');
+                                table.ajax.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('ผิดพลาด!', 'ไม่สามารถปิดใช้งานอุปกรณ์ได้', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+
             $('.closeModal').on('click', function() {
                 $('#modal-planting').addClass('hidden');
                 $('#modal-planting-edit').addClass('hidden');
