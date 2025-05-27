@@ -244,7 +244,7 @@
                             new Chart(ctx, {
                                 type: 'line',
                                 data: {
-                                    labels: sensor.data.map(d => d.created_at), // แกน X
+                                    labels: sensor.sensors.map(d => d.created_at), // แกน X
                                     datasets: datasets.filter(ds => ds.label.toLowerCase().includes(type))
                                 },
                                 options: {
