@@ -146,11 +146,11 @@
                     },
                     success: function(response) {
                         if (response.status) {
-                            $('#planting-device-edit').append('<option value="' + response.data.user_sensor.sensor_key.id + ' selected">' + response.data.user_sensor.sensor_key.key + '</option>');
+                            $('#planting-device-edit').append('<option value="' + response.data.user_sensor.sensor_key.id + '" selected>' + response.data.user_sensor.sensor_key.key + '</option>');
                             $('#planting-name-edit').val(response.data.name);
                             $('#planting-detail-edit').val(response.data.detail);
-                            $('#planting-date-start-edit').val(dayjs(response.data.start_date).format('DD-MM-YYYY'));
-                            $('#planting-date-end-edit').val(dayjs(response.data.end_date).format('DD-MM-YYYY'));
+                            $('#planting-date-start-edit').val(dayjs(response.data.start_date).format('YYYY-MM-DD'));
+                            $('#planting-date-end-edit').val(dayjs(response.data.end_date).format('YYYY-MM-DD'));
                         } else {
                             Swal.fire('ผิดพลาด!', 'ไม่พบข้อมูลอุปกรณ์', 'error');
                         }
