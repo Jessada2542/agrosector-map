@@ -53,12 +53,21 @@
         </div>
     </div>
 
-    <div id="modal-sensor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
-            <h2 class="text-center text-xl font-bold mb-4">ข้อมูล Sensor</h2>
-            <div id="sensor-content" class="mb-4">กำลังโหลด...</div>
-            <div class="flex justify-center">
-                <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
+    <!-- Modal แบบชิดขวา -->
+    <div id="modal-sensor" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end hidden">
+        <div class="relative bg-white w-[400px] h-full shadow-lg flex flex-col">
+            <div class="flex items-center justify-between p-6 border-b">
+                <h2 class="text-xl font-semibold">หัวเรื่อง</h2>
+                <button onclick="document.getElementById('modal-sensor').classList.add('hidden')"
+                    class="text-gray-500 hover:text-red-600 text-2xl font-bold">
+                    &times;
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <p class="text-gray-700">
+                    นี่คือเนื้อหาภายใน Modal ที่อยู่ด้านขวาของหน้าจอ คุณสามารถใส่ข้อความ รูปภาพ หรือแบบฟอร์มต่าง ๆ
+                    ได้ที่นี่
+                </p>
             </div>
         </div>
     </div>
