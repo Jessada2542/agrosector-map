@@ -96,9 +96,9 @@
                         <thead>
                             <tr class="bg-green-100 text-green-600 text-sm">
                                 <th class="px-4 py-2 border-b whitespace-nowrap">#</th>
-                                <th class="px-4 py-2 border-b whitespace-nowrap">Nitrogen (N)</th>
-                                <th class="px-4 py-2 border-b whitespace-nowrap">Phosphorus (P)</th>
-                                <th class="px-4 py-2 border-b whitespace-nowrap">Potassium (K)</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Nitrogen (N) mg/kg</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Phosphorus (P) mg/kg</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Potassium (K) mg/kg</th>
                                 <th class="px-4 py-2 border-b whitespace-nowrap">pH</th>
                                 {{-- <th class="px-4 py-2 border-b whitespace-nowrap">EC</th>
                                 <th class="px-4 py-2 border-b whitespace-nowrap">Temperature</th>
@@ -153,7 +153,6 @@
             selectButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const deviceId = this.dataset.id;
-                    console.log('อุปกรณ์ที่เลือก:', deviceId);
 
                     // 🔓 ปลดล็อกปุ่ม tab
                     tabLinks.forEach(tab => {
@@ -198,7 +197,7 @@
 
         $('.btn-select').click(function() {
             var deviceId = $(this).data('id');
-            console.log('Selected device ID:', deviceId);
+            $('#general-info').html('<p>กำลังโหลดข้อมูล...</p>');
 
             $.ajax({
                 url: '/dashboard/data/' + deviceId,
