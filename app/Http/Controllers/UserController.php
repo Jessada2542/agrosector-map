@@ -221,7 +221,7 @@ class UserController extends Controller
             'detail' => 'nullable|string|max:500',
             'date_end' => 'nullable|date|after_or_equal:date_start',
         ])->setAttributeNames([
-            'id' => 'ID',
+            'planting_id' => 'ID',
             'detail' => 'Detail',
             'date_end' => 'End Date',
         ]);
@@ -234,21 +234,12 @@ class UserController extends Controller
         }
 
         try {
-            $planting = UserUseSensor::whereId($request->input('id'))->first();
+            $planting = UserUseSensor::whereId($request->input('planting_id'))->first();
 
             if (!$planting) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Planting data not found'
-                ], 404);
-            }
-
-            $sensorKey = UserSensor::whereId($request->input('device_id'))->first();
-
-            if (!$sensorKey) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Device key not found'
                 ], 404);
             }
 
