@@ -36,9 +36,7 @@
                         <label for="planting-device">อุปกรณ์ (S/N)</label>
                         <select id="planting-device" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="" selected>เลือกอุปกรณ์</option>
-                            @foreach ($plantingData as $item)
-                                <option value="{{ $item->id }}">{{ $item->sensor_key }}</option>
-                            @endforeach
+                            <!-- js -->
                         </select>
                     </div>
                 </div>
@@ -106,6 +104,10 @@
                 },
                 success: function(response) {
                     console.log(response);
+                    $('#modal-planting').removeClass('hidden');
+                    $.each(response.data, function(index, item) {
+                        $('#device-district').append('<option value="' + item.id + '">' + item.sensor_key.key + '</option>');
+                    });
                 },
                 error: function(xhr, status, error) {
                     Swal.fire('ผิดพลาด!', 'ไม่สามารถดึงรายการอุปกรณ์ได้', 'error');

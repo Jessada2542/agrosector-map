@@ -110,20 +110,16 @@ class UserController extends Controller
                 ->make(true);
         }
 
-        $plantingData = UserSensor::with('sensorKey')
-            ->where('user_id', Auth::id())
-            ->get();
-
         $sideAtive = 'planting';
 
-        return view('user.planting', compact('sideAtive', 'plantingData'));
+        return view('user.planting', compact('sideAtive'));
     }
 
     public function plantingData($id)
     {
         $plantingData = UserSensor::with('sensorKey')
-            ->where('user_id', $id)
-            ->first();
+            ->where('user_id', Auth::id())
+            ->get();
 
         if (!$plantingData) {
             return response()->json([
