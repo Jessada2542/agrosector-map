@@ -10,7 +10,7 @@
         width: 100%;
     }
 
-    canvas.#myLineChart {
+    canvas .lineChart {
         max-width: 600px;
         margin: 50px auto;
         display: block;
@@ -75,7 +75,7 @@
                 <p class="text-gray-700" id="sensor-p">Phosphorus (P)</p>
                 <p class="text-gray-700" id="sensor-k">Potassium (K)</p>
                 <p class="text-gray-700" id="sensor-ph">pH</p>
-                <canvas id="myLineChart"></canvas>
+                <canvas id="myLineChart" class="lineChart"></canvas>
             </div>
         </div>
     </div>
@@ -164,31 +164,31 @@
                         $('#sensor-p').text(`Phosphorus (P): ${sensor.latest_sensor.p} mg/kg`);
                         $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor.k} mg/kg`);
                         $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph}`);
+
                         // สร้างกราฟ
                         const ctx = document.getElementById('myLineChart').getContext('2d');
-
                         const myChart = new Chart(ctx, {
                             type: 'line',
                             data: {
-                            labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.'], // แกน X
-                            datasets: [{
-                                label: 'อุณหภูมิ (°C)',         // คำอธิบายเส้น
-                                data: [25, 27, 30, 32, 29],      // แกน Y
-                                borderColor: 'rgba(75, 192, 192, 1)', // สีเส้น
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)', // สีพื้นที่ใต้เส้น
-                                borderWidth: 2,
-                                tension: 0.4, // ความโค้งของเส้น
-                                fill: true,
-                                pointRadius: 4
-                            }]
+                                labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.'], // แกน X
+                                datasets: [{
+                                    label: 'Nitrogen (N)',         // คำอธิบายเส้น
+                                    data: [25, 27, 30, 32, 29],      // แกน Y
+                                    borderColor: 'rgba(75, 192, 192, 1)', // สีเส้น
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // สีพื้นที่ใต้เส้น
+                                    borderWidth: 2,
+                                    tension: 0.4, // ความโค้งของเส้น
+                                    fill: true,
+                                    pointRadius: 4
+                                }]
                             },
                             options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                beginAtZero: false
+                                responsive: true,
+                                scales: {
+                                    y: {
+                                        beginAtZero: false
+                                    }
                                 }
-                            }
                             }
                         });
                     } else {
