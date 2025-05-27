@@ -92,7 +92,7 @@
                 <input type="hidden" id="planting-id-edit">
                 <div class="flex justify-center gap-3">
                     <button id="btn-edit-planting" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                        แก้ไข
+                        อัพเดท
                     </button>
                     <button id="btn-edit-planting-off" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
                         ปิดใช้งาน
@@ -245,7 +245,7 @@
 
                 $('.closeModal').on('click', function() {
                     $('#modal-planting').addClass('hidden');
-                    $('#planting-device').val('').trigger('change');
+                    $('#modal-planting-edit').addClass('hidden');
                 });
             });
         });
