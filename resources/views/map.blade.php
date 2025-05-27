@@ -195,7 +195,10 @@
                             }
                         }); */
 
-                        // สร้างกราฟสำหรับ N, P, K, PH
+                        const labels = sensor.sensors.map(d =>
+                            dayjs(d.created_at).format('DD-MM-YYYY HH:mm')
+                        );
+
                         const datasets = [
                             {
                                 label: 'Nitrogen (N)',
@@ -244,7 +247,7 @@
                             new Chart(ctx, {
                                 type: 'line',
                                 data: {
-                                    labels: sensor.sensors.map(d => d.created_at), // แกน X
+                                    labels: labels, // ใช้ label ที่ format แล้ว
                                     datasets: datasets.filter(ds => ds.label.toLowerCase().includes(type))
                                 },
                                 options: {
