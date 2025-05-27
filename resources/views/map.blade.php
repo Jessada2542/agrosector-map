@@ -70,11 +70,11 @@
                 </button>
             </div>
             <div class="p-6 overflow-y-auto" id="sensor-content">
-                <p class="text-gray-700">ชื่อ sensor</p>
-                <p class="text-gray-700">Nitrogen (N)</p>
-                <p class="text-gray-700">Phosphorus (P)</p>
-                <p class="text-gray-700">Potassium (K)</p>
-                <p class="text-gray-700">pH</p>
+                <strong id="sensor-name">ชื่อ sensor</ห>
+                <p class="text-gray-700" id="sensor-n">Nitrogen (N)</p>
+                <p class="text-gray-700" id="sensor-p">Phosphorus (P)</p>
+                <p class="text-gray-700" id="sensor-k">Potassium (K)</p>
+                <p class="text-gray-700" id="sensor-ph">pH</p>
                 <canvas id="myLineChart"></canvas>
             </div>
         </div>
@@ -156,16 +156,15 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
+                    console.log('Sensor Data:', response);
+
                     if (response.status) {
                         const sensor = response.data;
-                        $('#sensor-content').html(`
-                            <p class="text-gray-700">ชื่อ Sensor: ${sensor.name}</p>
-                            <p class="text-gray-700">Nitrogen (N): ${sensor.nitrogen}</p>
-                            <p class="text-gray-700">Phosphorus (P): ${sensor.phosphorus}</p>
-                            <p class="text-gray-700">Potassium (K): ${sensor.potassium}</p>
-                            <p class="text-gray-700">pH: ${sensor.ph}</p>
-                        `);
-
+                        $('#sensor-name').text(sensor.name);
+                        $('#sensor-n').text(`Nitrogen (N): ${sensor.nitrogen} mg/kg`);
+                        $('#sensor-p').text(`Phosphorus (P): ${sensor.phosphorus} mg/kg`);
+                        $('#sensor-k').text(`Potassium (K): ${sensor.potassium} mg/kg`);
+                        $('#sensor-ph').text(`pH: ${sensor.ph}`);
                         // สร้างกราฟ
                         const ctx = document.getElementById('myLineChart').getContext('2d');
 
