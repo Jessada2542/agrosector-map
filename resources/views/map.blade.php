@@ -159,12 +159,13 @@
                     console.log('Sensor Data:', response);
 
                     if (response.status) {
+                        $('#sensor-content').empty();
                         const sensor = response.data;
                         $('#sensor-name').text(sensor.name);
-                        $('#sensor-n').text(`Nitrogen (N): ${sensor.nitrogen} mg/kg`);
-                        $('#sensor-p').text(`Phosphorus (P): ${sensor.phosphorus} mg/kg`);
-                        $('#sensor-k').text(`Potassium (K): ${sensor.potassium} mg/kg`);
-                        $('#sensor-ph').text(`pH: ${sensor.ph}`);
+                        $('#sensor-n').text(`Nitrogen (N): ${sensor.latest_sensor.n} mg/kg`);
+                        $('#sensor-p').text(`Phosphorus (P): ${sensor.latest_sensor.p} mg/kg`);
+                        $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor.k} mg/kg`);
+                        $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph}`);
                         // สร้างกราฟ
                         const ctx = document.getElementById('myLineChart').getContext('2d');
 
@@ -192,32 +193,9 @@
                             }
                             }
                         });
-                        /* const ctx = document.getElementById('myLineChart').getContext('2d');
-                        new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: sensor.dates,
-                                datasets: [{
-                                    label: 'ค่าพารามิเตอร์',
-                                    data: sensor.values,
-                                    borderColor: '#42A5F5',
-                                    backgroundColor: 'rgba(66, 165, 245, 0.2)',
-                                    fill: true,
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        }); */
                     } else {
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
                     }
-
                 },
                 error: function(xhr, status, error) {
                     $('#sensor-content').html('เกิดข้อผิดพลาดในการโหลดข้อมูล');
