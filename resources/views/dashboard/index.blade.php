@@ -10,11 +10,11 @@
             @foreach ($sensor as $item)
                 <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                     <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> {{ $item->name }}</div>
-                    <div class="text-1xl font-bold text-green-800">อัพเดทล่าสุด {{ $sensor->sensor->created_at ? $sensor->sensor->created_at->format('Y-m-d H:i') : 'ไม่มีข้อมูล Sensor' }}</div>
-                    <p class="text-green-700 mt-2">Nitrogen (N) : {{ $sensor->sensor->n ? $sensor->sensor->n . ' mg/kg' : '' }}</p>
-                    <p class="text-green-700 mt-2">Phosphorus (P) : {{ $sensor->sensor->p ? $sensor->sensor->p . ' mg/kg' : '' }}</p>
-                    <p class="text-green-700 mt-2">Potassium (K) : {{ $sensor->sensor->k ? $sensor->sensor->k  . ' mg/kg' : '' }}</p>
-                    <p class="text-green-700 mt-2">pH : {{ $sensor->sensor->ph ?? '' }}</p>
+                    <div class="text-1xl font-bold text-green-800">อัพเดทล่าสุด {{ $item->sensor->created_at ? $item->sensor->created_at->format('Y-m-d H:i') : 'ไม่มีข้อมูล Sensor' }}</div>
+                    <p class="text-green-700 mt-2">Nitrogen (N) : {{ $item->sensor->n ? $item->sensor->n . ' mg/kg' : '' }}</p>
+                    <p class="text-green-700 mt-2">Phosphorus (P) : {{ $item->sensor->p ? $item->sensor->p . ' mg/kg' : '' }}</p>
+                    <p class="text-green-700 mt-2">Potassium (K) : {{ $item->sensor->k ? $item->sensor->k  . ' mg/kg' : '' }}</p>
+                    <p class="text-green-700 mt-2">pH : {{ $item->sensor->ph ?? '' }}</p>
                     {{-- <p class="text-green-700 mt-2">ec : {{ $sensor->ec }}</p>
                     <p class="text-green-700 mt-2">Temperature : {{ $sensor->temperature }}</p>
                     <p class="text-green-700 mt-2">Humidity : {{ $sensor->humidity }}</p> --}}
