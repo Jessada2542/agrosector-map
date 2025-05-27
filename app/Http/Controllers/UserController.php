@@ -149,7 +149,7 @@ class UserController extends Controller
             ], 422);
         }
 
-        try {
+        /* try { */
             $sensorKey = UserSensor::whereId($request->input('device_id'))->first();
 
             if (!$sensorKey) {
@@ -161,18 +161,18 @@ class UserController extends Controller
 
             UserUseSensor::create([
                 'user_id' => Auth::id(),
-                'user_sensor_id' => $sensorKey->id
+                'user_sensors_id' => $sensorKey->id
             ]);
 
             return response()->json([
                 'status' => true,
                 'message' => 'Planting data added successfully'
             ]);
-        } catch (\Throwable $th) {
+        /* } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => 'Failed to add planting data'
             ], 500);
-        }
+        } */
     }
 }
