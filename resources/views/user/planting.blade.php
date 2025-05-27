@@ -112,6 +112,9 @@
 
         $('#btn-add-device').on('click', function() {
             $('#planting-device').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
+            $('#planting-name').val('');
+            $('#planting-detail').val('');
+            $('#planting-date-start').val('');
             $.ajax({
                 url: '/user/planting/data/' + '{{ auth()->user()->id }}',
                 type: 'GET',
