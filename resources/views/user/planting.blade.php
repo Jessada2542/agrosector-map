@@ -148,8 +148,8 @@
                             $('#planting-device-edit').append('<option value="' + response.data.user_sensor.sensor_key.id + ' selected">' + response.data.user_sensor.sensor_key.key + '</option>');
                             $('#planting-name-edit').val(response.data.name);
                             $('#planting-detail-edit').val(response.data.detail);
-                            $('#planting-date-start-edit').val(response.data.date_start);
-                            $('#planting-date-end-edit').val(response.data.date_end);
+                            $('#planting-date-start-edit').val(response.data.start_date);
+                            $('#planting-date-end-edit').val(response.data.end_date);
                         } else {
                             Swal.fire('ผิดพลาด!', 'ไม่พบข้อมูลอุปกรณ์', 'error');
                         }
