@@ -119,7 +119,7 @@ class UserController extends Controller
     {
         // ดึง user_sensor_id ที่มี useSensor.status = 1
         $excludedSensorIds = UserUseSensor::where('status', 1)
-            ->pluck('sensor_id');
+            ->pluck('user_sensors_id');
 
         // Query หลัก
         $plantingData = UserSensor::with('sensorKey', 'useSensor')
