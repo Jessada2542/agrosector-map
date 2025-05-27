@@ -75,7 +75,10 @@
                 <p class="text-gray-700" id="sensor-p">Phosphorus (P)</p>
                 <p class="text-gray-700" id="sensor-k">Potassium (K)</p>
                 <p class="text-gray-700" id="sensor-ph">pH</p>
-                <canvas id="myLineChart" class="lineChart"></canvas>
+                <canvas id="grap-sensor-n" class="lineChart"></canvas>
+                <canvas id="grap-sensor-p" class="lineChart"></canvas>
+                <canvas id="grap-sensor-k" class="lineChart"></canvas>
+                <canvas id="grap-sensor-ph" class="lineChart"></canvas>
             </div>
         </div>
     </div>
@@ -166,7 +169,7 @@
                         $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph}`);
 
                         // สร้างกราฟ
-                        const ctx = document.getElementById('myLineChart').getContext('2d');
+                        /* const ctx = document.getElementById('myLineChart').getContext('2d');
                         const myChart = new Chart(ctx, {
                             type: 'line',
                             data: {
@@ -190,6 +193,69 @@
                                     }
                                 }
                             }
+                        }); */
+
+                        // สร้างกราฟสำหรับ N, P, K, PH
+                        const datasets = [
+                            {
+                                label: 'Nitrogen (N)',
+                                data: sensor.sensors.map(d => d.n),
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'Phosphorus (P)',
+                                data: sensor.sensors.map(d => d.p),
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'Potassium (K)',
+                                data: sensor.sensors.map(d => d.k),
+                                borderColor: 'rgba(255, 206, 86, 1)',
+                                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'pH',
+                                data: sensor.sensors.map(d => d.ph),
+                                borderColor: 'rgba(153, 102, 255, 1)',
+                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            }
+                        ];
+
+                        ['n', 'p', 'k', 'ph'].forEach((type) => {
+                            const ctx = document.getElementById(`grap-sensor-${type}`).getContext('2d');
+                            new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: sensor.data.map(d => d.created_at), // แกน X
+                                    datasets: datasets.filter(ds => ds.label.toLowerCase().includes(type))
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: false
+                                        }
+                                    }
+                                }
+                            });
                         });
                     } else {
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
