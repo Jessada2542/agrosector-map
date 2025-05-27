@@ -30,4 +30,9 @@ class UserUseSensor extends Model
     {
         return $this->hasMany(Sensor::class, 'use_user_sensor_id', 'id');
     }
+
+    public function latestSensor()
+    {
+        return $this->hasOne(Sensor::class, 'use_user_sensor_id', 'id')->latest('created_at');
+    }
 }
