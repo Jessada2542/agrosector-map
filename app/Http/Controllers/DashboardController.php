@@ -15,14 +15,14 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = UserUseSensor::with('sensors')
+            $query = Sensor::where('use_user_sensor_id', $request->input(('device_id')))
                 ->where('user_id', Auth::id())
                 ->orderBy('created_at', 'desc');
 
             return DataTables::eloquent($query)
                 ->addIndexColumn()
                 ->editColumn('datetime', function ($row) {
-                    return $row->created_at->format('Y-m-d H:i');
+                    return $row->created_at->format('d-m-Y H:i');
                 })
                 ->rawColumns(['datetime'])
                 ->make(true);
