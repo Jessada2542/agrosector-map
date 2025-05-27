@@ -117,4 +117,24 @@ class UserController extends Controller
 
         return view('user.planting', compact('sideAtive', 'plantingData'));
     }
+
+    public function plantingData($id)
+    {
+        $plantingData = UserUseSensor::with('sensorKey')
+            ->where('id', $id)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (!$plantingData) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Planting data not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $plantingData
+        ]);
+    }
 }
