@@ -40,7 +40,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="flex justify-center">
+                <div class="flex justify-center gap-3">
                     <button id="btn-add-planting" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="fa-solid fa-plus"></i> เพิ่ม
                     </button>
