@@ -31,7 +31,7 @@
         <div id="modal-planting" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
             <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
                 <h2 class="text-center text-xl font-bold mb-4">กรุณาเลือกอุปกรณ์ที่ต้องการเพิ่มในการปลูก</h2>
-                <div id="modal-content" class="mb-4">
+                <div class="mb-4">
                     <div class="mb-3">
                         <label for="planting-device">อุปกรณ์ (S/N)</label>
                         <select id="planting-device" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -96,6 +96,7 @@
         });
 
         $('#btn-add-device').on('click', function() {
+            $('#planting-device').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
             $.ajax({
                 url: '/user/planting/data/' + '{{ auth()->user()->id }}',
                 type: 'GET',
@@ -106,7 +107,7 @@
                     console.log(response);
                     $('#modal-planting').removeClass('hidden');
                     $.each(response.data, function(index, item) {
-                        $('#device-district').append('<option value="' + item.id + '">' + item.sensor_key.key + '</option>');
+                        $('#planting-device').append('<option value="' + item.id + '">' + item.sensor_key.key + '</option>');
                     });
                 },
                 error: function(xhr, status, error) {
