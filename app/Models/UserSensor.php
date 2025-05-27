@@ -28,7 +28,7 @@ class UserSensor extends Model
 
     public function useSensor()
     {
-        return $this->belongsTo(UserSensor::class, 'user_sensor_id', 'id');
+        return $this->hasMany(UserUseSensor::class, 'user_sensor_id');
     }
 
     public function province()
