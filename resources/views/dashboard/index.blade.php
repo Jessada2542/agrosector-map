@@ -15,7 +15,7 @@
 
                     <div class="text-1xl font-bold text-green-800">
                         อัพเดทล่าสุด
-                        {{ optional($item->latestSensor)->created_at ? $item->latestSensor->created_at->format('Y-m-d H:i') : 'ไม่มีข้อมูล Sensor' }}
+                        {{ optional($item->latestSensor)->created_at ? $item->latestSensor->created_at->format('d-m-Y H:i') : 'ไม่มีข้อมูล Sensor' }}
                     </div>
 
                     @if ($item->latestSensor)
