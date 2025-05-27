@@ -108,87 +108,87 @@
                 allowClear: true,
                 width: '100%',
             });
-        });
 
-        $('#btn-add-device').on('click', function() {
-            $('#planting-device').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
-            $('#planting-name').val('');
-            $('#planting-detail').val('');
-            $('#planting-date-start').val('');
-            $.ajax({
-                url: '/user/planting/data/' + '{{ auth()->user()->id }}',
-                type: 'GET',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function(response) {
-                    console.log(response);
-                    if (response.status) {
-                        $('#modal-planting').removeClass('hidden');
-                        $.each(response.data, function(index, item) {
-                            $('#planting-device').append('<option value="' + item.id + '">' + item.sensor_key.key + '</option>');
-                        });
-                    } else {
-                        Swal.fire('ผิดพลาด!', 'ไม่พบอุปกรณ์ที่สามารถเพิ่มได้', 'error');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    Swal.fire('ผิดพลาด!', 'ไม่สามารถดึงรายการอุปกรณ์ได้', 'error');
-                }
-            });
-
-            $('#btn-add-planting').on('click', function() {
-                var deviceId = $('#planting-device').val();
-                if (!deviceId) {
-                    Swal.fire('ผิดพลาด!', 'กรุณาเลือกอุปกรณ์ที่ต้องการเพิ่ม', 'error');
-                    return;
-                }
-
-                var plantingName = $('#planting-name').val();
-                var plantingDetail = $('#planting-detail').val();
-                var plantingDateStart = $('#planting-date-start').val();
-
-                if (!plantingName || !plantingDetail || !plantingDateStart) {
-                    Swal.fire('ผิดพลาด!', 'กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
-                    return;
-                }
-
-                Swal.fire({
-                    title: 'ยืนยันการเพิ่มอุปกรณ์',
-                    text: 'คุณต้องการเพิ่มอุปกรณ์นี้ในการปลูกหรือไม่?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'ใช่',
-                    cancelButtonText: 'ไม่'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: '/user/planting/add',
-                            type: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                                device_id: deviceId,
-                                name: plantingName,
-                                detail: plantingDetail,
-                                date_start: plantingDateStart
-                            },
-                            success: function(response) {
-                                Swal.fire('สำเร็จ!', 'เพิ่มอุปกรณ์เรียบร้อยแล้ว', 'success');
-                                $('#modal-planting').addClass('hidden');
-                                $('#planting-device').val('').trigger('change');
-                                table.ajax.reload();
-                            },
-                            error: function(xhr, status, error) {
-                                Swal.fire('ผิดพลาด!', 'ไม่สามารถเพิ่มอุปกรณ์ได้', 'error');
-                            }
-                        });
+            $('#btn-add-device').on('click', function() {
+                $('#planting-device').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
+                $('#planting-name').val('');
+                $('#planting-detail').val('');
+                $('#planting-date-start').val('');
+                $.ajax({
+                    url: '/user/planting/data/' + '{{ auth()->user()->id }}',
+                    type: 'GET',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        if (response.status) {
+                            $('#modal-planting').removeClass('hidden');
+                            $.each(response.data, function(index, item) {
+                                $('#planting-device').append('<option value="' + item.id + '">' + item.sensor_key.key + '</option>');
+                            });
+                        } else {
+                            Swal.fire('ผิดพลาด!', 'ไม่พบอุปกรณ์ที่สามารถเพิ่มได้', 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('ผิดพลาด!', 'ไม่สามารถดึงรายการอุปกรณ์ได้', 'error');
                     }
                 });
-            });
 
-            $('.closeModal').on('click', function() {
-                $('#modal-planting').addClass('hidden');
-                $('#planting-device').val('').trigger('change');
+                $('#btn-add-planting').on('click', function() {
+                    var deviceId = $('#planting-device').val();
+                    if (!deviceId) {
+                        Swal.fire('ผิดพลาด!', 'กรุณาเลือกอุปกรณ์ที่ต้องการเพิ่ม', 'error');
+                        return;
+                    }
+
+                    var plantingName = $('#planting-name').val();
+                    var plantingDetail = $('#planting-detail').val();
+                    var plantingDateStart = $('#planting-date-start').val();
+
+                    if (!plantingName || !plantingDetail || !plantingDateStart) {
+                        Swal.fire('ผิดพลาด!', 'กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+                        return;
+                    }
+
+                    Swal.fire({
+                        title: 'ยืนยันการเพิ่มอุปกรณ์',
+                        text: 'คุณต้องการเพิ่มอุปกรณ์นี้ในการปลูกหรือไม่?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'ใช่',
+                        cancelButtonText: 'ไม่'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '/user/planting/add',
+                                type: 'POST',
+                                data: {
+                                    _token: '{{ csrf_token() }}',
+                                    device_id: deviceId,
+                                    name: plantingName,
+                                    detail: plantingDetail,
+                                    date_start: plantingDateStart
+                                },
+                                success: function(response) {
+                                    Swal.fire('สำเร็จ!', 'เพิ่มอุปกรณ์เรียบร้อยแล้ว', 'success');
+                                    $('#modal-planting').addClass('hidden');
+                                    $('#planting-device').val('').trigger('change');
+                                    table.ajax.reload();
+                                },
+                                error: function(xhr, status, error) {
+                                    Swal.fire('ผิดพลาด!', 'ไม่สามารถเพิ่มอุปกรณ์ได้', 'error');
+                                }
+                            });
+                        }
+                    });
+                });
+
+                $('.closeModal').on('click', function() {
+                    $('#modal-planting').addClass('hidden');
+                    $('#planting-device').val('').trigger('change');
+                });
             });
         });
     </script>
