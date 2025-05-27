@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function() {
     Route::controller(DashboardController::class)->group(function() {
         Route::prefix('/dashboard')->group(function() {
             Route::match(['get', 'post'], '/', 'index')->name('dashboard.index');
+            Route::get('/data/{id}', 'data')->name('dashboard.data');
         });
     });
 

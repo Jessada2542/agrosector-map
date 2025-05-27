@@ -87,7 +87,7 @@
                 </nav>
             </div>
 
-            <div class="tab-content hidden">
+            <div class="tab-content hidden" id="general-info">
                 ข้อมูลทั่วไปของการปลูก เช่น พื้นที่ปลูก, ประเภทพืช, วันที่เริ่มปลูก, วันที่คาดว่าจะเก็บเกี่ยว
             </div>
             <div class="tab-content hidden">
@@ -199,6 +199,28 @@
         $('.btn-select').click(function() {
             var deviceId = $(this).data('id');
             console.log('Selected device ID:', deviceId);
+
+            $.ajax({
+                url: '/dashboard/data/' + deviceId,
+                method: 'GET',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.status) {
+                        $('#general-info').html(`
+                            <h2 class="text-lg font-semibold mb-4">ชื่อ ${response.data.name}</h2>
+                            <p>${response.data.detail}</p>
+                        `);
+                    } else {
+                        Swal.fire('ผิดพลาด!', 'ไม่พบข้อมูลของอุปกรณ์นี้.', 'error');
+                        return;
+                    }
+                },
+                error: function(xhr) {
+                    Swal.fire('ผิดพลาด!', 'ไม่พบอุปกรณ์ device.', 'error');
+                }
+            });
 
             // ตรวจสอบว่า DataTable ถูกสร้างไว้แล้วหรือยัง
             if ($.fn.dataTable.isDataTable('#table')) {

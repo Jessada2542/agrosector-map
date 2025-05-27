@@ -34,4 +34,17 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact('sideAtive', 'sensor'));
     }
+
+    public function data($id)
+    {
+        $sensorData = UserUseSensor::whereId($id)->first();
+        if (!$sensorData) {
+            return response()->json(['error' => 'Sensor not found'], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $sensorData,
+        ]);
+    }
 }
