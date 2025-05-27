@@ -253,7 +253,7 @@
                     {
                         data: 'ph'
                     },
-                    {
+                    /* {
                         data: 'ec'
                     },
                     {
@@ -261,7 +261,7 @@
                     },
                     {
                         data: 'humidity'
-                    },
+                    }, */
                     {
                         data: 'datetime'
                     }
