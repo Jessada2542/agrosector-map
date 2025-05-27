@@ -109,8 +109,12 @@ class UserController extends Controller
                 ->make(true);
         }
 
+        $plantingData = UserUseSensor::with('sensorKey')
+            ->where('user_id', Auth::id())
+            ->get();
+
         $sideAtive = 'planting';
 
-        return view('user.planting', compact('sideAtive'));
+        return view('user.planting', compact('sideAtive', 'plantingData'));
     }
 }

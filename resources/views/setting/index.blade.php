@@ -1,21 +1,4 @@
 @extends('layouts.app')
-<style>
-    .select2-container .select2-selection--single {
-        height: 40px !important;
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: #000000 !important;
-        line-height: 38px !important;
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__placeholder {
-        color: #000000 !important;
-    }
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: 38px !important;
-    }
-</style>
 @section('content')
     <div class="m-5">
         <div class="p-6 rounded-xl shadow-sm border border-green-200 mb-6">
@@ -251,7 +234,7 @@
                         });
                     },
                     error: function(xhr) {
-                        Swal.fire('Error!', 'ไม่พบอุปกรณ์ device.', 'error');
+                        Swal.fire('ผิดพลาด!', 'ไม่พบอุปกรณ์ device.', 'error');
                     }
                 });
             });
@@ -265,12 +248,12 @@
                 var subdistrictId = $('#device-subdistrict').val();
 
                 if (!positionLat || !positionLon) {
-                    Swal.fire('Error!', 'กรุณากรอกตำแหน่ง Latitude และ Longitude.', 'error');
+                    Swal.fire('ผิดพลาด!', 'กรุณากรอกตำแหน่ง Latitude และ Longitude.', 'error');
                     return;
                 }
 
                 if (!provinceId || !districtId || !subdistrictId) {
-                    Swal.fire('Error!', 'กรุณาเลือกจังหวัด, อำเภอ และตำบล.', 'error');
+                    Swal.fire('ผิดพลาด!', 'กรุณาเลือกจังหวัด, อำเภอ และตำบล.', 'error');
                     return;
                 }
 
@@ -292,11 +275,11 @@
                             table.ajax.reload();
                             $('#modal-edit-sensor').addClass('hidden');
                         } else {
-                            Swal.fire('Error!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
+                            Swal.fire('ผิดพลาด!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
                         }
                     },
                     error: function(xhr) {
-                        Swal.fire('Error!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
+                        Swal.fire('ผิดพลาด!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
                     }
                 });
             });

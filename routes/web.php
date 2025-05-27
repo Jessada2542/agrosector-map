@@ -30,7 +30,11 @@ Route::middleware('auth')->group(function() {
         Route::prefix('/user')->group(function() {
             Route::get('/', [UserController::class, 'index'])->name('user.index');
             Route::post('/update/{id}', [UserController::class, 'update'])->name('user.update');
-            Route::match(['get', 'post'], '/planting', 'planting')->name('user.planting');
+
+            Route::group(['prefix' => 'planting'], function() {
+                Route::match(['get', 'post'], '/', 'planting')->name('user.planting');
+                Route::get('/data/{id}', 'plantingData')->name('user.planting.data');
+            });
         });
     });
 
