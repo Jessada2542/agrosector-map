@@ -213,4 +213,59 @@ class UserController extends Controller
             'data' => $planting
         ]);
     }
+
+    public function plantingUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'planting_id' => 'required|exists:user_use_sensors,id',
+            'detail' => 'nullable|string|max:500',
+            'date_end' => 'nullable|date|after_or_equal:date_start',
+        ])->setAttributeNames([
+            'id' => 'ID',
+            'detail' => 'Detail',
+            'date_end' => 'End Date',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $planting = UserUseSensor::whereId($request->input('id'))->first();
+
+            if (!$planting) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Planting data not found'
+                ], 404);
+            }
+
+            $sensorKey = UserSensor::whereId($request->input('device_id'))->first();
+
+            if (!$sensorKey) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Device key not found'
+                ], 404);
+            }
+
+            $planting->update([
+                'detail' => $request->input('detail'),
+                'end_date' => $request->input('date_end'),
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Planting data updated successfully'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to update planting data'
+            ], 500);
+        }
+    }
 }

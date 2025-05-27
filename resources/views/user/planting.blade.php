@@ -251,6 +251,48 @@
                 });
             });
 
+            $('#btn-edit-planting').on('click', function() {
+                var deviceId = $('#planting-id-edit').val();
+                var plantingDetail = $('#planting-detail-edit').val();
+                var plantingDateEnd = $('#planting-date-end-edit').val();
+
+                if (!plantingDetail) {
+                    Swal.fire('ผิดพลาด!', 'กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+                    return;
+                }
+
+                Swal.fire({
+                    title: 'ยืนยันการแก้ไขอุปกรณ์',
+                    text: 'คุณต้องการแก้ไขอุปกรณ์นี้ในการปลูกหรือไม่?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ไม่'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/user/planting/update',
+                            type: 'PUT',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                planting_id: deviceId,
+                                detail: plantingDetail,
+                                date_end: plantingDateEnd
+                            },
+                            success: function(response) {
+                                Swal.fire('สำเร็จ!', 'แก้ไขอุปกรณ์เรียบร้อยแล้ว', 'success');
+                                $('#modal-planting-edit').addClass('hidden');
+                                $('#planting-device-edit').val('').trigger('change');
+                                table.ajax.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('ผิดพลาด!', 'ไม่สามารถแก้ไขอุปกรณ์ได้', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+
             $('.closeModal').on('click', function() {
                 $('#modal-planting').addClass('hidden');
                 $('#modal-planting-edit').addClass('hidden');
