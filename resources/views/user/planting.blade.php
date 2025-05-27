@@ -92,7 +92,7 @@
                 <input type="hidden" id="planting-id-edit">
                 <div class="flex justify-center gap-3">
                     <button id="btn-edit-planting" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                        <i class="fa-solid fa-plus"></i> แก้ไข
+                        แก้ไข
                     </button>
                     <button id="btn-edit-planting-off" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
                         ปิดใช้งาน
