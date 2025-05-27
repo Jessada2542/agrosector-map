@@ -100,8 +100,8 @@ class UserController extends Controller
                 })
                 ->editColumn('status', function ($row) {
                     return $row->status == 1
-                        ? '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-green-500 rounded">ออนไลน์</span>'
-                        : '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-red-500 rounded">ออฟไลน์</span>';
+                        ? '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-green-500 rounded">เปิดใช้งาน</span>'
+                        : '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-red-500 rounded">ปิดใช้ง่น</span>';
                 })
                 ->addColumn('action', function ($row) {
                     return '<button class="px-3 py-1 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded btn-edit" data-id="' . $row->id . '"><i class="fa-solid fa-gear"></i> แก้ไข</button>';
