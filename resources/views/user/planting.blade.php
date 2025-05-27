@@ -298,7 +298,7 @@
                 var plantingEndDate = $('#planting-date-end-edit').val();
 
                 if (!plantingEndDate) {
-                    Swal.fire('ผิดพลาด!', 'กรุณากรอกวันที่สิ้นสุดการปลูก', 'error');
+                    Swal.fire('คำเตือน!', 'กรุณากรอกวันที่สิ้นสุดการปลูก', 'warning');
                     return;
                 }
 
