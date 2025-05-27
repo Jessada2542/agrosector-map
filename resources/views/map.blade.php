@@ -57,17 +57,13 @@
     <div id="modal-sensor" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end hidden">
         <div class="relative bg-white w-[400px] h-full shadow-lg flex flex-col">
             <div class="flex items-center justify-between p-6 border-b">
-                <h2 class="text-xl font-semibold">หัวเรื่อง</h2>
+                <h2 class="text-xl font-semibold">สถิติ</h2>
                 <button onclick="document.getElementById('modal-sensor').classList.add('hidden')"
                     class="text-gray-500 hover:text-red-600 text-2xl font-bold">
                     &times;
                 </button>
             </div>
-            <div class="p-6 overflow-y-auto">
-                <p class="text-gray-700">
-                    นี่คือเนื้อหาภายใน Modal ที่อยู่ด้านขวาของหน้าจอ คุณสามารถใส่ข้อความ รูปภาพ หรือแบบฟอร์มต่าง ๆ
-                    ได้ที่นี่
-                </p>
+            <div class="p-6 overflow-y-auto" id="sensor-content">
             </div>
         </div>
     </div>
@@ -113,32 +109,10 @@
                 });
 
                 map.Ui.add(menuBarControl);
-
-                markSensor();
             });
         }
 
-        function markSensor() {
-            const sensorData = [{
-                    id: 1,
-                    name: 'Sensor A',
-                    lon: 101.129354,
-                    lat: 16.440727
-                },
-                {
-                    id: 2,
-                    name: 'Sensor B',
-                    lon: 101.129354,
-                    lat: 15.440727
-                },
-                {
-                    id: 3,
-                    name: 'Sensor C',
-                    lon: 101.129354,
-                    lat: 14.440727
-                }
-            ];
-
+        function markSensor(sensorData) {
             // เพิ่ม marker พร้อม metadata
             sensorData.forEach(sensor => {
                 const marker = new longdo.Marker({
@@ -162,12 +136,6 @@
         }
 
         function openModal(id) {
-            const modal = document.getElementById('modal-sensor');
-            const content = document.getElementById('sensor-content');
-            modal.classList.remove('hidden');
-
-            // ✅ โหลดข้อมูล sensor แบบ AJAX (ใช้ fetch หรือ Axios)
-            content.innerHTML = 'กำลังโหลด...';
             /* $.ajax({
                 url: `/api/sensor/${id}`, // หรือ route ใน Laravel เช่น route('sensor.show', id)
                 type: 'GET',
@@ -301,18 +269,62 @@
                     object = new longdo.Overlays.Object(provinceId, 'IG', {
                         lineColor: '#0054ff',
                     });
-                    map.Overlays.load(object);
                 } else if (districtId && !subdistrictId) {
                     object = new longdo.Overlays.Object(districtId, 'IG', {
                         lineColor: '#00ff00',
                     });
-                    map.Overlays.load(object);
                 } else if (subdistrictId && districtId && provinceId) {
                     object = new longdo.Overlays.Object(subdistrictId, 'IG', {
                         lineColor: '#ff0000',
                     });
-                    map.Overlays.load(object);
                 }
+                map.Overlays.load(object);
+
+                $.ajax({
+                    url: '/api/sensor/marker',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        province_code: provinceId,
+                        district_code: districtId,
+                        subdistrict_code: subdistrictId
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            console.log(response.data);
+
+                            const sensorData = [{
+                                    id: 1,
+                                    name: 'Sensor A',
+                                    lon: 101.129354,
+                                    lat: 16.440727
+                                },
+                                {
+                                    id: 2,
+                                    name: 'Sensor B',
+                                    lon: 101.129354,
+                                    lat: 15.440727
+                                },
+                                {
+                                    id: 3,
+                                    name: 'Sensor C',
+                                    lon: 101.129354,
+                                    lat: 14.440727
+                                }
+                            ];
+                            markSensor(sensorData);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            title: 'เกิดข้อผิดพลาด',
+                            text: 'ไม่สามารถค้นหาพื้นที่ได้ กรุณาลองใหม่อีกครั้ง',
+                            icon: 'error',
+                            backdrop: false,
+                        });
+                    }
+                });
             } else {
                 Swal.fire({
                     icon: 'warning',

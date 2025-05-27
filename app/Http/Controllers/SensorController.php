@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SensorKey;
 use App\Models\SensorTest;
+use App\Models\UserUseSensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -66,6 +67,55 @@ class SensorController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Sensor key generated successfully'
+        ]);
+    }
+
+    public function marker(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'province_code' => 'nullable',
+            'district_code' => 'nullable',
+            'subdistrict_code' => 'nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()->first()
+            ], 422);
+        }
+
+        $marker = UserUseSensor::with('userSensor', 'latestSensor')
+            ->where('status', 1)
+            ->when($request->input('province_code'), function ($query) use ($request) {
+                return $query->whereHas('userSensor', function ($q) use ($request) {
+                    $q->where('province_code', $request->input('province_code'));
+                });
+            })
+            ->when($request->input('district_code'), function ($query) use ($request) {
+                return $query->whereHas('userSensor', function ($q) use ($request) {
+                    $q->where('district_code', $request->input('district_code'));
+                });
+            })
+            ->when($request->input('subdistrict_code'), function ($query) use ($request) {
+                return $query->whereHas('userSensor', function ($q) use ($request) {
+                    $q->where('subdistrict_code', $request->input('subdistrict_code'));
+                });
+            })
+            ->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Area received successfully',
+            'data' => $marker->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'latitude' => $item->userSensor->latitude,
+                    'longitude' => $item->userSensor->longitude,
+                    'latest_sensor' => $item->latestSensor ? $item->latestSensor->toArray() : null,
+                ];
+            })
         ]);
     }
 }
