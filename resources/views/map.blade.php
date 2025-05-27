@@ -148,7 +148,6 @@
 
             map.Event.bind('overlayClick', function(overlay) {
                 const id = overlay._geojson?.properties?.metadata?.id;
-                console.log('ID ที่คลิก:', id);
                 openModal(id);
             });
         }
@@ -161,8 +160,6 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    console.log('Sensor Data:', response);
-
                     if (response.status) {
                         const sensor = response.data;
                         $('#sensor-name').text(sensor.name);
@@ -172,32 +169,6 @@
                         $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph}`);
 
                         // สร้างกราฟ
-                        /* const ctx = document.getElementById('myLineChart').getContext('2d');
-                        const myChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.'], // แกน X
-                                datasets: [{
-                                    label: 'Nitrogen (N)',         // คำอธิบายเส้น
-                                    data: [25, 27, 30, 32, 29],      // แกน Y
-                                    borderColor: 'rgba(75, 192, 192, 1)', // สีเส้น
-                                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // สีพื้นที่ใต้เส้น
-                                    borderWidth: 2,
-                                    tension: 0.4, // ความโค้งของเส้น
-                                    fill: true,
-                                    pointRadius: 4
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: false
-                                    }
-                                }
-                            }
-                        }); */
-
                         dayjs.extend(dayjs_plugin_utc);
                         dayjs.extend(dayjs_plugin_timezone);
 
