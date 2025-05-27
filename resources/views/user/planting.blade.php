@@ -66,14 +66,14 @@
                 <h2 class="text-center text-xl font-bold mb-4">แก้ไขอุปกรณ์ในการปลูก</h2>
                 <div class="mb-4">
                     <div class="mb-3">
-                        <label for="planting-device-edit">อุปกรณ์ (S/N) <span class="text-red-500">(แก้ไขไม่ได้)</span></label>
+                        <label for="planting-device-edit">อุปกรณ์ (S/N) <span class="text-sm text-red-500">(แก้ไขไม่ได้)</span></label>
                         <select id="planting-device-edit" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" disabled>
                             <option value="" selected>เลือกอุปกรณ์</option>
                             <!-- js -->
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="planting-name-edit">ชื่อในการปลูก <span class="text-red-500">(แก้ไขไม่ได้)</span></label>
+                        <label for="planting-name-edit">ชื่อในการปลูก <span class="text-sm text-red-500">(แก้ไขไม่ได้)</span></label>
                         <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ชื่อในการปลูก" id="planting-name-edit" readonly>
                     </div>
                     <div class="mb-3">
@@ -81,7 +81,7 @@
                         <textarea id="planting-detail-edit" class="w-full p-2 border border-gray-300 rounded mt-2" cols="30" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="planting-date-start-edit">วันที่เริ่มปลูก <span class="text-red-500">(แก้ไขไม่ได้)</span></label>
+                        <label for="planting-date-start-edit">วันที่เริ่มปลูก <span class="text-sm text-red-500">(แก้ไขไม่ได้)</span></label>
                         <input type="date" id="planting-date-start-edit" class="w-full p-2 border border-gray-300 rounded mt-2" readonly>
                     </div>
                     <div class="mb-3">
