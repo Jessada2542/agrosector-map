@@ -114,6 +114,8 @@
 
         function markSensor(sensorData) {
             // เพิ่ม marker พร้อม metadata
+            console.log('sensorData:', sensorData);
+
             sensorData.forEach(sensor => {
                 const marker = new longdo.Marker({
                     lat: sensor.lat,
