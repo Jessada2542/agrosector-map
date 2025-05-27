@@ -145,7 +145,7 @@
                     },
                     success: function(response) {
                         if (response.status) {
-                            $('#planting-device-edit').append('<option value="' + response.data.user_sensor.sensor_key.id + '">' + response.data.user_sensor.sensor_key.key + '</option>');
+                            $('#planting-device-edit').append('<option value="' + response.data.user_sensor.sensor_key.id + ' selected">' + response.data.user_sensor.sensor_key.key + '</option>');
                             $('#planting-name-edit').val(response.data.name);
                             $('#planting-detail').val(response.data.detail);
                             $('#planting-date-start-edit').val(response.data.date_start);
