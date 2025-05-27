@@ -5,6 +5,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://api.longdo.com/map3/?key=297ba9a121afbb2c7818b0a2c497b131"></script>
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>
 <style>
     #map {
         height: 100vh;
@@ -196,8 +198,11 @@
                             }
                         }); */
 
+                        dayjs.extend(dayjs_plugin_utc);
+                        dayjs.extend(dayjs_plugin_timezone);
+
                         const labels = sensor.sensors.map(d =>
-                            dayjs(d.created_at).format('DD-MM-YYYY HH:mm')
+                            dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
                         );
 
                         const datasets = [
