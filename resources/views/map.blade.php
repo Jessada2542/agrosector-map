@@ -313,7 +313,7 @@
                                     lat: 14.440727
                                 }
                             ];
-                            markSensor(sensorData);
+                            markSensor(response.data);
                         }
                     },
                     error: function(xhr, status, error) {
