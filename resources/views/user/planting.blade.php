@@ -39,6 +39,18 @@
                             <!-- js -->
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="planting-name">ชื่อในการปลูก</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ชื่อในการปลูก" id="planting-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="planting-detail">รายละเอียด</label>
+                        <textarea id="planting-detail" cols="30" rows="3"></textarea>
+                    </div>
+                     <div class="mb-3">
+                        <label for="planting-date-start">วันที่เริ่มปลูก</label>
+                        <input type="date" id="planting-date-start" class="w-full p-2 border border-gray-300 rounded mt-2">
+                    </div>
                 </div>
                 <div class="flex justify-center gap-3">
                     <button id="btn-add-planting" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
@@ -129,6 +141,15 @@
                     return;
                 }
 
+                var plantingName = $('#planting-name').val();
+                var plantingDetail = $('#planting-detail').val();
+                var plantingDateStart = $('#planting-date-start').val();
+
+                if (!plantingName || !plantingDetail || !plantingDateStart) {
+                    Swal.fire('ผิดพลาด!', 'กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+                    return;
+                }
+
                 Swal.fire({
                     title: 'ยืนยันการเพิ่มอุปกรณ์',
                     text: 'คุณต้องการเพิ่มอุปกรณ์นี้ในการปลูกหรือไม่?',
@@ -143,7 +164,10 @@
                             type: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
-                                device_id: deviceId
+                                device_id: deviceId,
+                                name: plantingName,
+                                detail: plantingDetail,
+                                date_start: plantingDateStart
                             },
                             success: function(response) {
                                 Swal.fire('สำเร็จ!', 'เพิ่มอุปกรณ์เรียบร้อยแล้ว', 'success');

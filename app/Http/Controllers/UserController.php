@@ -139,8 +139,14 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'device_id' => 'required|exists:user_sensors,id',
+            'name' => 'required|string|max:255',
+            'detail' => 'nullable|string|max:500',
+            'date_start' => 'required|date',
         ])->setAttributeNames([
             'device_id' => 'Device ID',
+            'name' => 'Name',
+            'detail' => 'Detail',
+            'date_start' => 'Start Date',
         ]);
 
         if ($validator->fails()) {
@@ -162,7 +168,10 @@ class UserController extends Controller
 
             UserUseSensor::create([
                 'user_id' => Auth::id(),
-                'user_sensors_id' => $sensorKey->id
+                'user_sensors_id' => $sensorKey->id,
+                'name' => $request->input('name'),
+                'detail' => $request->input('detail'),
+                'start_date' => $request->input('date_start'),
             ]);
 
             return response()->json([
