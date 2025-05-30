@@ -85,6 +85,7 @@
                         <div>
                             <label for="image" class="block text-sm font-medium text-gray-700">รูปภาพ</label>
                             <input type="file" id="image" multiple accept="image/*" class="mt-1 block w-full" />
+                            <div id="image-preview" class="flex flex-wrap gap-2 mt-2"></div>
                         </div>
                         <div>
                             <label for="detail" class="block text-sm font-medium text-gray-700">เนื้อหา</label>
@@ -297,5 +298,52 @@
                 scrollX: true,
             });
         });
+
+        const input = document.getElementById('image');
+        const previewContainer = document.getElementById('image-preview');
+        let files = [];
+
+        input.addEventListener('change', (event) => {
+            const selectedFiles = Array.from(event.target.files);
+
+            if (files.length + selectedFiles.length > 3) {
+            alert('อัปโหลดได้สูงสุด 3 รูปเท่านั้น');
+            input.value = ''; // reset input
+            return;
+            }
+
+            selectedFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const preview = document.createElement('div');
+                preview.className = 'relative w-20 h-20 rounded overflow-hidden border';
+
+                preview.innerHTML = `
+                <img src="${e.target.result}" class="w-full h-full object-cover" />
+                <button class="absolute top-0 right-0 bg-red-600 text-white text-xs p-1 rounded-bl hover:bg-red-700">x</button>
+                `;
+
+                // handle remove
+                preview.querySelector('button').addEventListener('click', () => {
+                preview.remove();
+                files = files.filter(f => f !== file);
+                updateInputFiles();
+                });
+
+                previewContainer.appendChild(preview);
+                files.push(file);
+                updateInputFiles();
+            };
+            reader.readAsDataURL(file);
+            });
+
+            input.value = ''; // reset input so same file can be re-selected
+        });
+
+        function updateInputFiles() {
+            const dataTransfer = new DataTransfer();
+            files.forEach(file => dataTransfer.items.add(file));
+            input.files = dataTransfer.files;
+        }
     </script>
 @endsection
