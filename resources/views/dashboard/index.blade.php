@@ -80,10 +80,18 @@
                 </div>
             </div>
             <div class="tab-content hidden" id="report-planting">
-                <div>
-                    <input type="file" id="" multiple accept="image/*" class="hidden" />
-                    <textarea class="border border-gray-300 rounded-lg p-2 w-full" id="" cols="30" rows="3"></textarea>
-                    <button class="bg-green-500 text-white px-4 py-2 rounded mt-2">สร้างรายงาน</button>
+                <div class="md:columns-3">
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-gray-700">รูปภาพ</label>
+                        <input type="file" id="image" multiple accept="image/*" />
+                    </div>
+                    <div>
+                        <label for="detail" class="block text-sm font-medium text-gray-700">เนื้อหา</label>
+                        <textarea class="border border-gray-300 rounded-lg p-2 w-full" id="detail" cols="30" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <button class="bg-green-500 text-white px-4 py-2 rounded mt-2">สร้างรายงาน</button>
+                    </div>
                 </div>
                 <div class="w-full overflow-x-auto">
                     <table class="min-w-[900px] bg-white border border-green-200 rounded-lg shadow-lg" id="table-planting">
