@@ -184,6 +184,7 @@
 
         $('.btn-select').click(function() {
             var deviceId = $(this).data('id');
+            $('#device_id').val(deviceId);
             $('#general-info').html('<p>กำลังโหลดข้อมูล...</p>');
 
             $.ajax({
@@ -345,6 +346,7 @@
             files.forEach(file => formData.append('images[]', file));
 
             formData.append('detail', $('#detail').val());
+            formData.append('use_user_sensor_id', $('#device_id').val());
 
             $.ajax({
                 url: '/dashboard/planting/report/create',

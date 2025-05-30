@@ -10,6 +10,7 @@
             <label for="detail" class="block text-sm font-medium text-gray-700">เนื้อหา</label>
             <textarea class="border border-gray-300 rounded-lg p-2 w-full mt-1" id="detail" cols="30" rows="3"></textarea>
         </div>
+        <input type="hidden" id="device_id">
         <div class="flex justify-center gap-2">
             <button id="btn-report-submit" class="px-4 py-2 bg-blue-500 rounded hover:bg-blue-400 text-white">สร้าง</button>
             <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
