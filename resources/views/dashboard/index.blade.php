@@ -83,22 +83,9 @@
                 <button class="bg-green-500 text-white px-4 py-2 rounded">
                     <i class="fa-solid fa-plus"></i> สร้างรายงาน
                 </button>
-                <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="image" class="block text-sm font-medium text-gray-700">รูปภาพ <span class="text-sm text-red-700">*สูงสุด 3 ภาพ</span></label>
-                            <input type="file" id="image" multiple accept="image/*" class="mt-1 block w-full" />
-                            <div id="image-preview" class="flex flex-wrap gap-2 mt-2"></div>
-                        </div>
-                        <div>
-                            <label for="detail" class="block text-sm font-medium text-gray-700">เนื้อหา</label>
-                            <textarea class="border border-gray-300 rounded-lg p-2 w-full mt-1" id="detail" cols="30" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="flex justify-center mt-2">
-                            <button class="bg-green-500 text-white px-4 py-2 rounded w-40">สร้างรายงาน</button>
-                        </div>
-                </div>
+
+                @include('modal.create-report')
+
                 <div class="w-full overflow-x-auto">
                     <table class="min-w-[900px] bg-white border border-green-200 rounded-lg shadow-lg" id="table-planting">
                         <thead>
