@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="tab-content hidden" id="report-planting">
-                <button class="bg-green-500 text-white px-4 py-2 rounded">
+                <button class="bg-green-500 text-white px-4 py-2 rounded" id="btn-create-report">
                     <i class="fa-solid fa-plus"></i> สร้างรายงาน
                 </button>
 
@@ -338,5 +338,16 @@
             files.forEach(file => dataTransfer.items.add(file));
             input.files = dataTransfer.files;
         }
+
+        $('#btn-create-report').on('click', function() {
+            $('#modal-report').removeClass('hidden');
+            $('#image-preview').empty();
+            $('#image').val('');
+            $('#detail').val('');
+        });
+
+        $('.closeModal').on('click', function() {
+            $('#modal-report').addClass('hidden');
+        });
     </script>
 @endsection
