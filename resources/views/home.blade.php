@@ -121,7 +121,7 @@
 
                         const sensor = response.data;
                         $('#sensor-name').text(sensor.name);
-                        $('#sensor-update').text(`อัพเดทล่าสุด: ${dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm:ss')}`);
+                        $('#sensor-update').text(`อัพเดทล่าสุด: ${dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')}`);
                         $('#sensor-n').text(`Nitrogen (N): ${sensor.latest_sensor.n} mg/kg`);
                         $('#sensor-p').text(`Phosphorus (P): ${sensor.latest_sensor.p} mg/kg`);
                         $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor.k} mg/kg`);
