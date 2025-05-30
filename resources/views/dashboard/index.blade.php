@@ -92,8 +92,8 @@
                             <textarea class="border border-gray-300 rounded-lg p-2 w-full mt-1" id="detail" cols="30" rows="3"></textarea>
                         </div>
                     </div>
-                    <div class="flex content-center mt-2">
-                            <button class="bg-green-500 text-white px-4 py-2 rounded w-full">สร้างรายงาน</button>
+                    <div class="flex justify-center mt-2">
+                            <button class="bg-green-500 text-white px-4 py-2 rounded w-40">สร้างรายงาน</button>
                         </div>
                 </div>
                 <div class="w-full overflow-x-auto">
