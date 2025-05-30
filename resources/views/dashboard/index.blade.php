@@ -387,14 +387,13 @@
         $(document).on('click', '.preview-image', function () {
             const imgSrc = $(this).attr('src');
             Swal.fire({
-                title: 'Preview รูปภาพ',
                 imageUrl: imgSrc,
                 imageAlt: 'Preview',
                 showConfirmButton: false,
                 showCancelButton: true,
                 cancelButtonText: 'ปิด',
                 background: '#fefefe',
-                width: '150px',
+                width: '350px',
                 padding: '1em',
                 customClass: {
                     popup: 'rounded-xl shadow-lg'
