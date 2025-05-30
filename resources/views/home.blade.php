@@ -233,6 +233,8 @@
                     text: `Lat: ${location.lat.toFixed(6)}, Lon: ${location.lon.toFixed(6)}`,
                     backdrop: false,
                 });
+            } else if (item.type === 'login') {
+                window.location.href = '/login';
             } else {
                 Swal.fire({
                     text: 'ไม่พบข้อมูลที่เลือก',
