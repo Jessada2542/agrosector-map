@@ -51,9 +51,13 @@ class DashboardController extends Controller
                 ->addColumn('image', function ($row) {
                     $images = $row->plantingImage->pluck('image')->toArray();
                     if (count($images) > 0) {
-                        return '<img src="' . asset('images/platnings/' . $images[0]) . '" class="img-thumbnail" style="width: 50px; height: 50px;">';
+                        $imageHtml = '';
+                        foreach ($images as $image) {
+                            $imageHtml .= '<img src="' . asset('images/platnings/' . $image) . '" width="50" height="50" class="img-thumbnail">';
+                        }
+                        return $imageHtml;
                     }
-                    return '';
+                    return 'No images';
                 })
                 ->editColumn('datetime', function ($row) {
                     return $row->created_at->format('d-m-Y H:i');
