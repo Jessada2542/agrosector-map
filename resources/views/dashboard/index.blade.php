@@ -80,7 +80,21 @@
                 </div>
             </div>
             <div class="tab-content hidden" id="report-planting">
-                อัพโหลดรูปได้, เขียนข้อความรายงานการปลูกได้
+                <div class="w-full overflow-x-auto">
+                    <table class="min-w-[900px] bg-white border border-green-200 rounded-lg shadow-lg" id="table-planting">
+                        <thead>
+                            <tr class="bg-green-100 text-green-600 text-sm">
+                                <th class="px-4 py-2 border-b whitespace-nowrap">#</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">รูปภาพ</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">รายละเอียด</th>
+                                <th class="px-4 py-2 border-b whitespace-nowrap">Datetime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- js -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -165,7 +179,6 @@
         $('.btn-select').click(function() {
             var deviceId = $(this).data('id');
             $('#general-info').html('<p>กำลังโหลดข้อมูล...</p>');
-            $('#report-planting').html('<p>กำลังโหลดข้อมูล...</p>');
 
             $.ajax({
                 url: '/dashboard/data/' + deviceId,
@@ -174,8 +187,6 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    console.log(response);
-
                     if (response.status) {
                         $('#general-info').html(`
                             <h2 class="text-lg font-semibold mb-4">${response.data.name}</h2>
@@ -236,6 +247,36 @@
                     }
                 ],
                 reponsive: true,
+                scrollX: true,
+            });
+
+            if ($.fn.dataTable.isDataTable('#table-planting')) {
+                // ถ้ามีแล้ว ให้ทำการล้างและโหลดใหม่
+                $('#table-planting').DataTable().destroy();
+            }
+
+            var tablePlanting = $('#table-planting').DataTable({
+                ajax: {
+                    url: '/dashboard/planting/report',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        device_id: deviceId
+                    },
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'image',
+                    },
+                    {
+                        data: 'datetime'
+                    }
+                ],
+                reponsive: true,
+                scrollX: true,
             });
         });
     </script>

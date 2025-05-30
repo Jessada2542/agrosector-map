@@ -38,6 +38,31 @@ class DashboardController extends Controller
         return view('dashboard.index', compact('sideAtive', 'sensor'));
     }
 
+    public function plantingReport(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = PlantingReport::with('plantingImage')
+                ->where('use_user_sensor_id', $request->input(('device_id')))
+                ->where('user_id', Auth::id())
+                ->orderBy('created_at', 'desc');
+
+            return DataTables::eloquent($query)
+                ->addIndexColumn()
+                ->addColumn('image', function ($row) {
+                    $images = $row->plantingImage->pluck('image')->toArray();
+                    if (count($images) > 0) {
+                        return '<img src="' . asset('images/platnings/' . $images[0]) . '" class="img-thumbnail" style="width: 50px; height: 50px;">';
+                    }
+                    return '';
+                })
+                ->editColumn('datetime', function ($row) {
+                    return $row->created_at->format('d-m-Y H:i');
+                })
+                ->rawColumns(['image', 'datetime'])
+                ->make(true);
+        }
+    }
+
     public function data($id)
     {
         $sensorData = UserUseSensor::whereId($id)->first();
@@ -50,7 +75,7 @@ class DashboardController extends Controller
             ->get();
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'data' => $sensorData,
             'planting_report' => $plantingReport,
         ]);
