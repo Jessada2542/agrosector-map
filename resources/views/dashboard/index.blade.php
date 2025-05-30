@@ -263,7 +263,7 @@
 
             var tablePlanting = $('#table-planting').DataTable({
                 ajax: {
-                    url: '/dashboard/planting/report',
+                    url: '/dashboard/planting/report/data',
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -340,10 +340,42 @@
         }
 
         $('#btn-create-report').on('click', function() {
+            const formData = new FormData();
+
+            files.forEach(file => formData.append('images[]', file));
+
+            formData.append('detail', $('#detail').val());
+
+            $.ajax({
+                url: '/dashboard/planting/report/create',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.status) {
+                        Swal.fire('สำเร็จ!', 'สร้างรายงานเรียบร้อยแล้ว.', 'success');
+                        $('#modal-report').addClass('hidden');
+                        $('#table-planting').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire('ผิดพลาด!', response.message, 'error');
+                    }
+                },
+                error: function(xhr) {
+                    Swal.fire('ผิดพลาด!', 'ไม่สามารถสร้างรายงานได้.', 'error');
+                }
+            });
+        });
+
+        $('#btn-create-report').on('click', function() {
             $('#modal-report').removeClass('hidden');
             $('#image-preview').empty();
             $('#image').val('');
             $('#detail').val('');
+            files = [];
         });
 
         $('.closeModal').on('click', function() {

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PlantingImage;
 use App\Models\PlantingReport;
 use App\Models\Sensor;
-use App\Models\SensorKey;
-use App\Models\SensorTest;
 use App\Models\UserUseSensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class DashboardController extends Controller
@@ -61,6 +61,39 @@ class DashboardController extends Controller
                 ->rawColumns(['image', 'datetime'])
                 ->make(true);
         }
+    }
+
+    public function plantingReportCreate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'use_user_sensor_id' => 'required|exists:user_use_sensors,id',
+            'detail' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        $reportId = PlantingReport::create([
+            'use_user_sensor_id' => $request->input('use_user_sensor_id'),
+            'user_id' => Auth::id(),
+            'detail' => $request->input('detail'),
+        ])->id;
+
+        if ($request->hasFile('image')) {
+            $images = [];
+            foreach ($request->file('image') as $image) {
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images/platnings'), $filename);
+                $images[] = [
+                    'planting_report_id' => $reportId,
+                    'image' => $filename,
+                ];
+            }
+            PlantingImage::insert($images);
+        }
+
+        return response()->json(['status' => true, 'message' => 'Planting report created successfully']);
     }
 
     public function data($id)
