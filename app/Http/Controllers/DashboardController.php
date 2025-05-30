@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PlantingReport;
 use App\Models\Sensor;
 use App\Models\SensorKey;
 use App\Models\SensorTest;
@@ -44,9 +45,14 @@ class DashboardController extends Controller
             return response()->json(['error' => 'Sensor not found'], 404);
         }
 
+        $plantingReport = PlantingReport::where('use_user_sensor_id', $id)
+            ->where('user_id', Auth::id())
+            ->get();
+
         return response()->json([
             'status' => 'success',
             'data' => $sensorData,
+            'planting_report' => $plantingReport,
         ]);
     }
 }

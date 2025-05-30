@@ -34,39 +34,6 @@
                     </div>
                 </div>
             @endforeach
-            {{-- <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
-                <div class="text-green
-
-            {{-- <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
-                <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> อุปกรณ์ (2)
-                </div>
-                <div class="text-1xl font-bold text-green-800">อัพเดทล่าสุด Datetime</div>
-                <p class="text-green-700 mt-2">Nitrogen (N) : value</p>
-                <p class="text-green-700 mt-2">Phosphorus (P) : value</p>
-                <p class="text-green-700 mt-2">Potassium (K) : value</p>
-                <p class="text-green-700 mt-2">pH : value</p>
-                <p class="text-green-700 mt-2">ec : value</p>
-                <p class="text-green-700 mt-2">Temperature : value</p>
-                <p class="text-green-700 mt-2">Humidity : value</p>
-                <div class="flex justify-center">
-                    <button class="bg-green-500 text-white px-4 py-2 rounded btn-select" data-id="2">เลือก</button>
-                </div>
-            </div>
-            <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
-                <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> อุปกรณ์ (3)
-                </div>
-                <div class="text-1xl font-bold text-green-800">อัพเดทล่าสุด Datetime</div>
-                <p class="text-green-700 mt-2">Nitrogen (N) : value</p>
-                <p class="text-green-700 mt-2">Phosphorus (P) : value</p>
-                <p class="text-green-700 mt-2">Potassium (K) : value</p>
-                <p class="text-green-700 mt-2">pH : value</p>
-                <p class="text-green-700 mt-2">ec : value</p>
-                <p class="text-green-700 mt-2">Temperature : value</p>
-                <p class="text-green-700 mt-2">Humidity : value</p>
-                <div class="flex justify-center">
-                    <button class="bg-green-500 text-white px-4 py-2 rounded btn-select" data-id="3">เลือก</button>
-                </div>
-            </div> --}}
         </div>
 
         <div class="mt-6 p-6 rounded-xl shadow-sm border border-green-200 mb-6">
@@ -112,7 +79,7 @@
                     </table>
                 </div>
             </div>
-            <div class="tab-content hidden">
+            <div class="tab-content hidden" id="report-planting">
                 อัพโหลดรูปได้, เขียนข้อความรายงานการปลูกได้
             </div>
         </div>
@@ -198,6 +165,7 @@
         $('.btn-select').click(function() {
             var deviceId = $(this).data('id');
             $('#general-info').html('<p>กำลังโหลดข้อมูล...</p>');
+            $('#report-planting').html('<p>กำลังโหลดข้อมูล...</p>');
 
             $.ajax({
                 url: '/dashboard/data/' + deviceId,
@@ -206,6 +174,8 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
+                    console.log(response);
+
                     if (response.status) {
                         $('#general-info').html(`
                             <h2 class="text-lg font-semibold mb-4">${response.data.name}</h2>
