@@ -80,6 +80,9 @@
                 </div>
             </div>
             <div class="tab-content hidden" id="report-planting">
+                <button class="bg-green-500 text-white px-4 py-2 rounded">
+                    <i class="fa-solid fa-plus"></i> สร้างรายงาน
+                </button>
                 <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
