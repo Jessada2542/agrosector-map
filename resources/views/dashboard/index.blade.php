@@ -82,7 +82,7 @@
             <div class="tab-content hidden" id="report-planting">
                 <div>
                     <input type="file" id="" multiple accept="image/*" class="hidden" />
-                    <textarea id="" cols="30" rows="3"></textarea>
+                    <textarea class="form-control" id="" cols="30" rows="3"></textarea>
                     <button class="bg-green-500 text-white px-4 py-2 rounded mt-2">สร้างรายงาน</button>
                 </div>
                 <div class="w-full overflow-x-auto">
