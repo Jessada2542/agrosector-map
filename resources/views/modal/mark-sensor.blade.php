@@ -10,7 +10,7 @@
         </div>
         <div class="p-6 overflow-y-auto" id="sensor-content">
             <strong id="sensor-name" class="text-xl">ชื่อ sensor</strong><br>
-            <span class="text-sm text-gray-500">อัพเดทล่าสุด เวลา</span>
+            <span id="sensor-update" class="text-sm text-gray-500">อัพเดทล่าสุด เวลา</span>
             <p class="text-gray-700" id="sensor-n">Nitrogen (N)</p>
             <p class="text-gray-700" id="sensor-p">Phosphorus (P)</p>
             <p class="text-gray-700" id="sensor-k">Potassium (K)</p>
