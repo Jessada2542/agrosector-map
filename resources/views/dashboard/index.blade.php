@@ -339,7 +339,7 @@
             input.files = dataTransfer.files;
         }
 
-        $('#btn-create-report').on('click', function() {
+        $('#btn-report-submit').on('click', function() {
             const formData = new FormData();
 
             files.forEach(file => formData.append('images[]', file));
