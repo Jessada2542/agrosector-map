@@ -116,6 +116,9 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status) {
+                        dayjs.extend(dayjs_plugin_utc);
+                        dayjs.extend(dayjs_plugin_timezone);
+
                         const sensor = response.data;
                         $('#sensor-name').text(sensor.name);
                         $('#sensor-update').text(`อัพเดทล่าสุด: ${dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm:ss')}`);
@@ -125,9 +128,6 @@
                         $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph}`);
 
                         // สร้างกราฟ
-                        dayjs.extend(dayjs_plugin_utc);
-                        dayjs.extend(dayjs_plugin_timezone);
-
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
                         );
