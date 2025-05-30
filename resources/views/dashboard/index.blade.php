@@ -350,7 +350,7 @@
                 url: '/dashboard/planting/report/create',
                 type: 'POST',
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 data: formData,
                 processData: false,
