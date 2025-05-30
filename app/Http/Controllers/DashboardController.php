@@ -53,11 +53,11 @@ class DashboardController extends Controller
                     if (count($images) > 0) {
                         $imageHtml = '';
                         foreach ($images as $image) {
-                            $imageHtml .= '<img src="' . asset('images/platnings/' . $image) . '" width="50" height="50" class="img-thumbnail">';
+                            $imageHtml .= '<img src="' . asset('images/platnings/' . $image) . '" width="50" height="50" class="img-thumbnail me-1" style="display: inline-block;">';
                         }
                         return $imageHtml;
                     }
-                    return 'No images';
+                    return 'ไม่มีรูปภาพ';
                 })
                 ->editColumn('datetime', function ($row) {
                     return $row->created_at->format('d-m-Y H:i');
