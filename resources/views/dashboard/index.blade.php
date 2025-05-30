@@ -383,5 +383,21 @@
         $('.closeModal').on('click', function() {
             $('#modal-report').addClass('hidden');
         });
+
+        $(document).on('click', '.preview-image', function () {
+            const imgSrc = $(this).attr('src');
+            Swal.fire({
+                title: 'Preview รูปภาพ',
+                imageUrl: imgSrc,
+                imageAlt: 'Preview',
+                showConfirmButton: false,
+                background: '#fefefe',
+                width: 'auto',
+                padding: '1em',
+                customClass: {
+                    popup: 'rounded-xl shadow-lg'
+                }
+            });
+        });
     </script>
 @endsection

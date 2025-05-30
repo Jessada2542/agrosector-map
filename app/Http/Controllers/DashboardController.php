@@ -53,7 +53,8 @@ class DashboardController extends Controller
                     if (count($images) > 0) {
                         $imageHtml = '';
                         foreach ($images as $image) {
-                            $imageHtml .= '<img src="' . asset('images/platnings/' . $image) . '" width="50" height="50" class="img-thumbnail me-1" style="display: inline-block;">';
+                            $url = asset('images/platnings/' . $image);
+                            $imageHtml .= '<img src="' . $url . '" width="50" height="50" class="inline-block mr-2 rounded border preview-image" style="cursor: pointer;">';
                         }
                         return $imageHtml;
                     }
