@@ -84,9 +84,9 @@ class DashboardController extends Controller
             'detail' => $request->input('detail'),
         ])->id;
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('images')) {
             $images = [];
-            foreach ($request->file('image') as $image) {
+            foreach ($request->file('images') as $image) {
                 $filename = time() . '_' . $image->getClientOriginalName();
                 $image->move(public_path('images/platnings'), $filename);
                 $images[] = [
