@@ -1,4 +1,11 @@
 @extends('layouts.app')
+<style>
+    @media (max-width: 767px) {
+        #btn-create-report {
+            width: 100% !important;
+        }
+    }
+</style>
 @section('content')
     <div class="m-5">
         <div class="p-6 rounded-xl shadow-sm border border-green-200 mb-6">
