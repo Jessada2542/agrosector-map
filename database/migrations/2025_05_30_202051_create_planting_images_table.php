@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('planting_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('planting_report_id')->constrained('planting_reports')->onDelete('cascade');
-            $table->string('image_name')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
