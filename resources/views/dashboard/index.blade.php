@@ -80,6 +80,11 @@
                 </div>
             </div>
             <div class="tab-content hidden" id="report-planting">
+                <div>
+                    <input type="file" id="" multiple accept="image/*" class="hidden" />
+                    <textarea id="" cols="30" rows="3"></textarea>
+                    <button class="bg-green-500 text-white px-4 py-2 rounded mt-2">สร้างรายงาน</button>
+                </div>
                 <div class="w-full overflow-x-auto">
                     <table class="min-w-[900px] bg-white border border-green-200 rounded-lg shadow-lg" id="table-planting">
                         <thead>
