@@ -391,8 +391,10 @@
                 imageUrl: imgSrc,
                 imageAlt: 'Preview',
                 showConfirmButton: false,
+                showCancelButton: true,
+                cancelButtonText: 'ปิด',
                 background: '#fefefe',
-                width: 'auto',
+                width: '150px',
                 padding: '1em',
                 customClass: {
                     popup: 'rounded-xl shadow-lg'
