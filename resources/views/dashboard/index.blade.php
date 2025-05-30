@@ -91,7 +91,7 @@
                             <label for="detail" class="block text-sm font-medium text-gray-700">เนื้อหา</label>
                             <textarea class="border border-gray-300 rounded-lg p-2 w-full mt-1" id="detail" cols="30" rows="2"></textarea>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-end">
                             <button class="bg-green-500 text-white px-4 py-2 rounded w-full">สร้างรายงาน</button>
                         </div>
                     </div>
