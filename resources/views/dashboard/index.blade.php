@@ -272,6 +272,9 @@
                         data: 'image',
                     },
                     {
+                        data: 'detail'
+                    },
+                    {
                         data: 'datetime'
                     }
                 ],
