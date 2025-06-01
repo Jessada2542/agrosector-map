@@ -54,6 +54,8 @@ class SensorController extends Controller
 
     public function store(Request $request)
     {
+        Log::info('Request received', $request->all());
+
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
             'sensor_key' => 'required|exists:sensor_keys,key',
@@ -77,6 +79,7 @@ class SensorController extends Controller
         ]);
 
         if ($validator->fails()) {
+            Log::warning('Validation failed', $validator->errors()->toArray());
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors()->first(),
@@ -85,6 +88,8 @@ class SensorController extends Controller
         }
 
         $sensorKey = SensorKey::where('key', $request->input('sensor_key'))->first();
+        Log::info('SensorKey found', ['sensorKey' => $sensorKey]);
+
         if (!$sensorKey) {
             return response()->json(['status' => false, 'message' => 'Invalid sensor key'], 422);
         }
@@ -93,6 +98,8 @@ class SensorController extends Controller
             ->where('user_sensor_id', $sensorKey->id)
             ->first();
 
+        Log::info('UserUseSensor check', ['useUserSensor' => $useUserSensor]);
+
         if (!$useUserSensor) {
             return response()->json([
                 'status' => false,
@@ -100,7 +107,7 @@ class SensorController extends Controller
             ], 422);
         }
 
-        Sensor::create([
+        $sensor = Sensor::create([
             'user_id' => $request->input('user_id'),
             'use_user_sensor_id' => $useUserSensor->id,
             'sensor_key' => $sensorKey->id,
@@ -112,6 +119,8 @@ class SensorController extends Controller
             'temperature' => $request->input('temperature'),
             'humidity' => $request->input('humidity'),
         ]);
+
+        Log::info('Sensor data saved', ['sensor' => $sensor]);
 
         return response()->json(['status' => true, 'message' => 'Sensor data processed successfully']);
     }
