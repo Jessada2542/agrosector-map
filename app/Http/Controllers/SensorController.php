@@ -103,7 +103,7 @@ class SensorController extends Controller
         Sensor::create([
             'user_id' => $request->input('user_id'),
             'use_user_sensor_id' => $useUserSensor->id,
-            'sensor_key' => $sensorKey->id,
+            'sensor_key_id' => $sensorKey->id,
             'n' => $request->input('n'),
             'p' => $request->input('p'),
             'k' => $request->input('k'),
