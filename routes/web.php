@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/sensor/generate', [SensorController::class, 'generateSensor'])->name('sensor.generate');
 
-    Route::prefix('/admin')->group(function() {
+    Route::prefix('/admin')->middleware(['check.role'])->group(function () {
         Route::get('/map', [AdminMapController::class, 'index'])->name('admin.index');
     });
 
