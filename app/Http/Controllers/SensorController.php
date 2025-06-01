@@ -90,6 +90,10 @@ class SensorController extends Controller
             return response()->json(['status' => false, 'message' => 'Invalid sensor key'], 422);
         }
 
+        if ($sensorKey->is_active != 1) {
+            return response()->json(['status' => true, 'message' => 'Sensor key is not active']);
+        }
+
         $useUserSensor = UserUseSensor::where('user_id', $request->input('user_id'))
             ->where('user_sensors_id', $sensorKey->id)
             ->first();
