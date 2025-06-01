@@ -93,6 +93,13 @@ class SensorController extends Controller
             ->where('user_sensor_id', $sensorKey->id)
             ->first();
 
+        if (!$useUserSensor) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Sensor is not assigned to this user.'
+            ], 422);
+        }
+
         Sensor::create([
             'user_id' => $request->input('user_id'),
             'use_user_sensor_id' => $useUserSensor->id,
