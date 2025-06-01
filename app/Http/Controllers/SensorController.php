@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sensor;
 use App\Models\SensorKey;
 use App\Models\SensorTest;
 use App\Models\UserUseSensor;
@@ -39,6 +40,62 @@ class SensorController extends Controller
         }
 
         SensorTest::create([
+            'n' => $request->input('n'),
+            'p' => $request->input('p'),
+            'k' => $request->input('k'),
+            'ph' => $request->input('ph'),
+            'ec' => $request->input('ec'),
+            'temperature' => $request->input('temperature'),
+            'humidity' => $request->input('humidity'),
+        ]);
+
+        return response()->json(['status' => true, 'message' => 'Sensor data processed successfully']);
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|exists:users,id',
+            'sensor_key' => 'required|exists:sensor_keys,key',
+            'n' => 'required',
+            'p' => 'required',
+            'k' => 'required',
+            'ph' => 'required',
+            'ec' => 'required',
+            'temperature' => 'required',
+            'humidity' => 'required',
+        ])->setAttributeNames([
+            'user_id' => 'User',
+            'sensor_key' => 'Sensor Key',
+            'n' => 'Nitrogen',
+            'p' => 'Phosphorus',
+            'k' => 'Potassium',
+            'ph' => 'pH',
+            'ec' => 'Electrical Conductivity',
+            'temperature' => 'Temperature',
+            'humidity' => 'Humidity',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()->first()
+            ], 422);
+        }
+
+        $sensorKey = SensorKey::where('key', $request->input('sensor_key'))->first();
+        if (!$sensorKey) {
+            return response()->json(['status' => false, 'message' => 'Invalid sensor key'], 422);
+        }
+
+        $useUserSensor = UserUseSensor::where('user_id', $request->input('user_id'))
+            ->where('user_sensor_id', $sensorKey->id)
+            ->first();
+
+        Sensor::create([
+            'user_id' => $request->input('user_id'),
+            'use_user_sensor_id' => $useUserSensor->id,
+            'sensor_key' => $sensorKey->id,
             'n' => $request->input('n'),
             'p' => $request->input('p'),
             'k' => $request->input('k'),

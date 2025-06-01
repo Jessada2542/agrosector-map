@@ -17,3 +17,4 @@ Route::post('/sensor/marker', [SensorController::class, 'marker'])->name('sensor
 Route::get('/sensor/data/{id}', [SensorController::class, 'data'])->name('sensor.data');
 
 Route::post('/sensor/test', [SensorController::class, 'test'])->name('sensor.test');
+Route::post('/sensor/store', [SensorController::class, 'store'])->name('sensor.store');
