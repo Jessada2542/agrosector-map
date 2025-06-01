@@ -9,5 +9,6 @@ class SensorKey extends Model
     protected $fillable = [
         'key',
         'is_active',
+        'updated_at',
     ];
 }
