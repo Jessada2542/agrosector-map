@@ -41,6 +41,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Login success',
+            'role' => $user->role_id,
         ], Response::HTTP_OK);
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\MapController as AdminMapController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -54,6 +55,10 @@ Route::middleware('auth')->group(function() {
     });
 
     Route::get('/sensor/generate', [SensorController::class, 'generateSensor'])->name('sensor.generate');
+
+    Route::prefix('/admin')->group(function() {
+        Route::get('/map', [AdminMapController::class, 'index'])->name('admin.index');
+    });
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

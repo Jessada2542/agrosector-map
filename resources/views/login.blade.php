@@ -80,7 +80,11 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(() => {
-                                window.location.href = '/map';
+                                if (response.role > 1) {
+                                    window.location.href = '/admin/map';
+                                } else {
+                                    window.location.href = '/map';
+                                }
                             });
                         } else {
                             Swal.fire({
