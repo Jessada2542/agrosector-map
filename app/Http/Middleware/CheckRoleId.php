@@ -20,6 +20,6 @@ class CheckRoleId
             return $next($request);
         }
 
-        abort(403, 'Unauthorized | You do not have permission to access this resource.');
+        abort(403, 'You do not have permission to access this resource.');
     }
 }
