@@ -228,7 +228,7 @@ class SensorController extends Controller
             return response()->json(['status' => false, 'message' => 'Invalid sensor key'], 422);
         }
 
-        $sensorKey->update(['update_at' => Carbon::now()]);
+        $sensorKey->update(['updated_at' => Carbon::now()]);
 
         return response()->json(['status' => true, 'message' => 'Sensor connected successfully']);
     }
