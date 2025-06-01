@@ -79,7 +79,8 @@ class SensorController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'errors' => $validator->errors()->first()
+                'errors' => $validator->errors()->first(),
+                'data' => $request->all()
             ], 422);
         }
 
