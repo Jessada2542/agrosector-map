@@ -6,6 +6,7 @@ use App\Models\Sensor;
 use App\Models\SensorKey;
 use App\Models\SensorTest;
 use App\Models\UserUseSensor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -201,5 +202,30 @@ class SensorController extends Controller
             'status' => true,
             'data' => $sensorData,
         ]);
+    }
+
+    public function updateConnect(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'sensor_key' => 'required|exists:sensor_keys,key',
+        ])->setAttributeNames([
+            'sensor_key' => 'Sensor Key',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()->first()
+            ], 422);
+        }
+
+        $sensorKey = SensorKey::where('key', $request->input('sensor_key'))->first();
+        if (!$sensorKey) {
+            return response()->json(['status' => false, 'message' => 'Invalid sensor key'], 422);
+        }
+
+        $sensorKey->update(['update_at' => Carbon::now()]);
+
+        return response()->json(['status' => true, 'message' => 'Sensor connected successfully']);
     }
 }

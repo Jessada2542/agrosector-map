@@ -18,3 +18,4 @@ Route::get('/sensor/data/{id}', [SensorController::class, 'data'])->name('sensor
 
 Route::post('/sensor/test', [SensorController::class, 'test'])->name('sensor.test');
 Route::post('/sensor/store', [SensorController::class, 'store'])->name('sensor.store');
+Route::post('/board/update/connect', [SensorController::class, 'updateConnect'])->name('board.update.connect');
