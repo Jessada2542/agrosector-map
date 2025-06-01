@@ -21,7 +21,7 @@
             <i class="fa-solid fa-chart-line"></i> รายงาน
         </a>
         <a href="{{ route('user.index') }}" class="{{ (isset($sideAtive) && $sideAtive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-green-100 rounded">
-            <i class="fa-solid fa-user"></i> ผู้ใช้งานระบบ
+            <i class="fa-solid fa-users"></i> ผู้ใช้งานระบบ
         </a>
         <a href="{{ route('user.planting') }}" class="{{ (isset($sideAtive) && $sideAtive == 'planting') ? 'side-active' : '' }} px-4 py-2 hover:bg-green-100 rounded">
             <i class="fa-solid fa-seedling"></i> การปลูก
@@ -49,7 +49,7 @@
             <i class="fa-solid fa-chart-line"></i> รายงาน
         </a>
         <a href="{{ route('user.index') }}" class="hover:bg-green-100 px-4 py-2 rounded {{ (isset($sideAtive) && $sideAtive == 'user') ? 'side-active' : '' }}">
-            <i class="fa-solid fa-user"></i> ผู้ใช้งานระบบ
+            <i class="fa-solid fa-users"></i> ผู้ใช้งานระบบ
         </a>
         <a href="{{ route('user.planting') }}" class="hover:bg-green-100 px-4 py-2 rounded {{ (isset($sideAtive) && $sideAtive == 'planting') ? 'side-active' : '' }}">
             <i class="fa-solid fa-seedling"></i> การปลูก
