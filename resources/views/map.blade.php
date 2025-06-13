@@ -92,26 +92,29 @@
         }
 
         function openModal(id) {
+            // เปิด modal
             $('#modal-sensor').removeClass('hidden');
+
+            // เก็บ chart instances ไว้ที่ object
+            window.sensorCharts = window.sensorCharts || {};
 
             $.ajax({
                 url: `/api/sensor/data/${id}`,
                 type: 'GET',
                 dataType: 'json',
-                success: function(response) {
+                success: function (response) {
                     if (response.status) {
                         dayjs.extend(dayjs_plugin_utc);
                         dayjs.extend(dayjs_plugin_timezone);
 
                         const sensor = response.data;
-                        $('#sensor-name').text(sensor.name);
-                        $('#sensor-update').text(`อัพเดทล่าสุด: ${dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')}`);
-                        $('#sensor-n').text(`Nitrogen (N): ${sensor.latest_sensor.n} mg/kg`);
-                        $('#sensor-p').text(`Phosphorus (P): ${sensor.latest_sensor.p} mg/kg`);
-                        $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor.k} mg/kg`);
-                        $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph}`);
+                    $('#sensor-name').text(sensor.name);
+                    $('#sensor-update').text(`อัพเดทล่าสุด: ${dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')}`);
+                    $('#sensor-n').text(`Nitrogen (N): ${sensor.latest_sensor.n} mg/kg.`);
+                    $('#sensor-p').text(`Phosphorus (P): ${sensor.latest_sensor.p} mg/kg.`);
+                    $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor.k} mg/kg.`);
+                    $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph}`);
 
-                        // สร้างกราฟ
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
                         );
@@ -159,7 +162,6 @@
                             }
                         ];
 
-                        // แมป label ของกราฟแต่ละตัว
                         const typeLabelMap = {
                             n: 'Nitrogen (N)',
                             p: 'Phosphorus (P)',
@@ -167,38 +169,35 @@
                             ph: 'pH'
                         };
 
-                        // สร้างกราฟแต่ละตัว
                         ['n', 'p', 'k', 'ph'].forEach((type) => {
+                            // destroy chart ถ้ามีอยู่แล้ว
+                            if (window.sensorCharts[type]) {
+                                window.sensorCharts[type].destroy();
+                            }
                             const ctx = document.getElementById(`grap-sensor-${type}`).getContext('2d');
-                            new Chart(ctx, {
+                            window.sensorCharts[type] = new Chart(ctx, {
                                 type: 'line',
                                 data: {
-                                labels: labels,
-                                datasets: datasets.filter(ds => ds.label === typeLabelMap[type])
+                                    labels: labels,
+                                    datasets: datasets.filter(ds => ds.label === typeLabelMap[type]),
                                 },
                                 options: {
-                                responsive: true,
-                                plugins: {
-                                    legend: {
-                                    display: true,
-                                    position: 'top'
-                                    }
-                                },
-                                scales: {
-                                    y: {
-                                    beginAtZero: false
-                                    }
-                                }
+                                    responsive: true,
+                                    plugins: {
+                                        legend: { display: true, position:'top' }
+                                    },
+                                    scales: { y: { beginAtZero: false } }
                                 }
                             });
                         });
+
                     } else {
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     $('#sensor-content').html('เกิดข้อผิดพลาดในการโหลดข้อมูล');
-                    console.error('AJAX Error:', status, error);
+                    console.error('AJAX Error!', status, error);
                 }
             });
         }
