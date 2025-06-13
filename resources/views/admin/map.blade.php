@@ -94,6 +94,9 @@
         function openModal(id) {
             $('#modal-sensor').removeClass('hidden');
 
+            // เก็บ chart instances ไว้ที่ object
+            window.sensorCharts = window.sensorCharts || {};
+
             $.ajax({
                 url: `/api/sensor/data/${id}`,
                 type: 'GET',
@@ -111,7 +114,6 @@
                         $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor.k} mg/kg`);
                         $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph}`);
 
-                        // สร้างกราฟ
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
                         );
@@ -159,7 +161,6 @@
                             }
                         ];
 
-                        // แมป label ของกราฟแต่ละตัว
                         const typeLabelMap = {
                             n: 'Nitrogen (N)',
                             p: 'Phosphorus (P)',
@@ -167,28 +168,32 @@
                             ph: 'pH'
                         };
 
-                        // สร้างกราฟแต่ละตัว
                         ['n', 'p', 'k', 'ph'].forEach((type) => {
+                            // destroy chart ถ้ามีอยู่แล้ว
+                            if (window.sensorCharts[type]) {
+                                window.sensorCharts[type].destroy();
+                            }
+
                             const ctx = document.getElementById(`grap-sensor-${type}`).getContext('2d');
-                            new Chart(ctx, {
+                            window.sensorCharts[type] = new Chart(ctx, {
                                 type: 'line',
                                 data: {
-                                labels: labels,
-                                datasets: datasets.filter(ds => ds.label === typeLabelMap[type])
+                                    labels: labels,
+                                    datasets: datasets.filter(ds => ds.label === typeLabelMap[type])
                                 },
                                 options: {
-                                responsive: true,
-                                plugins: {
-                                    legend: {
-                                    display: true,
-                                    position: 'top'
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            display: true,
+                                            position: 'top'
+                                        }
+                                    },
+                                    scales: {
+                                        y: {
+                                            beginAtZero: false
+                                        }
                                     }
-                                },
-                                scales: {
-                                    y: {
-                                    beginAtZero: false
-                                    }
-                                }
                                 }
                             });
                         });
