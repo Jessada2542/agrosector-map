@@ -195,7 +195,10 @@ class SensorController extends Controller
             'userSensor',
             'latestSensor',
             'sensors' => function ($query) {
-                $query->where('created_at', '>=', now()->subDays(7));
+                $query->whereBetween('created_at', [
+                    now()->subDays(7)->startOfDay(),
+                    now()->endOfDay(),
+                ]);
             }
         ])->whereId($id)->first();
 
