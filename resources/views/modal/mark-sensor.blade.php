@@ -51,25 +51,20 @@
                         </thead>
                         <tbody>
                         <tr class="bg-white text-gray-700">
-                            <td class="px-4 py-2">14.00</td>
-                            <td class="px-4 py-2">79.00</td>
-                            <td class="px-4 py-2">72.00</td>
-                            <td class="px-4 py-2">756.00</td>
-                            <td class="px-4 py-2">02/05/2568</td>
+                            <td class="px-4 py-2" id="sensor-n">14.00</td>
+                            <td class="px-4 py-2" d="sensor-p">79.00</td>
+                            <td class="px-4 py-2" id="sensor-k">72.00</td>
+                            <td class="px-4 py-2" id="sensor-ph">756.00</td>
+                            <td class="px-4 py-2" id="sensor-update">02/05/2568</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
+                <canvas id="grap-sensor-n" class="lineChart"></canvas>
+                <canvas id="grap-sensor-p" class="lineChart"></canvas>
+                <canvas id="grap-sensor-k" class="lineChart"></canvas>
+                <canvas id="grap-sensor-ph" class="lineChart"></canvas>
             </div>
-            <span id="sensor-update" class="text-sm text-gray-500">อัพเดทล่าสุด เวลา</span>
-            <p class="text-gray-700" id="sensor-n">Nitrogen (N)</p>
-            <p class="text-gray-700" id="sensor-p">Phosphorus (P)</p>
-            <p class="text-gray-700" id="sensor-k">Potassium (K)</p>
-            <p class="text-gray-700" id="sensor-ph">pH</p>
-            <canvas id="grap-sensor-n" class="lineChart"></canvas>
-            <canvas id="grap-sensor-p" class="lineChart"></canvas>
-            <canvas id="grap-sensor-k" class="lineChart"></canvas>
-            <canvas id="grap-sensor-ph" class="lineChart"></canvas>
         </div>
     </div>
 </div>
