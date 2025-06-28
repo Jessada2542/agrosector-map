@@ -38,7 +38,7 @@
                 <span id="sensor-detail" class="text-gray-600">Detail</span>
             </div>
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto mb-3">
                     <table class="min-w-full text-center border border-collapse">
                         <thead>
                         <tr class="bg-gradient-to-r from-green-400 via-cyan-500 to-blue-500 text-white">
@@ -52,7 +52,7 @@
                         <tbody>
                         <tr class="bg-white text-gray-700">
                             <td class="px-4 py-2" id="sensor-n">14.00</td>
-                            <td class="px-4 py-2" d="sensor-p">79.00</td>
+                            <td class="px-4 py-2" id="sensor-p">79.00</td>
                             <td class="px-4 py-2" id="sensor-k">72.00</td>
                             <td class="px-4 py-2" id="sensor-ph">756.00</td>
                             <td class="px-4 py-2" id="sensor-update">02/05/2568</td>
@@ -60,10 +60,10 @@
                         </tbody>
                     </table>
                 </div>
-                <canvas id="grap-sensor-n" class="lineChart"></canvas>
-                <canvas id="grap-sensor-p" class="lineChart"></canvas>
-                <canvas id="grap-sensor-k" class="lineChart"></canvas>
-                <canvas id="grap-sensor-ph" class="lineChart"></canvas>
+                <canvas id="grap-sensor-n" class="lineChart mb-3"></canvas>
+                <canvas id="grap-sensor-p" class="lineChart mb-3"></canvas>
+                <canvas id="grap-sensor-k" class="lineChart mb-3"></canvas>
+                <canvas id="grap-sensor-ph" class="lineChart mb-3"></canvas>
             </div>
         </div>
     </div>
