@@ -131,11 +131,11 @@
 
                         const sensor = response.data;
                         $('#sensor-name').text(sensor.name);
-                        $('#sensor-update').text(`อัพเดทล่าสุด: ${sensor.latest_sensor.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm') : ''}`);
-                        $('#sensor-n').text(`Nitrogen (N): ${sensor.latest_sensor.n ? sensor.latest_sensor.n : ''} mg/kg.`);
-                        $('#sensor-p').text(`Phosphorus (P): ${sensor.latest_sensor.p ? sensor.latest_sensor.p : ''} mg/kg.`);
-                        $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor.k ? sensor.latest_sensor.k : ''} mg/kg.`);
-                        $('#sensor-ph').text(`pH: ${sensor.latest_sensor.ph ? sensor.latest_sensor.ph : ''}`);
+                        $('#sensor-update').text(`อัพเดทล่าสุด: ${sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm') : ''}`);
+                        $('#sensor-n').text(`Nitrogen (N): ${sensor.latest_sensor?.n ? sensor.latest_sensor.n : ''} mg/kg.`);
+                        $('#sensor-p').text(`Phosphorus (P): ${sensor.latest_sensor?.p ? sensor.latest_sensor.p : ''} mg/kg.`);
+                        $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor?.k ? sensor.latest_sensor.k : ''} mg/kg.`);
+                        $('#sensor-ph').text(`pH: ${sensor.latest_sensor?.ph ? sensor.latest_sensor.ph : ''}`);
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
