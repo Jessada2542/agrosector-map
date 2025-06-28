@@ -125,6 +125,8 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
+                    console.log(response);
+
                     if (response.status) {
                         dayjs.extend(dayjs_plugin_utc);
                         dayjs.extend(dayjs_plugin_timezone);

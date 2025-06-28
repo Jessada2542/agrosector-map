@@ -42,20 +42,20 @@
                     <table class="min-w-full text-center border border-collapse">
                         <thead>
                         <tr class="bg-gradient-to-r from-green-400 via-cyan-500 to-blue-500 text-white">
-                            <th class="px-4 py-2 whitespace-nowrap">N mg/kg</th>
-                            <th class="px-4 py-2 whitespace-nowrap">P mg/kg</th>
-                            <th class="px-4 py-2 whitespace-nowrap">K mg/kg</th>
-                            <th class="px-4 py-2 whitespace-nowrap">pH</th>
-                            <th class="px-4 py-2 whitespace-nowrap">วัน/เดือน/ปี</th>
+                            <th class="py-2 whitespace-nowrap">N mg/kg</th>
+                            <th class="py-2 whitespace-nowrap">P mg/kg</th>
+                            <th class="py-2 whitespace-nowrap">K mg/kg</th>
+                            <th class="py-2 whitespace-nowrap">pH</th>
+                            <th class="py-2 whitespace-nowrap">วัน/เดือน/ปี</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr class="bg-white text-gray-700">
-                            <td class="px-4 py-2 whitespace-nowrap" id="sensor-n">14.00</td>
-                            <td class="px-4 py-2 whitespace-nowrap" id="sensor-p">79.00</td>
-                            <td class="px-4 py-2 whitespace-nowrap" id="sensor-k">72.00</td>
-                            <td class="px-4 py-2 whitespace-nowrap" id="sensor-ph">756.00</td>
-                            <td class="px-4 py-2 whitespace-nowrap" id="sensor-update">02/05/2568</td>
+                            <td class="py-2 whitespace-nowrap" id="sensor-n">14.00</td>
+                            <td class="py-2 whitespace-nowrap" id="sensor-p">79.00</td>
+                            <td class="py-2 whitespace-nowrap" id="sensor-k">72.00</td>
+                            <td class="py-2 whitespace-nowrap" id="sensor-ph">756.00</td>
+                            <td class="py-2 whitespace-nowrap" id="sensor-update">02/05/2568</td>
                         </tr>
                         </tbody>
                     </table>
