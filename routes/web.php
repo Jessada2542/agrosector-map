@@ -11,6 +11,9 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 
 /* Route::post('/geocode/import', [HomeController::class, 'import'])->name('geocode.import'); */
+Route::get('/now', function () {
+    return now()->toDateTimeString(); // หรือ Carbon::now()
+});
 
 Route::middleware('loggedin')->group(function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
