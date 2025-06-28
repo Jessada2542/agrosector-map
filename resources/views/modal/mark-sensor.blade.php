@@ -42,10 +42,10 @@
                     <table class="min-w-full text-center border border-collapse">
                         <thead>
                         <tr class="bg-gradient-to-r from-green-400 via-cyan-500 to-blue-500 text-white">
-                            <th class="px-4 py-2">N kg/L</th>
-                            <th class="px-4 py-2">P kg/L</th>
-                            <th class="px-4 py-2">K kg/L</th>
-                            <th class="px-4 py-2">CO₂ ppm</th>
+                            <th class="px-4 py-2">N mg/kg</th>
+                            <th class="px-4 py-2">P mg/kg</th>
+                            <th class="px-4 py-2">K mg/kg</th>
+                            <th class="px-4 py-2">PH</th>
                             <th class="px-4 py-2">วัน/เดือน/ปี</th>
                         </tr>
                         </thead>
