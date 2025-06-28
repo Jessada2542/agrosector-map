@@ -210,8 +210,7 @@ class SensorController extends Controller
         return response()->json([
             'status' => true,
             'data' => $sensorData,
-            'datetime' => Carbon::now('Asia/Bangkok')->toDateTimeString(),
-            'subday' => Carbon::now('Asia/Bangkok')->subDays(7)->toDateTimeString()
+            'datetime' => Carbon::now('Asia/Bangkok')->toDateTimeString()
         ]);
     }
 
