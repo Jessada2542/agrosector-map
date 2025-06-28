@@ -138,7 +138,7 @@
                         const district = sensor.user_sensor?.district ? sensor.user_sensor.district.district_name_th : '';
                         const province = sensor.user_sensor?.province ? sensor.user_sensor.province.province_name_th : '';
                         const province_code = sensor.user_sensor?.province ? sensor.user_sensor.province.province_code : '';
-                        $('#sensor-address').text(subdistrict + ' ' + district + ' ' + province + ' ' + province_code + '000');
+                        $('#sensor-address').text('ตำบล' + subdistrict + ' อำเภอ' + district + ' จังหวัด' + province + ' ' + province_code + '000');
                         $('#sensor-name').text(sensor.name ? sensor.name : '');
                         $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
