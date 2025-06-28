@@ -193,6 +193,9 @@ class SensorController extends Controller
         $sensorData = UserUseSensor::with([
             'user',
             'userSensor',
+            'userSensor.province',
+            'userSensor.district',
+            'userSensor.subdistrict',
             'latestSensor',
             'sensors' => function ($query) {
                 $query->whereBetween('created_at', [
