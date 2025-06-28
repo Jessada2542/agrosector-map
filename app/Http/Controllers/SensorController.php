@@ -199,8 +199,8 @@ class SensorController extends Controller
             'latestSensor',
             'sensors' => function ($query) {
                 $query->whereBetween('created_at', [
-                    Carbon::now('Asia/Bangkok')->subDays(7)->startOfDay(),
-                    Carbon::now('Asia/Bangkok')->endOfDay()
+                    Carbon::now('Asia/Bangkok')->subDays(7)->startOfDay()->toDateTimeString(),
+                    Carbon::now('Asia/Bangkok')->endOfDay()->toDateTimeString()
                 ]);
             }
         ])->whereId($id)->first();
@@ -212,7 +212,7 @@ class SensorController extends Controller
         return response()->json([
             'status' => true,
             'data' => $sensorData,
-            'datetime' => Carbon::now('Asia/Bangkok')
+            'datetime' => Carbon::now('Asia/Bangkok')->toDateTimeString()
         ]);
     }
 
