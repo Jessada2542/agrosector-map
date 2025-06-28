@@ -9,7 +9,7 @@
             </button>
         </div>
         <div class="p-6 overflow-y-auto" id="sensor-content">
-            <div class="card">
+            <div class="max-w-sm rounded-2xl overflow-hidden shadow-lg bg-white">
                 <strong id="sensor-name" class="text-xl">ชื่อ sensor</strong>
             </div>
             <br>
