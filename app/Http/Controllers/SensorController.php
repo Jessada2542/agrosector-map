@@ -209,7 +209,8 @@ class SensorController extends Controller
         return response()->json([
             'status' => true,
             'data' => $sensorData,
-            'datetime' => now()
+            'datetime' => now(),
+            'carbon' => Carbon::now('Asia/Bangkok')
         ]);
     }
 
