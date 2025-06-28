@@ -1,7 +1,7 @@
 <!-- Modal แบบชิดขวา -->
 <div id="modal-sensor" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end hidden">
     <div class="relative bg-gray-200 w-[500px] h-full shadow-lg flex flex-col">
-        <div class="flex items-center justify-between p-6 border-b">
+        <div class="flex items-center justify-between p-6">
             <h2 class="text-xl font-semibold"><i class="fa-solid fa-circle-info"></i> ข้อมูลเกษตรกรรม</h2>
             <button onclick="document.getElementById('modal-sensor').classList.add('hidden')"
                 class="text-gray-500 hover:text-red-600 text-2xl font-bold">
@@ -9,9 +9,9 @@
             </button>
         </div>
         <div class="p-6 overflow-y-auto" id="sensor-content">
-            <div class="max-w-sm rounded-md overflow-hidden shadow-lg bg-white p-3">
-                <p>ชื่อผู้ใช้</p>
-                <strong id="sensor-name">ชื่อ sensor</strong>
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                <p class="text-green-100">ชื่อผู้ใช้</p>
+                <strong id="sensor-name" class="text-gray-700">ชื่อ sensor</strong>
             </div>
             <br>
             <span id="sensor-update" class="text-sm text-gray-500">อัพเดทล่าสุด เวลา</span>
