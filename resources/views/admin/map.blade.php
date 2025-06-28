@@ -131,7 +131,7 @@
 
                         const sensor = response.data;
                         $('#sensor-name').text(sensor.name);
-                        $('#sensor-update').text(`${sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm') : ''}`);
+                        $('#sensor-update').text(`${sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY') : ''}`);
                         $('#sensor-n').text(`${sensor.latest_sensor?.n ? sensor.latest_sensor.n : ''}`);
                         $('#sensor-p').text(`${sensor.latest_sensor?.p ? sensor.latest_sensor.p : ''}`);
                         $('#sensor-k').text(`${sensor.latest_sensor?.k ? sensor.latest_sensor.k : ''}`);
