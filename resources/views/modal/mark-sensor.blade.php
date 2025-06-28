@@ -9,15 +9,16 @@
             </button>
         </div>
         <div class="p-6 overflow-y-auto" id="sensor-content">
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
-                <p class="text-green-900">ชื่อผู้ใช้</p>
-                <span id="sensor-name" class="text-gray-600">ชื่อ sensor</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                    <p class="text-green-900">ชื่อผู้ใช้</p>
+                    <span id="sensor-name" class="text-gray-600">ชื่อ sensor</span>
+                </div>
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                    <p class="text-green-900">พิกัด</p>
+                    <span id="sensor-position" class="text-gray-600">ตำแหน่ง</span>
+                </div>
             </div>
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
-                <p class="text-green-900">พิกัด</p>
-                <span id="sensor-position" class="text-gray-600">ตำแหน่ง</span>
-            </div>
-            <br>
             <span id="sensor-update" class="text-sm text-gray-500">อัพเดทล่าสุด เวลา</span>
             <p class="text-gray-700" id="sensor-n">Nitrogen (N)</p>
             <p class="text-gray-700" id="sensor-p">Phosphorus (P)</p>
