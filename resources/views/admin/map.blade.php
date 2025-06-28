@@ -132,12 +132,15 @@
                         dayjs.extend(dayjs_plugin_timezone);
 
                         const sensor = response.data;
-                        $('#sensor-name').text(sensor.name);
-                        $('#sensor-update').text(`${sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY') : ''}`);
-                        $('#sensor-n').text(`${sensor.latest_sensor?.n ? sensor.latest_sensor.n : ''}`);
-                        $('#sensor-p').text(`${sensor.latest_sensor?.p ? sensor.latest_sensor.p : ''}`);
-                        $('#sensor-k').text(`${sensor.latest_sensor?.k ? sensor.latest_sensor.k : ''}`);
-                        $('#sensor-ph').text(`${sensor.latest_sensor?.ph ? sensor.latest_sensor.ph : ''}`);
+                        $('#sensor-name').text(sensor.name ? sensor.name : '');
+                        $('#sensor-position').text(sensor.user_sensor ? sensor.user_sensor.lat + ', ' + sensor.user_sensor.lon : '');
+                        $('#sensor-address').text();
+                        $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
+                        $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
+                        $('#sensor-n').text(sensor.latest_sensor?.n ? sensor.latest_sensor.n : '');
+                        $('#sensor-p').text(sensor.latest_sensor?.p ? sensor.latest_sensor.p : '');
+                        $('#sensor-k').text(sensor.latest_sensor?.k ? sensor.latest_sensor.k : '');
+                        $('#sensor-ph').text(sensor.latest_sensor?.ph ? sensor.latest_sensor.ph : '');
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
