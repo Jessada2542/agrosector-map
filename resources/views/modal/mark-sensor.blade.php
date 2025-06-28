@@ -9,7 +9,7 @@
             </button>
         </div>
         <div class="p-6 overflow-y-auto" id="sensor-content">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
                     <p class="text-green-900">ชื่อผู้ใช้</p>
                     <span id="user-name" class="text-gray-600">ชื่อ</span>
@@ -19,11 +19,11 @@
                     <span id="sensor-position" class="text-gray-600">ตำแหน่ง</span>
                 </div>
             </div>
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                 <p class="text-green-900">สถานที่</p>
                 <span id="sensor-address" class="text-gray-600">ที่อยู่</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
                     <p class="text-green-900">พืชที่ปลูก</p>
                     <span id="sensor-name" class="text-gray-600">ชื่อ</span>
@@ -33,9 +33,33 @@
                     <span id="sensor-date" class="text-gray-600">วันที่</span>
                 </div>
             </div>
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                 <p class="text-green-900">รายละเอียด</p>
                 <span id="sensor-detail" class="text-gray-600">Detail</span>
+            </div>
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-center border border-collapse">
+                        <thead>
+                        <tr class="bg-gradient-to-r from-green-400 via-cyan-500 to-blue-500 text-white">
+                            <th class="px-4 py-2">N kg/L</th>
+                            <th class="px-4 py-2">P kg/L</th>
+                            <th class="px-4 py-2">K kg/L</th>
+                            <th class="px-4 py-2">CO₂ ppm</th>
+                            <th class="px-4 py-2">วัน/เดือน/ปี</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="bg-white text-gray-700">
+                            <td class="px-4 py-2">14.00</td>
+                            <td class="px-4 py-2">79.00</td>
+                            <td class="px-4 py-2">72.00</td>
+                            <td class="px-4 py-2">756.00</td>
+                            <td class="px-4 py-2">02/05/2568</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <span id="sensor-update" class="text-sm text-gray-500">อัพเดทล่าสุด เวลา</span>
             <p class="text-gray-700" id="sensor-n">Nitrogen (N)</p>
