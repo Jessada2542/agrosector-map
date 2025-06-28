@@ -2,7 +2,7 @@
 <div id="modal-sensor" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end hidden">
     <div class="relative bg-white w-[400px] h-full shadow-lg flex flex-col">
         <div class="flex items-center justify-between p-6 border-b">
-            <h2 class="text-xl font-semibold">สถิติ</h2>
+            <h2 class="text-xl font-semibold"><i class="fa-solid fa-circle-info"></i> ข้อมูลเกษตรกรรม</h2>
             <button onclick="document.getElementById('modal-sensor').classList.add('hidden')"
                 class="text-gray-500 hover:text-red-600 text-2xl font-bold">
                 &times;
