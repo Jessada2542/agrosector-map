@@ -141,6 +141,7 @@
                         $('#sensor-address').text('ตำบล' + subdistrict + ' อำเภอ' + district + ' จังหวัด' + province + ' ' + province_code + '000');
                         $('#sensor-name').text(sensor.name ? sensor.name : '');
                         $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
+                        $('#sensor-detail').text(sensor.detail ? sensor.detail : '');
                         $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-n').text(sensor.latest_sensor?.n ? sensor.latest_sensor.n : '');
                         $('#sensor-p').text(sensor.latest_sensor?.p ? sensor.latest_sensor.p : '');
