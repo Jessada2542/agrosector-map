@@ -38,7 +38,7 @@
                 <span id="sensor-detail" class="text-gray-600">Detail</span>
             </div>
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <div class="overflow-x-auto mb-3">
+                <div class="overflow-x-auto">
                     <table class="min-w-full text-center border border-collapse">
                         <thead>
                         <tr class="bg-gradient-to-r from-green-400 via-cyan-500 to-blue-500 text-white">
@@ -60,11 +60,15 @@
                         </tbody>
                     </table>
                 </div>
-                <canvas id="grap-sensor-n" class="lineChart mb-3"></canvas>
-                <canvas id="grap-sensor-p" class="lineChart mb-3"></canvas>
-                <canvas id="grap-sensor-k" class="lineChart mb-3"></canvas>
-                <canvas id="grap-sensor-ph" class="lineChart mb-3"></canvas>
             </div>
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
+                <p class="text-green-900">ระดับไนโตรเจน (N)</p>
+                <canvas id="grap-sensor-n" class="lineChart"></canvas>
+            </div>
+
+                <canvas id="grap-sensor-p" class="lineChart"></canvas>
+                <canvas id="grap-sensor-k" class="lineChart"></canvas>
+                <canvas id="grap-sensor-ph" class="lineChart"></canvas>
         </div>
     </div>
 </div>
