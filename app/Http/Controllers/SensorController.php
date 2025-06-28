@@ -198,7 +198,7 @@ class SensorController extends Controller
             'userSensor.subdistrict',
             'latestSensor',
             'sensors' => function ($query) {
-                $query->whereBetween('created_at', '>=', Carbon::now('Asia/Bangkok')->subDays(7)->toDateTimeString());
+                $query->where('created_at', '>=', Carbon::now('Asia/Bangkok')->subDays(7)->toDateTimeString());
             }
         ])->whereId($id)->first();
 
