@@ -191,6 +191,7 @@ class SensorController extends Controller
     public function data($id)
     {
         $sensorData = UserUseSensor::with([
+            'user',
             'userSensor',
             'latestSensor',
             'sensors' => function ($query) {
