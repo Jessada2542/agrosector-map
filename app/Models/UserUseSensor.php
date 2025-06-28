@@ -28,7 +28,7 @@ class UserUseSensor extends Model
 
     public function sensors()
     {
-        return $this->hasMany(Sensor::class, 'use_user_sensor_id', 'user_sensors_id');
+        return $this->hasMany(Sensor::class, 'use_user_sensor_id', 'id');
     }
 
     public function latestSensor()
