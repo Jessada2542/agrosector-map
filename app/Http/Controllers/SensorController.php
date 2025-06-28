@@ -96,6 +96,7 @@ class SensorController extends Controller
 
         $useUserSensor = UserUseSensor::where('user_id', $request->input('user_id'))
             ->where('user_sensors_id', $sensorKey->id)
+            ->where('status', 1)
             ->first();
 
         if (!$useUserSensor) {
