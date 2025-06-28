@@ -134,7 +134,7 @@
                         const sensor = response.data;
                         $('#user-name').text(sensor.user ? sensor.user.name : '');
                         $('#sensor-position').text(sensor.user_sensor ? sensor.user_sensor.lat + ', ' + sensor.user_sensor.lon : '');
-                        const subdistrict = sensor.user_sensor?.subdistrict ? sensor.user_sensor.province.subdistrict_name_th : '';
+                        const subdistrict = sensor.user_sensor?.subdistrict ? sensor.user_sensor.subdistrict.subdistrict_name_th : '';
                         const district = sensor.user_sensor?.district ? sensor.user_sensor.district.district_name_th : '';
                         const province = sensor.user_sensor?.province ? sensor.user_sensor.province.province_name_th : '';
                         const province_code = sensor.user_sensor?.province ? sensor.user_sensor.province.province_code : '';
