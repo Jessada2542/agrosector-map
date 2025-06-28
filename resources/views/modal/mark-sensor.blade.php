@@ -45,7 +45,7 @@
                             <th class="px-4 py-2">N mg/kg</th>
                             <th class="px-4 py-2">P mg/kg</th>
                             <th class="px-4 py-2">K mg/kg</th>
-                            <th class="px-4 py-2">PH</th>
+                            <th class="px-4 py-2">pH</th>
                             <th class="px-4 py-2">วัน/เดือน/ปี</th>
                         </tr>
                         </thead>
@@ -74,7 +74,7 @@
                 <canvas id="grap-sensor-k" class="lineChart"></canvas>
             </div>
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <p>ระดับกรดด่าง (PH)</p>
+                <p>ระดับกรดด่าง (pH)</p>
                 <canvas id="grap-sensor-ph" class="lineChart"></canvas>
             </div>
         </div>
