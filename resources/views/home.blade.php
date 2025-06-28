@@ -124,12 +124,21 @@
                         dayjs.extend(dayjs_plugin_timezone);
 
                         const sensor = response.data;
-                        $('#sensor-name').text(sensor.name);
-                        $('#sensor-update').text(`อัพเดทล่าสุด: ${sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm') : ''}`);
-                        $('#sensor-n').text(`Nitrogen (N): ${sensor.latest_sensor?.n ? sensor.latest_sensor.n : ''} mg/kg.`);
-                        $('#sensor-p').text(`Phosphorus (P): ${sensor.latest_sensor?.p ? sensor.latest_sensor.p : ''} mg/kg.`);
-                        $('#sensor-k').text(`Potassium (K): ${sensor.latest_sensor?.k ? sensor.latest_sensor.k : ''} mg/kg.`);
-                        $('#sensor-ph').text(`pH: ${sensor.latest_sensor?.ph ? sensor.latest_sensor.ph : ''}`);
+                        $('#user-name').text(sensor.user ? sensor.user.name : '');
+                        $('#sensor-position').text(sensor.user_sensor ? sensor.user_sensor.lat + ', ' + sensor.user_sensor.lon : '');
+                        const subdistrict = sensor.user_sensor?.subdistrict ? sensor.user_sensor.subdistrict.subdistrict_name_th : '';
+                        const district = sensor.user_sensor?.district ? sensor.user_sensor.district.district_name_th : '';
+                        const province = sensor.user_sensor?.province ? sensor.user_sensor.province.province_name_th : '';
+                        const province_code = sensor.user_sensor?.province ? sensor.user_sensor.province.province_code : '';
+                        $('#sensor-address').text('ตำบล' + subdistrict + ' อำเภอ' + district + ' จังหวัด' + province + ' ' + province_code + '000');
+                        $('#sensor-name').text(sensor.name ? sensor.name : '');
+                        $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
+                        $('#sensor-detail').text(sensor.detail ? sensor.detail : '');
+                        $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
+                        $('#sensor-n').text(sensor.latest_sensor?.n ? sensor.latest_sensor.n : '');
+                        $('#sensor-p').text(sensor.latest_sensor?.p ? sensor.latest_sensor.p : '');
+                        $('#sensor-k').text(sensor.latest_sensor?.k ? sensor.latest_sensor.k : '');
+                        $('#sensor-ph').text(sensor.latest_sensor?.ph ? sensor.latest_sensor.ph : '');
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
