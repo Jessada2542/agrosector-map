@@ -62,13 +62,21 @@
                 </div>
             </div>
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <p class="text-green-900">ระดับไนโตรเจน (N)</p>
+                <p>ระดับไนโตรเจน (N)</p>
                 <canvas id="grap-sensor-n" class="lineChart"></canvas>
             </div>
-
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
+                <p>ระดับฟอสฟอรัส (P)</p>
                 <canvas id="grap-sensor-p" class="lineChart"></canvas>
+            </div>
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
+                <p>ระดับโพแทสเซียม (K)</p>
                 <canvas id="grap-sensor-k" class="lineChart"></canvas>
+            </div>
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
+                <p>ระดับกรดด่าง (PH)</p>
                 <canvas id="grap-sensor-ph" class="lineChart"></canvas>
+            </div>
         </div>
     </div>
 </div>
