@@ -132,9 +132,10 @@
                         dayjs.extend(dayjs_plugin_timezone);
 
                         const sensor = response.data;
-                        $('#sensor-name').text(sensor.name ? sensor.name : '');
+                        $('#user-name').text(sensor.user ? sensor.user.name : '');
                         $('#sensor-position').text(sensor.user_sensor ? sensor.user_sensor.lat + ', ' + sensor.user_sensor.lon : '');
                         $('#sensor-address').text();
+                        $('#sensor-name').text(sensor.name ? sensor.name : '');
                         $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-n').text(sensor.latest_sensor?.n ? sensor.latest_sensor.n : '');
