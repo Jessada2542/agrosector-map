@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\GeoCode;
 use App\Models\UserUseSensor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -52,10 +53,10 @@ class MapController extends Controller
                     return $row->latest_sensor ? $row->latest_sensor->created_at->format('d-m-Y H:i') : '';
                 })
                 ->editColumn('date_start', function ($row) {
-                    return $row->start_date->format('d-m-Y');
+                    return $row->start_date ? Carbon::parse($row->start_date)->format('d-m-Y') : '';
                 })
                 ->editColumn('date_end', function ($row) {
-                    return $row->end_date ? $row->end_date->format('d-m-Y') : '';
+                    return $row->end_date ? Carbon::parse($row->end_date)->format('d-m-Y') : '';
                 })
                 ->rawColumns(['user_name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'])
                 ->make(true);
