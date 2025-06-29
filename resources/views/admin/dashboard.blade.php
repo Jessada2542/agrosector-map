@@ -55,5 +55,11 @@
             ],
             reponsive: true,
         });
+
+        $(document).on('click', '.btn-info', function() {
+            const id = $(this).data('id');
+            console.log(id);
+
+        });
     </script>
 @endsection
