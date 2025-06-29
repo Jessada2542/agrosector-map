@@ -90,7 +90,9 @@ class MapController extends Controller
             'userSensor.district',
             'userSensor.subdistrict',
             'latestSensor'
-            )->first();
+            )
+            ->whereId($request->id)
+            ->first();
 
         $subdistrict = $data->userSensor->subdistrict->subdistrict_name_th ?? '';
         $district = $data->userSensor->district->district_name_th ?? '';
