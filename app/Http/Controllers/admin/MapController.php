@@ -83,8 +83,31 @@ class MapController extends Controller
             return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
         }
 
-        $data = UserUseSensor::with('user', 'latestSensor')->first();
+        $data = UserUseSensor::with(
+            'user',
+            'userSensor',
+            'userSensor.province',
+            'userSensor.district',
+            'userSensor.subdistrict',
+            'latestSensor'
+            )->first();
 
-        return response()->json(['status' => true, 'data' => $data]);
+        return response()->json([
+            'status' => true,
+            'data' => $data->map(function ($item) {
+                return [
+                    'user_name' => $item->user->name,
+                    'name' => $item->name,
+                    'position' => $item->userSensor ? $item->userSensor->lat . ', ' . $item->userSensor->lon : '',
+                    'address' => $item->userSensor->province,
+                    'n' => $item->latestSensor ? $item->latestSensor->n : '',
+                    'p' => $item->latestSensor ? $item->latestSensor->p : '',
+                    'k' => $item->latestSensor ? $item->latestSensor->k : '',
+                    'ph' => $item->latestSensor ? $item->latestSensor->ph : '',
+                    'datetime' => $item->latestSensor ? $item->latestSensor->created_at->format('d-m-Y H:i') : '',
+                    'date_start' => $item->start_date ? Carbon::parse($item->start_date)->format('d-m-Y') : '',
+                    'date_end' => $item->end_date ? Carbon::parse($item->end_date)->format('d-m-Y') : ''
+                ];
+            })]);
     }
 }

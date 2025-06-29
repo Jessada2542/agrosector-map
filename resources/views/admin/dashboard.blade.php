@@ -36,6 +36,9 @@
             <div class="space-y-3 text-gray-800">
                 <div><span class="font-semibold">ชื่อผู้ใช้:</span> <span id="user_name"></span></div>
                 <div><span class="font-semibold">ชื่อ:</span> <span id="name"></span></div>
+                <div><span class="font-semibold">พิกัด:</span> <span id="position"></span></div>
+                <div><span class="font-semibold">สถานที่:</span> <span id="address"></span></div>
+                <div><span class="font-semibold">รายละเอียด:</span> <span id="detail"></span></div>
                 <div><span class="font-semibold">N:</span> <span id="n"></span></div>
                 <div><span class="font-semibold">P:</span> <span id="p"></span></div>
                 <div><span class="font-semibold">K:</span> <span id="k"></span></div>
@@ -51,7 +54,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
@@ -93,7 +95,7 @@
                     console.log(response);
 
                     if (response.status) {
-                        const fields = ['user_name', 'name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'];
+                        const fields = ['user_name', 'name', 'position', 'address', 'detail', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'];
 
                         fields.forEach(fieldId => {
                             const el = document.getElementById(fieldId);
