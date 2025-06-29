@@ -60,7 +60,10 @@ Route::middleware('auth')->group(function() {
     Route::get('/sensor/generate', [SensorController::class, 'generateSensor'])->name('sensor.generate');
 
     Route::middleware(['check.role'])->prefix('/admin')->group(function () {
-        Route::get('/map', [AdminMapController::class, 'index'])->name('admin.index');
+        Route::controller(AdminMapController::class)->group(function() {
+            Route::get('/map', 'index')->name('admin.index');
+            Route::match(['get', 'post'], '/dashboard', 'dashboard')->name('admin.dashboard');
+        });
     });
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
