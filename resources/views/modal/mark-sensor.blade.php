@@ -1,6 +1,6 @@
 <!-- Modal แบบชิดขวา -->
 <div id="modal-sensor" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end hidden">
-    <div class="relative bg-gray-200 w-[500px] h-full shadow-lg flex flex-col">
+    <div class="relative bg-gray-200 w-[600px] h-full shadow-lg flex flex-col">
         <div class="flex items-center justify-between p-6">
             <h2 class="text-xl font-semibold"><i class="fa-solid fa-circle-info"></i> ข้อมูลเกษตรกรรม</h2>
             <button onclick="document.getElementById('modal-sensor').classList.add('hidden')"
@@ -52,7 +52,7 @@
                     <p id="sensor-datetime" class="text-lg font-medium text-gray-800">02/05/2568 14:35</p>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-center">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-center">
                     <div>
                         <p class="text-gray-500 text-sm">N (mg/kg)</p>
                         <p id="sensor-n" class="text-xl font-semibold text-green-600">14.00</p>

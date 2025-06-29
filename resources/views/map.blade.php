@@ -108,7 +108,7 @@
                         dayjs.extend(dayjs_plugin_timezone);
 
                         const sensor = response.data;
-                       $('#user-name').text(sensor.user ? sensor.user.name : '');
+                        $('#user-name').text(sensor.user ? sensor.user.name : '');
                         $('#sensor-position').text(sensor.user_sensor ? sensor.user_sensor.lat + ', ' + sensor.user_sensor.lon : '');
                         const subdistrict = sensor.user_sensor?.subdistrict ? sensor.user_sensor.subdistrict.subdistrict_name_th : '';
                         const district = sensor.user_sensor?.district ? sensor.user_sensor.district.district_name_th : '';
@@ -123,6 +123,7 @@
                         $('#sensor-p').text(sensor.latest_sensor ? sensor.latest_sensor.p : '');
                         $('#sensor-k').text(sensor.latest_sensor ? sensor.latest_sensor.k : '');
                         $('#sensor-ph').text(sensor.latest_sensor ? sensor.latest_sensor.ph : '');
+                        $('#sensor-humidity').text(sensor.latest_sensor ? sensor.latest_sensor.humidity : '');
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
@@ -168,6 +169,16 @@
                                 tension: 0.4,
                                 fill: true,
                                 pointRadius: 4
+                            },
+                            {
+                                label: 'Humidity',
+                                data: sensor.sensors.map(d => d.humidity),
+                                borderColor: 'rgba(0, 191, 255, 1)',
+                                backgroundColor: 'rgba(0, 191, 255, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
                             }
                         ];
 
@@ -175,10 +186,11 @@
                             n: 'Nitrogen (N)',
                             p: 'Phosphorus (P)',
                             k: 'Potassium (K)',
-                            ph: 'pH'
+                            ph: 'pH',
+                            humidity: 'Humidity'
                         };
 
-                        ['n', 'p', 'k', 'ph'].forEach((type) => {
+                        ['n', 'p', 'k', 'ph', 'humidity'].forEach((type) => {
                             // destroy chart ถ้ามีอยู่แล้ว
                             if (window.sensorCharts[type]) {
                                 window.sensorCharts[type].destroy();
