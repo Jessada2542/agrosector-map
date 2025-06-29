@@ -315,7 +315,8 @@
                             type: 'PUT',
                             data: {
                                 _token: '{{ csrf_token() }}',
-                                planting_id: deviceId
+                                planting_id: deviceId,
+                                date_end: plantingEndDate
                             },
                             success: function(response) {
                                 Swal.fire('สำเร็จ!', 'ปิดใช้งานอุปกรณ์เรียบร้อยแล้ว', 'success');

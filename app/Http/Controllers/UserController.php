@@ -264,8 +264,10 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'planting_id' => 'required|exists:user_use_sensors,id',
+            'date_end' => 'nullable|date|after_or_equal:date_start',
         ])->setAttributeNames([
             'planting_id' => 'ID',
+            'date_end' => 'End Date',
         ]);
 
         if ($validator->fails()) {
@@ -285,7 +287,10 @@ class UserController extends Controller
                 ], 404);
             }
 
-            $planting->update(['status' => 0]);
+            $planting->update([
+                'status' => 0,
+                'end_date' => $request->input('date_end'),
+            ]);
 
             return response()->json([
                 'status' => true,

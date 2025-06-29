@@ -14,7 +14,7 @@
     <!-- Sidebar content -->
     <div class="text-center text-2xl font-bold mt-12 mb-6">Agrosector</div>
     <nav class="flex flex-col space-y-2 px-4">
-        <a href="{{ route('map.index') }}" class="{{ (isset($sideAtive) && $sideAtive == 'map') ? 'side-active' : '' }} px-4 py-2 hover:bg-green-100 rounded">
+        <a href="{{ route('admin.index') }}" class="{{ (isset($sideAtive) && $sideAtive == 'map') ? 'side-active' : '' }} px-4 py-2 hover:bg-green-100 rounded">
             <i class="fa-solid fa-map"></i> แผนที่
         </a>
         <a href="{{ route('dashboard.index') }}" class="{{ (isset($sideAtive) && $sideAtive == 'dashboard') ? 'side-active' : '' }} px-4 py-2 hover:bg-green-100 rounded">
