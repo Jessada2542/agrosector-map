@@ -89,6 +89,7 @@ class MapController extends Controller
             'userSensor.province',
             'userSensor.district',
             'userSensor.subdistrict',
+            'userSensor.sensorKey',
             'latestSensor'
             )
             ->whereId($request->id)
@@ -107,6 +108,7 @@ class MapController extends Controller
                 'position' => $data->userSensor ? $data->userSensor->lat . ', ' . $data->userSensor->lon : '',
                 'address' => 'ตำบล' . $subdistrict . ' อำเภอ' . $district . ' จังหวัด' . $province . ' ' . $province_code . '000',
                 'detail' => $data->detail ?? '',
+                'sensor' => $data->userSensor->sensorKey->key ?? '',
                 'n' => $data->latestSensor->n ?? '',
                 'p' => $data->latestSensor->p ?? '',
                 'k' => $data->latestSensor->k ?? '',

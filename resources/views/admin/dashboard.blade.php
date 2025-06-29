@@ -39,6 +39,7 @@
                 <div><span class="font-semibold">พิกัด:</span> <span id="position"></span></div>
                 <div><span class="font-semibold">สถานที่:</span> <span id="address"></span></div>
                 <div><span class="font-semibold">รายละเอียด:</span> <span id="detail"></span></div>
+                <div><span class="font-semibold">Sensor S/N:</span> <span id="sensor"></span></div>
                 <div><span class="font-semibold">N:</span> <span id="n"></span></div>
                 <div><span class="font-semibold">P:</span> <span id="p"></span></div>
                 <div><span class="font-semibold">K:</span> <span id="k"></span></div>
@@ -92,10 +93,8 @@
                     id: id
                 },
                 success: function(response) {
-                    console.log(response);
-
                     if (response.status) {
-                        const fields = ['user_name', 'name', 'position', 'address', 'detail', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'];
+                        const fields = ['user_name', 'name', 'position', 'address', 'detail', 'sensor', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'];
 
                         fields.forEach(fieldId => {
                             const el = document.getElementById(fieldId);
