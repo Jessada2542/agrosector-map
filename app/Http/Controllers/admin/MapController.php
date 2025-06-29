@@ -59,7 +59,9 @@ class MapController extends Controller
                     return $row->end_date ? Carbon::parse($row->end_date)->format('d-m-Y') : '';
                 })
                 ->addColumn('action', function ($row) {
-                    return '';
+                    return '<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                        <i class="fa-solid fa-info"></i> ดูข้อมูล
+                    </button>';
                 })
                 ->rawColumns(['user_name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end', 'action'])
                 ->make(true);
