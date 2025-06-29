@@ -8,44 +8,51 @@
                 &times;
             </button>
         </div>
-        <div class="p-6 overflow-y-auto" id="sensor-content">
-            <div class="grid grid-cols-1 md:grid-cols-2 p-3 mb-3">
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-0">
+        <div class="p-4 sm:p-6 overflow-y-auto" id="sensor-content">
+            <!-- กล่องข้อมูลผู้ใช้และพิกัด -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-3">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
                     <p class="text-green-900">ชื่อผู้ใช้</p>
                     <span id="user-name" class="text-gray-600">ชื่อ</span>
                 </div>
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-0">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
                     <p class="text-green-900">พิกัด</p>
                     <span id="sensor-position" class="text-gray-600">ตำแหน่ง</span>
                 </div>
             </div>
+
+            <!-- สถานที่ -->
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                 <p class="text-green-900">สถานที่</p>
                 <span id="sensor-address" class="text-gray-600">ที่อยู่</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 p-3 mb-3">
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-0">
+
+            <!-- พืชที่ปลูก / วันที่ปลูก -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-3">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
                     <p class="text-green-900">พืชที่ปลูก</p>
                     <span id="sensor-name" class="text-gray-600">ชื่อ</span>
                 </div>
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-0">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
                     <p class="text-green-900">วันที่ปลูก</p>
                     <span id="sensor-date" class="text-gray-600">วันที่</span>
                 </div>
             </div>
+
+            <!-- รายละเอียด -->
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                 <p class="text-green-900">รายละเอียด</p>
                 <span id="sensor-detail" class="text-gray-600">Detail</span>
             </div>
+
+            <!-- ค่าที่วัด -->
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <!-- เวลาอ่านค่า -->
                 <div class="mb-4">
                     <p class="text-gray-500 text-sm">เวลาอ่านค่า</p>
                     <p id="sensor-datetime" class="text-lg font-medium text-gray-800">02/05/2568 14:35</p>
                 </div>
 
-                <!-- ค่าต่าง ๆ -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 text-center">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-center">
                     <div>
                         <p class="text-gray-500 text-sm">N (mg/kg)</p>
                         <p id="sensor-n" class="text-xl font-semibold text-green-600">14.00</p>
@@ -68,25 +75,29 @@
                     </div>
                 </div>
             </div>
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <p>ระดับไนโตรเจน (N)</p>
-                <canvas id="grap-sensor-n" class="lineChart"></canvas>
-            </div>
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <p>ระดับฟอสฟอรัส (P)</p>
-                <canvas id="grap-sensor-p" class="lineChart"></canvas>
-            </div>
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <p>ระดับโพแทสเซียม (K)</p>
-                <canvas id="grap-sensor-k" class="lineChart"></canvas>
-            </div>
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <p>ระดับกรดด่าง (pH)</p>
-                <canvas id="grap-sensor-ph" class="lineChart"></canvas>
-            </div>
-            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <p>ระดับความชื้น (Humidity)</p>
-                <canvas id="grap-sensor-humidity" class="lineChart"></canvas>
+
+            <!-- กราฟทั้งหมด -->
+            <div class="space-y-4">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับไนโตรเจน (N)</p>
+                    <canvas id="grap-sensor-n" class="lineChart w-full min-w-0"></canvas>
+                </div>
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับฟอสฟอรัส (P)</p>
+                    <canvas id="grap-sensor-p" class="lineChart w-full min-w-0"></canvas>
+                </div>
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับโพแทสเซียม (K)</p>
+                    <canvas id="grap-sensor-k" class="lineChart w-full min-w-0"></canvas>
+                </div>
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับกรดด่าง (pH)</p>
+                    <canvas id="grap-sensor-ph" class="lineChart w-full min-w-0"></canvas>
+                </div>
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับความชื้น (Humidity)</p>
+                    <canvas id="grap-sensor-humidity" class="lineChart w-full min-w-0"></canvas>
+                </div>
             </div>
         </div>
     </div>
