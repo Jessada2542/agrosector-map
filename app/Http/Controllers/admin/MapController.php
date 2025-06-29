@@ -52,10 +52,10 @@ class MapController extends Controller
                     return $row->latest_sensor ? $row->latest_sensor->created_at->format('d-m-Y H:i') : '';
                 })
                 ->editColumn('date_start', function ($row) {
-                    return $row->start_date->format('d-m-Y H:i');
+                    return $row->start_date->format('d-m-Y');
                 })
                 ->editColumn('date_end', function ($row) {
-                    return $row->end_date ? $row->end_date->format('d-m-Y H:i') : '';
+                    return $row->end_date ? $row->end_date->format('d-m-Y') : '';
                 })
                 ->rawColumns(['user_name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'])
                 ->make(true);
