@@ -32,7 +32,7 @@
 
     <div id="modal-info" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-lg">
-            <h2 class="text-center text-2xl font-bold text-green-700 mb-6">ข้อมูลเซนเซอร์</h2>
+            <h2 class="text-center text-2xl font-bold text-green-700 mb-6">ข้อมูล</h2>
             <div class="space-y-3 text-gray-800">
                 <div><span class="font-semibold">ชื่อผู้ใช้:</span> <span id="user_name"></span></div>
                 <div><span class="font-semibold">ชื่อ:</span> <span id="name"></span></div>
