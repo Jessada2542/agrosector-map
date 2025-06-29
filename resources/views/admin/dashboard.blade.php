@@ -18,6 +18,9 @@
                         <th class="px-4 py-2 border-b">K (mg/lg)</th>
                         <th class="px-4 py-2 border-b">pH</th>
                         <th class="px-4 py-2 border-b">อัพเดทล่าสุด</th>
+                        <th class="px-4 py-2 border-b">วันที่เริ่ม</th>
+                        <th class="px-4 py-2 border-b">วันที่สิ้นสุด</th>
+                        <th class="px-4 py-2 border-b">อัพเดทล่าสุด</th>
                         <th class="px-4 py-2 border-b">การจัดการ</th>
                     </tr>
                 </thead>
@@ -47,6 +50,8 @@
                 { data: 'k' },
                 { data: 'ph' },
                 { data: 'datetime' },
+                { data: 'date_start' },
+                { data: 'date_end' },
                 { data: 'action' }
             ],
             reponsive: true,

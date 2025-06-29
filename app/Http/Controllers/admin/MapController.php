@@ -36,10 +36,28 @@ class MapController extends Controller
                 ->editColumn('user_name', function ($row) {
                     return $row->user->name;
                 })
-                ->editColumn('datetime', function ($row) {
-                    return $row->created_at->format('d-m-Y H:i');
+                ->editColumn('n', function ($row) {
+                    return $row->latest_sensor->n ?? '';
                 })
-                ->rawColumns(['datetime'])
+                ->editColumn('p', function ($row) {
+                    return $row->latest_sensor->p ?? '';
+                })
+                ->editColumn('k', function ($row) {
+                    return $row->latest_sensor->k ?? '';
+                })
+                ->editColumn('ph', function ($row) {
+                    return $row->latest_sensor->ph ?? '';
+                })
+                ->editColumn('datetime', function ($row) {
+                    return $row->latest_sensor->created_at->format('d-m-Y H:i');
+                })
+                ->editColumn('date_start', function ($row) {
+                    return $row->start_date->format('d-m-Y H:i');
+                })
+                ->editColumn('date_end', function ($row) {
+                    return $row->end_date ? $row->end_date->format('d-m-Y H:i') : '';
+                })
+                ->rawColumns(['user_name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'])
                 ->make(true);
         }
 
