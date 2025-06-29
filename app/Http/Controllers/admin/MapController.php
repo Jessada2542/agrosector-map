@@ -58,7 +58,10 @@ class MapController extends Controller
                 ->editColumn('date_end', function ($row) {
                     return $row->end_date ? Carbon::parse($row->end_date)->format('d-m-Y') : '';
                 })
-                ->rawColumns(['user_name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'])
+                ->addColumn('action', function ($row) {
+                    return '';
+                })
+                ->rawColumns(['user_name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end', 'action'])
                 ->make(true);
         }
 
