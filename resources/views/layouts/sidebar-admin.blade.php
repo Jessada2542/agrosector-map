@@ -1,3 +1,12 @@
+<style>
+    .side-active {
+        --tw-bg-opacity: 1;
+        background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1)) !important;
+        color: rgb(21 128 61); /* text-green-800 */
+        font-weight: 600;
+        border-left: 4px solid #22c55e; /* green-500 */
+    }
+</style>
 <!-- ✅ MOBILE NAVBAR -->
 <nav class="lg:hidden fixed top-0 left-0 w-full bg-gradient-to-r from-green-500 via-emerald-400 to-cyan-500 text-white flex items-center justify-between px-4 py-3 shadow z-30">
     <div class="text-xl font-bold">Agrosector Back</div>
