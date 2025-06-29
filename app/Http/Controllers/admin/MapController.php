@@ -38,16 +38,16 @@ class MapController extends Controller
                     return $row->user->name;
                 })
                 ->editColumn('n', function ($row) {
-                    return $row->latestSensor?->n ?? '';
+                    return $row->latestSensor ? $row->latestSensor->n : '';
                 })
                 ->editColumn('p', function ($row) {
-                    return $row->latestSensor?->p ?? '';
+                    return $row->latestSensor ? $row->latestSensor->p : '';
                 })
                 ->editColumn('k', function ($row) {
-                    return $row->latestSensor?->k ?? '';
+                    return $row->latestSensor ? $row->latestSensor->k : '';
                 })
                 ->editColumn('ph', function ($row) {
-                    return $row->latestSensor?->ph ?? '';
+                    return $row->latestSensor ? $row->latestSensor->ph : '';
                 })
                 ->editColumn('datetime', function ($row) {
                     return $row->latestSensor ? $row->latestSensor->created_at->format('d-m-Y H:i') : '';
