@@ -104,6 +104,7 @@ class MapController extends Controller
                 'name' => $data->name ?? '',
                 'position' => $data->userSensor ? $data->userSensor->lat . ', ' . $data->userSensor->lon : '',
                 'address' => 'ตำบล' . $subdistrict . ' อำเภอ' . $district . ' จังหวัด' . $province . ' ' . $province_code . '000',
+                'detail' => $data->detail ?? '',
                 'n' => $data->latestSensor->n ?? '',
                 'p' => $data->latestSensor->p ?? '',
                 'k' => $data->latestSensor->k ?? '',
