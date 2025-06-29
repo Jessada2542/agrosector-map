@@ -77,6 +77,10 @@
                 <p>ระดับกรดด่าง (pH)</p>
                 <canvas id="grap-sensor-ph" class="lineChart"></canvas>
             </div>
+            <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
+                <p>ระดับความชื้น (Humidity)</p>
+                <canvas id="grap-sensor-humidity" class="lineChart"></canvas>
+            </div>
         </div>
     </div>
 </div>
