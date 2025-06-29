@@ -49,7 +49,7 @@ class MapController extends Controller
                     return $row->latest_sensor->ph ?? '';
                 })
                 ->editColumn('datetime', function ($row) {
-                    return $row->latest_sensor->created_at->format('d-m-Y H:i');
+                    return $row->latest_sensor ? $row->latest_sensor->created_at->format('d-m-Y H:i') : '';
                 })
                 ->editColumn('date_start', function ($row) {
                     return $row->start_date->format('d-m-Y H:i');
