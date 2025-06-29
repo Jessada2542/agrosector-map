@@ -38,19 +38,19 @@ class MapController extends Controller
                     return $row->user->name;
                 })
                 ->editColumn('n', function ($row) {
-                    return $row->latest_sensor->n ?? '';
+                    return $row->latestSensor->n ?? '';
                 })
                 ->editColumn('p', function ($row) {
-                    return $row->latest_sensor->p ?? '';
+                    return $row->latestSensor->p ?? '';
                 })
                 ->editColumn('k', function ($row) {
-                    return $row->latest_sensor->k ?? '';
+                    return $row->latestSensor->k ?? '';
                 })
                 ->editColumn('ph', function ($row) {
-                    return $row->latest_sensor->ph ?? '';
+                    return $row->latestSensor->ph ?? '';
                 })
                 ->editColumn('datetime', function ($row) {
-                    return $row->latest_sensor ? $row->latest_sensor->created_at->format('d-m-Y H:i') : '';
+                    return $row->latestSensor ? $row->latestSensor->created_at->format('d-m-Y H:i') : '';
                 })
                 ->editColumn('date_start', function ($row) {
                     return $row->start_date ? Carbon::parse($row->start_date)->format('d-m-Y') : '';
