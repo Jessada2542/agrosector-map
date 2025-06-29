@@ -23,7 +23,7 @@ class MapController extends Controller
             ->get();
         $sideActive = 'map';
 
-        return view('admin.map', compact('sideAtive', 'provinces', 'districts', 'subdistricts'));
+        return view('admin.map', compact('sideActive', 'provinces', 'districts', 'subdistricts'));
     }
 
     public function dashboard(Request $request)
