@@ -38,27 +38,28 @@
                 <span id="sensor-detail" class="text-gray-600">Detail</span>
             </div>
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full text-center border border-collapse">
-                        <thead>
-                        <tr class="bg-gradient-to-r from-green-400 via-cyan-500 to-blue-500 text-white">
-                            <th class="py-2 whitespace-nowrap">N mg/kg</th>
-                            <th class="py-2 whitespace-nowrap">P mg/kg</th>
-                            <th class="py-2 whitespace-nowrap">K mg/kg</th>
-                            <th class="py-2 whitespace-nowrap">pH</th>
-                            <th class="py-2 whitespace-nowrap">วัน/เดือน/ปี</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="bg-white text-gray-700">
-                            <td class="py-2 whitespace-nowrap" id="sensor-n">14.00</td>
-                            <td class="py-2 whitespace-nowrap" id="sensor-p">79.00</td>
-                            <td class="py-2 whitespace-nowrap" id="sensor-k">72.00</td>
-                            <td class="py-2 whitespace-nowrap" id="sensor-ph">756.00</td>
-                            <td class="py-2 whitespace-nowrap" id="sensor-update">02/05/2568</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="mb-3">
+                    <p class="text-gray-500 text-sm">เวลาอ่านค่า</p>
+                    <p id="sensor-datetime" class="text-lg font-medium text-gray-800">02/05/2568 14:35</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                    <div>
+                        <p class="text-gray-500 text-sm">N (mg/kg)</p>
+                        <p id="sensor-n" class="text-xl font-semibold text-green-600">14.00</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">P (mg/kg)</p>
+                        <p id="sensor-p" class="text-xl font-semibold text-blue-600">79.00</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">K (mg/kg)</p>
+                        <p id="sensor-k" class="text-xl font-semibold text-cyan-600">72.00</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">pH</p>
+                        <p id="sensor-ph" class="text-xl font-semibold text-purple-600">7.56</p>
+                    </div>
                 </div>
             </div>
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
