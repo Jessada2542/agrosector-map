@@ -94,20 +94,19 @@ class MapController extends Controller
 
         return response()->json([
             'status' => true,
-            'data' => $data->map(function ($item) {
-                return [
-                    'user_name' => $item->user->name,
-                    'name' => $item->name,
-                    'position' => $item->userSensor ? $item->userSensor->lat . ', ' . $item->userSensor->lon : '',
-                    'address' => $item->userSensor->province,
-                    'n' => $item->latestSensor ? $item->latestSensor->n : '',
-                    'p' => $item->latestSensor ? $item->latestSensor->p : '',
-                    'k' => $item->latestSensor ? $item->latestSensor->k : '',
-                    'ph' => $item->latestSensor ? $item->latestSensor->ph : '',
-                    'datetime' => $item->latestSensor ? $item->latestSensor->created_at->format('d-m-Y H:i') : '',
-                    'date_start' => $item->start_date ? Carbon::parse($item->start_date)->format('d-m-Y') : '',
-                    'date_end' => $item->end_date ? Carbon::parse($item->end_date)->format('d-m-Y') : ''
-                ];
-            })]);
+            'data' => [
+                'user_name' => $data->user->name ?? '',
+                'name' => $data->name ?? '',
+                'position' => $data->userSensor ? $data->userSensor->lat . ', ' . $data->userSensor->lon : '',
+                'address' => $data->userSensor->province ?? '',
+                'n' => $data->latestSensor->n ?? '',
+                'p' => $data->latestSensor->p ?? '',
+                'k' => $data->latestSensor->k ?? '',
+                'ph' => $data->latestSensor->ph ?? '',
+                'datetime' => $data->latestSensor?->created_at?->format('d-m-Y H:i') ?? '',
+                'date_start' => $data->start_date ? Carbon::parse($data->start_date)->format('d-m-Y') : '',
+                'date_end' => $data->end_date ? Carbon::parse($data->end_date)->format('d-m-Y') : ''
+            ]
+        ]);
     }
 }
