@@ -9,7 +9,7 @@
             </button>
         </div>
         <div class="p-6 overflow-y-auto" id="sensor-content">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 p-3 mb-3">
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-0">
                     <p class="text-green-900">ชื่อผู้ใช้</p>
                     <span id="user-name" class="text-gray-600">ชื่อ</span>
@@ -23,7 +23,7 @@
                 <p class="text-green-900">สถานที่</p>
                 <span id="sensor-address" class="text-gray-600">ที่อยู่</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 p-3 mb-3">
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-0">
                     <p class="text-green-900">พืชที่ปลูก</p>
                     <span id="sensor-name" class="text-gray-600">ชื่อ</span>
