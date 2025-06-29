@@ -10,11 +10,11 @@
         </div>
         <div class="p-6 overflow-y-auto" id="sensor-content">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                     <p class="text-green-900">ชื่อผู้ใช้</p>
                     <span id="user-name" class="text-gray-600">ชื่อ</span>
                 </div>
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                     <p class="text-green-900">พิกัด</p>
                     <span id="sensor-position" class="text-gray-600">ตำแหน่ง</span>
                 </div>
@@ -24,11 +24,11 @@
                 <span id="sensor-address" class="text-gray-600">ที่อยู่</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                     <p class="text-green-900">พืชที่ปลูก</p>
                     <span id="sensor-name" class="text-gray-600">ชื่อ</span>
                 </div>
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                     <p class="text-green-900">วันที่ปลูก</p>
                     <span id="sensor-date" class="text-gray-600">วันที่</span>
                 </div>
@@ -38,12 +38,14 @@
                 <span id="sensor-detail" class="text-gray-600">Detail</span>
             </div>
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
-                <div class="mb-3">
+                <!-- เวลาอ่านค่า -->
+                <div class="mb-4">
                     <p class="text-gray-500 text-sm">เวลาอ่านค่า</p>
                     <p id="sensor-datetime" class="text-lg font-medium text-gray-800">02/05/2568 14:35</p>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                <!-- ค่าต่าง ๆ -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 text-center">
                     <div>
                         <p class="text-gray-500 text-sm">N (mg/kg)</p>
                         <p id="sensor-n" class="text-xl font-semibold text-green-600">14.00</p>
@@ -59,6 +61,10 @@
                     <div>
                         <p class="text-gray-500 text-sm">pH</p>
                         <p id="sensor-ph" class="text-xl font-semibold text-purple-600">7.56</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">ความชื้น (%)</p>
+                        <p id="sensor-humidity" class="text-xl font-semibold text-indigo-600">45.00</p>
                     </div>
                 </div>
             </div>

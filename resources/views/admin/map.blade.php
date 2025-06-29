@@ -145,6 +145,7 @@
                         $('#sensor-p').text(sensor.latest_sensor ? sensor.latest_sensor.p : '');
                         $('#sensor-k').text(sensor.latest_sensor ? sensor.latest_sensor.k : '');
                         $('#sensor-ph').text(sensor.latest_sensor ? sensor.latest_sensor.ph : '');
+                        $('#sensor-humidity').text(sensor.latest_sensor ? sensor.latest_sensor.humidity : '');
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
