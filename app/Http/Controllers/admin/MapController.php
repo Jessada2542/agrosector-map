@@ -92,13 +92,18 @@ class MapController extends Controller
             'latestSensor'
             )->first();
 
+        $subdistrict = $data->userSensor->subdistrict->subdistrict_name_th ?? '';
+        $district = $data->userSensor->district->district_name_th ?? '';
+        $province = $data->userSensor->province->province_name_th ?? '';
+        $province_code = $data->userSensor->province->province_code ?? '';
+
         return response()->json([
             'status' => true,
             'data' => [
                 'user_name' => $data->user->name ?? '',
                 'name' => $data->name ?? '',
                 'position' => $data->userSensor ? $data->userSensor->lat . ', ' . $data->userSensor->lon : '',
-                'address' => $data->userSensor->province ?? '',
+                'address' => 'ตำบล' . $subdistrict . ' อำเภอ' . $district . ' จังหวัด' . $province . ' ' . $province_code . '000',
                 'n' => $data->latestSensor->n ?? '',
                 'p' => $data->latestSensor->p ?? '',
                 'k' => $data->latestSensor->k ?? '',
