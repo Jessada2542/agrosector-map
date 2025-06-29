@@ -7,6 +7,7 @@ use App\Models\GeoCode;
 use App\Models\UserUseSensor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class MapController extends Controller
@@ -70,5 +71,20 @@ class MapController extends Controller
         $sideActive = 'dashboard';
 
         return view('admin.dashboard', compact('sideActive'));
+    }
+
+    public function data(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:user_use_sensors,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        $data = UserUseSensor::with('user', 'latestSensor')->first();
+
+        return response()->json(['status' => true, 'data' => $data]);
     }
 }

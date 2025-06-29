@@ -30,6 +30,29 @@
         </div>
     </div>
 
+    <div id="modal-info" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-lg">
+            <h2 class="text-center text-2xl font-bold text-green-700 mb-6">ข้อมูลเซนเซอร์</h2>
+            <div class="space-y-3 text-gray-800">
+                <div><span class="font-semibold">ชื่อผู้ใช้:</span> <span id="user_name"></span></div>
+                <div><span class="font-semibold">ชื่อ:</span> <span id="name"></span></div>
+                <div><span class="font-semibold">N:</span> <span id="n"></span></div>
+                <div><span class="font-semibold">P:</span> <span id="p"></span></div>
+                <div><span class="font-semibold">K:</span> <span id="k"></span></div>
+                <div><span class="font-semibold">pH:</span> <span id="ph"></span></div>
+                <div><span class="font-semibold">เวลาอ่านค่า:</span> <span id="datetime"></span></div>
+                <div><span class="font-semibold">เริ่ม:</span> <span id="date_start"></span></div>
+                <div><span class="font-semibold">สิ้นสุด:</span> <span id="date_end"></span></div>
+            </div>
+            <div class="flex justify-center mt-6">
+                <button class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 closeModal">
+                    ปิด
+                </button>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
         var table = $('#table').DataTable({
@@ -58,8 +81,40 @@
 
         $(document).on('click', '.btn-info', function() {
             const id = $(this).data('id');
-            console.log(id);
 
+            $.ajax({
+                url: '/admin/dashboard/data',
+                type: 'GET',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id
+                },
+                success: function(response) {
+                    console.log(response);
+
+                    if (response.status) {
+                        const fields = ['user_name', 'name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'];
+
+                        fields.forEach(fieldId => {
+                            const el = document.getElementById(fieldId);
+                            if (el) {
+                                el.textContent = response.data[fieldId] ?? '';
+                            }
+                        });
+
+                        $('#modal-info').removeClass('hidden').addClass('flex');
+                    } else {
+                        Swal.fire('ผิดพลาด!', 'ไม่สามารถดึงข้อมูลได้', 'error');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire('ผิดพลาด!', 'ไม่สามารถดึงข้อมูลได้', 'error');
+                }
+            });
+        });
+
+        $('.closeModal').on('click', function() {
+            $('#modal-info').addClass('hidden');
         });
     </script>
 @endsection
