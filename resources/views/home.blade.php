@@ -134,7 +134,7 @@
                         $('#sensor-name').text(sensor.name ? sensor.name : '');
                         $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-detail').text(sensor.detail ? sensor.detail : '');
-                        $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
+                        $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY HH:mm') : '');
                         $('#sensor-n').text(sensor.latest_sensor ? sensor.latest_sensor.n : '');
                         $('#sensor-p').text(sensor.latest_sensor ? sensor.latest_sensor.p : '');
                         $('#sensor-k').text(sensor.latest_sensor ? sensor.latest_sensor.k : '');

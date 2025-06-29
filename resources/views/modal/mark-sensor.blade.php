@@ -49,7 +49,7 @@
             <div class="rounded-md overflow-hidden shadow-lg bg-white p-3 mb-3">
                 <div class="mb-4">
                     <p class="text-gray-500 text-sm">เวลาอ่านค่า</p>
-                    <p id="sensor-datetime" class="text-lg font-medium text-gray-800">02/05/2568 14:35</p>
+                    <p id="sensor-update" class="text-lg font-medium text-gray-800">02/05/2568 14:35</p>
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-center">
