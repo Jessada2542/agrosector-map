@@ -58,7 +58,7 @@
     <script>
         var table = $('#table').DataTable({
             ajax: {
-                url: '/admin/dashboard',
+                url: '/admin/users',
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}'
