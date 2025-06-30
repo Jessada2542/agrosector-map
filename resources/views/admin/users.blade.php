@@ -128,7 +128,7 @@
                 success: function (res) {
                     if (res.status) {
                         const data = res.data;
-                        $('#edit-id').val(data.id);
+                        $('#edit-id').val(id);
                         $('#edit-image').attr('src', data.image);
                         $('#edit-name').val(data.name);
                         $('#edit-username').val(data.username);
