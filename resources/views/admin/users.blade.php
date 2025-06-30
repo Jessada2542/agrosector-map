@@ -32,6 +32,7 @@
             <h2 class="text-center text-2xl font-bold text-green-700 mb-6">แก้ไขข้อมูลผู้ใช้</h2>
 
             <form id="edit-form" enctype="multipart/form-data" class="space-y-4 text-gray-800">
+                @csrf
                 <input type="hidden" name="id" id="edit-id">
                 <!-- รูปโปรไฟล์ -->
                 <div class="flex items-center gap-4">
@@ -92,12 +93,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
         var table = $('#table').DataTable({
             ajax: {
                 url: '/admin/users',
@@ -178,6 +173,9 @@
                 data: formData,
                 processData: false,
                 contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (res) {
                     if (res.status) {
                         Swal.fire('สำเร็จ', 'อัปเดตข้อมูลเรียบร้อยแล้ว', 'success');
