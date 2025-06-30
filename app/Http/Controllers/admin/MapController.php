@@ -124,7 +124,7 @@ class MapController extends Controller
     public function users(Request $request)
     {
         if ($request->ajax()) {
-            $query = User::query();
+            $query = User::where('role_id', 1);
 
             return DataTables::eloquent($query)
                 ->addIndexColumn()
