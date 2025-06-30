@@ -55,7 +55,7 @@
         <a href="{{ route('admin.dashboard') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'dashboard') ? 'side-active' : '' }}">
             <i class="fa-solid fa-chart-line"></i> รายงาน
         </a>
-        <a href="{{ route('admin.users') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }}">
+        <a href="{{ route('admin.users') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'users') ? 'side-active' : '' }}">
             <i class="fa-solid fa-users"></i> ผู้ใช้งานระบบ
         </a>
         <a href="{{ route('user.planting') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'planting') ? 'side-active' : '' }}">
