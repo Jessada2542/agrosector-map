@@ -31,13 +31,13 @@
         <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-lg">
             <h2 class="text-center text-2xl font-bold text-green-700 mb-6">แก้ไขข้อมูลผู้ใช้</h2>
 
-            <form id="edit-form" class="space-y-4 text-gray-800">
+            <form id="edit-form" enctype="multipart/form-data" class="space-y-4 text-gray-800">
                 <!-- รูปโปรไฟล์ -->
                 <div class="flex items-center gap-4">
                     <img id="edit-image" src="" alt="รูปโปรไฟล์" class="w-16 h-16 rounded-full object-cover border">
                     <div>
                         <label class="block text-sm font-medium">อัปโหลดรูปใหม่</label>
-                        <input type="file" name="avatar" class="mt-1 text-sm text-gray-600">
+                        <input type="file" name="avatar" id="avatar-input" class="mt-1 text-sm text-gray-600">
                     </div>
                 </div>
 
@@ -141,6 +141,52 @@
                 },
                 error: function () {
                     Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
+                }
+            });
+        });
+
+        $('#avatar-input').on('change', function (event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#edit-image').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+
+        $('#edit-form').on('submit', function (e) {
+            e.preventDefault();
+
+            const form = $(this)[0];
+            const formData = new FormData(form);
+
+            $.ajax({
+                url: '/admin/users/update',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (res) {
+                    if (res.status) {
+                        Swal.fire('สำเร็จ', 'อัปเดตข้อมูลเรียบร้อยแล้ว', 'success');
+                        $('#modal-edit').addClass('hidden');
+
+                        table.ajax.reload();
+                    } else {
+                        Swal.fire('ผิดพลาด', res.message || 'อัปเดตไม่สำเร็จ', 'error');
+                    }
+                },
+                error: function (xhr) {
+                    let msg = xhr.responseJSON?.message || 'เกิดข้อผิดพลาด';
+                    Swal.fire('ผิดพลาด', msg, 'error');
                 }
             });
         });

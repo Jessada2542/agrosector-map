@@ -174,4 +174,47 @@ class MapController extends Controller
             ]
         ]);
     }
+
+    public function usersUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:users,id',
+            'name' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        $user = User::whereId($request->id)->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        $avatarName = $user->avatar;
+        if ($request->hasFile('avatar')) {
+            $oldAvatarPath = public_path('images/avatars/' . $user->avatar);
+            if ($user->avatar && file_exists($oldAvatarPath)) {
+                unlink($oldAvatarPath);
+            }
+
+            $avatar = $request->file('avatar');
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatar->move(public_path('images/avatars'), $avatarName);
+        }
+
+        $user->update([
+            'avatar' => $avatarName ? $avatarName : $user->avatar,
+            'name' => $request->input('name'),
+            'address' => $request->input('address'),
+        ]);
+
+        return response()->json(['status' => true, 'message' => 'User updated successfully']);
+    }
 }
