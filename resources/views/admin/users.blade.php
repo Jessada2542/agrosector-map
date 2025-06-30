@@ -130,6 +130,7 @@
                         const data = res.data;
                         $('#edit-id').val(id);
                         $('#edit-image').attr('src', data.image);
+                        $('#avatar-input').val('');
                         $('#edit-name').val(data.name);
                         $('#edit-username').val(data.username);
                         $('#edit-email').val(data.email);
