@@ -129,7 +129,7 @@ class MapController extends Controller
             return DataTables::eloquent($query)
                 ->addIndexColumn()
                 ->addColumn('image', function ($row) {
-                    $url = asset('images/avatars/' . $row->avatar);
+                    $url = $row->avatar ? asset('images/avatars/' . $row->avatar) : asset('images/avatars/No_image.png');
                     return '<img src="' . $url . '" class="w-10 h-10 rounded-full object-cover" alt="' . e($row->name) . '">';
                 })
                 ->editColumn('created_at', function ($row) {
