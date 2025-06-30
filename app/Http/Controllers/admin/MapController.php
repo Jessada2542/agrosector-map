@@ -136,8 +136,8 @@ class MapController extends Controller
                     return $row->created_at ? $row->created_at->format('d-m-Y H:i') : '';
                 })
                 ->addColumn('action', function ($row) {
-                    return '<button class="btn-info bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" data-id="'. $row->id .'">
-                        ดูข้อมูล
+                    return '<button class="btn-info bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 border border-yellow-700 rounded" data-id="'. $row->id .'">
+                        แก้ไข
                     </button>';
                 })
                 ->rawColumns(['image', 'created_at', 'action'])
