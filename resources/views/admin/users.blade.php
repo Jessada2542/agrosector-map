@@ -91,6 +91,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         var table = $('#table').DataTable({
             ajax: {
                 url: '/admin/users',
@@ -158,7 +164,6 @@
             }
         });
 
-
         $('#edit-form').on('submit', function (e) {
             e.preventDefault();
 
@@ -171,9 +176,6 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
                 success: function (res) {
                     if (res.status) {
                         Swal.fire('สำเร็จ', 'อัปเดตข้อมูลเรียบร้อยแล้ว', 'success');
