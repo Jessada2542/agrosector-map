@@ -49,7 +49,7 @@
                 <div><span class="font-semibold">สิ้นสุด:</span> <span id="date_end"></span></div>
             </div>
             <div class="flex justify-center mt-6">
-                <button class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 closeModal">
+                <button class="px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 closeModal">
                     ปิด
                 </button>
             </div>

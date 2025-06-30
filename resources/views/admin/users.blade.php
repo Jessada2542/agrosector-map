@@ -2,8 +2,7 @@
 @section('content')
 <div class="m-5">
         <div class="p-6 rounded-xl shadow-sm border border-green-200 mb-6">
-            <h1 class="text-2xl font-bold text-green-700 mb-2"><i class="fa-solid fa-chart-line"></i> รายงาน</h1>
-            <p class="text-green-900">ผู้ใช้งานระบบ</p>
+            <h1 class="text-2xl font-bold text-green-700 mb-2"><i class="fa-solid fa-chart-line"></i> ผู้ใช้งานระบบ</h1>
         </div>
 
         <div class="overflow-x-auto">
@@ -30,24 +29,60 @@
 
     <div id="modal-edit" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-lg">
-            <h2 class="text-center text-2xl font-bold text-green-700 mb-6">ข้อมูล</h2>
-            <div class="space-y-3 text-gray-800">
-                <div><span class="font-semibold">ชื่อผู้ใช้:</span> <span id="user_name"></span></div>
-                <div><span class="font-semibold">ชื่อ:</span> <span id="name"></span></div>
-                <div><span class="font-semibold">พิกัด:</span> <span id="position"></span></div>
-                <div><span class="font-semibold">สถานที่:</span> <span id="address"></span></div>
-                <div><span class="font-semibold">รายละเอียด:</span> <span id="detail"></span></div>
-                <div><span class="font-semibold">Sensor S/N:</span> <span id="sensor"></span></div>
-                <div><span class="font-semibold">N:</span> <span id="n"></span></div>
-                <div><span class="font-semibold">P:</span> <span id="p"></span></div>
-                <div><span class="font-semibold">K:</span> <span id="k"></span></div>
-                <div><span class="font-semibold">pH:</span> <span id="ph"></span></div>
-                <div><span class="font-semibold">เวลาอ่านค่า:</span> <span id="datetime"></span></div>
-                <div><span class="font-semibold">เริ่ม:</span> <span id="date_start"></span></div>
-                <div><span class="font-semibold">สิ้นสุด:</span> <span id="date_end"></span></div>
-            </div>
-            <div class="flex justify-center mt-6">
-                <button class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 closeModal">
+            <h2 class="text-center text-2xl font-bold text-green-700 mb-6">แก้ไขข้อมูลผู้ใช้</h2>
+
+            <form id="edit-form" class="space-y-4 text-gray-800">
+                <!-- รูปโปรไฟล์ -->
+                <div class="flex items-center gap-4">
+                    <img id="edit-image" src="" alt="รูปโปรไฟล์" class="w-16 h-16 rounded-full object-cover border">
+                    <div>
+                        <label class="block text-sm font-medium">อัปโหลดรูปใหม่</label>
+                        <input type="file" name="avatar" class="mt-1 text-sm text-gray-600">
+                    </div>
+                </div>
+
+                <!-- ชื่อ -->
+                <div>
+                    <label for="edit-name" class="block text-sm font-medium">ชื่อ</label>
+                    <input type="text" id="edit-name" name="name" class="w-full px-3 py-2 border rounded-lg" required>
+                </div>
+
+                <!-- Username (ห้ามแก้) -->
+                <div>
+                    <label class="block text-sm font-medium">ชื่อผู้ใช้ (Username)</label>
+                    <input type="text" id="edit-username" class="w-full px-3 py-2 border rounded-lg bg-gray-100" readonly>
+                </div>
+
+                <!-- Email (ห้ามแก้) -->
+                <div>
+                    <label class="block text-sm font-medium">อีเมล</label>
+                    <input type="email" id="edit-email" class="w-full px-3 py-2 border rounded-lg bg-gray-100" readonly>
+                </div>
+
+                <!-- โทรศัพท์ (ห้ามแก้) -->
+                <div>
+                    <label class="block text-sm font-medium">เบอร์โทร</label>
+                    <input type="text" id="edit-phone" class="w-full px-3 py-2 border rounded-lg bg-gray-100" readonly>
+                </div>
+
+                <!-- ที่อยู่ -->
+                <div>
+                    <label for="edit-address" class="block text-sm font-medium">ที่อยู่</label>
+                    <textarea id="edit-address" name="address" rows="3" class="w-full px-3 py-2 border rounded-lg resize-none"></textarea>
+                </div>
+
+                <!-- วันที่สร้าง (แสดงเฉย ๆ) -->
+                <div>
+                    <label class="block text-sm font-medium">วันที่สมัคร</label>
+                    <input type="text" id="edit-created-at" class="w-full px-3 py-2 border rounded-lg bg-gray-100" readonly>
+                </div>
+            </form>
+
+            <div class="flex justify-center gap-4 mt-6">
+                <button type="submit" form="edit-form" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
+                    อัปเดต
+                </button>
+                <button type="button" class="px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 closeModal">
                     ปิด
                 </button>
             </div>
@@ -82,30 +117,30 @@
             const id = $(this).data('id');
 
             $.ajax({
-                url: '/admin/dashboard/data',
-                type: 'GET',
+                url: '/admin/users/data',
+                method: 'GET',
                 data: {
-                    _token: '{{ csrf_token() }}',
-                    id: id
+                    id: id,
+                    _token: '{{ csrf_token() }}'
                 },
-                success: function(response) {
-                    if (response.status) {
-                        const fields = ['user_name', 'name', 'position', 'address', 'detail', 'sensor', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end'];
-
-                        fields.forEach(fieldId => {
-                            const el = document.getElementById(fieldId);
-                            if (el) {
-                                el.textContent = response.data[fieldId] ?? '';
-                            }
-                        });
+                success: function (res) {
+                    if (res.status) {
+                        const data = res.data;
+                        $('#edit-image').attr('src', data.image);
+                        $('#edit-name').val(data.name);
+                        $('#edit-username').val(data.username);
+                        $('#edit-email').val(data.email);
+                        $('#edit-phone').val(data.phone);
+                        $('#edit-address').val(data.address);
+                        $('#edit-created-at').val(data.created_at);
 
                         $('#modal-edit').removeClass('hidden').addClass('flex');
                     } else {
-                        Swal.fire('ผิดพลาด!', 'ไม่สามารถดึงข้อมูลได้', 'error');
+                        Swal.fire('ผิดพลาด', 'ไม่สามารถโหลดข้อมูลได้', 'error');
                     }
                 },
-                error: function(xhr, status, error) {
-                    Swal.fire('ผิดพลาด!', 'ไม่สามารถดึงข้อมูลได้', 'error');
+                error: function () {
+                    Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
                 }
             });
         });

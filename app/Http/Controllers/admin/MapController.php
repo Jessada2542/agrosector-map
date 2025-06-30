@@ -74,7 +74,7 @@ class MapController extends Controller
         return view('admin.dashboard', compact('sideActive'));
     }
 
-    public function data(Request $request)
+    public function dashboardData(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'id' => 'required|exists:user_use_sensors,id',
@@ -147,5 +147,30 @@ class MapController extends Controller
         $sideActive = 'users';
 
         return view('admin.users', compact('sideActive'));
+    }
+
+    public function usersData(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:users,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        $data = User::findOrFail($request->id);
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'image' => $data->avatar ? asset('images/avatars/' . $data->avatar) : asset('images/avatars/No_image.png'),
+                'name' => $data->name,
+                'username' => $data->username,
+                'email' => $data->email,
+                'phone' => $data->phone,
+                'address' => $data->address
+            ]
+        ]);
     }
 }
