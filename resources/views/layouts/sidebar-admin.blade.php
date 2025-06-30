@@ -55,7 +55,7 @@
         <a href="{{ route('admin.dashboard') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'dashboard') ? 'side-active' : '' }}">
             <i class="fa-solid fa-chart-line"></i> รายงาน
         </a>
-        <a href="{{ route('user.index') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }}">
+        <a href="{{ route('admin.users') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }}">
             <i class="fa-solid fa-users"></i> ผู้ใช้งานระบบ
         </a>
         <a href="{{ route('user.planting') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'planting') ? 'side-active' : '' }}">
@@ -63,6 +63,9 @@
         </a>
         <a href="{{ route('setting.index') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'setting') ? 'side-active' : '' }}">
             <i class="fa-solid fa-gear"></i> จัดการเช็นเชอร์
+        </a>
+        <a href="{{ route('user.index') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
+            <i class="fa-solid fa-users"></i> บัญชีผู้ใช้
         </a>
         <a href="{{ route('logout') }}" class="mt-auto hover:bg-red-100 bg-red-200 px-4 py-2 rounded transition text-red-800">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> ออกจากระบบ
