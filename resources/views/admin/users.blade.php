@@ -10,13 +10,13 @@
                 <thead>
                     <tr class="bg-green-100 text-green-600">
                         <th class="px-4 py-2 border-b">#</th>
-                        <th class="px-4 py-2 border-b">Image</th>
-                        <th class="px-4 py-2 border-b">Name</th>
-                        <th class="px-4 py-2 border-b">Username</th>
-                        <th class="px-4 py-2 border-b">Email</th>
-                        <th class="px-4 py-2 border-b">Phone</th>
-                        <th class="px-4 py-2 border-b">Address</th>
-                        <th class="px-4 py-2 border-b">Created At</th>
+                        <th class="px-4 py-2 border-b">รูปภาพ</th>
+                        <th class="px-4 py-2 border-b">ชื่อ</th>
+                        <th class="px-4 py-2 border-b">ชื่อผู้ใช้ (Username)</th>
+                        <th class="px-4 py-2 border-b">อีเมล</th>
+                        <th class="px-4 py-2 border-b">เบอร์โทร</th>
+                        <th class="px-4 py-2 border-b">ที่อยู่</th>
+                        <th class="px-4 py-2 border-b">วันที่สร้าง</th>
                         <th class="px-4 py-2 border-b">การจัดการ</th>
                     </tr>
                 </thead>

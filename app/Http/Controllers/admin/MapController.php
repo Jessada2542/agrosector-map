@@ -169,7 +169,8 @@ class MapController extends Controller
                 'username' => $data->username,
                 'email' => $data->email,
                 'phone' => $data->phone,
-                'address' => $data->address
+                'address' => $data->address,
+                'created' => $data->created_at ? $data->created_at->format('d-m-Y H:i') : '',
             ]
         ]);
     }
