@@ -137,7 +137,7 @@ class MapController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     return '<button class="btn-info bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 border border-yellow-700 rounded" data-id="'. $row->id .'">
-                        แก้ไข
+                        <i class="fa-solid fa-pen-to-square"></i> แก้ไข
                     </button>';
                 })
                 ->rawColumns(['image', 'created_at', 'action'])
