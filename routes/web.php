@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/map', 'index')->name('admin.index');
             Route::match(['get', 'post'], '/dashboard', 'dashboard')->name('admin.dashboard');
             Route::get('/dashboard/data', 'data')->name('admin.data');
+            Route::match(['get', 'post'], '/users', 'users')->name('admin.users');
         });
     });
 

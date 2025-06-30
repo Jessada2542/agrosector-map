@@ -19,7 +19,7 @@
 
     <button id="close-sidebar" class="absolute top-4 right-4 text-3xl text-white">×</button>
 
-    <div class="text-center text-2xl font-bold mt-12 mb-6">Agrosector</div>
+    <div class="text-center text-2xl font-bold mt-12 mb-6">Agrosector Back</div>
     <nav class="flex flex-col space-y-2 px-4">
         <a href="{{ route('admin.index') }}" class="{{ (isset($sideActive) && $sideActive == 'map') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-map"></i> แผนที่
@@ -27,7 +27,7 @@
         <a href="{{ route('admin.dashboard') }}" class="{{ (isset($sideActive) && $sideActive == 'dashboard') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-chart-line"></i> รายงาน
         </a>
-        <a href="{{ route('user.index') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
+        <a href="{{ route('admin.users') }}" class="{{ (isset($sideActive) && $sideActive == 'users') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-users"></i> ผู้ใช้งานระบบ
         </a>
         <a href="{{ route('user.planting') }}" class="{{ (isset($sideActive) && $sideActive == 'planting') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
@@ -35,6 +35,9 @@
         </a>
         <a href="{{ route('setting.index') }}" class="{{ (isset($sideActive) && $sideActive == 'setting') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-gear"></i> จัดการเช็นเชอร์
+        </a>
+        <a href="{{ route('user.index') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
+            <i class="fa-solid fa-users"></i> บัญชีผู้ใช้
         </a>
         <a href="{{ route('logout') }}" class="px-4 py-2 bg-red-200 hover:bg-red-300 text-red-800 rounded mt-4">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> ออกจากระบบ

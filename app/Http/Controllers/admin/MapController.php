@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GeoCode;
+use App\Models\User;
 use App\Models\UserUseSensor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -118,5 +119,32 @@ class MapController extends Controller
                 'date_end' => $data->end_date ? Carbon::parse($data->end_date)->format('d-m-Y') : ''
             ]
         ]);
+    }
+
+    public function users(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = User::query();
+
+            return DataTables::eloquent($query)
+                ->addIndexColumn()
+                ->addColumn('image', function ($row) {
+                    return '<img src="images/avatars/'. $row->avatar .'" class="w-10 h-10 rounded-full" alt="'. $row->name .'">';
+                })
+                ->editColumn('created_at', function ($row) {
+                    return $row->created_at ? $row->created_at->format('d-m-Y H:i') : '';
+                })
+                ->addColumn('action', function ($row) {
+                    return '<button class="btn-info bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" data-id="'. $row->id .'">
+                        ดูข้อมูล
+                    </button>';
+                })
+                ->rawColumns(['image', 'created_at', 'action'])
+                ->make(true);
+        }
+
+        $sideActive = 'users';
+
+        return view('admin.users', compact('sideActive'));
     }
 }
