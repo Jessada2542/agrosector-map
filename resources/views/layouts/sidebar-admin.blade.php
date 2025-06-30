@@ -66,3 +66,17 @@
         </a>
     </nav>
 </aside>
+
+<script>
+    const openBtn = document.getElementById('open-sidebar');
+    const closeBtn = document.getElementById('close-sidebar');
+    const sidebar = document.getElementById('mobile-sidebar');
+
+    openBtn.addEventListener('click', () => {
+        sidebar.classList.remove('-translate-x-full');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+    });
+</script>
