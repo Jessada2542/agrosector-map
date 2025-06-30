@@ -32,6 +32,7 @@
             <h2 class="text-center text-2xl font-bold text-green-700 mb-6">แก้ไขข้อมูลผู้ใช้</h2>
 
             <form id="edit-form" enctype="multipart/form-data" class="space-y-4 text-gray-800">
+                <input type="hidden" name="id" id="edit-id">
                 <!-- รูปโปรไฟล์ -->
                 <div class="flex items-center gap-4">
                     <img id="edit-image" src="" alt="รูปโปรไฟล์" class="w-16 h-16 rounded-full object-cover border">
@@ -132,6 +133,7 @@
                 success: function (res) {
                     if (res.status) {
                         const data = res.data;
+                        $('#edit-id').val(data.id);
                         $('#edit-image').attr('src', data.image);
                         $('#edit-name').val(data.name);
                         $('#edit-username').val(data.username);
