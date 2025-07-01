@@ -22,7 +22,7 @@ class SettingSensorController extends Controller
                 ->editColumn('user_name', function ($row) {
                     return $row->user->name ?? 'N/A';
                 })
-                ->editColumn('device_key', function ($row) {
+                ->editColumn('sensor_key', function ($row) {
                     return $row->sensorKey->key ?? 'N/A';
                 })
                 ->editColumn('position', function ($row) {
@@ -46,7 +46,7 @@ class SettingSensorController extends Controller
                 ->addColumn('action', function ($row) {
                     return '<button class="px-3 py-1 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded btn-edit" data-id="' . $row->id . '"><i class="fa-solid fa-gear"></i> แก้ไข</button>';
                 })
-                ->rawColumns(['user_name', 'device_key', 'position', 'address', 'status', 'action'])
+                ->rawColumns(['user_name', 'sensor_key', 'position', 'address', 'status', 'action'])
                 ->make(true);
         }
 
