@@ -33,7 +33,7 @@
         <a href="{{ route('admin.planting') }}" class="{{ (isset($sideActive) && $sideActive == 'planting') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-seedling"></i> การปลูก
         </a>
-        <a href="{{ route('setting.index') }}" class="{{ (isset($sideActive) && $sideActive == 'setting') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
+        <a href="{{ route('admin.setting.sensor') }}" class="{{ (isset($sideActive) && $sideActive == 'setting') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-gear"></i> จัดการเช็นเชอร์
         </a>
         <a href="{{ route('admin.users.profile') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
@@ -61,7 +61,7 @@
         <a href="{{ route('admin.planting') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'planting') ? 'side-active' : '' }}">
             <i class="fa-solid fa-seedling"></i> การปลูก
         </a>
-        <a href="{{ route('setting.index') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'setting') ? 'side-active' : '' }}">
+        <a href="{{ route('admin.setting.sensor') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'setting') ? 'side-active' : '' }}">
             <i class="fa-solid fa-gear"></i> จัดการเช็นเชอร์
         </a>
         <a href="{{ route('admin.users.profile') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
