@@ -89,7 +89,7 @@ class SettingSensorController extends Controller
 
         UserSensor::create([
             'user_id' => $request->user_id,
-            'sensor_key_id' => $request->device_id
+            'sensor_key_id' => $request->sensor_id
         ]);
 
         return response()->json([
