@@ -62,9 +62,9 @@ class SettingController extends Controller
 
     public function edit($id)
     {
-        $userSensor = UserSensor::where('sensor_key_id', $id)
+        $userSensor = UserSensor::with('sensorKey')
+            ->where('id', $id)
             ->where('user_id', Auth::id())
-            ->with('sensorKey')
             ->first();
 
         return response()->json([
