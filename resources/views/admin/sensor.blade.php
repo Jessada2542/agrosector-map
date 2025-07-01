@@ -126,7 +126,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
-        v/* ar table = $('#table').DataTable({
+        /* ar table = $('#table').DataTable({
             ajax: {
                 url: '/admin/users',
                 type: 'POST',
