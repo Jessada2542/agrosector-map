@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -36,6 +37,14 @@ class UserController extends Controller
         $sideActive = 'users';
 
         return view('admin.users', compact('sideActive'));
+    }
+
+    public function profile()
+    {
+        $user = User::findOrFail(Auth::id());
+        $sideActive = 'users';
+
+        return view('admin.profile', compact('sideActive', 'user'));
     }
 
     public function data(Request $request)

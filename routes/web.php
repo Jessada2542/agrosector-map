@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function() {
         Route::controller(AdminUserController::class)->group(function() {
             Route::prefix('/users')->group(function() {
                 Route::match(['get', 'post'], '/', 'index')->name('admin.users');
+                Route::get('/profile', 'profile')->name('admin.users.profile');
                 Route::get('/data', 'data')->name('admin.users.data');
                 Route::post('/store', 'store')->name('admin.users.store');
                 Route::post('/update', 'update')->name('admin.users.update');
