@@ -93,8 +93,9 @@ Route::middleware('auth')->group(function() {
         Route::controller(AdminSettingSensorController::class)->group(function() {
             Route::prefix('/sensor')->group(function() {
                 Route::match(['get', 'post'], '/', 'index')->name('admin.setting.sensor');
+                Route::post('/store', 'store')->name('admin.setting.sensor.store');
                 Route::get('/data', 'data')->name('admin.setting.sensor.data');
-                Route::put('/update', 'update')->name('admin.setting.sensor.update');
+                Route::post('/update', 'update')->name('admin.setting.sensor.update');
             });
         });
     });

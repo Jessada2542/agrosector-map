@@ -32,7 +32,7 @@
                         <th class="px-4 py-2 border-b">รหัสอุปกรณ์</th>
                         <th class="px-4 py-2 border-b">ตำแหน่ง</th>
                         <th class="px-4 py-2 border-b">ที่ตั้ง</th>
-                        <th class="px-4 py-2 border-b">สถานะ</th>
+                        {{-- <th class="px-4 py-2 border-b">สถานะ</th> --}}
                         <th class="px-4 py-2 border-b">การจัดการ</th>
                     </tr>
                 </thead>
@@ -141,7 +141,7 @@
                 { data: 'sensor_key' },
                 { data: 'position' },
                 { data: 'address' },
-                { data: 'status' },
+                /* { data: 'status' }, */
                 { data: 'action' }
             ],
             responsive: true,
@@ -187,47 +187,30 @@
         });
 
         $('#btn-add').on('click', function() {
-            const avatarInput = $('#user-avatar')[0];
-            const name = $('#user-name').val();
-            const username = $('#user-username').val();
-            const password = $('#user-password').val();
-            const email = $('#user-email').val();
-            const phone = $('#user-phone').val();
-            const address = $('#user-address').val();
+            const sensorDevice = $('#sensor-device').val();
+            const sensorUsername = $('#sensor-username').val();
 
-            if (!name || !username || !password) {
-                Swal.fire('ผิดพลาด', 'กรุณากรอกข้อมูลที่จำเป็น', 'error');
+            if (!sensorDevice || !sensorUsername) {
+                Swal.fire('ผิดพลาด', 'กรุณาเลือกอุปกรณ์และผู้ใช้', 'warning');
                 return;
             }
 
-            const formData = new FormData();
-            if (avatarInput.files.length > 0) {
-                formData.append('avatar', avatarInput.files[0]);
-            }
-            formData.append('name', name);
-            formData.append('username', username);
-            formData.append('password', password);
-            formData.append('email', email);
-            formData.append('phone', phone);
-            formData.append('address', address);
-
             $.ajax({
-                url: '/admin/users/store',
+                url: '/admin/sensors/store',
                 method: 'POST',
-                processData: false,
-                contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                data: {
+                    sensor_id: sensorDevice,
+                    user_id: sensorUsername,
+                    _token: '{{ csrf_token() }}'
                 },
-                data: formData,
                 success: function (res) {
                     if (res.status) {
-                        Swal.fire('สำเร็จ', 'เพิ่มผู้ใช้ใหม่เรียบร้อยแล้ว', 'success');
-                        $('#modal-add-user').addClass('hidden');
+                        Swal.fire('สำเร็จ', 'เพิ่มเซ็นเซอร์เรียบร้อยแล้ว', 'success');
+                        $('#modal-add').addClass('hidden');
 
                         table.ajax.reload();
                     } else {
-                        Swal.fire('ผิดพลาด', res.message || 'ไม่สามารถเพิ่มผู้ใช้ได้', 'error');
+                        Swal.fire('ผิดพลาด', res.message || 'ไม่สามารถเพิ่มเซ็นเซอร์ได้', 'error');
                     }
                 },
                 error: function (xhr) {
