@@ -240,17 +240,17 @@
             });
         });
 
-        $(document).on('click', '.btn-edit', function() {
-            const id = $(this).data('id');
+        $('#table').on('click', '.btn-edit', function() {
+            var deviceId = $(this).data('id');
 
             $.ajax({
-                url: '/admin/sensor/edit/' + id,
+                url: '/admin/sensor/edit/' + deviceId,
                 method: 'GET',
                 data: {
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    $('#modal-edit-sensor').removeClass('hidden');
+                    $('#modal-edit').removeClass('hidden');
                     $('#text-sensor-name').text('แก้ไข : ' + response.data.sensor_key.key);
                     $('#device-key').val(response.data.sensor_key.key);
                     $('#device-position-lat').val(response.data.lat ?? '');
