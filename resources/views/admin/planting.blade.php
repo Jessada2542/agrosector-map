@@ -254,11 +254,11 @@
 
             var tablePlanting = $('#table-planting').DataTable({
                 ajax: {
-                    url: '/dashboard/planting/report/data',
+                    url: '/admin/planting/data/report',
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
-                        device_id: deviceId
+                        id: deviceId
                     },
                 },
                 columns: [{

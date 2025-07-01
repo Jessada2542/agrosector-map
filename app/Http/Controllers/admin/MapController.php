@@ -337,4 +337,41 @@ class MapController extends Controller
                 ->make(true);
         }
     }
+
+    public function plantingDataReport(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:user_use_sensors,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        if ($request->ajax()) {
+            $query = PlantingReport::with('plantingImage')
+                ->where('use_user_sensor_id', $request->input('id'))
+                ->orderBy('created_at', 'desc');
+
+            return DataTables::eloquent($query)
+                ->addIndexColumn()
+                ->addColumn('image', function ($row) {
+                    $images = $row->plantingImage->pluck('image')->toArray();
+                    if (count($images) > 0) {
+                        $imageHtml = '';
+                        foreach ($images as $image) {
+                            $url = asset('images/platnings/' . $image);
+                            $imageHtml .= '<img src="' . $url . '" width="50" height="50" class="inline-block mr-2 rounded border preview-image" style="cursor: pointer;">';
+                        }
+                        return $imageHtml;
+                    }
+                    return 'ไม่มีรูปภาพ';
+                })
+                ->editColumn('datetime', function ($row) {
+                    return $row->created_at->format('d-m-Y H:i');
+                })
+                ->rawColumns(['image', 'datetime'])
+                ->make(true);
+        }
+    }
 }

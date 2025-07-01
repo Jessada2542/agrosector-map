@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function() {
             Route::match(['get', 'post'], '/planting', 'planting')->name('admin.planting');
             Route::get('/planting/data', 'plantingData')->name('admin.planting.data');
             Route::post('/planting/data/sensor', 'plantingDataSensor')->name('admin.planting.data.sensor');
+            Route::post('/planting/data/report', 'plantingDataReport')->name('admin.planting.data.report');
         });
     });
 
