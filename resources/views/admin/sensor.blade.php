@@ -272,7 +272,7 @@
                         success: function(districts) {
                             console.log(districts);
 
-                            if (districts.length > 0) {
+                            if (districts) {
                                 $('#device-district').empty().append('<option value="" disabled selected>เลือกอำเภอ</option>');
                                 $.each(districts, function(index, item) {
                                     $('#device-district').append('<option value="' + item.id + '">' + item.name + '</option>');
