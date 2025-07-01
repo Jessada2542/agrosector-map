@@ -36,7 +36,7 @@
         <a href="{{ route('setting.index') }}" class="{{ (isset($sideActive) && $sideActive == 'setting') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-gear"></i> จัดการเช็นเชอร์
         </a>
-        <a href="{{ route('user.index') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
+        <a href="{{ route('admin.users.profile') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-users"></i> บัญชีผู้ใช้
         </a>
         <a href="{{ route('logout') }}" class="px-4 py-2 bg-red-200 hover:bg-red-300 text-red-800 rounded mt-4">
@@ -64,7 +64,7 @@
         <a href="{{ route('setting.index') }}" class="hover:bg-white hover:text-green-800 px-4 py-2 rounded transition {{ (isset($sideActive) && $sideActive == 'setting') ? 'side-active' : '' }}">
             <i class="fa-solid fa-gear"></i> จัดการเช็นเชอร์
         </a>
-        <a href="{{ route('user.index') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
+        <a href="{{ route('admin.users.profile') }}" class="{{ (isset($sideActive) && $sideActive == 'user') ? 'side-active' : '' }} px-4 py-2 hover:bg-white hover:text-green-800 rounded transition">
             <i class="fa-solid fa-users"></i> บัญชีผู้ใช้
         </a>
         <a href="{{ route('logout') }}" class="mt-auto hover:bg-red-100 bg-red-200 px-4 py-2 rounded transition text-red-800">
