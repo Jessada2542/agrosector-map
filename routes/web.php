@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\MapController as AdminMapController;
 use App\Http\Controllers\admin\PlantingController as AdminPlantingController;
+use App\Http\Controllers\admin\SettingSensorController as AdminSettingSensorController;
 use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,13 @@ Route::middleware('auth')->group(function() {
                 Route::get('/data', 'data')->name('admin.planting.data');
                 Route::post('/data/sensor', 'dataSensor')->name('admin.planting.data.sensor');
                 Route::post('/data/report', 'dataReport')->name('admin.planting.data.report');
+            });
+        });
+        Route::controller(AdminSettingSensorController::class)->group(function() {
+            Route::prefix('/setting/sensor')->group(function() {
+                Route::match(['get', 'post'], '/', 'index')->name('admin.setting.sensor');
+                Route::get('/data', 'data')->name('admin.setting.sensor.data');
+                Route::put('/update', 'update')->name('admin.setting.sensor.update');
             });
         });
     });

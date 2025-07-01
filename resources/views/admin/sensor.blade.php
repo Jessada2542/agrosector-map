@@ -2,10 +2,21 @@
 @section('content')
 <div class="m-5">
         <div class="flex justify-between items-center p-6 rounded-xl shadow-sm border border-green-200 mb-6">
-            <h1 class="text-2xl font-bold text-green-700 mb-2"><i class="fa-solid fa-users"></i> ผู้ใช้งานระบบ</h1>
+            <h1 class="text-2xl font-bold text-green-700 mb-2"><i class="fa-solid fa-gear"></i> จัดการเซนเซอร์</h1>
             <button id="btn-modal-add-user" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                <i class="fa-solid fa-plus"></i> เพิ่มผู้ใช้
+                <i class="fa-solid fa-plus"></i> เพิ่มเซนเซอร์
             </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
+                <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> เซนเซอร์ทั้งหมด</div>
+                <div class="text-3xl font-bold text-green-800">124 ตัว</div>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
+                <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> เซ็นเซอร์ที่ว่าง</div>
+                <div class="text-3xl font-bold text-green-800">1 ตัว</div>
+            </div>
         </div>
 
         <div class="overflow-x-auto">
@@ -13,13 +24,10 @@
                 <thead>
                     <tr class="bg-green-100 text-green-600">
                         <th class="px-4 py-2 border-b">#</th>
-                        <th class="px-4 py-2 border-b">รูปภาพ</th>
-                        <th class="px-4 py-2 border-b">ชื่อ</th>
-                        <th class="px-4 py-2 border-b">ชื่อผู้ใช้ (Username)</th>
-                        <th class="px-4 py-2 border-b">อีเมล</th>
-                        <th class="px-4 py-2 border-b">เบอร์โทร</th>
-                        <th class="px-4 py-2 border-b">ที่อยู่</th>
-                        <th class="px-4 py-2 border-b">วันที่สร้าง</th>
+                        <th class="px-4 py-2 border-b">ผู้ใช้งาน</th>
+                        <th class="px-4 py-2 border-b">รหัสอุปกรณ์</th>
+                        <th class="px-4 py-2 border-b">ตำแหน่ง</th>
+                        <th class="px-4 py-2 border-b">ที่ตั้ง</th>
                         <th class="px-4 py-2 border-b">การจัดการ</th>
                     </tr>
                 </thead>
@@ -141,7 +149,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
-        var table = $('#table').DataTable({
+        v/* ar table = $('#table').DataTable({
             ajax: {
                 url: '/admin/users',
                 type: 'POST',
@@ -161,7 +169,7 @@
                 { data: 'action' }
             ],
             responsive: true,
-        });
+        }); */
 
         $('#btn-modal-add-user').on('click', function() {
             $('#modal-add-user').removeClass('hidden').addClass('flex');
