@@ -176,7 +176,7 @@
                 url: '/admin/planting/data',
                 method: 'GET',
                 data: {
-                    id: deviceId,å
+                    id: deviceId,
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
