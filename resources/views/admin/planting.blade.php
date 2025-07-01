@@ -180,6 +180,8 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
+                    console.log(response);
+
                     if (response.status) {
                         $('#general-info').html(`
                             <h2 class="text-lg font-semibold mb-4">${response.data.name}</h2>
@@ -195,9 +197,7 @@
                 }
             });
 
-            // ตรวจสอบว่า DataTable ถูกสร้างไว้แล้วหรือยัง
-            if ($.fn.dataTable.isDataTable('#table-sensor')) {
-                // ถ้ามีแล้ว ให้ทำการล้างและโหลดใหม่
+            /* if ($.fn.dataTable.isDataTable('#table-sensor')) {
                 $('#table-sensor').DataTable().destroy();
             }
 
@@ -244,7 +244,6 @@
             });
 
             if ($.fn.dataTable.isDataTable('#table-planting')) {
-                // ถ้ามีแล้ว ให้ทำการล้างและโหลดใหม่
                 $('#table-planting').DataTable().destroy();
             }
 
@@ -273,7 +272,7 @@
                 ],
                 responsive: true,
                 scrollX: true,
-            });
+            }); */
         });
     </script>
 @endsection
