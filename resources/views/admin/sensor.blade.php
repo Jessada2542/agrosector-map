@@ -159,6 +159,24 @@
             width: '100%',
         });
 
+        $('#device-province').select2({
+            placeholder: 'เลือกจังหวัด',
+            allowClear: true,
+            width: '100%',
+        });
+
+        $('#device-district').select2({
+            placeholder: 'เลือกอำเภอ',
+            allowClear: true,
+            width: '100%',
+        });
+
+        $('#device-subdistrict').select2({
+            placeholder: 'เลือกตำบล',
+            allowClear: true,
+            width: '100%',
+        });
+
         $('#btn-modal-add').on('click', function() {
             $('#modal-add').removeClass('hidden').addClass('flex');
             $('#sensor-device').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
@@ -222,38 +240,159 @@
             });
         });
 
-        $(document).on('click', '.btn-info', function() {
+        $(document).on('click', '.btn-edit', function() {
             const id = $(this).data('id');
 
             $.ajax({
-                url: '/admin/users/data',
+                url: '/admin/sensor/edit/' + id,
                 method: 'GET',
                 data: {
-                    id: id,
                     _token: '{{ csrf_token() }}'
                 },
-                success: function (res) {
-                    if (res.status) {
-                        const data = res.data;
-                        $('#edit-id').val(id);
-                        $('#edit-image').attr('src', data.image);
-                        $('#avatar-input').val('');
-                        $('#edit-name').val(data.name);
-                        $('#edit-username').val(data.username);
-                        $('#edit-email').val(data.email);
-                        $('#edit-phone').val(data.phone);
-                        $('#edit-address').val(data.address);
-                        $('#edit-created-at').val(data.created_at);
+                success: function(response) {
+                    $('#modal-edit-sensor').removeClass('hidden');
+                    $('#text-sensor-name').text('แก้ไข : ' + response.data.sensor_key.key);
+                    $('#device-key').val(response.data.sensor_key.key);
+                    $('#device-position-lat').val(response.data.lat ?? '');
+                    $('#device-position-lon').val(response.data.lon ?? '');
+                    $('#device-id').val(response.data.id);
 
-                        $('#modal-edit').removeClass('hidden').addClass('flex');
-                    } else {
-                        Swal.fire('ผิดพลาด', 'ไม่สามารถโหลดข้อมูลได้', 'error');
-                    }
+                    // === โหลดจังหวัดและ trigger change เพื่อโหลดอำเภอ ===
+                    $('#device-province').val(response.data.province_code).trigger('change');
+
+                    // === โหลดอำเภอแล้ว set ค่า ===
+                    $.ajax({
+                        url: '/api/districts',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            province_code: response.data.province_code
+                        },
+                        dataType: 'json',
+                        success: function(districts) {
+                            $('#device-district').empty().append('<option value="" disabled selected>เลือกอำเภอ</option>');
+                            $.each(districts, function(index, item) {
+                                $('#device-district').append('<option value="' + item.id + '">' + item.name + '</option>');
+                            });
+
+                            $('#device-district').val(response.data.district_code).trigger('change');
+
+                            // === โหลดตำบลแล้ว set ค่า ===
+                            $.ajax({
+                                url: '/api/subdistricts',
+                                type: 'POST',
+                                data: {
+                                    _token: '{{ csrf_token() }}',
+                                    district_code: response.data.district_code
+                                },
+                                dataType: 'json',
+                                success: function(subdistricts) {
+                                    $('#device-subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
+                                    $.each(subdistricts, function(index, item) {
+                                        $('#device-subdistrict').append('<option value="' + item.id + '">' + item.name + '</option>');
+                                    });
+
+                                    $('#device-subdistrict').val(response.data.subdistrict_code);
+                                }
+                            });
+                        }
+                    });
                 },
-                error: function () {
-                    Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
+                error: function(xhr) {
+                    Swal.fire('ผิดพลาด!', 'ไม่พบอุปกรณ์ device.', 'error');
                 }
             });
+        });
+
+        $('#btn-save-sensor').on('click', function() {
+            const deviceId = $('#device-id').val();
+            const positionLat = $('#device-position-lat').val();
+            const positionLon = $('#device-position-lon').val();
+            const provinceId = $('#device-province').val();
+            const districtId = $('#device-district').val();
+            const subdistrictId = $('#device-subdistrict').val();
+
+            if (!positionLat || !positionLon) {
+                Swal.fire('ผิดพลาด!', 'กรุณากรอกตำแหน่ง Latitude และ Longitude.', 'error');
+                return;
+            }
+
+            if (!provinceId || !districtId || !subdistrictId) {
+                Swal.fire('ผิดพลาด!', 'กรุณาเลือกจังหวัด, อำเภอ และตำบล.', 'error');
+                return;
+            }
+
+            $.ajax({
+                url: '/admin/sensor/update',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: deviceId,
+                    lat: positionLat,
+                    lon: positionLon,
+                    province_code: provinceId,
+                    district_code: districtId,
+                    subdistrict_code: subdistrictId
+                },
+                success: function(response) {
+                    if (response.status) {
+                        Swal.fire('Success!', 'อัพเดตข้อมูลอุปกรณ์เรียบร้อยแล้ว.', 'success');
+                        $('#modal-edit').addClass('hidden');
+
+                        table.ajax.reload();
+                    } else {
+                        Swal.fire('ผิดพลาด!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
+                    }
+                },
+                error: function(xhr) {
+                    Swal.fire('ผิดพลาด!', 'ไม่สามารถอัพเดตข้อมูลอุปกรณ์ได้.', 'error');
+                }
+            });
+        });
+
+        $('#device-province').on('change', function() {
+            var provinceId = $(this).val();
+            $('#device-district').empty().append('<option value="" disabled selected>เลือกอำเภอ</option>');
+            $('#device-subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
+            if (provinceId) {
+                $.ajax({
+                    url: '/api/districts',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        province_code: provinceId
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(index, item) {
+                            $('#device-district').append('<option value="' + item.id + '">' + item
+                                .name + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#device-district').on('change', function() {
+            var districtId = $(this).val();
+            $('#device-subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
+            if (districtId) {
+                $.ajax({
+                    url: '/api/subdistricts',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        district_code: districtId
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(index, item) {
+                            $('#device-subdistrict').append('<option value="' + item.id + '">' + item
+                                .name + '</option>');
+                        });
+                    }
+                });
+            }
         });
 
         $('.closeModal').on('click', function() {

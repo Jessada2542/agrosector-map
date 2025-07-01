@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function() {
                 Route::match(['get', 'post'], '/', 'index')->name('admin.setting.sensor');
                 Route::post('/store', 'store')->name('admin.setting.sensor.store');
                 Route::get('/data', 'data')->name('admin.setting.sensor.data');
+                Route::get('/edit/{id}', 'edit')->name('admin.setting.sensor.edit');
                 Route::post('/update', 'update')->name('admin.setting.sensor.update');
             });
         });

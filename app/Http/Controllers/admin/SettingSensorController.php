@@ -46,7 +46,7 @@ class SettingSensorController extends Controller
                         : '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-red-500 rounded">ออฟไลน์</span>';
                 }) */
                 ->addColumn('action', function ($row) {
-                    return '<button class="px-3 py-1 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded btn-edit" data-id="' . $row->id . '"><i class="fa-solid fa-gear"></i> แก้ไข</button>';
+                    return '<button class="px-3 py-1 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded btn-edit" data-id="' . $row->id . '"><i class="fa-solid fa-pen-to-square"></i> แก้ไข</button>';
                 })
                 ->rawColumns(['user_name', 'sensor_key', 'position', 'address'/* , 'status' */, 'action'])
                 ->make(true);
@@ -95,6 +95,25 @@ class SettingSensorController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Sensor assigned to user successfully'
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $userSensor = UserSensor::whereId($id)
+            ->with('sensorKey', 'province', 'district', 'subdistrict')
+            ->first();
+
+        if (!$userSensor) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Sensor not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $userSensor
         ]);
     }
 
