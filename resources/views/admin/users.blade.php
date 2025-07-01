@@ -35,7 +35,7 @@
             <h2 class="text-center text-xl font-bold mb-4">สร้างผู้ใช้ใหม่</h2>
             <div class="mb-4">
                 <div class="flex items-center gap-4 mb-3">
-                    <img id="user-image" src="" alt="รูปโปรไฟล์" class="w-16 h-16 rounded-full object-cover border">
+                    <img id="user-image" src="{{ asset('images/avatars/No_image.png') }}" alt="รูปโปรไฟล์" class="w-16 h-16 rounded-full object-cover border">
                     <div>
                         <label class="block text-sm font-medium">อัปโหลดรูปใหม่</label>
                         <input type="file" id="user-avatar" class="mt-1 text-sm text-gray-600">
@@ -165,6 +165,15 @@
 
         $('#btn-modal-add-user').on('click', function() {
             $('#modal-add-user').removeClass('hidden').addClass('flex');
+
+            $('#user-image').attr('src', '/images/avatars/No_image.png');
+            $('#user-avatar').val('');
+            $('#user-name').val('');
+            $('#user-username').val('');
+            $('#user-password').val('');
+            $('#user-email').val('');
+            $('#user-phone').val('');
+            $('#user-address').val('');
         });
 
         $('#user-avatar').on('change', function (event) {
