@@ -203,21 +203,26 @@
                 return;
             }
 
+            const formData = new FormData();
+            if (avatarInput.files.length > 0) {
+                formData.append('avatar', avatarInput.files[0]);
+            }
+            formData.append('name', name);
+            formData.append('username', username);
+            formData.append('password', password);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('address', address);
+
             $.ajax({
                 url: '/admin/users/store',
                 method: 'POST',
                 processData: false,
                 contentType: false,
-                data: {
-                    avatar: avatarInput.files[0],
-                    name: name,
-                    username: username,
-                    password: password,
-                    email: email,
-                    phone: phone,
-                    address: address,
-                    _token: '{{ csrf_token() }}'
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
+                data: formData,
                 success: function (res) {
                     if (res.status) {
                         Swal.fire('สำเร็จ', 'เพิ่มผู้ใช้ใหม่เรียบร้อยแล้ว', 'success');
