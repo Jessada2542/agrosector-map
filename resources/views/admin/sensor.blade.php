@@ -196,7 +196,7 @@
             }
 
             $.ajax({
-                url: '/admin/sensors/store',
+                url: '/admin/sensor/store',
                 method: 'POST',
                 data: {
                     sensor_id: sensorDevice,
