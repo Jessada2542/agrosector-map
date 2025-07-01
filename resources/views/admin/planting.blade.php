@@ -91,7 +91,7 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const selectButtons = document.querySelectorAll('.btn-select');
+            const selectButtons = document.querySelectorAll('.btn-info');
             const tabLinks = document.querySelectorAll('.tab-link');
             const tabContents = document.querySelectorAll('.tab-content');
 
