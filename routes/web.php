@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/dashboard/data', 'dashboardData')->name('admin.data');
             Route::match(['get', 'post'], '/users', 'users')->name('admin.users');
             Route::get('/users/data', 'usersData')->name('admin.users.data');
+            Route::post('/users/store', 'usersStore')->name('admin.users.store');
             Route::post('/users/update', 'usersUpdate')->name('admin.users.update');
         });
     });

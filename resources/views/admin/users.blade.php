@@ -3,7 +3,7 @@
 <div class="m-5">
         <div class="flex justify-between items-center p-6 rounded-xl shadow-sm border border-green-200 mb-6">
             <h1 class="text-2xl font-bold text-green-700 mb-2"><i class="fa-solid fa-chart-line"></i> ผู้ใช้งานระบบ</h1>
-            <button id="btn-add-user" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+            <button id="btn-modal-add-user" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
                 <i class="fa-solid fa-plus"></i> เพิ่มผู้ใช้
             </button>
         </div>
@@ -34,16 +34,23 @@
         <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
             <h2 class="text-center text-xl font-bold mb-4">สร้างผู้ใช้ใหม่</h2>
             <div class="mb-4">
+                <div class="flex items-center gap-4 mb-3">
+                    <img id="user-image" src="" alt="รูปโปรไฟล์" class="w-16 h-16 rounded-full object-cover border">
+                    <div>
+                        <label class="block text-sm font-medium">อัปโหลดรูปใหม่</label>
+                        <input type="file" id="user-avatar" class="mt-1 text-sm text-gray-600">
+                    </div>
+                </div>
                 <div class="mb-3">
-                    <label for="user-name">ชื่อ</label>
+                    <label for="user-name">ชื่อ <span class="text-sm text-red-500">(ต้องกรอก)</span></label>
                     <input type="text" id="user-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-3">
-                    <label for="user-username">ชื่อผู้ใช้ (Username)</label>
+                    <label for="user-username">ชื่อผู้ใช้ (Username) <span class="text-sm text-red-500">(ต้องกรอก)</span></label>
                     <input type="text" id="user-username" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-3">
-                    <label for="user-password">รหัสผ่าน (Password)</label>
+                    <label for="user-password">รหัสผ่าน (Password) <span class="text-sm text-red-500">(ต้องกรอก)</span></label>
                     <input type="password" id="user-password" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-3">
@@ -156,8 +163,67 @@
             reponsive: true,
         });
 
-        $('#btn-add-user').on('click', function() {
+        $('#btn-modal-add-user').on('click', function() {
             $('#modal-add-user').removeClass('hidden').addClass('flex');
+        });
+
+        $('#user-avatar').on('change', function (event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#user-image').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+        $('#btn-add-user').on('click', function() {
+            const avatarInput = $('#user-avatar')[0];
+            const name = $('#user-name').val();
+            const username = $('#user-username').val();
+            const password = $('#user-password').val();
+            const email = $('#user-email').val();
+            const phone = $('#user-phone').val();
+            const address = $('#user-address').val();
+
+            if (!name || !username || !password) {
+                Swal.fire('ผิดพลาด', 'กรุณากรอกข้อมูลที่จำเป็น', 'error');
+                return;
+            }
+
+            $.ajax({
+                url: '/admin/users/store',
+                method: 'POST',
+                processData: false,
+                contentType: false,
+                data: {
+                    avatar: avatarInput.files[0],
+                    name: name,
+                    username: username,
+                    password: password,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (res) {
+                    if (res.status) {
+                        Swal.fire('สำเร็จ', 'เพิ่มผู้ใช้ใหม่เรียบร้อยแล้ว', 'success');
+                        $('#modal-add-user').addClass('hidden');
+
+                        table.ajax.reload();
+                    } else {
+                        Swal.fire('ผิดพลาด', res.message || 'ไม่สามารถเพิ่มผู้ใช้ได้', 'error');
+                    }
+                },
+                error: function (xhr) {
+                    let msg = xhr.responseJSON?.message || 'เกิดข้อผิดพลาด';
+                    Swal.fire('ผิดพลาด', msg, 'error');
+                }
+            });
         });
 
         $(document).on('click', '.btn-info', function() {

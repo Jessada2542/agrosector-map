@@ -175,6 +175,38 @@ class MapController extends Controller
         ]);
     }
 
+    public function usersStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|unique:users,username|max:255',
+            'password' => 'required|string|min:8|confirmed',
+            'address' => 'nullable|string|max:255',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        $avatarName = null;
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatar->move(public_path('images/avatars'), $avatarName);
+        }
+
+        User::create([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'password' => bcrypt($request->input('password')),
+            'address' => $request->input('address'),
+            'avatar' => $avatarName,
+        ]);
+
+        return response()->json(['status' => true, 'message' => 'User created successfully']);
+    }
+
     public function usersUpdate(Request $request)
     {
         $validator = Validator::make($request->all(), [
