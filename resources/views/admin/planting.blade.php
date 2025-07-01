@@ -168,6 +168,8 @@
         });
 
         $(document).on('click', '.btn-info', function() {
+            $('.tab-content').addClass('hidden');
+
             var deviceId = $(this).data('id');
             $('#device_id').val(deviceId);
             $('#general-info').html('<p>กำลังโหลดข้อมูล...</p>');
