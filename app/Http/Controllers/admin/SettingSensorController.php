@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\GeoCode;
 use App\Models\SensorKey;
 use App\Models\User;
 use App\Models\UserSensor;
@@ -54,9 +55,18 @@ class SettingSensorController extends Controller
         $sensorUse = UserSensor::count();
         $sensorNotUse = $sensorAll - $sensorUse;
         $users = User::where('role_id', 1)->select('id', 'name')->get();
+        $province = GeoCode::select('province_code as id', 'province_name_th as name')
+            ->groupBy('province_code', 'province_name_th')
+            ->get();
+        $district = GeoCode::select('district_code as id', 'district_name_th as name')
+            ->groupBy('district_code', 'district_name_th')
+            ->get();
+        $subdistrict = GeoCode::select('subdistrict_code as id', 'subdistrict_name_th as name')
+            ->groupBy('subdistrict_code', 'subdistrict_name_th')
+            ->get();
         $sideActive = 'setting';
 
-        return view('admin.sensor', compact('sideActive', 'users', 'sensorAll', 'sensorUse', 'sensorNotUse'));
+        return view('admin.sensor', compact('sideActive', 'users', 'sensorAll', 'sensorUse', 'sensorNotUse', 'province', 'district', 'subdistrict'));
     }
 
     public function data(Request $request)
