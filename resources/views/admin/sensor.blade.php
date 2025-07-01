@@ -15,11 +15,11 @@
             </div>
             <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                 <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> เซนเซอร์ที่ใช้งาน</div>
-                <div class="text-3xl font-bold text-green-800">{{ $sensorUse }} ตัว</div>
+                <div class="text-3xl font-bold text-green-800" id="sensor-use">{{ $sensorUse }} ตัว</div>
             </div>
             <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                 <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> เซ็นเซอร์ที่ว่าง</div>
-                <div class="text-3xl font-bold text-green-800">{{ $sensorNotUse }} ตัว</div>
+                <div class="text-3xl font-bold text-green-800" id="sensor-not-use">{{ $sensorNotUse }} ตัว</div>
             </div>
         </div>
 
@@ -207,6 +207,8 @@
                     if (res.status) {
                         Swal.fire('สำเร็จ', 'เพิ่มเซ็นเซอร์เรียบร้อยแล้ว', 'success');
                         $('#modal-add').addClass('hidden');
+                        $('#sensor-use').text(parseInt($('#sensor-use').text()) + 1 + ' ตัว');
+                        $('#sensor-not-use').text(parseInt($('#sensor-not-use').text()) - 1 + ' ตัว');
 
                         table.ajax.reload();
                     } else {
