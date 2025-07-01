@@ -270,6 +270,8 @@
                         },
                         dataType: 'json',
                         success: function(districts) {
+                            console.log(districts);
+
                             if (districts.length > 0) {
                                 $('#device-district').empty().append('<option value="" disabled selected>เลือกอำเภอ</option>');
                                 $.each(districts, function(index, item) {
