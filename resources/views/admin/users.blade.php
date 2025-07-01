@@ -156,6 +156,10 @@
             reponsive: true,
         });
 
+        $('#btn-add-user').on('click', function() {
+            $('#modal-add-user').removeClass('hidden').addClass('flex');
+        });
+
         $(document).on('click', '.btn-info', function() {
             const id = $(this).data('id');
 
