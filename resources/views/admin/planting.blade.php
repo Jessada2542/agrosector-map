@@ -90,62 +90,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const selectButtons = document.querySelectorAll('.btn-info');
-            const tabLinks = document.querySelectorAll('.tab-link');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            // 🔒 ล็อกปุ่ม tab ตอนเริ่มต้น
-            tabLinks.forEach(tab => {
-                tab.classList.add('pointer-events-none', 'opacity-50');
-            });
-
-            // ✅ เมื่อกดเลือกอุปกรณ์
-            selectButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const deviceId = this.dataset.id;
-
-                    // 🔓 ปลดล็อกปุ่ม tab
-                    tabLinks.forEach(tab => {
-                        tab.classList.remove('pointer-events-none', 'opacity-50');
-                        tab.classList.add('hover:text-green-600', 'hover:border-green-600');
-                    });
-
-                    // ✅ ทำให้แท็บแรก active และแสดงเนื้อหา
-                    tabLinks.forEach((tab, index) => {
-                        tab.classList.remove('text-green-600', 'border-green-600');
-                        if (index === 0) {
-                            tab.classList.add('text-green-600', 'border-green-600');
-                        }
-                    });
-
-                    tabContents.forEach((content, index) => {
-                        content.classList.add('hidden');
-                        if (index === 0) {
-                            content.classList.remove('hidden');
-                        }
-                    });
-
-                    // ✅ ถ้าต้องการ: ส่ง deviceId ไปโหลดข้อมูลแบบ AJAX เพิ่มเติมตรงนี้
-                });
-            });
-
-            // ✅ เพิ่ม event คลิก tab เพื่อสลับเนื้อหา
-            tabLinks.forEach((tab, index) => {
-                tab.addEventListener('click', function() {
-                    if (tab.classList.contains('pointer-events-none')) return;
-
-                    tabLinks.forEach(t => t.classList.remove('text-green-600', 'border-green-600'));
-                    tab.classList.add('text-green-600', 'border-green-600');
-
-                    tabContents.forEach(c => c.classList.add('hidden'));
-                    if (tabContents[index]) {
-                        tabContents[index].classList.remove('hidden');
-                    }
-                });
-            });
-        });
-
         var table = $('#table').DataTable({
             ajax: {
                 url: '/admin/planting',
@@ -165,6 +109,67 @@
                 { data: 'action' }
             ],
             responsive: true,
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // 🔒 ล็อก tab ตอนโหลดหน้า
+            tabLinks.forEach(tab => {
+                tab.classList.add('pointer-events-none', 'opacity-50');
+            });
+
+            // ✅ Event Delegation: จับคลิกปุ่ม .btn-info ไม่ว่าจะมาจากไหน
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.classList.contains('btn-info')) {
+                    const deviceId = e.target.dataset.id;
+
+                    // 🔓 ปลดล็อก tab ทุกปุ่ม
+                    tabLinks.forEach(tab => {
+                        tab.classList.remove('pointer-events-none', 'opacity-50');
+                        tab.classList.add('hover:text-green-600', 'hover:border-green-600');
+                    });
+
+                    // ✅ ทำให้แท็บแรก active
+                    tabLinks.forEach((tab, index) => {
+                        tab.classList.remove('text-green-600', 'border-green-600');
+                        if (index === 0) {
+                            tab.classList.add('text-green-600', 'border-green-600');
+                        }
+                    });
+
+                    // ✅ แสดงเนื้อหาแท็บแรก
+                    tabContents.forEach((content, index) => {
+                        content.classList.add('hidden');
+                        if (index === 0) {
+                            content.classList.remove('hidden');
+                        }
+                    });
+
+                    // ✅ โหลดข้อมูลเพิ่มเติมได้ตรงนี้ (เช่นผ่าน AJAX)
+                    console.log('เลือกอุปกรณ์:', deviceId);
+                    // Example:
+                    // fetch(`/api/device/${deviceId}`).then(...);
+                }
+            });
+
+            // ✅ คลิกเปลี่ยนแท็บ
+            tabLinks.forEach((tab, index) => {
+                tab.addEventListener('click', function () {
+                    if (tab.classList.contains('pointer-events-none')) return;
+
+                    // ลบ active เดิม
+                    tabLinks.forEach(t => t.classList.remove('text-green-600', 'border-green-600'));
+                    tab.classList.add('text-green-600', 'border-green-600');
+
+                    // ซ่อน/โชว์เนื้อหา
+                    tabContents.forEach(c => c.classList.add('hidden'));
+                    if (tabContents[index]) {
+                        tabContents[index].classList.remove('hidden');
+                    }
+                });
+            });
         });
 
         $(document).on('click', '.btn-info', function() {
