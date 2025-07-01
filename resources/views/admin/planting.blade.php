@@ -202,7 +202,7 @@
                 }
             });
 
-            /* if ($.fn.dataTable.isDataTable('#table-sensor')) {
+            if ($.fn.dataTable.isDataTable('#table-sensor')) {
                 $('#table-sensor').DataTable().destroy();
             }
 
@@ -277,7 +277,7 @@
                 ],
                 responsive: true,
                 scrollX: true,
-            }); */
+            });
         });
     </script>
 @endsection
