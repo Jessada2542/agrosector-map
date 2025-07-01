@@ -173,9 +173,10 @@
             $('#general-info').html('<p>กำลังโหลดข้อมูล...</p>');
 
             $.ajax({
-                url: '/dashboard/data/' + deviceId,
+                url: '/admin/planting/data',
                 method: 'GET',
                 data: {
+                    id: deviceId,å
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {

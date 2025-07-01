@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GeoCode;
+use App\Models\PlantingReport;
 use App\Models\User;
 use App\Models\UserUseSensor;
 use Carbon\Carbon;
@@ -286,5 +287,29 @@ class MapController extends Controller
         $sideActive = 'planting';
 
         return view('admin.planting', compact('sideActive'));
+    }
+
+    public function plantingData(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:user_use_sensors,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        $sensorData = UserUseSensor::whereId($request->id)->first();
+        if (!$sensorData) {
+            return response()->json(['error' => 'Sensor not found'], 404);
+        }
+
+        $plantingReport = PlantingReport::where('use_user_sensor_id', $request->id)->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $sensorData,
+            'planting_report' => $plantingReport,
+        ]);
     }
 }
