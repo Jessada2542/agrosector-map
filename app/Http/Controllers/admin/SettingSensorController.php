@@ -7,7 +7,6 @@ use App\Models\GeoCode;
 use App\Models\SensorKey;
 use App\Models\User;
 use App\Models\UserSensor;
-use App\Models\UserUseSensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -119,12 +118,10 @@ class SettingSensorController extends Controller
 
     public function data(Request $request)
     {
-        // ดึง user_sensor_id ที่มี useSensor.status = 1
-        $excludedSensorIds = UserUseSensor::where('status', 1)
-            ->pluck('user_sensors_id');
+        $excludedSensorIds = UserSensor::pluck('user_sensors_id');
 
         // Query หลัก
-        $plantingData = UserSensor::with('sensorKey', 'useSensor')
+        $sensorData = UserSensor::with('sensorKey', 'useSensor')
             ->whereNotIn('id', $excludedSensorIds) // ตัดพวกที่มี status = 1 ทิ้ง
             ->where(function ($query) {
                 $query->whereDoesntHave('useSensor') // ยังไม่มี
@@ -134,16 +131,16 @@ class SettingSensorController extends Controller
             })
             ->get();
 
-        if (!$plantingData) {
+        if ($sensorData->isEmpty()) {
             return response()->json([
                 'status' => false,
-                'message' => 'Planting data not found'
+                'message' => 'Sensor data not found'
             ], 404);
         }
 
         return response()->json([
             'status' => true,
-            'data' => $plantingData
+            'data' => $sensorData
         ]);
     }
 
