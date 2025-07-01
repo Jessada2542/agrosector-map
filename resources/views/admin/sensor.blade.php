@@ -154,6 +154,12 @@
             width: '100%',
         });
 
+        $('#sensor-username').select2({
+            placeholder: 'เลือกผู้ใช้',
+            allowClear: true,
+            width: '100%',
+        });
+
         $('#btn-modal-add').on('click', function() {
             $('#modal-add').removeClass('hidden').addClass('flex');
             $('#sensor-device').empty().append('<option value="" disabled selected>เลือกอุปกรณ์</option>');
