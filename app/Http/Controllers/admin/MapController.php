@@ -276,7 +276,7 @@ class MapController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     return '<button class="btn-info bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" data-id="'. $row->id .'">
-                        ดูข้อมูล
+                        <i class="fa-regular fa-circle-question"></i> ดูข้อมูล
                     </button>';
                 })
                 ->rawColumns(['user_name', 'device_key', 'date_start', 'date_end', 'status', 'action'])
