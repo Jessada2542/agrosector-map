@@ -270,41 +270,31 @@
                         },
                         dataType: 'json',
                         success: function(districts) {
-                            console.log(districts);
+                            $('#device-district').empty().append('<option value="" disabled selected>เลือกอำเภอ</option>');
+                            $.each(districts, function(index, item) {
+                                $('#device-district').append('<option value="' + item.id + '">' + item.name + '</option>');
+                            });
 
-                            if (districts) {
-                                $('#device-district').empty().append('<option value="" disabled selected>เลือกอำเภอ</option>');
-                                $.each(districts, function(index, item) {
-                                    $('#device-district').append('<option value="' + item.id + '">' + item.name + '</option>');
-                                });
+                            $('#device-district').val(response.data.district_code).trigger('change');
 
-                                $('#device-district').val(response.data.district_code).trigger('change');
+                            // === โหลดตำบลแล้ว set ค่า ===
+                            $.ajax({
+                                url: '/api/subdistricts',
+                                type: 'POST',
+                                data: {
+                                    _token: '{{ csrf_token() }}',
+                                    district_code: response.data.district_code
+                                },
+                                dataType: 'json',
+                                success: function(subdistricts) {
+                                    $('#device-subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
+                                    $.each(subdistricts, function(index, item) {
+                                        $('#device-subdistrict').append('<option value="' + item.id + '">' + item.name + '</option>');
+                                    });
 
-                                // === โหลดตำบลแล้ว set ค่า ===
-                                $.ajax({
-                                    url: '/api/subdistricts',
-                                    type: 'POST',
-                                    data: {
-                                        _token: '{{ csrf_token() }}',
-                                        district_code: response.data.district_code
-                                    },
-                                    dataType: 'json',
-                                    success: function(subdistricts) {
-                                        if (subdistricts.length > 0) {
-                                            $('#device-subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
-                                            $.each(subdistricts, function(index, item) {
-                                                $('#device-subdistrict').append('<option value="' + item.id + '">' + item.name + '</option>');
-                                            });
-
-                                            $('#device-subdistrict').val(response.data.subdistrict_code);
-                                        } else {
-                                            $('#device-subdistrict').empty().append('<option value="" disabled selected>เลือกตำบล</option>');
-                                        }
-                                    }
-                                });
-                            } else {
-                                $('#device-district').empty().append('<option value="" disabled selected>เลือกอำเภอ</option>');
-                            }
+                                    $('#device-subdistrict').val(response.data.subdistrict_code);
+                                }
+                            });
                         }
                     });
                 },

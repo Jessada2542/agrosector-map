@@ -129,7 +129,27 @@ class SettingSensorController extends Controller
 
     public function update(Request $request)
     {
-        // Logic to update sensor settings
+        $request->validate([
+            'id' => 'required|exists:user_sensors,id',
+            'lat' => 'required',
+            'lon' => 'required',
+            'province_code' => 'required|exists:geo_codes,province_code',
+            'district_code' => 'required|exists:geo_codes,district_code',
+            'subdistrict_code' => 'required|exists:geo_codes,subdistrict_code',
+        ]);
+
+        $userSensor = UserSensor::whereId($request->input('id'))->first();
+        if (!$userSensor) {
+            return response()->json(['status' => false, 'message' => 'Device not found'], 404);
+        }
+        $userSensor->update([
+            'lat' => $request->input('lat'),
+            'lon' => $request->input('lon'),
+            'province_code' => $request->input('province_code'),
+            'district_code' => $request->input('district_code'),
+            'subdistrict_code' => $request->input('subdistrict_code'),
+        ]);
+
         return response()->json(['status' => true, 'message' => 'Settings updated successfully']);
     }
 }
