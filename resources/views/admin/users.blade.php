@@ -160,7 +160,7 @@
                 { data: 'created_at' },
                 { data: 'action' }
             ],
-            reponsive: true,
+            responsive: true,
         });
 
         $('#btn-modal-add-user').on('click', function() {

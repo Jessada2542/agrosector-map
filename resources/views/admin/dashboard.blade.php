@@ -79,7 +79,7 @@
                 { data: 'date_end' },
                 { data: 'action' }
             ],
-            reponsive: true,
+            responsive: true,
         });
 
         $(document).on('click', '.btn-info', function() {

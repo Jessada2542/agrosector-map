@@ -124,7 +124,7 @@
                     { data: 'status' },
                     { data: 'action' }
                 ],
-                reponsive: true,
+                responsive: true,
             });
 
             $('#table').on('click', '.btn-edit', function() {

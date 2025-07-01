@@ -68,6 +68,8 @@ Route::middleware('auth')->group(function() {
             Route::get('/users/data', 'usersData')->name('admin.users.data');
             Route::post('/users/store', 'usersStore')->name('admin.users.store');
             Route::post('/users/update', 'usersUpdate')->name('admin.users.update');
+            Route::match(['get', 'post'], '/planting', 'planting')->name('admin.planting');
+            Route::get('/planting/data', 'plantingData')->name('admin.planting.data');
         });
     });
 

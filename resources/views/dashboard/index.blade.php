@@ -259,7 +259,7 @@
                         data: 'datetime'
                     }
                 ],
-                reponsive: true,
+                responsive: true,
                 scrollX: true,
             });
 
@@ -291,7 +291,7 @@
                         data: 'datetime'
                     }
                 ],
-                reponsive: true,
+                responsive: true,
                 scrollX: true,
             });
         });
