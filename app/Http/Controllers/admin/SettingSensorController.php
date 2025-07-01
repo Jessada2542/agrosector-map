@@ -118,25 +118,11 @@ class SettingSensorController extends Controller
 
     public function data(Request $request)
     {
-        $excludedSensorIds = UserSensor::pluck('sensor_key_id');
+        $excludedSensorIds = UserSensor::pluck('sensor_key_id')->toArray();
 
-        // Query หลัก
-        $sensorData = UserSensor::with('sensorKey', 'useSensor')
-            ->whereNotIn('id', $excludedSensorIds) // ตัดพวกที่มี status = 1 ทิ้ง
-            ->where(function ($query) {
-                $query->whereDoesntHave('useSensor') // ยังไม่มี
-                    ->orWhereHas('useSensor', function ($q) {
-                        $q->where('status', 0); // หรือมี แต่ status = 0
-                    });
-            })
+        $sensorData = SensorKey::with('sensorKey')
+            ->whereNotIn('id', $excludedSensorIds)
             ->get();
-
-        if ($sensorData->isEmpty()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Sensor data not found'
-            ], 404);
-        }
 
         return response()->json([
             'status' => true,
