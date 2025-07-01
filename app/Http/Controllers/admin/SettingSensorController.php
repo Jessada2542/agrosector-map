@@ -8,13 +8,46 @@ use App\Models\User;
 use App\Models\UserSensor;
 use App\Models\UserUseSensor;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class SettingSensorController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
+            $query = UserSensor::with('sensorKey', 'province', 'district', 'subdistrict');
 
+            return DataTables::eloquent($query)
+                ->addIndexColumn()
+                ->editColumn('user_name', function ($row) {
+                    return $row->user->name ?? 'N/A';
+                })
+                ->editColumn('device_key', function ($row) {
+                    return $row->sensorKey->key ?? 'N/A';
+                })
+                ->editColumn('position', function ($row) {
+                    return $row->lat && $row->lon ? $row->lat . ', ' . $row->lon : 'N/A';
+                })
+               ->addColumn('address', function ($row) {
+                    $parts = [
+                        $row->province?->province_name_th ?? null,
+                        $row->district?->district_name_th ?? null,
+                        $row->subdistrict?->subdistrict_name_th ?? null,
+                    ];
+
+                    // ลบค่าว่างหรือ null ออก และรวมด้วย ', '
+                    return implode(', ', array_filter($parts));
+                })
+                ->editColumn('status', function ($row) {
+                    return $row->sensorKey->is_active == 1
+                        ? '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-green-500 rounded">ออนไลน์</span>'
+                        : '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-red-500 rounded">ออฟไลน์</span>';
+                })
+                ->addColumn('action', function ($row) {
+                    return '<button class="px-3 py-1 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded btn-edit" data-id="' . $row->id . '"><i class="fa-solid fa-gear"></i> แก้ไข</button>';
+                })
+                ->rawColumns(['user_name', 'device_key', 'position', 'address', 'status', 'action'])
+                ->make(true);
         }
 
         $sensorAll = SensorKey::count();

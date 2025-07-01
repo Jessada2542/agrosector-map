@@ -126,9 +126,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
-        /* ar table = $('#table').DataTable({
+        var table = $('#table').DataTable({
             ajax: {
-                url: '/admin/users',
+                url: '/admin/sensor',
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}'
@@ -136,17 +136,14 @@
             },
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-                { data: 'image' },
-                { data: 'name' },
-                { data: 'username' },
-                { data: 'email' },
-                { data: 'phone' },
+                { data: 'user_name' },
+                { data: 'sensor_key' },
+                { data: 'position' },
                 { data: 'address' },
-                { data: 'created_at' },
                 { data: 'action' }
             ],
             responsive: true,
-        }); */
+        });
 
         $('#sensor-device').select2({
             placeholder: 'เลือกอุปกรณ์',
