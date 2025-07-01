@@ -118,7 +118,7 @@ class SettingSensorController extends Controller
 
     public function data(Request $request)
     {
-        $excludedSensorIds = UserSensor::pluck('user_sensors_id');
+        $excludedSensorIds = UserSensor::pluck('sensor_key_id');
 
         // Query หลัก
         $sensorData = UserSensor::with('sensorKey', 'useSensor')
