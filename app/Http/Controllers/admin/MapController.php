@@ -40,25 +40,25 @@ class MapController extends Controller
                     return $row->user->name;
                 })
                 ->editColumn('n', function ($row) {
-                    return $row->latestSensor ? $row->latestSensor->n : '';
+                    return $row->latestSensor ? $row->latestSensor->n : '-';
                 })
                 ->editColumn('p', function ($row) {
-                    return $row->latestSensor ? $row->latestSensor->p : '';
+                    return $row->latestSensor ? $row->latestSensor->p : '-';
                 })
                 ->editColumn('k', function ($row) {
-                    return $row->latestSensor ? $row->latestSensor->k : '';
+                    return $row->latestSensor ? $row->latestSensor->k : '-';
                 })
                 ->editColumn('ph', function ($row) {
-                    return $row->latestSensor ? $row->latestSensor->ph : '';
+                    return $row->latestSensor ? $row->latestSensor->ph : '-';
                 })
                 ->editColumn('datetime', function ($row) {
-                    return $row->latestSensor ? $row->latestSensor->created_at->format('d-m-Y H:i') : '';
+                    return $row->latestSensor ? $row->latestSensor->created_at->format('d-m-Y H:i') : '-';
                 })
                 ->editColumn('date_start', function ($row) {
-                    return $row->start_date ? Carbon::parse($row->start_date)->format('d-m-Y') : '';
+                    return $row->start_date ? Carbon::parse($row->start_date)->format('d-m-Y') : '-';
                 })
                 ->editColumn('date_end', function ($row) {
-                    return $row->end_date ? Carbon::parse($row->end_date)->format('d-m-Y') : '';
+                    return $row->end_date ? Carbon::parse($row->end_date)->format('d-m-Y') : '-';
                 })
                 ->addColumn('action', function ($row) {
                     return '<button class="btn-info bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded flex items-center gap-1" data-id="'. $row->id .'">
