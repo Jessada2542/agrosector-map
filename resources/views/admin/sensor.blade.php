@@ -32,6 +32,7 @@
                         <th class="px-4 py-2 border-b">รหัสอุปกรณ์</th>
                         <th class="px-4 py-2 border-b">ตำแหน่ง</th>
                         <th class="px-4 py-2 border-b">ที่ตั้ง</th>
+                        <th class="px-4 py-2 border-b">สถานะ</th>
                         <th class="px-4 py-2 border-b">การจัดการ</th>
                     </tr>
                 </thead>
@@ -140,6 +141,7 @@
                 { data: 'sensor_key' },
                 { data: 'position' },
                 { data: 'address' },
+                { data: 'status' },
                 { data: 'action' }
             ],
             responsive: true,
