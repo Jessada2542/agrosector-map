@@ -192,7 +192,7 @@
                     if (response.status) {
                         $('#modal-add').removeClass('hidden');
                         $.each(response.data, function(index, item) {
-                            $('#sensor-device').append('<option value="' + item.id + '">' + item.sensor_key.key + '</option>');
+                            $('#sensor-device').append('<option value="' + item.id + '">' + item.key + '</option>');
                         });
                     } else {
                         Swal.fire('ผิดพลาด!', 'ไม่พบอุปกรณ์ที่สามารถเพิ่มได้', 'error');
