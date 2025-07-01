@@ -119,10 +119,7 @@ class SettingSensorController extends Controller
     public function data(Request $request)
     {
         $excludedSensorIds = UserSensor::pluck('sensor_key_id')->toArray();
-
-        $sensorData = SensorKey::with('sensorKey')
-            ->whereNotIn('id', $excludedSensorIds)
-            ->get();
+        $sensorData = SensorKey::whereNotIn('id', $excludedSensorIds)->get();
 
         return response()->json([
             'status' => true,
