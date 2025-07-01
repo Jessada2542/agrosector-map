@@ -304,7 +304,7 @@
             });
         });
 
-        $('#btn-save-sensor').on('click', function() {
+        $('#btn-save-edit').on('click', function() {
             const deviceId = $('#device-id').val();
             const positionLat = $('#device-position-lat').val();
             const positionLon = $('#device-position-lon').val();
