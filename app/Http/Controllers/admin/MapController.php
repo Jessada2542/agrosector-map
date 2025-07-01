@@ -61,8 +61,8 @@ class MapController extends Controller
                     return $row->end_date ? Carbon::parse($row->end_date)->format('d-m-Y') : '';
                 })
                 ->addColumn('action', function ($row) {
-                    return '<button class="btn-info bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" data-id="'. $row->id .'">
-                        ดูข้อมูล
+                    return '<button class="btn-info bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded flex items-center gap-1" data-id="'. $row->id .'">
+                        <i class="fa-regular fa-circle-question"></i> ดูข้อมูล
                     </button>';
                 })
                 ->rawColumns(['user_name', 'n', 'p', 'k', 'ph', 'datetime', 'date_start', 'date_end', 'action'])
@@ -275,7 +275,7 @@ class MapController extends Controller
                         : '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-red-500 rounded">ปิดใช้งาน</span>';
                 })
                 ->addColumn('action', function ($row) {
-                    return '<button class="btn-info bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" data-id="'. $row->id .'">
+                    return '<button class="btn-info bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded flex items-center gap-1" data-id="'. $row->id .'">
                         <i class="fa-regular fa-circle-question"></i> ดูข้อมูล
                     </button>';
                 })
