@@ -72,7 +72,7 @@ class SettingSensorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'sensor_id' => 'required|exists:user_sensors,id',
+            'sensor_id' => 'required|exists:sensor_keys,id',
             'user_id' => 'required|exists:users,id',
         ])->setAttributeNames([
             'sensor_id' => 'Sensor ID',
