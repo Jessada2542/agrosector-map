@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\GeoCode;
 use App\Models\PlantingReport;
+use App\Models\Sensor;
 use App\Models\User;
 use App\Models\UserUseSensor;
 use Carbon\Carbon;
@@ -311,5 +312,29 @@ class MapController extends Controller
             'data' => $sensorData,
             'planting_report' => $plantingReport,
         ]);
+    }
+
+    public function plantingDataSensor(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:user_use_sensors,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        if ($request->ajax()) {
+            $query = Sensor::where('use_user_sensor_id', $request->input('id'))
+                ->orderBy('created_at', 'desc');
+
+            return DataTables::eloquent($query)
+                ->addIndexColumn()
+                ->editColumn('datetime', function ($row) {
+                    return $row->created_at->format('d-m-Y H:i');
+                })
+                ->rawColumns(['datetime'])
+                ->make(true);
+        }
     }
 }

@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function() {
             Route::post('/users/update', 'usersUpdate')->name('admin.users.update');
             Route::match(['get', 'post'], '/planting', 'planting')->name('admin.planting');
             Route::get('/planting/data', 'plantingData')->name('admin.planting.data');
+            Route::post('/planting/data/sensor', 'plantingDataSensor')->name('admin.planting.data.sensor');
         });
     });
 

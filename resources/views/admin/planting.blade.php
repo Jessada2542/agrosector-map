@@ -208,11 +208,11 @@
 
             var tableSensor = $('#table-sensor').DataTable({
                 ajax: {
-                    url: '/dashboard',
+                    url: '/admin/planting/data/sensor',
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
-                        device_id: deviceId
+                        id: deviceId
                     },
                 },
                 columns: [{
