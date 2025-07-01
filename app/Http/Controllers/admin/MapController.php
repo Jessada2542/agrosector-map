@@ -10,7 +10,7 @@ class MapController extends Controller
 {
     public function index()
     {
-        User::whereId(2)->update(['password' => bcrypt('pcru67000')]);
+        User::whereId(3)->update(['password' => bcrypt('pcru67000')]);
         $provinces = GeoCode::select('province_code as id', 'province_name_th as name')
             ->groupBy('province_code', 'province_name_th')
             ->get();
