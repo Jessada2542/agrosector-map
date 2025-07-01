@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\SensorKey;
 use App\Models\User;
 use App\Models\UserSensor;
 use App\Models\UserUseSensor;
@@ -15,10 +16,14 @@ class SettingSensorController extends Controller
         if ($request->ajax()) {
 
         }
+
+        $sensorAll = SensorKey::count();
+        $sensorUse = UserSensor::count();
+        $sensorNotUse = $sensorAll - $sensorUse;
         $users = User::where('role_id', 1)->select('id', 'name')->get();
         $sideActive = 'setting';
 
-        return view('admin.sensor', compact('sideActive', 'users'));
+        return view('admin.sensor', compact('sideActive', 'users', 'sensorAll', 'sensorUse', 'sensorNotUse'));
     }
 
     public function data(Request $request)

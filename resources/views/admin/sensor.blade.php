@@ -11,15 +11,15 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
             <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                 <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> เซนเซอร์ทั้งหมด</div>
-                <div class="text-3xl font-bold text-green-800">124 ตัว</div>
+                <div class="text-3xl font-bold text-green-800">{{ $sensorAll }} ตัว</div>
             </div>
             <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                 <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> เซนเซอร์ที่ใช้งาน</div>
-                <div class="text-3xl font-bold text-green-800">123 ตัว</div>
+                <div class="text-3xl font-bold text-green-800">{{ $sensorUse }} ตัว</div>
             </div>
             <div class="bg-white p-5 rounded-xl border border-green-200 shadow hover:shadow-md transition">
                 <div class="text-green-600 text-lg font-semibold mb-2"><i class="fa-solid fa-microchip"></i> เซ็นเซอร์ที่ว่าง</div>
-                <div class="text-3xl font-bold text-green-800">1 ตัว</div>
+                <div class="text-3xl font-bold text-green-800">{{ $sensorNotUse }} ตัว</div>
             </div>
         </div>
 
