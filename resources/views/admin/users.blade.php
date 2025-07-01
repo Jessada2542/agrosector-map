@@ -1,8 +1,11 @@
 @extends('layouts.app-admin')
 @section('content')
 <div class="m-5">
-        <div class="p-6 rounded-xl shadow-sm border border-green-200 mb-6">
+        <div class="flex justify-between items-center p-6 rounded-xl shadow-sm border border-green-200 mb-6">
             <h1 class="text-2xl font-bold text-green-700 mb-2"><i class="fa-solid fa-chart-line"></i> ผู้ใช้งานระบบ</h1>
+            <button id="btn-add-user" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                <i class="fa-solid fa-plus"></i> เพิ่มผู้ใช้
+            </button>
         </div>
 
         <div class="overflow-x-auto">
@@ -24,6 +27,44 @@
                     <!-- js -->
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div id="modal-add-user" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h2 class="text-center text-xl font-bold mb-4">สร้างผู้ใช้ใหม่</h2>
+            <div class="mb-4">
+                <div class="mb-3">
+                    <label for="user-name">ชื่อ</label>
+                    <input type="text" id="user-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-3">
+                    <label for="user-username">ชื่อผู้ใช้ (Username)</label>
+                    <input type="text" id="user-username" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-3">
+                    <label for="user-password">รหัสผ่าน (Password)</label>
+                    <input type="password" id="user-password" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-3">
+                    <label for="user-email">อีเมล</label>
+                    <input type="email" id="user-email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-3">
+                    <label for="user-phone">เบอร์โทร</label>
+                    <input type="text" id="user-phone" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-3">
+                    <label for="user-address">ที่อยู่</label>
+                    <input type="text" id="user-address" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <div class="flex justify-center gap-3">
+                <button id="btn-add-user" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <i class="fa-solid fa-plus"></i> เพิ่ม
+                </button>
+                <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
+            </div>
         </div>
     </div>
 
@@ -195,6 +236,7 @@
         });
 
         $('.closeModal').on('click', function() {
+            $('#modal-add-user').addClass('hidden');
             $('#modal-edit').addClass('hidden');
         });
     </script>
