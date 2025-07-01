@@ -35,7 +35,7 @@
                     <div class="mb-3">
                         <label for="planting-device">อุปกรณ์ (S/N)</label>
                         <select id="planting-device" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="" selected>เลือกอุปกรณ์</option>
+                            <option value="" disabled selected>เลือกอุปกรณ์</option>
                             <!-- js -->
                         </select>
                     </div>
