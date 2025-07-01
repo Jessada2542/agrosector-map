@@ -42,7 +42,7 @@ class UserController extends Controller
     public function profile()
     {
         $data = User::findOrFail(Auth::id());
-        $sideActive = 'users';
+        $sideActive = 'user';
 
         return view('admin.profile', compact('sideActive', 'data'));
     }
