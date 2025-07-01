@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="mt-6 p-6 rounded-xl shadow-sm border border-green-200 mb-6">
+    <div class="m-6 p-6 rounded-xl shadow-sm border border-green-200">
         <div class="border-b border-gray-200 mb-4">
             <nav class="-mb-px flex space-x-4" aria-label="Tabs">
                 <button
@@ -49,7 +49,7 @@
         </div>
         <div class="tab-content hidden">
             <div class="w-full overflow-x-auto">
-                <table class="min-w-[900px] bg-white border border-green-200 rounded-lg shadow-lg" id="table">
+                <table class="min-w-[900px] bg-white border border-green-200 rounded-lg shadow-lg" id="table-sensor">
                     <thead>
                         <tr class="bg-green-100 text-green-600 text-sm">
                             <th class="px-4 py-2 border-b whitespace-nowrap">#</th>
@@ -167,8 +167,112 @@
             responsive: true,
         });
 
-        $('.closeModal').on('click', function() {
+        $('.btn-info').click(function() {
+            var deviceId = $(this).data('id');
+            $('#device_id').val(deviceId);
+            $('#general-info').html('<p>กำลังโหลดข้อมูล...</p>');
 
+            $.ajax({
+                url: '/dashboard/data/' + deviceId,
+                method: 'GET',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.status) {
+                        $('#general-info').html(`
+                            <h2 class="text-lg font-semibold mb-4">${response.data.name}</h2>
+                            <p>${response.data.detail}</p>
+                        `);
+                    } else {
+                        Swal.fire('ผิดพลาด!', 'ไม่พบข้อมูลของอุปกรณ์นี้.', 'error');
+                        return;
+                    }
+                },
+                error: function(xhr) {
+                    Swal.fire('ผิดพลาด!', 'ไม่พบอุปกรณ์ device.', 'error');
+                }
+            });
+
+            // ตรวจสอบว่า DataTable ถูกสร้างไว้แล้วหรือยัง
+            if ($.fn.dataTable.isDataTable('#table-sensor')) {
+                // ถ้ามีแล้ว ให้ทำการล้างและโหลดใหม่
+                $('#table-sensor').DataTable().destroy();
+            }
+
+            var tableSensor = $('#table-sensor').DataTable({
+                ajax: {
+                    url: '/dashboard',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        device_id: deviceId
+                    },
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'n'
+                    },
+                    {
+                        data: 'p'
+                    },
+                    {
+                        data: 'k'
+                    },
+                    {
+                        data: 'ph'
+                    },
+                    {
+                        data: 'ec'
+                    },
+                    {
+                        data: 'temperature'
+                    },
+                    {
+                        data: 'humidity'
+                    },
+                    {
+                        data: 'datetime'
+                    }
+                ],
+                responsive: true,
+                scrollX: true,
+            });
+
+            if ($.fn.dataTable.isDataTable('#table-planting')) {
+                // ถ้ามีแล้ว ให้ทำการล้างและโหลดใหม่
+                $('#table-planting').DataTable().destroy();
+            }
+
+            var tablePlanting = $('#table-planting').DataTable({
+                ajax: {
+                    url: '/dashboard/planting/report/data',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        device_id: deviceId
+                    },
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'image',
+                    },
+                    {
+                        data: 'detail'
+                    },
+                    {
+                        data: 'datetime'
+                    }
+                ],
+                responsive: true,
+                scrollX: true,
+            });
         });
     </script>
 @endsection
