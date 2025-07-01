@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\MapController as AdminMapController;
+use App\Http\Controllers\admin\PlantingController as AdminPlantingController;
+use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -62,16 +65,28 @@ Route::middleware('auth')->group(function() {
     Route::middleware(['check.role'])->prefix('/admin')->group(function () {
         Route::controller(AdminMapController::class)->group(function() {
             Route::get('/map', 'index')->name('admin.index');
-            Route::match(['get', 'post'], '/dashboard', 'dashboard')->name('admin.dashboard');
-            Route::get('/dashboard/data', 'dashboardData')->name('admin.data');
-            Route::match(['get', 'post'], '/users', 'users')->name('admin.users');
-            Route::get('/users/data', 'usersData')->name('admin.users.data');
-            Route::post('/users/store', 'usersStore')->name('admin.users.store');
-            Route::post('/users/update', 'usersUpdate')->name('admin.users.update');
-            Route::match(['get', 'post'], '/planting', 'planting')->name('admin.planting');
-            Route::get('/planting/data', 'plantingData')->name('admin.planting.data');
-            Route::post('/planting/data/sensor', 'plantingDataSensor')->name('admin.planting.data.sensor');
-            Route::post('/planting/data/report', 'plantingDataReport')->name('admin.planting.data.report');
+        });
+        Route::controller(AdminDashboardController::class)->group(function() {
+            Route::prefix('/dashboard')->group(function() {
+                Route::match(['get', 'post'], '/', 'index')->name('admin.dashboard');
+                Route::get('/data', 'data')->name('admin.data');
+            });
+        });
+        Route::controller(AdminUserController::class)->group(function() {
+            Route::prefix('/users')->group(function() {
+                Route::match(['get', 'post'], '/', 'index')->name('admin.users');
+                Route::get('/data', 'data')->name('admin.users.data');
+                Route::post('/store', 'store')->name('admin.users.store');
+                Route::post('/update', 'update')->name('admin.users.update');
+            });
+        });
+        Route::controller(AdminPlantingController::class)->group(function() {
+            Route::prefix('/planting')->group(function() {
+                Route::match(['get', 'post'], '/', 'index')->name('admin.planting');
+                Route::get('/data', 'data')->name('admin.planting.data');
+                Route::post('/data/sensor', 'dataSensor')->name('admin.planting.data.sensor');
+                Route::post('/data/report', 'dataReport')->name('admin.planting.data.report');
+            });
         });
     });
 
