@@ -72,57 +72,57 @@
         </div>
     </div>
 
-    <div id="modal-edit" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-            <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
-                <h2 class="text-center text-xl font-bold mb-4" id="text-sensor-name">ข้อมูล Sensor</h2>
-                <div class="mb-4">
-                    <div class="mb-3">
-                        <label for="device-key">รหัสอุปกรณ์</label>
-                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="รหัสอุปกรณ์" id="device-key" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="device-position-lat">ตำแหน่ง Latitude</label>
-                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lat" id="device-position-lat">
-                    </div>
-                    <div class="mb-3">
-                        <label for="device-position-lon">ตำแหน่ง Longitude</label>
-                        <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lon" id="device-position-lon">
-                    </div>
-                    <div class="mb-3">
-                        <label for="device-province">จังหวัด</label>
-                        <select id="device-province" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="" selected>เลือกจังหวัด</option>
-                            @foreach ($province as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="device-district">อำเภอ</label>
-                        <select id="device-district" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="" selected>เลือกอำเภอ</option>
-                            @foreach ($district as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="device-subdistrict">ตำบล</label>
-                        <select id="device-subdistrict" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="" selected>เลือกตำบล</option>
-                            @foreach ($subdistrict as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+    {{-- <div id="modal-edit" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h2 class="text-center text-xl font-bold mb-4" id="text-sensor-name">ข้อมูล Sensor</h2>
+            <div class="mb-4">
+                <div class="mb-3">
+                    <label for="device-key">รหัสอุปกรณ์</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="รหัสอุปกรณ์" id="device-key" readonly>
                 </div>
-                <input type="hidden" id="device-id">
-                <div class="flex justify-center">
-                    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2" id="btn-save-edit">บันทึก</button>
-                    <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
+                <div class="mb-3">
+                    <label for="device-position-lat">ตำแหน่ง Latitude</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lat" id="device-position-lat">
+                </div>
+                <div class="mb-3">
+                    <label for="device-position-lon">ตำแหน่ง Longitude</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="ตำแหน่ง Lon" id="device-position-lon">
+                </div>
+                <div class="mb-3">
+                    <label for="device-province">จังหวัด</label>
+                    <select id="device-province" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="" selected>เลือกจังหวัด</option>
+                        @foreach ($province as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="device-district">อำเภอ</label>
+                    <select id="device-district" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="" selected>เลือกอำเภอ</option>
+                        @foreach ($district as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="device-subdistrict">ตำบล</label>
+                    <select id="device-subdistrict" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="" selected>เลือกตำบล</option>
+                        @foreach ($subdistrict as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
+            <input type="hidden" id="device-id">
+            <div class="flex justify-center">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2" id="btn-save-edit">บันทึก</button>
+                <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 closeModal">ปิด</button>
+            </div>
         </div>
+    </div> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
