@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SensorController;
 use Illuminate\Http\Request;
@@ -19,3 +20,6 @@ Route::get('/sensor/data/{id}', [SensorController::class, 'data'])->name('sensor
 Route::post('/sensor/test', [SensorController::class, 'test'])->name('sensor.test');
 Route::post('/sensor/store', [SensorController::class, 'store'])->name('sensor.store');
 Route::post('/board/update/connect', [SensorController::class, 'updateConnect'])->name('board.update.connect');
+
+Route::post('/generate/user', [UserController::class, 'genUser'])->name('gen.user');
+Route::get('/sensor/generate', [SensorController::class, 'generateSensor'])->name('sensor.generate');

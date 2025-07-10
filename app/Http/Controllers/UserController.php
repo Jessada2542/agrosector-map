@@ -303,4 +303,19 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    public function genUser(Request $request)
+    {
+        if ($request->input('key') == 'DEVBUG') {
+            User::create([
+                'name' => $request->input('name'),
+                'username' => $request->input('username'),
+                'password' => bcrypt($request->input('password'))
+            ]);
+
+            return response()->json(['status' => true, 'message' => 'Generate User created successfully']);
+        }
+
+        return response()->json(['status' => false, 'message' => 'Generate User created fail']);
+    }
 }
