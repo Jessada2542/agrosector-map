@@ -73,6 +73,10 @@
                         <p class="text-gray-500 text-sm">ความชื้น (%)</p>
                         <p id="sensor-humidity" class="text-xl font-semibold text-indigo-600">45.00</p>
                     </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">EC</p>
+                        <p id="sensor-ec" class="text-xl font-semibold text-orange-600">40.00</p>
+                    </div>
                 </div>
             </div>
 
