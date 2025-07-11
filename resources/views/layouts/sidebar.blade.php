@@ -1,7 +1,7 @@
 <!-- ✅ MOBILE NAVBAR -->
 <nav class="lg:hidden fixed top-0 left-0 w-full bg-gradient-to-r from-green-200 to-green-400 text-green-900 flex items-center justify-between px-4 py-3 shadow z-30">
     <div>
-        <img src="{{ asset('/images/logo_sidebar.jpg') }}" alt="logo" width="100">
+        <img src="{{ asset('/images/logo_sidebar.jpg') }}" alt="logo" width="150">
     </div>
     <button id="open-sidebar" class="text-3xl text-green-800">☰</button>
 </nav>
