@@ -1,14 +1,21 @@
 <!-- Modal แบบชิดขวา -->
 <div id="modal-sensor" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 z-50 flex justify-end hidden">
-    <div class="relative bg-gray-200 w-[600px] h-full shadow-lg flex flex-col">
+    <div class="relative bg-gray-200 w-full sm:w-[600px] max-w-screen h-full shadow-lg flex flex-col">
+
+        <!-- Header -->
         <div class="flex items-center justify-between p-6">
-            <h2 class="text-xl font-semibold"><i class="fa-solid fa-circle-info"></i> ข้อมูลเกษตรกรรม</h2>
+            <h2 class="text-xl font-semibold">
+                <i class="fa-solid fa-circle-info"></i> ข้อมูลเกษตรกรรม
+            </h2>
             <button onclick="document.getElementById('modal-sensor').classList.add('hidden')"
                 class="text-gray-500 hover:text-red-600 text-2xl font-bold">
                 &times;
             </button>
         </div>
-        <div class="p-4 sm:p-6 overflow-y-auto" id="sensor-content">
+
+        <!-- Content -->
+        <div class="p-4 sm:p-6 overflow-y-auto flex-1" id="sensor-content">
+
             <!-- กล่องข้อมูลผู้ใช้และพิกัด -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-3">
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
