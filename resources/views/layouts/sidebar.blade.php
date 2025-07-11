@@ -1,6 +1,8 @@
 <!-- ✅ MOBILE NAVBAR -->
 <nav class="lg:hidden fixed top-0 left-0 w-full bg-gradient-to-r from-green-200 to-green-400 text-green-900 flex items-center justify-between px-4 py-3 shadow z-30">
-    <div class="text-xl font-bold">Agrosector</div>
+    <div>
+        <img src="{{ asset('/images/logo_sidebar.jpg') }}" alt="logo" width="100">
+    </div>
     <button id="open-sidebar" class="text-3xl text-green-800">☰</button>
 </nav>
 
@@ -12,8 +14,8 @@
     <button id="close-sidebar" class="absolute top-4 right-4 text-3xl text-green-800">×</button>
 
     <!-- Sidebar content -->
-    <div class="flex justify-center">
-        <img src="{{ asset('/images/logo_sidebar.jpg') }}" alt="logo">
+    <div class="flex justify-center my-5">
+        <img src="{{ asset('/images/logo_sidebar.jpg') }}" alt="logo" width="180">
     </div>
     <nav class="flex flex-col space-y-2 px-4">
         <a href="{{ route('map.index') }}" class="{{ (isset($sideAtive) && $sideAtive == 'map') ? 'side-active' : '' }} px-4 py-2 hover:bg-green-100 rounded">
@@ -39,8 +41,8 @@
 
 <!-- ✅ DESKTOP SIDEBAR -->
 <aside class="hidden lg:flex flex-col w-64 h-full fixed top-0 left-0 bg-gradient-to-b from-green-200 to-green-400 text-green-900 p-4 space-y-4 shadow-lg z-20">
-    <div class="flex justify-center">
-        <img src="{{ asset('/images/logo_sidebar.jpg') }}" alt="logo" width="100">
+    <div class="flex justify-center my-3">
+        <img src="{{ asset('/images/logo_sidebar.jpg') }}" alt="logo" width="250">
     </div>
     <nav class="flex flex-col space-y-2">
         <a href="{{ route('map.index') }}" class="hover:bg-green-100 px-4 py-2 rounded {{ (isset($sideAtive) && $sideAtive == 'map') ? 'side-active' : '' }}">
