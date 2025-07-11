@@ -14,7 +14,7 @@ class LoggedIn
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            return redirect()->route('map');
+            return redirect()->route('/map');
         }
 
         return $next($request);
