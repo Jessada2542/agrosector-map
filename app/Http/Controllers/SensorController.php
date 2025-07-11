@@ -95,12 +95,12 @@ class SensorController extends Controller
             return response()->json(['status' => true, 'message' => 'Sensor key is not active']);
         }
 
-        $userSenosr = UserSensor::where('user_id', $request->input('user_id'))
+        $userSensor = UserSensor::where('user_id', $request->input('user_id'))
             ->where('sensor_key_id', $sensorKey->id)
             ->first();
 
         $useUserSensor = UserUseSensor::where('user_id', $request->input('user_id'))
-            ->where('user_sensors_id', $userSenosr->id)
+            ->where('user_sensors_id', $userSensor->id)
             ->where('status', 1)
             ->first();
 
