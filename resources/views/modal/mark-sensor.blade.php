@@ -81,7 +81,7 @@
             </div>
 
             <!-- กราฟทั้งหมด -->
-            <div class="space-y-4">
+            <div class="space-y-3">
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับไนโตรเจน (N)</p>
                     <canvas id="grap-sensor-n" class="lineChart w-full min-w-0"></canvas>
