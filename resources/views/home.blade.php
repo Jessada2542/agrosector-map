@@ -195,6 +195,16 @@
                                 tension: 0.4,
                                 fill: true,
                                 pointRadius: 4
+                            },
+                            {
+                                label: 'EC',
+                                data: sensor.sensors.map(d => d.ec),
+                                borderColor: 'rgba(255, 165, 0, 1)',
+                                backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
                             }
                         ];
 
@@ -203,10 +213,11 @@
                             p: 'Phosphorus (P)',
                             k: 'Potassium (K)',
                             ph: 'pH',
-                            humidity: 'Humidity'
+                            humidity: 'Humidity',
+                            ec: 'EC'
                         };
 
-                        ['n', 'p', 'k', 'ph', 'humidity'].forEach((type) => {
+                        ['n', 'p', 'k', 'ph', 'humidity', 'ec'].forEach((type) => {
                             // destroy chart ถ้ามีอยู่แล้ว
                             if (window.sensorCharts[type]) {
                                 window.sensorCharts[type].destroy();

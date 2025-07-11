@@ -98,6 +98,10 @@
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับความชื้น (Humidity)</p>
                     <canvas id="grap-sensor-humidity" class="lineChart w-full min-w-0"></canvas>
                 </div>
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3">
+                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับการนำไฟฟ้า (EC)</p>
+                    <canvas id="grap-sensor-ec" class="lineChart w-full min-w-0"></canvas>
+                </div>
             </div>
         </div>
     </div>

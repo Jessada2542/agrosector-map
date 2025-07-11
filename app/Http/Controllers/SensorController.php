@@ -111,8 +111,6 @@ class SensorController extends Controller
             ], 422);
         }
 
-        //return response()->json($useUserSensor->id);
-
         Sensor::create([
             'user_id' => $request->input('user_id'),
             'use_user_sensor_id' => $useUserSensor->id,
