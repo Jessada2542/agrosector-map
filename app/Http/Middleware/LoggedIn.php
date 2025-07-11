@@ -13,10 +13,10 @@ class LoggedIn
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!is_null(request()->user())) {
-            return redirect('/');
-        } else {
-            return $next($request);
+        if (Auth::check()) {
+            return redirect()->route('map');
         }
+
+        return $next($request);
     }
 }
