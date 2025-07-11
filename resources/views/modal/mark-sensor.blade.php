@@ -1,5 +1,5 @@
 <!-- Modal แบบชิดขวา -->
-<div id="modal-sensor" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end hidden">
+<div id="modal-sensor" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 z-50 flex justify-end hidden">
     <div class="relative bg-gray-200 w-[600px] h-full shadow-lg flex flex-col">
         <div class="flex items-center justify-between p-6">
             <h2 class="text-xl font-semibold"><i class="fa-solid fa-circle-info"></i> ข้อมูลเกษตรกรรม</h2>
