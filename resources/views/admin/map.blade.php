@@ -146,6 +146,7 @@
                         $('#sensor-k').text(sensor.latest_sensor ? sensor.latest_sensor.k : '');
                         $('#sensor-ph').text(sensor.latest_sensor ? sensor.latest_sensor.ph : '');
                         $('#sensor-humidity').text(sensor.latest_sensor ? sensor.latest_sensor.humidity : '');
+                        $('#sensor-ec').text(sensor.latest_sensor ? sensor.latest_sensor.ec : '');
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
@@ -201,6 +202,16 @@
                                 tension: 0.4,
                                 fill: true,
                                 pointRadius: 4
+                            },
+                            {
+                                label: 'EC',
+                                data: sensor.sensors.map(d => d.ec),
+                                borderColor: 'rgba(255, 128, 0, 1)',
+                                backgroundColor: 'rgba(255, 128, 0, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
                             }
                         ];
 
@@ -209,10 +220,11 @@
                             p: 'Phosphorus (P)',
                             k: 'Potassium (K)',
                             ph: 'pH',
-                            humidity: 'Humidity'
+                            humidity: 'Humidity',
+                            ec: 'EC'
                         };
 
-                        ['n', 'p', 'k', 'ph', 'humidity'].forEach((type) => {
+                        ['n', 'p', 'k', 'ph', 'humidity', 'ec'].forEach((type) => {
                             // destroy chart ถ้ามีอยู่แล้ว
                             if (window.sensorCharts[type]) {
                                 window.sensorCharts[type].destroy();
@@ -233,7 +245,6 @@
                                 }
                             });
                         });
-
                     } else {
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
                     }

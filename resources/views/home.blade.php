@@ -239,7 +239,6 @@
                                 }
                             });
                         });
-
                     } else {
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
                     }
