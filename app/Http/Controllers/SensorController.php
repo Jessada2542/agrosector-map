@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sensor;
 use App\Models\SensorKey;
 use App\Models\SensorTest;
+use App\Models\UserSensor;
 use App\Models\UserUseSensor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -94,9 +95,8 @@ class SensorController extends Controller
             return response()->json(['status' => true, 'message' => 'Sensor key is not active']);
         }
 
-        $useUserSensor = UserUseSensor::where('user_id', $request->input('user_id'))
-            ->where('user_sensors_id', $sensorKey->id)
-            ->where('status', 1)
+        $useUserSensor = UserSensor::where('user_id', $request->input('user_id'))
+            ->where('sensor_key_id', $sensorKey->id)
             ->first();
 
         if (!$useUserSensor) {
