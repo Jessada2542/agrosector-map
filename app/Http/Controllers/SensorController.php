@@ -102,7 +102,8 @@ class SensorController extends Controller
         if (!$useUserSensor) {
             return response()->json([
                 'status' => false,
-                'message' => 'Sensor is not assigned to this user.'
+                'message' => 'Sensor is not assigned to this user.',
+                'text' => $sensorKey
             ], 422);
         }
 
