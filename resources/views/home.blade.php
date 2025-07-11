@@ -199,8 +199,8 @@
                             {
                                 label: 'EC',
                                 data: sensor.sensors.map(d => d.ec),
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 206, 86, 1)',
+                                backgroundColor: 'rgba(255, 206, 86, 0.2)',
                                 borderWidth: 2,
                                 tension: 0.4,
                                 fill: true,
