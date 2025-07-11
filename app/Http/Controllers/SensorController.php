@@ -95,15 +95,19 @@ class SensorController extends Controller
             return response()->json(['status' => true, 'message' => 'Sensor key is not active']);
         }
 
-        $useUserSensor = UserSensor::where('user_id', $request->input('user_id'))
+        $userSenosr = UserSensor::where('user_id', $request->input('user_id'))
             ->where('sensor_key_id', $sensorKey->id)
+            ->first();
+
+        $useUserSensor = UserUseSensor::where('user_id', $request->input('user_id'))
+            ->where('user_sensors_id', $userSenosr->id)
+            ->where('status', 1)
             ->first();
 
         if (!$useUserSensor) {
             return response()->json([
                 'status' => false,
-                'message' => 'Sensor is not assigned to this user.',
-                'text' => $sensorKey
+                'message' => 'Sensor is not assigned to this user.'
             ], 422);
         }
 
