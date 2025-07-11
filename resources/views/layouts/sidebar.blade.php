@@ -13,7 +13,7 @@
 
     <!-- Sidebar content -->
     <div class="text-center mt-12 mb-6">
-        <img src="{{ asset('/images/logo.png') }}" alt="logo">
+        <img src="{{ asset('/images/logo_sidebar.png') }}" alt="logo">
     </div>
     <nav class="flex flex-col space-y-2 px-4">
         <a href="{{ route('map.index') }}" class="{{ (isset($sideAtive) && $sideAtive == 'map') ? 'side-active' : '' }} px-4 py-2 hover:bg-green-100 rounded">
@@ -40,7 +40,7 @@
 <!-- ✅ DESKTOP SIDEBAR -->
 <aside class="hidden lg:flex flex-col w-64 h-full fixed top-0 left-0 bg-gradient-to-b from-green-200 to-green-400 text-green-900 p-4 space-y-4 shadow-lg z-20">
     <div class="text-center">
-        <img src="{{ asset('/images/logo.png') }}" alt="logo">
+        <img src="{{ asset('/images/logo_sidebar.png') }}" alt="logo">
     </div>
     <nav class="flex flex-col space-y-2">
         <a href="{{ route('map.index') }}" class="hover:bg-green-100 px-4 py-2 rounded {{ (isset($sideAtive) && $sideAtive == 'map') ? 'side-active' : '' }}">
