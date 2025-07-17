@@ -6,7 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Agrosector Map</title>
-    <link href="{{ asset('/images/logo.png') }}" rel="shortcut icon">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('/images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('/images/logo.png') }}" type="image/x-icon">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Agrosector Map">
+    <meta property="og:description" content="ระบบติดตามยานพาหนะด้วย GPS สำหรับภาคเกษตรกรรม">
+    <meta property="og:image" content="https://evgps.agrosector-map.com/images/logo.png">
+    <meta property="og:url" content="https://evgps.agrosector-map.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Agrosector Map">
+    <meta name="twitter:description" content="ระบบติดตามยานพาหนะด้วย GPS สำหรับภาคเกษตรกรรม">
+    <meta name="twitter:image" content="https://evgps.agrosector-map.com/images/logo.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Agrosector Map",
+      "url": "https://evgps.agrosector-map.com",
+      "logo": "https://evgps.agrosector-map.com/images/logo.png"
+    }
+    </script>
+
+    <!-- CSS & JS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -18,6 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>
+
     <style>
         html,
         body {
@@ -119,23 +149,32 @@
                 url: `/api/sensor/data/${id}`,
                 type: 'GET',
                 dataType: 'json',
-                success: function (response) {
+                success: function(response) {
                     if (response.status) {
                         dayjs.extend(dayjs_plugin_utc);
                         dayjs.extend(dayjs_plugin_timezone);
 
                         const sensor = response.data;
                         $('#user-name').text(sensor.user ? sensor.user.name : '');
-                        $('#sensor-position').text(sensor.user_sensor ? sensor.user_sensor.lat + ', ' + sensor.user_sensor.lon : '');
-                        const subdistrict = sensor.user_sensor?.subdistrict ? sensor.user_sensor.subdistrict.subdistrict_name_th : '';
-                        const district = sensor.user_sensor?.district ? sensor.user_sensor.district.district_name_th : '';
-                        const province = sensor.user_sensor?.province ? sensor.user_sensor.province.province_name_th : '';
-                        const province_code = sensor.user_sensor?.province ? sensor.user_sensor.province.province_code : '';
-                        $('#sensor-address').text('ตำบล' + subdistrict + ' อำเภอ' + district + ' จังหวัด' + province + ' ' + province_code + '000');
+                        $('#sensor-position').text(sensor.user_sensor ? sensor.user_sensor.lat + ', ' + sensor
+                            .user_sensor.lon : '');
+                        const subdistrict = sensor.user_sensor?.subdistrict ? sensor.user_sensor.subdistrict
+                            .subdistrict_name_th : '';
+                        const district = sensor.user_sensor?.district ? sensor.user_sensor.district
+                            .district_name_th : '';
+                        const province = sensor.user_sensor?.province ? sensor.user_sensor.province
+                            .province_name_th : '';
+                        const province_code = sensor.user_sensor?.province ? sensor.user_sensor.province
+                            .province_code : '';
+                        $('#sensor-address').text('ตำบล' + subdistrict + ' อำเภอ' + district + ' จังหวัด' +
+                            province + ' ' + province_code + '000');
                         $('#sensor-name').text(sensor.name ? sensor.name : '');
-                        $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
+                        $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz(
+                            'Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-detail').text(sensor.detail ? sensor.detail : '');
-                        $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY HH:mm') : '');
+                        $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor
+                                .latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY HH:mm') :
+                            '');
                         $('#sensor-n').text(sensor.latest_sensor ? sensor.latest_sensor.n : '');
                         $('#sensor-p').text(sensor.latest_sensor ? sensor.latest_sensor.p : '');
                         $('#sensor-k').text(sensor.latest_sensor ? sensor.latest_sensor.k : '');
@@ -147,8 +186,7 @@
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
                         );
 
-                        const datasets = [
-                            {
+                        const datasets = [{
                                 label: 'Nitrogen (N)',
                                 data: sensor.sensors.map(d => d.n),
                                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -229,14 +267,22 @@
                                 type: 'line',
                                 data: {
                                     labels: labels,
-                                    datasets: datasets.filter(ds => ds.label === typeLabelMap[type]),
+                                    datasets: datasets.filter(ds => ds.label === typeLabelMap[
+                                        type]),
                                 },
                                 options: {
                                     responsive: true,
                                     plugins: {
-                                        legend: { display: true, position:'top' }
+                                        legend: {
+                                            display: true,
+                                            position: 'top'
+                                        }
                                     },
-                                    scales: { y: { beginAtZero: false } }
+                                    scales: {
+                                        y: {
+                                            beginAtZero: false
+                                        }
+                                    }
                                 }
                             });
                         });
@@ -244,7 +290,7 @@
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
                     }
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     $('#sensor-content').html('เกิดข้อผิดพลาดในการโหลดข้อมูล');
                     console.error('AJAX Error!', status, error);
                 }
