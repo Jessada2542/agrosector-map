@@ -13,16 +13,16 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Agrosector Map">
-    <meta property="og:description" content="ระบบติดตามยานพาหนะด้วย GPS สำหรับภาคเกษตรกรรม">
-    <meta property="og:image" content="https://evgps.agrosector-map.com/images/logo.png">
-    <meta property="og:url" content="https://evgps.agrosector-map.com">
+    <meta property="og:description" content="ระบบติดตามค่าเซ็นเซอร์สำหรับภาคเกษตรกรรม">
+    <meta property="og:image" content="https://agrosector-map.com/images/logo.png">
+    <meta property="og:url" content="https://agrosector-map.com">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Agrosector Map">
-    <meta name="twitter:description" content="ระบบติดตามยานพาหนะด้วย GPS สำหรับภาคเกษตรกรรม">
-    <meta name="twitter:image" content="https://evgps.agrosector-map.com/images/logo.png">
+    <meta name="twitter:description" content="ระบบติดตามค่าเซ็นเซอร์สำหรับภาคเกษตรกรรม">
+    <meta name="twitter:image" content="https://agrosector-map.com/images/logo.png">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -30,8 +30,8 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Agrosector Map",
-      "url": "https://evgps.agrosector-map.com",
-      "logo": "https://evgps.agrosector-map.com/images/logo.png"
+      "url": "https://agrosector-map.com",
+      "logo": "https://agrosector-map.com/images/logo.png"
     }
     </script>
 
@@ -74,7 +74,7 @@
     @include('modal.mark-sensor')
 
     <script>
-        const checkLogin = '{{ Auth::check() }}';
+        const checkLogin = @json(Auth::check());
         var map;
 
         function init() {
@@ -361,7 +361,7 @@
                     url: '/api/districts',
                     type: 'POST',
                     data: {
-                        _token: '{{ csrf_token() }}',
+                        _token: @json(csrf_token()),,
                         province_code: provinceId
                     },
                     dataType: 'json',
@@ -383,7 +383,7 @@
                     url: '/api/subdistricts',
                     type: 'POST',
                     data: {
-                        _token: '{{ csrf_token() }}',
+                        _token: @json(csrf_token()),,
                         district_code: districtId
                     },
                     dataType: 'json',
@@ -432,7 +432,7 @@
                     url: '/api/sensor/marker',
                     type: 'POST',
                     data: {
-                        _token: '{{ csrf_token() }}',
+                        _token: @json(csrf_token()),,
                         province_code: provinceId,
                         district_code: districtId,
                         subdistrict_code: subdistrictId

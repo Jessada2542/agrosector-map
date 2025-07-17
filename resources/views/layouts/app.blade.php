@@ -13,16 +13,16 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Agrosector Map">
-    <meta property="og:description" content="ระบบติดตามยานพาหนะด้วย GPS สำหรับภาคเกษตรกรรม">
-    <meta property="og:image" content="https://evgps.agrosector-map.com/images/logo.png">
-    <meta property="og:url" content="https://evgps.agrosector-map.com">
+    <meta property="og:description" content="ระบบติดตามค่าเซ็นเซอร์สำหรับภาคเกษตรกรรม">
+    <meta property="og:image" content="https://agrosector-map.com/images/logo.png">
+    <meta property="og:url" content="https://agrosector-map.com">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Agrosector Map">
-    <meta name="twitter:description" content="ระบบติดตามยานพาหนะด้วย GPS สำหรับภาคเกษตรกรรม">
-    <meta name="twitter:image" content="https://evgps.agrosector-map.com/images/logo.png">
+    <meta name="twitter:description" content="ระบบติดตามค่าเซ็นเซอร์สำหรับภาคเกษตรกรรม">
+    <meta name="twitter:image" content="https://agrosector-map.com/images/logo.png">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
