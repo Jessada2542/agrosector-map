@@ -6,35 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Agrosector Map</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('/images/logo.png') }}">
-    <link rel="shortcut icon" href="{{ asset('/images/logo.png') }}" type="image/x-icon">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Agrosector Map">
-    <meta property="og:description" content="ระบบติดตามค่าเซ็นเซอร์สำหรับภาคเกษตรกรรม">
-    <meta property="og:image" content="https://agrosector-map.com/images/logo.png">
-    <meta property="og:url" content="https://agrosector-map.com">
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Agrosector Map">
-    <meta name="twitter:description" content="ระบบติดตามค่าเซ็นเซอร์สำหรับภาคเกษตรกรรม">
-    <meta name="twitter:image" content="https://agrosector-map.com/images/logo.png">
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Agrosector Map",
-      "url": "https://evgps.agrosector-map.com",
-      "logo": "https://evgps.agrosector-map.com/images/logo.png"
-    }
-    </script>
-
+    <link href="{{ asset('/images/logo.png') }}" rel="shortcut icon">
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.min.css">
