@@ -119,7 +119,7 @@ class SensorController extends Controller
             'p' => $request->input('p'),
             'k' => $request->input('k'),
             'ph' => $request->input('ph'),
-            'ec' => $request->input('ec'),
+            'ec' => $request->input('ec') * 10,
             'temperature' => $request->input('temperature'),
             'humidity' => $request->input('humidity'),
         ]);
