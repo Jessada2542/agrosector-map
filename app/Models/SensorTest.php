@@ -14,5 +14,8 @@ class SensorTest extends Model
         'ec',
         'temperature',
         'humidity',
+        'air_humidity',
+        'air_temperature',
+        'light'
     ];
 }
