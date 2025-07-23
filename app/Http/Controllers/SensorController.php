@@ -24,6 +24,9 @@ class SensorController extends Controller
             'ec' => 'required',
             'temperature' => 'required',
             'humidity' => 'required',
+            'air_humidity' => 'nullable',
+            'air_temperature' => 'nullable',
+            'light' => 'nullable'
         ])->setAttributeNames([
             'n' => 'Nitrogen',
             'p' => 'Phosphorus',
@@ -32,6 +35,9 @@ class SensorController extends Controller
             'ec' => 'Electrical Conductivity',
             'temperature' => 'Temperature',
             'humidity' => 'Humidity',
+            'air_humidity' => 'Air Humidity',
+            'air_temperature' => 'Air Temperature',
+            'light' => 'Light'
         ]);
 
         if ($validator->fails()) {
@@ -49,6 +55,9 @@ class SensorController extends Controller
             'ec' => $request->input('ec'),
             'temperature' => $request->input('temperature'),
             'humidity' => $request->input('humidity'),
+            'air_humidity' => $request->input('air_humidity'),
+            'air_temperature' => $request->input('air_temperature'),
+            'light' => $request->input('light')
         ]);
 
         return response()->json(['status' => true, 'message' => 'Sensor data processed successfully']);
@@ -66,6 +75,9 @@ class SensorController extends Controller
             'ec' => 'required',
             'temperature' => 'required',
             'humidity' => 'required',
+            'air_humidity' => 'nullable',
+            'air_temperature' => 'nullable',
+            'light' => 'nullable'
         ])->setAttributeNames([
             'user_id' => 'User',
             'sensor_key' => 'Sensor Key',
@@ -76,6 +88,9 @@ class SensorController extends Controller
             'ec' => 'Electrical Conductivity',
             'temperature' => 'Temperature',
             'humidity' => 'Humidity',
+            'air_humidity' => 'Air Humidity',
+            'air_temperature' => 'Air Temperature',
+            'light' => 'Light'
         ]);
 
         if ($validator->fails()) {
@@ -122,6 +137,9 @@ class SensorController extends Controller
             'ec' => round($request->input('ec') * 10, 2),
             'temperature' => $request->input('temperature'),
             'humidity' => $request->input('humidity'),
+            'air_humidity' => $request->input('air_humidity'),
+            'air_temperature' => $request->input('air_temperature'),
+            'light' => $request->input('light')
         ]);
 
         return response()->json(['status' => true, 'message' => 'Sensor data processed successfully']);
