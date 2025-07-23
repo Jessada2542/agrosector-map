@@ -7,6 +7,7 @@ use App\Models\GeoCode;
 use App\Models\SensorKey;
 use App\Models\User;
 use App\Models\UserSensor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -29,7 +30,7 @@ class SettingSensorController extends Controller
                 ->editColumn('position', function ($row) {
                     return $row->lat && $row->lon ? $row->lat . ', ' . $row->lon : 'N/A';
                 })
-               ->addColumn('address', function ($row) {
+                ->addColumn('address', function ($row) {
                     $parts = [
                         $row->province?->province_name_th ?? null,
                         $row->district?->district_name_th ?? null,
@@ -39,15 +40,22 @@ class SettingSensorController extends Controller
                     // ลบค่าว่างหรือ null ออก และรวมด้วย ', '
                     return implode(', ', array_filter($parts));
                 })
-                /* ->editColumn('status', function ($row) {
-                    return $row->sensorKey->is_active == 1
+                ->editColumn('status', function ($row) {
+                    // สมมติ updated_at เป็น Carbon instance หรือแปลงให้เป็น Carbon ได้
+                    $updatedAt = Carbon::parse($row->sensorKey->updated_at);
+
+                    // เช็คว่า updated_at อยู่ภายใน 3 ชั่วโมงย้อนหลังจากเวลาปัจจุบันหรือไม่
+                    $isOnline = $updatedAt->greaterThanOrEqualTo(Carbon::now()->subHours(3));
+
+                    return $isOnline
                         ? '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-green-500 rounded">ออนไลน์</span>'
                         : '<span class="inline-block px-2 py-1 text-xs font-semibold text-white bg-red-500 rounded">ออฟไลน์</span>';
-                }) */
+                })
+
                 ->addColumn('action', function ($row) {
                     return '<button class="px-3 py-1 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded btn-edit" data-id="' . $row->id . '"><i class="fa-solid fa-pen-to-square"></i> แก้ไข</button>';
                 })
-                ->rawColumns(['user_name', 'sensor_key', 'position', 'address'/* , 'status' */, 'action'])
+                ->rawColumns(['user_name', 'sensor_key', 'position', 'address', 'status', 'action'])
                 ->make(true);
         }
 
