@@ -77,7 +77,9 @@ class SensorController extends Controller
             'humidity' => 'required',
             'air_humidity' => 'nullable',
             'air_temperature' => 'nullable',
-            'light' => 'nullable'
+            'light' => 'nullable',
+            'co2' => 'nullable',
+            'nh3' => 'nullable',
         ])->setAttributeNames([
             'user_id' => 'User',
             'sensor_key' => 'Sensor Key',
@@ -90,7 +92,9 @@ class SensorController extends Controller
             'humidity' => 'Humidity',
             'air_humidity' => 'Air Humidity',
             'air_temperature' => 'Air Temperature',
-            'light' => 'Light'
+            'light' => 'Light',
+            'co2' => 'CO2',
+            'nh3' => 'NH3'
         ]);
 
         if ($validator->fails()) {
@@ -139,7 +143,9 @@ class SensorController extends Controller
             'humidity' => $request->input('humidity'),
             'air_humidity' => $request->input('air_humidity'),
             'air_temperature' => $request->input('air_temperature'),
-            'light' => $request->input('light')
+            'light' => $request->input('light'),
+            'co2' => $request->input('co2'),
+            'nh3' => $request->input('nh3'),
         ]);
 
         return response()->json(['status' => true, 'message' => 'Sensor data processed successfully']);

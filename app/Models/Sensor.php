@@ -19,7 +19,9 @@ class Sensor extends Model
         'humidity',
         'air_humidity',
         'air_temperature',
-        'light'
+        'light',
+        'co2',
+        'nh3'
     ];
 
     public function sensorKey()
