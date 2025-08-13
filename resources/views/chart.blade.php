@@ -70,7 +70,7 @@
         <div class="row">
             <!-- กราฟรวม (2 เส้น: ภายนอก/ภายใน) -->
             <div class="col-md-6">
-                <div class="card border-info">
+                <div class="card">
                     <div class="card-header bg-info text-white">ความชื้น (%)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="humCombinedChart"></canvas></div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-warning">
+                <div class="card">
                     <div class="card-header bg-warning text-white">อุณหภูมิ (°C)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="tempCombinedChart"></canvas></div>
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-purple">
+                <div class="card">
                     <div class="card-header bg-purple text-white">TAN (mg/L) - NH3 (ppm)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="tannh3CombinedChart"></canvas></div>
@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-secondary">
+                <div class="card">
                     <div class="card-header bg-secondary text-white">แสง (lux)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="lightCombinedChart"></canvas></div>
@@ -104,7 +104,7 @@
 
             <!-- กราฟเดียว -->
             <div class="col-md-6">
-                <div class="card border-primary">
+                <div class="card">
                     <div class="card-header bg-primary text-white">ความชื้นภายนอก (%)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="humOutChart"></canvas></div>
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-success">
+                <div class="card">
                     <div class="card-header bg-success text-white">ความชื้นภายใน (%)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="humInChart"></canvas></div>
@@ -120,7 +120,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-warning">
+                <div class="card">
                     <div class="card-header bg-warning text-white">อุณหภูมิภายนอก (°C)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="tempOutChart"></canvas></div>
@@ -128,7 +128,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-danger">
+                <div class="card">
                     <div class="card-header bg-danger text-white">อุณหภูมิภายใน (°C)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="tempInChart"></canvas></div>
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-purple">
+                <div class="card">
                     <div class="card-header bg-purple text-white">TAN (mg/L)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="tanChart"></canvas></div>
@@ -144,7 +144,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-brown">
+                <div class="card">
                     <div class="card-header bg-brown text-white">NH3 (ppm)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="nh3Chart"></canvas></div>
@@ -154,7 +154,7 @@
 
             <!-- กราฟแสง -->
             <div class="col-md-6">
-                <div class="card border-secondary">
+                <div class="card">
                     <div class="card-header bg-secondary text-white">แสงภายนอก (lux)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="lightOutChart"></canvas></div>
@@ -162,7 +162,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card border-secondary">
+                <div class="card">
                     <div class="card-header bg-secondary text-white">แสงภายใน (lux)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="lightInChart"></canvas></div>
