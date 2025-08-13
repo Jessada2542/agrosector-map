@@ -269,9 +269,12 @@ class SensorController extends Controller
         return response()->json(['status' => true, 'message' => 'Sensor connected successfully']);
     }
 
-    public function iself()
+    public function iself(Request $request)
     {
-        $data = SensorReading::all();
+        $from = $request->from ?? SensorReading::min('datetime');
+        $to   = $request->to   ?? SensorReading::max('datetime');
+
+        $data = SensorReading::whereBetween('datetime', [$from, $to])->get();
 
         $labels = $data->pluck('datetime')->map(fn($d) => date('d-m-Y H:i', strtotime($d)));
         $humid_out = $data->pluck('humid_out');
@@ -280,7 +283,19 @@ class SensorController extends Controller
         $temp_in = $data->pluck('temp_in');
         $tan = $data->pluck('tan');
         $nh3 = $data->pluck('nh3');
+        $light_out = $data->pluck('light_out');
+        $light_in = $data->pluck('light_in');
 
-        return view('chart', compact('labels', 'humid_out', 'humid_in', 'temp_out', 'temp_in', 'tan', 'nh3'));
+        return view('chart', compact(
+            'labels',
+            'humid_out',
+            'humid_in',
+            'temp_out',
+            'temp_in',
+            'tan',
+            'nh3',
+            'light_out',
+            'light_in'
+        ));
     }
 }
