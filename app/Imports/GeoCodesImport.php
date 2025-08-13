@@ -28,7 +28,9 @@ class GeoCodesImport implements ToModel
             'temp_in' => $row[3],
             'temp_out' => $row[4],
             'tan' => $row[5],
-            'nh3' => $row[6]
+            'nh3' => $row[6],
+            'lux_out' => $row[7],
+            'lux_in' => $row[8]
         ]);
     }
 }

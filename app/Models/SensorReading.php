@@ -13,6 +13,8 @@ class SensorReading extends Model
         'temp_in',
         'temp_out',
         'tan',
-        'nh3'
+        'nh3',
+        'lux_out',
+        'lux_in'
     ];
 }
