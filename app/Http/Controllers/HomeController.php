@@ -62,16 +62,19 @@ class HomeController extends Controller
 
 
 
-    /* public function import(Request $request)
+    public function import(Request $request)
     {
         // Validate the uploaded file
-        $request->validate([
+        /* $request->validate([
             'file' => 'required|mimes:xlsx,csv',
-        ]);
+        ]); */
+
+        $filePath = public_path('data.csv');
 
         // Import the Excel file into the GeoCode model
-        Excel::import(new GeoCodesImport, $request->file('file'));
+        //Excel::import(new GeoCodesImport, $request->file('file'));
+        Excel::import(new GeoCodesImport, $filePath);
 
         return back()->with('success', 'GeoCodes imported successfully!');
-    } */
+    }
 }
