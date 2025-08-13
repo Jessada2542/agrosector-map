@@ -76,7 +76,7 @@
                             {
                                 label: 'CO2',
                                 data: co2s,
-                                borderColor: 'yellow',
+                                borderColor: '#ffcc00',
                                 fill: false
                             },
                         ]
@@ -125,7 +125,7 @@
                         datasets: [{
                             label: 'CO2',
                             data: co2s,
-                            borderColor: 'yellow',
+                            borderColor: '#ffcc00',
                             fill: false
                         }]
                     },
