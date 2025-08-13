@@ -271,10 +271,14 @@ class SensorController extends Controller
 
     public function iself(Request $request)
     {
-        $from = $request->from ?? SensorReading::min('datetime');
-        $to   = $request->to   ?? SensorReading::max('datetime');
+        $query = SensorReading::query();
 
-        $data = SensorReading::whereBetween('datetime', [$from, $to])->get();
+        if($request->filled('from') && $request->filled('to')){
+            $query->whereDate('datetime', '>=', $request->from)
+                ->whereDate('datetime', '<=', $request->to);
+        }
+
+        $data = $query->orderBy('datetime')->get();
 
         $labels = $data->pluck('datetime')->map(fn($d) => date('d-m-Y H:i', strtotime($d)));
         $humid_out = $data->pluck('humid_out');
