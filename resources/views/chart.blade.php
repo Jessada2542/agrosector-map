@@ -112,15 +112,15 @@
     </div>
 
     <script>
-        function createChart(ctxId, label, color) {
+        function createChart(ctxId, label, color, dataValues) {
             const ctx = document.getElementById(ctxId);
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
+                    labels: @json($labels),
                     datasets: [{
                         label: label,
-                        data: [20, 30, 25, 28, 35, 40, 38, 32],
+                        data: dataValues,
                         borderColor: color,
                         backgroundColor: color + '33',
                         fill: true,
@@ -139,13 +139,14 @@
             });
         }
 
-        createChart('humOutChart', 'ความชื้นภายนอก (%)', '#2196F3');
-        createChart('humInChart', 'ความชื้นภายใน (%)', '#4CAF50');
-        createChart('tempOutChart', 'อุณหภูมิภายนอก (°C)', '#FF9800');
-        createChart('tempInChart', 'อุณหภูมิภายใน (°C)', '#E91E63');
-        createChart('tanChart', 'TAN (mg/L)', '#9C27B0');
-        createChart('nh3Chart', 'NH3 (ppm)', '#795548');
+        createChart('humOutChart', 'ความชื้นภายนอก (%)', '#2196F3', @json($humid_out));
+        createChart('humInChart', 'ความชื้นภายใน (%)', '#4CAF50', @json($humid_in));
+        createChart('tempOutChart', 'อุณหภูมิภายนอก (°C)', '#FF9800', @json($temp_out));
+        createChart('tempInChart', 'อุณหภูมิภายใน (°C)', '#E91E63', @json($temp_in));
+        createChart('tanChart', 'TAN (mg/L)', '#9C27B0', @json($tan));
+        createChart('nh3Chart', 'NH3 (ppm)', '#795548', @json($nh3));
     </script>
+
 </body>
 
 </html>
