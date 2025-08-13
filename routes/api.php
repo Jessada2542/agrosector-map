@@ -23,3 +23,6 @@ Route::post('/board/update/connect', [SensorController::class, 'updateConnect'])
 
 Route::post('/generate/user', [UserController::class, 'genUser'])->name('gen.user');
 Route::get('/sensor/generate', [SensorController::class, 'generateSensor'])->name('sensor.generate');
+
+
+Route::get('/sensor/data/iself', [SensorController::class, 'iself'])->name('sensor.data.iself');

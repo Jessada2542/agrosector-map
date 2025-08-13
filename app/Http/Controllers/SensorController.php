@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sensor;
 use App\Models\SensorKey;
+use App\Models\SensorReading;
 use App\Models\SensorTest;
 use App\Models\UserSensor;
 use App\Models\UserUseSensor;
@@ -266,5 +267,14 @@ class SensorController extends Controller
         $sensorKey->update(['updated_at' => Carbon::now()]);
 
         return response()->json(['status' => true, 'message' => 'Sensor connected successfully']);
+    }
+
+    public function iself()
+    {
+        $data = SensorReading::orderBy('created_at', 'asc')
+                ->take(24)
+                ->get(['temp', 'humid', 'co2', 'created_at']);
+
+        return view('chart', compact('data'));
     }
 }
