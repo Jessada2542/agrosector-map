@@ -26,3 +26,4 @@ Route::get('/sensor/generate', [SensorController::class, 'generateSensor'])->nam
 
 
 Route::get('/sensor/iself', [SensorController::class, 'iself'])->name('sensor.data.iself');
+Route::get('/sensor/get/self', [SensorController::class, 'getDataSelf'])->name('sensor.data.get.self');

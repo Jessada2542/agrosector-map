@@ -271,9 +271,18 @@ class SensorController extends Controller
 
     public function iself()
     {
-        $data = SensorReading::orderBy('created_at', 'asc')
-                ->get(['temp', 'humid', 'co2', 'created_at']);
+        return view('chart');
+    }
 
-        return view('chart', compact('data'));
+    public function getDataSelf(Request $request)
+    {
+        $query = SensorReading::orderBy('created_at', 'asc');
+
+        if ($request->has('date') && $request->date != '') {
+            $query->whereDate('created_at', $request->date);
+        }
+
+        $data = $query->get(['temp','humid','co2','created_at']);
+        return response()->json($data);
     }
 }

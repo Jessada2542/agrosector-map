@@ -1,113 +1,162 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <title>Sensor Data Charts</title>
-     <link href="{{ asset('/images/logo.png') }}" rel="shortcut icon">
+    <link href="{{ asset('/images/logo.png') }}" rel="shortcut icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body class="bg-light">
-
-<div class="container py-4">
-
-    <!-- Card กราฟรวม -->
-    <div class="card shadow mb-4">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">กราฟรวม Temperature + Humidity + CO₂</h5>
+    <div class="container mt-4">
+        <div class="mb-3">
+            <input type="date" id="filterDate" class="form-control" />
         </div>
-        <div class="card-body">
-            <canvas id="allChart" style="height:350px;"></canvas>
-        </div>
-    </div>
 
-    <!-- 3 กราฟแยก -->
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-header bg-danger text-white">
-                    <h6 class="mb-0">Temperature (°C)</h6>
-                </div>
-                <div class="card-body">
-                    <canvas id="tempChart" style="height:250px;"></canvas>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">All Data</div>
+                    <div class="card-body"><canvas id="chartAll"></canvas></div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-header bg-info text-white">
-                    <h6 class="mb-0">Humidity (%)</h6>
-                </div>
-                <div class="card-body">
-                    <canvas id="humidChart" style="height:250px;"></canvas>
+            <div class="col-md-6 mb-3">
+                <div class="card shadow">
+                    <div class="card-header bg-danger text-white">Temperature</div>
+                    <div class="card-body"><canvas id="chartTemp"></canvas></div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-header bg-success text-white">
-                    <h6 class="mb-0">CO₂ (ppm)</h6>
+            <div class="col-md-6 mb-3">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">Humidity</div>
+                    <div class="card-body"><canvas id="chartHumid"></canvas></div>
                 </div>
-                <div class="card-body">
-                    <canvas id="co2Chart" style="height:250px;"></canvas>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card shadow">
+                    <div class="card-header bg-warning text-dark">CO2</div>
+                    <div class="card-body"><canvas id="chartCo2"></canvas></div>
                 </div>
             </div>
         </div>
     </div>
 
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chartAll, chartTemp, chartHumid, chartCo2;
 
-<script>
-    const labels = {!! json_encode($data->pluck('created_at')->map(fn($d)=>$d->format('d-m-Y H:i'))) !!};
-    const tempData = {!! json_encode($data->pluck('temp')) !!};
-    const humidData = {!! json_encode($data->pluck('humid')) !!};
-    const co2Data = {!! json_encode($data->pluck('co2')) !!};
+        async function loadData(date = '') {
+            const res = await fetch(`/api/sensor/get/self?date=${date}`);
+            const data = await res.json();
 
-    // Chart รวม
-    new Chart(document.getElementById('allChart').getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                { label: 'Temperature (°C)', data: tempData, borderColor: 'rgba(255,99,132,1)', backgroundColor: 'rgba(255,99,132,0.2)', fill: false, yAxisID: 'y' },
-                { label: 'Humidity (%)', data: humidData, borderColor: 'rgba(54,162,235,1)', backgroundColor: 'rgba(54,162,235,0.2)', fill: false, yAxisID: 'y' },
-                { label: 'CO₂ (ppm)', data: co2Data, borderColor: 'rgba(75,192,192,1)', backgroundColor: 'rgba(75,192,192,0.2)', fill: false, yAxisID: 'y1' }
-            ]
-        },
-        options: {
-            responsive: true,
-            interaction: { mode: 'index', intersect: false },
-            stacked: false,
-            scales: {
-                y: { type: 'linear', position: 'left' },
-                y1: { type: 'linear', position: 'right', grid: { drawOnChartArea: false } }
+            const labels = data.map(r => r.created_at);
+            const temps = data.map(r => r.temp);
+            const humids = data.map(r => r.humid);
+            const co2s = data.map(r => r.co2);
+
+            if (!chartAll) {
+                chartAll = new Chart(document.getElementById('chartAll'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                                label: 'Temp',
+                                data: temps,
+                                borderColor: 'red',
+                                fill: false
+                            },
+                            {
+                                label: 'Humidity',
+                                data: humids,
+                                borderColor: 'blue',
+                                fill: false
+                            },
+                            {
+                                label: 'CO2',
+                                data: co2s,
+                                borderColor: 'green',
+                                fill: false
+                            },
+                        ]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+
+                chartTemp = new Chart(document.getElementById('chartTemp'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                            label: 'Temp',
+                            data: temps,
+                            borderColor: 'red',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+
+                chartHumid = new Chart(document.getElementById('chartHumid'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                            label: 'Humidity',
+                            data: humids,
+                            borderColor: 'blue',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+
+                chartCo2 = new Chart(document.getElementById('chartCo2'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                            label: 'CO2',
+                            data: co2s,
+                            borderColor: 'green',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+
+            } else {
+                [chartAll, chartTemp, chartHumid, chartCo2].forEach(c => {
+                    c.data.labels = labels;
+                });
+                chartAll.data.datasets[0].data = temps;
+                chartAll.data.datasets[1].data = humids;
+                chartAll.data.datasets[2].data = co2s;
+                chartTemp.data.datasets[0].data = temps;
+                chartHumid.data.datasets[0].data = humids;
+                chartCo2.data.datasets[0].data = co2s;
+
+                [chartAll, chartTemp, chartHumid, chartCo2].forEach(c => c.update());
             }
         }
-    });
 
-    // Chart Temp
-    new Chart(document.getElementById('tempChart').getContext('2d'), {
-        type: 'line',
-        data: { labels: labels, datasets: [{ label: 'Temperature (°C)', data: tempData, borderColor: 'rgba(255,99,132,1)', backgroundColor: 'rgba(255,99,132,0.2)', fill: true, tension: 0.3 }] },
-        options: { responsive: true, scales: { y: { beginAtZero: false } } }
-    });
+        loadData();
 
-    // Chart Humid
-    new Chart(document.getElementById('humidChart').getContext('2d'), {
-        type: 'line',
-        data: { labels: labels, datasets: [{ label: 'Humidity (%)', data: humidData, borderColor: 'rgba(54,162,235,1)', backgroundColor: 'rgba(54,162,235,0.2)', fill: true, tension: 0.3 }] },
-        options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
-    });
+        document.getElementById('filterDate').addEventListener('change', (e) => {
+            loadData(e.target.value);
+        });
+    </script>
 
-    // Chart CO₂
-    new Chart(document.getElementById('co2Chart').getContext('2d'), {
-        type: 'line',
-        data: { labels: labels, datasets: [{ label: 'CO₂ (ppm)', data: co2Data, borderColor: 'rgba(75,192,192,1)', backgroundColor: 'rgba(75,192,192,0.2)', fill: true, tension: 0.3 }] },
-        options: { responsive: true, scales: { y: { beginAtZero: false } } }
-    });
-</script>
 
 </body>
+
 </html>
