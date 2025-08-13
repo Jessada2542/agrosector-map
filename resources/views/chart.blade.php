@@ -44,14 +44,17 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/customParseFormat.js"></script>
     <script>
         let chartAll, chartTemp, chartHumid, chartCo2;
+        dayjs.extend(dayjs_plugin_customParseFormat);
 
         async function loadData(date = '') {
             const res = await fetch(`/api/sensor/get/self?date=${date}`);
             const data = await res.json();
 
-            const labels = data.map(r => r.created_at.format('d-m-y H:i'));
+            const labels = data.map(r => dayjs(r.created_at).format('DD-MM-YY HH:mm'));
             const temps = data.map(r => r.temp);
             const humids = data.map(r => r.humid);
             const co2s = data.map(r => r.co2);
