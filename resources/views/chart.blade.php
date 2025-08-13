@@ -51,7 +51,7 @@
             const res = await fetch(`/api/sensor/get/self?date=${date}`);
             const data = await res.json();
 
-            const labels = data.map(r => r.created_at);
+            const labels = data.map(r => r.created_at.format('d-m-y H:i'));
             const temps = data.map(r => r.temp);
             const humids = data.map(r => r.humid);
             const co2s = data.map(r => r.co2);
