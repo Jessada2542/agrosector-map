@@ -272,7 +272,6 @@ class SensorController extends Controller
     public function iself()
     {
         $data = SensorReading::orderBy('created_at', 'asc')
-                ->take(24)
                 ->get(['temp', 'humid', 'co2', 'created_at']);
 
         return view('chart', compact('data'));
