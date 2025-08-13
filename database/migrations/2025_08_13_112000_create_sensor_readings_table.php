@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('sensor_readings', function (Blueprint $table) {
             $table->id();
-            $table->string('temp');
-            $table->string('humid');
-            $table->string('co2');
+            $table->string('day');
+            $table->string('hour');
+            $table->string('temp_in');
+            $table->string('temp_out');
             $table->timestamps();
         });
     }

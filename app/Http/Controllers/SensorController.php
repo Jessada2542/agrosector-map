@@ -271,18 +271,15 @@ class SensorController extends Controller
 
     public function iself()
     {
-        return view('chart');
-    }
+        $data = SensorReading::all(['day', 'hour', 'temp_in', 'temp_out']);
 
-    public function getDataSelf(Request $request)
-    {
-        $query = SensorReading::orderBy('created_at', 'asc');
+        $labels = $data->map(function ($item) {
+            return 'วันที่ ' . $item->day . ' ชั่วโมงที่ ' . str_pad($item->hour, 2, '0', STR_PAD_LEFT) . ':00';
+        });
 
-        if ($request->has('date') && $request->date != '') {
-            $query->whereDate('created_at', $request->date);
-        }
-
-        $data = $query->get(['temp','humid','co2','created_at']);
-        return response()->json($data);
+        return view('chart', [
+            'data' => $data,
+            'labels' => $labels
+        ]);
     }
 }
