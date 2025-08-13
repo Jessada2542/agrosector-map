@@ -274,13 +274,13 @@ class SensorController extends Controller
         $data = SensorReading::all();
 
         $labels = $data->pluck('datetime')->map(fn($d) => date('d-m-Y H:i', strtotime($d)));
-        $humidityOut = $data->pluck('humid_out');
-        $humidityIn = $data->pluck('humid_in');
-        $tempOut = $data->pluck('temp_out');
-        $tempIn = $data->pluck('temp_in');
+        $humid_out = $data->pluck('humid_out');
+        $humid_in = $data->pluck('humid_in');
+        $temp_out = $data->pluck('temp_out');
+        $temp_in = $data->pluck('temp_in');
         $tan = $data->pluck('tan');
         $nh3 = $data->pluck('nh3');
 
-        return view('chart', compact('labels', 'humidityOut', 'humidityIn', 'tempOut', 'tempIn', 'tan', 'nh3'));
+        return view('chart', compact('labels', 'humid_out', 'humid_in', 'temp_out', 'temp_in', 'tan', 'nh3'));
     }
 }
