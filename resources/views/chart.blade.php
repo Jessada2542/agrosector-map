@@ -35,14 +35,6 @@
             height: 300px;
         }
 
-        .border-purple {
-            border-color: #6f42c1 !important;
-        }
-
-        .border-brown {
-            border-color: #8B4513 !important;
-        }
-
         .bg-purple {
             background-color: #6f42c1 !important;
         }
