@@ -271,15 +271,16 @@ class SensorController extends Controller
 
     public function iself()
     {
-        $data = SensorReading::all(['day', 'hour', 'temp_in', 'temp_out']);
+        $data = SensorReading::all();
 
-        $labels = $data->map(function ($item) {
-            return 'วันที่ ' . $item->day . ' ชั่วโมงที่ ' . str_pad($item->hour, 2, '0', STR_PAD_LEFT) . ':00';
-        });
+        $labels = $data->pluck('datetime')->map(fn($d) => date('d-m-Y H:i', strtotime($d)));
+        $humidityOut = $data->pluck('humid_out');
+        $humidityIn = $data->pluck('humid_in');
+        $tempOut = $data->pluck('temp_out');
+        $tempIn = $data->pluck('temp_in');
+        $tan = $data->pluck('tan');
+        $nh3 = $data->pluck('nh3');
 
-        return view('chart', [
-            'data' => $data,
-            'labels' => $labels
-        ]);
+        return view('chart', compact('labels', 'humidityOut', 'humidityIn', 'tempOut', 'tempIn', 'tan', 'nh3'));
     }
 }

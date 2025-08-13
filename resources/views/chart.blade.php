@@ -3,151 +3,149 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Sensor Data Charts</title>
+    <title>Dashboard Sensor</title>
     <link href="{{ asset('/images/logo.png') }}" rel="shortcut icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #81C784, #4CAF50);
+            font-family: "Prompt", sans-serif;
+        }
+
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+    </style>
 </head>
 
-<body class="bg-light">
-
+<body>
     <div class="container py-4">
-        <div class="card shadow mb-4">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">อุณหภูมิภายใน + อุณหภูมิภายนอก</h5>
-            </div>
-            <div class="card-body">
-                <canvas id="allChart" style="height:350px;"></canvas>
-            </div>
-        </div>
+        <h1 class="text-white mb-4">Dashboard - ค่าต่าง ๆ</h1>
+        <div class="row">
 
-        <div class="row g-4">
+            <!-- ความชื้นภายนอก -->
             <div class="col-md-6">
-                <div class="card shadow">
-                    <div class="card-header bg-danger text-white">
-                        <h6 class="mb-0">อุณหภูมิภายใน (°C)</h6>
-                    </div>
+                <div class="card">
+                    <div class="card-header bg-success text-white">ความชื้นภายนอก</div>
                     <div class="card-body">
-                        <canvas id="tempInChart" style="height:250px;"></canvas>
+                        <div class="chart-container">
+                            <canvas id="humOutChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- ความชื้นภายใน -->
             <div class="col-md-6">
-                <div class="card shadow">
-                    <div class="card-header bg-info text-white">
-                        <h6 class="mb-0">อุณหภูมิภายนอก (°C)</h6>
-                    </div>
+                <div class="card">
+                    <div class="card-header bg-success text-white">ความชื้นภายใน</div>
                     <div class="card-body">
-                        <canvas id="tempOutChart" style="height:250px;"></canvas>
+                        <div class="chart-container">
+                            <canvas id="humInChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- อุณหภูมิภายนอก -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">อุณหภูมิภายนอก</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="tempOutChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- อุณหภูมิภายใน -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">อุณหภูมิภายใน</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="tempInChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAN -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">TAN</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="tanChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NH3 -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">NH3</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="nh3Chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script>
-        const labels = {!! json_encode($labels) !!};
-        const tempInData = {!! json_encode($data->pluck('temp_in')) !!};
-        const tempOutData = {!! json_encode($data->pluck('temp_out')) !!};
-
-        // Chart รวม
-        new Chart(document.getElementById('allChart').getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                        label: 'อุณหภูมิภายใน (°C)',
-                        data: tempInData,
-                        borderColor: 'rgba(255,99,132,1)',
-                        backgroundColor: 'rgba(255,99,132,0.2)',
-                        fill: false,
-                        yAxisID: 'y'
-                    },
-                    {
-                        label: 'อุณหภูมิภายนอก (°C)',
-                        data: tempOutData,
-                        borderColor: 'rgba(54,162,235,1)',
-                        backgroundColor: 'rgba(54,162,235,0.2)',
-                        fill: false,
-                        yAxisID: 'y'
-                    },
-                ]
-            },
-            options: {
-                responsive: true,
-                interaction: {
-                    mode: 'index',
-                    intersect: false
+        function createChart(ctxId, label, color) {
+            const ctx = document.getElementById(ctxId);
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
+                    datasets: [{
+                        label: label,
+                        data: [20, 30, 25, 28, 35, 40, 38, 32],
+                        borderColor: color,
+                        backgroundColor: color + '33',
+                        fill: true,
+                        tension: 0.3,
+                        borderWidth: 2
+                    }]
                 },
-                stacked: false,
-                scales: {
-                    y: {
-                        type: 'linear',
-                        position: 'left'
-                    },
-                    y1: {
-                        type: 'linear',
-                        position: 'right',
-                        grid: {
-                            drawOnChartArea: false
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
                     }
                 }
-            }
-        });
+            });
+        }
 
-        // Chart TempIn
-        new Chart(document.getElementById('tempInChart').getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Temperature (°C)',
-                    data: tempInData,
-                    borderColor: 'rgba(255,99,132,1)',
-                    backgroundColor: 'rgba(255,99,132,0.2)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: false
-                    }
-                }
-            }
-        });
-
-        // Chart TempOut
-        new Chart(document.getElementById('tempOutChart').getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Temperature (°C)',
-                    data: tempOutData,
-                    borderColor: 'rgba(54,162,235,1)',
-                    backgroundColor: 'rgba(54,162,235,0.2)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100
-                    }
-                }
-            }
-        });
+        createChart('humOutChart', 'ความชื้นภายนอก (%)', '#2196F3');
+        createChart('humInChart', 'ความชื้นภายใน (%)', '#4CAF50');
+        createChart('tempOutChart', 'อุณหภูมิภายนอก (°C)', '#FF9800');
+        createChart('tempInChart', 'อุณหภูมิภายใน (°C)', '#E91E63');
+        createChart('tanChart', 'TAN (mg/L)', '#9C27B0');
+        createChart('nh3Chart', 'NH3 (ppm)', '#795548');
     </script>
-
 </body>
 
 </html>
