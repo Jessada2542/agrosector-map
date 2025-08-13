@@ -142,7 +142,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // ฟังก์ชันสร้างกราฟ 1 เส้น
         function createChart(ctxId, label, color, dataValues) {
             const ctx = document.getElementById(ctxId);
             new Chart(ctx, {
@@ -190,7 +189,6 @@
             });
         }
 
-        // กราฟเดิม
         createChart('humOutChart', 'ความชื้นภายนอก (%)', '#2196F3', @json($humid_out));
         createChart('humInChart', 'ความชื้นภายใน (%)', '#4CAF50', @json($humid_in));
         createChart('tempOutChart', 'อุณหภูมิภายนอก (°C)', '#FF9800', @json($temp_out));
@@ -238,7 +236,6 @@
             }
         ]);
 
-        // กราฟแสง
         createChart('lightOutChart', 'แสงภายนอก (lux)', '#FFC107', @json($light_out));
         createChart('lightInChart', 'แสงภายใน (lux)', '#8BC34A', @json($light_in));
     </script>

@@ -286,7 +286,6 @@ class SensorController extends Controller
         $light_out = $data->pluck('lux_out');
         $light_in = $data->pluck('lux_in');
 
-        // สร้าง array สำหรับกราฟรวมใน Controller
         $humid_combined = [];
         $temp_combined = [];
         foreach ($humid_out as $k => $v) {
