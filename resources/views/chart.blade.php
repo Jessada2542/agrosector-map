@@ -34,6 +34,14 @@
             position: relative;
             height: 300px;
         }
+
+        .border-purple {
+            border-color: #6f42c1 !important;
+        }
+
+        .border-brown {
+            border-color: #8B4513 !important;
+        }
     </style>
 </head>
 
@@ -66,6 +74,22 @@
                     <div class="card-header bg-warning text-white">อุณหภูมิ (°C)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="tempCombinedChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-purple">
+                    <div class="card-header bg-purple text-white">TAN (mg/L) - NH3 (ppm)</div>
+                    <div class="card-body">
+                        <div class="chart-container"><canvas id="tannh3CombinedChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-secondary">
+                    <div class="card-header bg-secondary text-white">แสง (lux)</div>
+                    <div class="card-body">
+                        <div class="chart-container"><canvas id="lightCombinedChart"></canvas></div>
                     </div>
                 </div>
             </div>
@@ -170,7 +194,6 @@
             });
         }
 
-        // ฟังก์ชันสร้างกราฟหลายเส้น
         function createMultiLineChart(ctxId, labels, datasets) {
             const ctx = document.getElementById(ctxId);
             new Chart(ctx, {
@@ -196,6 +219,8 @@
         createChart('tempInChart', 'อุณหภูมิภายใน (°C)', '#E91E63', @json($temp_in));
         createChart('tanChart', 'TAN (mg/L)', '#9C27B0', @json($tan));
         createChart('nh3Chart', 'NH3 (ppm)', '#795548', @json($nh3));
+        createChart('lightOutChart', 'แสงภายนอก (lux)', '#FFC107', @json($light_out));
+        createChart('lightInChart', 'แสงภายใน (lux)', '#8BC34A', @json($light_in));
 
         // กราฟรวม (2 เส้น)
         createMultiLineChart('humCombinedChart', @json($labels), [{
@@ -236,9 +261,44 @@
                 borderWidth: 2
             }
         ]);
-
-        createChart('lightOutChart', 'แสงภายนอก (lux)', '#FFC107', @json($light_out));
-        createChart('lightInChart', 'แสงภายใน (lux)', '#8BC34A', @json($light_in));
+        createMultiLineChart('tannh3CombinedChart', @json($labels), [{
+                label: 'TAN (mg/L)',
+                data: @json($tan),
+                borderColor: '#9C27B0',
+                backgroundColor: '#9C27B033',
+                fill: true,
+                tension: 0.3,
+                borderWidth: 2
+            },
+            {
+                label: 'NH3 (ppm)',
+                data: @json($nh3),
+                borderColor: '#795548',
+                backgroundColor: '#79554833',
+                fill: true,
+                tension: 0.3,
+                borderWidth: 2
+            }
+        ]);
+        createMultiLineChart('lightCombinedChart', @json($labels), [{
+                label: 'ภายนอก (lux)',
+                data: @json($light_out),
+                borderColor: '#FFC107',
+                backgroundColor: '#FFC10733',
+                fill: true,
+                tension: 0.3,
+                borderWidth: 2
+            },
+            {
+                label: 'ภายใน (lux)',
+                data: @json($light_in),
+                borderColor: '#8BC34A',
+                backgroundColor: '#8BC34A33',
+                fill: true,
+                tension: 0.3,
+                borderWidth: 2
+            }
+        ]);
     </script>
 </body>
 

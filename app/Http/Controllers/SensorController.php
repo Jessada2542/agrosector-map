@@ -269,7 +269,7 @@ class SensorController extends Controller
         return response()->json(['status' => true, 'message' => 'Sensor connected successfully']);
     }
 
-    public function iself(Request $request)
+    public function isilk(Request $request)
     {
         $query = SensorReading::query();
 
@@ -292,11 +292,19 @@ class SensorController extends Controller
 
         $humid_combined = [];
         $temp_combined = [];
+        $tan_nh3_combined = [];
+        $light_combined = [];
         foreach ($humid_out as $k => $v) {
             $humid_combined[] = $v + ($humid_in[$k] ?? 0);
         }
         foreach ($temp_out as $k => $v) {
             $temp_combined[] = $v + ($temp_in[$k] ?? 0);
+        }
+        foreach ($tan as $key => $value) {
+            $tan_nh3_combined[] = $value + ($nh3[$key] ?? 0);
+        }
+        foreach ($light_out as $key => $value) {
+            $light_combined[] = $value + ($light_in[$key] ?? 0);
         }
 
         return view('chart', compact(
@@ -310,7 +318,9 @@ class SensorController extends Controller
             'light_out',
             'light_in',
             'humid_combined',
-            'temp_combined'
+            'temp_combined',
+            'tan_nh3_combined',
+            'light_combined'
         ));
     }
 }

@@ -25,5 +25,4 @@ Route::post('/generate/user', [UserController::class, 'genUser'])->name('gen.use
 Route::get('/sensor/generate', [SensorController::class, 'generateSensor'])->name('sensor.generate');
 
 
-Route::get('/sensor/iself', [SensorController::class, 'iself'])->name('sensor.data.iself');
-Route::get('/sensor/get/self', [SensorController::class, 'getDataSelf'])->name('sensor.data.get.self');
+Route::get('/sensor/isilk', [SensorController::class, 'isilk'])->name('sensor.data.isilk');
