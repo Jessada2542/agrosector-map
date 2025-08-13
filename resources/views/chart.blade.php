@@ -42,6 +42,14 @@
         .border-brown {
             border-color: #8B4513 !important;
         }
+
+        .bg-purple {
+            background-color: #6f42c1 !important;
+        }
+
+        .bg-brown {
+            background-color: #8B4513 !important;
+        }
     </style>
 </head>
 
