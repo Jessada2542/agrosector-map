@@ -59,7 +59,7 @@
 </div>
 
 <script>
-    const labels = {!! json_encode($data->pluck('created_at')->map(fn($d)=>$d->format('H:i'))) !!};
+    const labels = {!! json_encode($data->pluck('created_at')->map(fn($d)=>$d->format('d-m-Y H:i'))) !!};
     const tempData = {!! json_encode($data->pluck('temp')) !!};
     const humidData = {!! json_encode($data->pluck('humid')) !!};
     const co2Data = {!! json_encode($data->pluck('co2')) !!};
