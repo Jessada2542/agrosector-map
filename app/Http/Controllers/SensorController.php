@@ -286,6 +286,16 @@ class SensorController extends Controller
         $light_out = $data->pluck('light_out');
         $light_in = $data->pluck('light_in');
 
+        // สร้าง array สำหรับกราฟรวมใน Controller
+        $humid_combined = [];
+        $temp_combined = [];
+        foreach ($humid_out as $k => $v) {
+            $humid_combined[] = $v + ($humid_in[$k] ?? 0);
+        }
+        foreach ($temp_out as $k => $v) {
+            $temp_combined[] = $v + ($temp_in[$k] ?? 0);
+        }
+
         return view('chart', compact(
             'labels',
             'humid_out',
@@ -295,7 +305,9 @@ class SensorController extends Controller
             'tan',
             'nh3',
             'light_out',
-            'light_in'
+            'light_in',
+            'humid_combined',
+            'temp_combined'
         ));
     }
 }

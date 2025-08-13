@@ -96,8 +96,8 @@ createChart('tanChart', 'TAN (mg/L)', '#9C27B0', @json($tan));
 createChart('nh3Chart', 'NH3 (ppm)', '#795548', @json($nh3));
 
 // กราฟใหม่
-createChart('humCombinedChart', 'ความชื้นรวม (%)', '#00BCD4', @json(array_map(function($o,$i){ return $o+$i; }, $humid_out, $humid_in)));
-createChart('tempCombinedChart', 'อุณหภูมิรวม (°C)', '#FF5722', @json(array_map(function($o,$i){ return $o+$i; }, $temp_out, $temp_in)));
+createChart('humCombinedChart', 'ความชื้นรวม (%)', '#00BCD4', @json($humid_combined));
+createChart('tempCombinedChart', 'อุณหภูมิรวม (°C)', '#FF5722', @json($temp_combined));
 createChart('lightOutChart', 'แสงภายนอก (lux)', '#FFC107', @json($light_out));
 createChart('lightInChart', 'แสงภายใน (lux)', '#8BC34A', @json($light_in));
 </script>
