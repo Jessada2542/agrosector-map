@@ -9,7 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            background: linear-gradient(to right, #81C784, #4CAF50);
             font-family: "Prompt", sans-serif;
         }
 
@@ -33,7 +32,7 @@
 
 <body>
     <div class="container py-4">
-        <h1 class="text-white mb-4">Dashboard - ค่าต่าง ๆ</h1>
+        <h1 class="mb-4">Dashboard</h1>
         <div class="row">
 
             <!-- ความชื้นภายนอก -->
