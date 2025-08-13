@@ -32,7 +32,7 @@
 
         .chart-container {
             position: relative;
-            height: 300px;
+            /* height: 300px; */
         }
 
         .bg-purple {
