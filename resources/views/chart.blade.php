@@ -52,7 +52,25 @@
         </form>
 
         <div class="row">
-            <!-- กราฟเดิม -->
+            <!-- กราฟรวม (2 เส้น: ภายนอก/ภายใน) -->
+            <div class="col-md-6">
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">ความชื้น (%)</div>
+                    <div class="card-body">
+                        <div class="chart-container"><canvas id="humCombinedChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-warning">
+                    <div class="card-header bg-warning text-white">อุณหภูมิ (°C)</div>
+                    <div class="card-body">
+                        <div class="chart-container"><canvas id="tempCombinedChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- กราฟเดียว -->
             <div class="col-md-6">
                 <div class="card border-primary">
                     <div class="card-header bg-primary text-white">ความชื้นภายนอก (%)</div>
@@ -98,24 +116,6 @@
                     <div class="card-header bg-brown text-white">NH3 (ppm)</div>
                     <div class="card-body">
                         <div class="chart-container"><canvas id="nh3Chart"></canvas></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- กราฟรวม (2 เส้น: ภายนอก/ภายใน) -->
-            <div class="col-md-6">
-                <div class="card border-info">
-                    <div class="card-header bg-info text-white">ความชื้น (%)</div>
-                    <div class="card-body">
-                        <div class="chart-container"><canvas id="humCombinedChart"></canvas></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card border-warning">
-                    <div class="card-header bg-warning text-white">อุณหภูมิ (°C)</div>
-                    <div class="card-body">
-                        <div class="chart-container"><canvas id="tempCombinedChart"></canvas></div>
                     </div>
                 </div>
             </div>
