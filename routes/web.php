@@ -14,8 +14,7 @@ use App\Http\Controllers\SensorController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 
-Route::post('/geocode/import', [HomeController::class, 'import'])->name('geocode.import');
-
+Route::get('/geocode/import', [HomeController::class, 'import'])->name('geocode.import');
 Route::get('/now', function () {
     return now()->toDateTimeString(); // หรือ Carbon::now()
 });
