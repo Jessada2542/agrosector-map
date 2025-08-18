@@ -367,29 +367,53 @@
                             nh3: 'NH3'
                         };
 
-                        // ทำลูปสร้างกราฟครบทุกตัว
                         Object.keys(typeLabelMap).forEach((type) => {
+                        const chartLabel = typeLabelMap[type];
+                        const dataset = datasets.find(ds => ds.label === chartLabel);
+                        const boxEl = document.getElementById(`box-chart-${type}`);
+                        const canvasEl = document.getElementById(`grap-sensor-${type}`);
+
+                        if (!boxEl || !canvasEl) return; // ถ้าไม่มี element ใน DOM ให้ข้ามไป
+
+                        // เช็คว่ามีข้อมูลหรือไม่ (อย่างน้อย 1 ค่า != null/undefined)
+                        const hasData = dataset && dataset.data.some(value => value !== null && value !== undefined);
+
+                        if (!hasData) {
+                            // ไม่มีข้อมูล → ซ่อนกล่อง และลบกราฟเดิม
+                            boxEl.classList.add('hidden');
                             if (window.sensorCharts[type]) {
                                 window.sensorCharts[type].destroy();
+                                delete window.sensorCharts[type];
                             }
-                            const ctx = document.getElementById(`grap-sensor-${type}`).getContext('2d');
-                            window.sensorCharts[type] = new Chart(ctx, {
-                                type: 'line',
-                                data: {
-                                    labels: labels,
-                                    datasets: datasets.filter(ds => ds.label === typeLabelMap[type]),
+                            return;
+                        } else {
+                            // มีข้อมูล → แสดงกล่อง
+                            boxEl.classList.remove('hidden');
+                        }
+
+                        // ถ้ามีกราฟเก่าอยู่ → ลบออกก่อน
+                        if (window.sensorCharts[type]) {
+                            window.sensorCharts[type].destroy();
+                        }
+
+                        const ctx = canvasEl.getContext('2d');
+                        window.sensorCharts[type] = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [dataset]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: { display: true, position: 'top' }
                                 },
-                                options: {
-                                    responsive: true,
-                                    plugins: {
-                                        legend: { display: true, position: 'top' }
-                                    },
-                                    scales: {
-                                        y: { beginAtZero: false }
-                                    }
+                                scales: {
+                                    y: { beginAtZero: false }
                                 }
-                            });
+                            }
                         });
+                    });
                     } else {
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
                     }
