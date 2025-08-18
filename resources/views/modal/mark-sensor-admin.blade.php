@@ -125,7 +125,7 @@
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับโพแทสเซียม (K)</p>
                     <canvas id="grap-sensor-k" class="lineChart w-full min-w-0"></canvas>
                 </div>
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chartph">
+                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-ph">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับกรดด่าง (pH)</p>
                     <canvas id="grap-sensor-ph" class="lineChart w-full min-w-0"></canvas>
                 </div>
