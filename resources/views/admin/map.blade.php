@@ -357,12 +357,12 @@
                             p: 'Phosphorus (P)',
                             k: 'Potassium (K)',
                             ph: 'pH',
-                            's-h': 'Soil Humidity',
-                            's-t': 'Soil Temperature',
+                            sh: 'Soil Humidity',
+                            st: 'Soil Temperature',
                             ec: 'EC',
                             light: 'Light',
-                            'a-h': 'Air Humidity',
-                            'a-t': 'Air Temperature',
+                            ah: 'Air Humidity',
+                            at: 'Air Temperature',
                             co2: 'CO2',
                             nh3: 'NH3'
                         };
