@@ -141,12 +141,89 @@
                         $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-detail').text(sensor.detail ? sensor.detail : '');
                         $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY HH:mm') : '');
-                        $('#sensor-n').text(sensor.latest_sensor ? sensor.latest_sensor.n : '');
-                        $('#sensor-p').text(sensor.latest_sensor ? sensor.latest_sensor.p : '');
-                        $('#sensor-k').text(sensor.latest_sensor ? sensor.latest_sensor.k : '');
-                        $('#sensor-ph').text(sensor.latest_sensor ? sensor.latest_sensor.ph : '');
-                        $('#sensor-humidity').text(sensor.latest_sensor ? sensor.latest_sensor.humidity : '');
-                        $('#sensor-ec').text(sensor.latest_sensor ? sensor.latest_sensor.ec : '');
+                        if (sensor.latest_sensor && sensor.latest_sensor.n) {
+                            $('#box-n').removeClass('hidden');
+                            $('#sensor-n').text(sensor.latest_sensor.n);
+                        } else {
+                            $('#box-n').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.p) {
+                            $('#box-p').removeClass('hidden');
+                            $('#sensor-p').text(sensor.latest_sensor.p);
+                        } else {
+                            $('#box-p').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.k) {
+                            $('#box-k').removeClass('hidden');
+                            $('#sensor-k').text(sensor.latest_sensor.k);
+                        } else {
+                            $('#box-k').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.ph) {
+                            $('#box-ph').removeClass('hidden');
+                            $('#sensor-ph').text(sensor.latest_sensor.ph);
+                        } else {
+                            $('#box-ph').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.humidity) {
+                            $('#box-s-h').removeClass('hidden');
+                            $('#sensor-soil-humidity').text(sensor.latest_sensor.humidity);
+                        } else {
+                            $('#box-s-h').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.temperature) {
+                            $('#box-s-t').removeClass('hidden');
+                            $('#sensor-soil-temperature').text(sensor.latest_sensor.temperature);
+                        } else {
+                            $('#box-s-t').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.ec) {
+                            $('#box-ec').removeClass('hidden');
+                            $('#sensor-ec').text(sensor.latest_sensor.ec);
+                        } else {
+                            $('#box-ec').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.light) {
+                            $('#box-light').removeClass('hidden');
+                            $('#sensor-light').text(sensor.latest_sensor.light);
+                        } else {
+                            $('#box-light').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.air_humidity) {
+                            $('#box-a-h').removeClass('hidden');
+                            $('#sensor-air-humidity').text(sensor.latest_sensor.air_humidity);
+                        } else {
+                            $('#box-a-h').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.air_temperature) {
+                            $('#box-a-t').removeClass('hidden');
+                            $('#sensor-air-temperature').text(sensor.latest_sensor.air_temperature);
+                        } else {
+                            $('#box-a-t').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.co2) {
+                            $('#box-co2').removeClass('hidden');
+                            $('#sensor-co2').text(sensor.latest_sensor.co2);
+                        } else {
+                            $('#box-co2').addClass('hidden');
+                        }
+
+                        if (sensor.latest_sensor && sensor.latest_sensor.nh3) {
+                            $('#box-nh3').removeClass('hidden');
+                            $('#sensor-nh3').text(sensor.latest_sensor.nh3);
+                        } else {
+                            $('#box-nh3').addClass('hidden');
+                        }
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
@@ -194,10 +271,20 @@
                                 pointRadius: 4
                             },
                             {
-                                label: 'Humidity',
+                                label: 'Soil Humidity',
                                 data: sensor.sensors.map(d => d.humidity),
                                 borderColor: 'rgba(0, 191, 255, 1)',
                                 backgroundColor: 'rgba(0, 191, 255, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'Soil Temperature',
+                                data: sensor.sensors.map(d => d.temperature),
+                                borderColor: 'rgba(255, 140, 0, 1)',
+                                backgroundColor: 'rgba(255, 140, 0, 0.2)',
                                 borderWidth: 2,
                                 tension: 0.4,
                                 fill: true,
@@ -212,6 +299,56 @@
                                 tension: 0.4,
                                 fill: true,
                                 pointRadius: 4
+                            },
+                            {
+                                label: 'Light',
+                                data: sensor.sensors.map(d => d.light),
+                                borderColor: 'rgba(255, 215, 0, 1)',
+                                backgroundColor: 'rgba(255, 215, 0, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'Air Humidity',
+                                data: sensor.sensors.map(d => d.air_humidity),
+                                borderColor: 'rgba(30, 144, 255, 1)',
+                                backgroundColor: 'rgba(30, 144, 255, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'Air Temperature',
+                                data: sensor.sensors.map(d => d.air_temperature),
+                                borderColor: 'rgba(255, 99, 71, 1)',
+                                backgroundColor: 'rgba(255, 99, 71, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'CO2',
+                                data: sensor.sensors.map(d => d.co2),
+                                borderColor: 'rgba(0, 128, 0, 1)',
+                                backgroundColor: 'rgba(0, 128, 0, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'NH3',
+                                data: sensor.sensors.map(d => d.nh3),
+                                borderColor: 'rgba(148, 0, 211, 1)',
+                                backgroundColor: 'rgba(148, 0, 211, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
                             }
                         ];
 
@@ -220,12 +357,18 @@
                             p: 'Phosphorus (P)',
                             k: 'Potassium (K)',
                             ph: 'pH',
-                            humidity: 'Humidity',
-                            ec: 'EC'
+                            's-h': 'Soil Humidity',
+                            's-t': 'Soil Temperature',
+                            ec: 'EC',
+                            light: 'Light',
+                            'a-h': 'Air Humidity',
+                            'a-t': 'Air Temperature',
+                            co2: 'CO2',
+                            nh3: 'NH3'
                         };
 
-                        ['n', 'p', 'k', 'ph', 'humidity', 'ec'].forEach((type) => {
-                            // destroy chart ถ้ามีอยู่แล้ว
+                        // ทำลูปสร้างกราฟครบทุกตัว
+                        Object.keys(typeLabelMap).forEach((type) => {
                             if (window.sensorCharts[type]) {
                                 window.sensorCharts[type].destroy();
                             }
@@ -239,9 +382,11 @@
                                 options: {
                                     responsive: true,
                                     plugins: {
-                                        legend: { display: true, position:'top' }
+                                        legend: { display: true, position: 'top' }
                                     },
-                                    scales: { y: { beginAtZero: false } }
+                                    scales: {
+                                        y: { beginAtZero: false }
+                                    }
                                 }
                             });
                         });
