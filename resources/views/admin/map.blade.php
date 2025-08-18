@@ -338,23 +338,23 @@
                         }
 
                         const ctx = canvasEl.getContext('2d');
-                        window.sensorCharts[type] = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: labels,
-                                datasets: [dataset]
-                            },
-                            options: {
-                                responsive: true,
-                                plugins: {
-                                    legend: { display: true, position: 'top' }
+                            window.sensorCharts[type] = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: labels,
+                                    datasets: [dataset]
                                 },
-                                scales: {
-                                    y: { beginAtZero: false }
+                                options: {
+                                    responsive: true,
+                                    plugins: {
+                                        legend: { display: true, position: 'top' }
+                                    },
+                                    scales: {
+                                        y: { beginAtZero: false }
+                                    }
                                 }
-                            }
+                            });
                         });
-                    });
                     } else {
                         $('#sensor-content').html('<p class="text-red-500">ไม่พบข้อมูลสำหรับ Sensor นี้</p>');
                     }

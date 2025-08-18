@@ -76,14 +76,6 @@
                         <p class="text-gray-500 text-sm">pH</p>
                         <p id="sensor-ph" class="text-xl font-semibold text-purple-600">7.56</p>
                     </div>
-                    <div id="box-s-h">
-                        <p class="text-gray-500 text-sm">ความชื้นดิ้น (%)</p>
-                        <p id="sensor-soil-humidity" class="text-xl font-semibold text-indigo-600">45.00</p>
-                    </div>
-                    <div id="box-ec">
-                        <p class="text-gray-500 text-sm">EC</p>
-                        <p id="sensor-ec" class="text-xl font-semibold text-orange-600">40.00</p>
-                    </div>
                     <div id="box-light">
                         <p class="text-gray-500 text-sm">แสง</p>
                         <p id="sensor-light" class="text-xl font-semibold text-orange-600">40.00</p>
@@ -95,10 +87,6 @@
                     <div id="box-a-t">
                         <p class="text-gray-500 text-sm">อุณหภูมิ (°C)</p>
                         <p id="sensor-air-temperature" class="text-xl font-semibold text-indigo-600">45.00</p>
-                    </div>
-                    <div id="box-co2">
-                        <p class="text-gray-500 text-sm">CO2 (ppm)</p>
-                        <p id="sensor-co2" class="text-xl font-semibold text-indigo-600">45.00</p>
                     </div>
                 </div>
             </div>
@@ -121,14 +109,6 @@
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับกรดด่าง (pH)</p>
                     <canvas id="grap-sensor-ph" class="lineChart w-full min-w-0"></canvas>
                 </div>
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-s-h">
-                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับความชื้นดิน (Soil Humidity)</p>
-                    <canvas id="grap-sensor-s-h" class="lineChart w-full min-w-0"></canvas>
-                </div>
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-ec">
-                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับการนำไฟฟ้า (EC)</p>
-                    <canvas id="grap-sensor-ec" class="lineChart w-full min-w-0"></canvas>
-                </div>
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-light">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับความเข้มแสง (lux)</p>
                     <canvas id="grap-sensor-light" class="lineChart w-full min-w-0"></canvas>
@@ -140,10 +120,6 @@
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-a-t">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับอุณหภูมิ (Temperature)</p>
                     <canvas id="grap-sensor-a-t" class="lineChart w-full min-w-0"></canvas>
-                </div>
-                <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-co2">
-                    <p class="text-green-800 text-sm font-semibold mb-2">ระดับคาร์บอนไดออกไซด์ (CO2)</p>
-                    <canvas id="grap-sensor-co2" class="lineChart w-full min-w-0"></canvas>
                 </div>
             </div>
         </div>

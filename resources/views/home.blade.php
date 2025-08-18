@@ -136,12 +136,25 @@
                         $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-detail').text(sensor.detail ? sensor.detail : '');
                         $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY HH:mm') : '');
-                        $('#sensor-n').text(sensor.latest_sensor ? sensor.latest_sensor.n : '');
-                        $('#sensor-p').text(sensor.latest_sensor ? sensor.latest_sensor.p : '');
-                        $('#sensor-k').text(sensor.latest_sensor ? sensor.latest_sensor.k : '');
-                        $('#sensor-ph').text(sensor.latest_sensor ? sensor.latest_sensor.ph : '');
-                        $('#sensor-humidity').text(sensor.latest_sensor ? sensor.latest_sensor.humidity : '');
-                        $('#sensor-ec').text(sensor.latest_sensor ? sensor.latest_sensor.ec : '');
+                        const sensorMap = [
+                            { key: 'n',              box: '#box-n',       el: '#sensor-n' },
+                            { key: 'p',              box: '#box-p',       el: '#sensor-p' },
+                            { key: 'k',              box: '#box-k',       el: '#sensor-k' },
+                            { key: 'ph',             box: '#box-ph',      el: '#sensor-ph' },
+                            { key: 'light',          box: '#box-light',   el: '#sensor-light' },
+                            { key: 'air_humidity',   box: '#box-a-h',     el: '#sensor-air-humidity' },
+                            { key: 'air_temperature',box: '#box-a-t',     el: '#sensor-air-temperature' },
+                        ];
+
+                        sensorMap.forEach(({ key, box, el }) => {
+                            const val = sensor.latest_sensor?.[key];
+                            if (val !== null && val !== undefined) {
+                                $(box).removeClass('hidden');
+                                $(el).text(val);
+                            } else {
+                                $(box).addClass('hidden');
+                            }
+                        });
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
@@ -189,25 +202,35 @@
                                 pointRadius: 4
                             },
                             {
-                                label: 'Humidity',
-                                data: sensor.sensors.map(d => d.humidity),
-                                borderColor: 'rgba(0, 191, 255, 1)',
-                                backgroundColor: 'rgba(0, 191, 255, 0.2)',
+                                label: 'Light',
+                                data: sensor.sensors.map(d => d.light),
+                                borderColor: 'rgba(255, 215, 0, 1)',
+                                backgroundColor: 'rgba(255, 215, 0, 0.2)',
                                 borderWidth: 2,
                                 tension: 0.4,
                                 fill: true,
                                 pointRadius: 4
                             },
                             {
-                                label: 'EC',
-                                data: sensor.sensors.map(d => d.ec),
-                                borderColor: 'rgba(255, 128, 0, 1)',
-                                backgroundColor: 'rgba(255, 128, 0, 0.2)',
+                                label: 'Air Humidity',
+                                data: sensor.sensors.map(d => d.air_humidity),
+                                borderColor: 'rgba(30, 144, 255, 1)',
+                                backgroundColor: 'rgba(30, 144, 255, 0.2)',
                                 borderWidth: 2,
                                 tension: 0.4,
                                 fill: true,
                                 pointRadius: 4
-                            }
+                            },
+                            {
+                                label: 'Air Temperature',
+                                data: sensor.sensors.map(d => d.air_temperature),
+                                borderColor: 'rgba(255, 99, 71, 1)',
+                                backgroundColor: 'rgba(255, 99, 71, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            },
                         ];
 
                         const typeLabelMap = {
@@ -215,28 +238,55 @@
                             p: 'Phosphorus (P)',
                             k: 'Potassium (K)',
                             ph: 'pH',
-                            humidity: 'Humidity',
-                            ec: 'EC'
+                            light: 'Light',
+                            'a-h': 'Air Humidity',
+                            'a-t': 'Air Temperature'
                         };
 
-                        ['n', 'p', 'k', 'ph', 'humidity', 'ec'].forEach((type) => {
-                            // destroy chart ถ้ามีอยู่แล้ว
+                        Object.keys(typeLabelMap).forEach((type) => {
+                        const chartLabel = typeLabelMap[type];
+                        const dataset = datasets.find(ds => ds.label === chartLabel);
+                        const boxEl = document.getElementById(`box-chart-${type}`);
+                        const canvasEl = document.getElementById(`grap-sensor-${type}`);
+
+                        if (!boxEl || !canvasEl) return; // ถ้าไม่มี element ใน DOM ให้ข้ามไป
+
+                        // เช็คว่ามีข้อมูลหรือไม่ (อย่างน้อย 1 ค่า != null/undefined)
+                        const hasData = dataset && dataset.data.some(value => value !== null && value !== undefined);
+
+                        if (!hasData) {
+                            // ไม่มีข้อมูล → ซ่อนกล่อง และลบกราฟเดิม
+                            boxEl.classList.add('hidden');
                             if (window.sensorCharts[type]) {
                                 window.sensorCharts[type].destroy();
+                                delete window.sensorCharts[type];
                             }
-                            const ctx = document.getElementById(`grap-sensor-${type}`).getContext('2d');
+                            return;
+                        } else {
+                            // มีข้อมูล → แสดงกล่อง
+                            boxEl.classList.remove('hidden');
+                        }
+
+                        // ถ้ามีกราฟเก่าอยู่ → ลบออกก่อน
+                        if (window.sensorCharts[type]) {
+                            window.sensorCharts[type].destroy();
+                        }
+
+                        const ctx = canvasEl.getContext('2d');
                             window.sensorCharts[type] = new Chart(ctx, {
                                 type: 'line',
                                 data: {
                                     labels: labels,
-                                    datasets: datasets.filter(ds => ds.label === typeLabelMap[type]),
+                                    datasets: [dataset]
                                 },
                                 options: {
                                     responsive: true,
                                     plugins: {
-                                        legend: { display: true, position:'top' }
+                                        legend: { display: true, position: 'top' }
                                     },
-                                    scales: { y: { beginAtZero: false } }
+                                    scales: {
+                                        y: { beginAtZero: false }
+                                    }
                                 }
                             });
                         });
