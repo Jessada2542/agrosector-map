@@ -141,89 +141,30 @@
                         $('#sensor-date').text(sensor.start_date ? dayjs.utc(sensor.start_date).tz('Asia/Bangkok').format('DD/MM/YYYY') : '');
                         $('#sensor-detail').text(sensor.detail ? sensor.detail : '');
                         $('#sensor-update').text(sensor.latest_sensor?.created_at ? dayjs.utc(sensor.latest_sensor.created_at).tz('Asia/Bangkok').format('DD/MM/YYYY HH:mm') : '');
-                        if (sensor.latest_sensor && sensor.latest_sensor.n) {
-                            $('#box-n').removeClass('hidden');
-                            $('#sensor-n').text(sensor.latest_sensor.n);
-                        } else {
-                            $('#box-n').addClass('hidden');
-                        }
+                        const sensorMap = [
+                            { key: 'n',              box: '#box-n',       el: '#sensor-n' },
+                            { key: 'p',              box: '#box-p',       el: '#sensor-p' },
+                            { key: 'k',              box: '#box-k',       el: '#sensor-k' },
+                            { key: 'ph',             box: '#box-ph',      el: '#sensor-ph' },
+                            { key: 'humidity',       box: '#box-s-h',     el: '#sensor-soil-humidity' },
+                            { key: 'temperature',    box: '#box-s-t',     el: '#sensor-soil-temperature' },
+                            { key: 'ec',             box: '#box-ec',      el: '#sensor-ec' },
+                            { key: 'light',          box: '#box-light',   el: '#sensor-light' },
+                            { key: 'air_humidity',   box: '#box-a-h',     el: '#sensor-air-humidity' },
+                            { key: 'air_temperature',box: '#box-a-t',     el: '#sensor-air-temperature' },
+                            { key: 'co2',            box: '#box-co2',     el: '#sensor-co2' },
+                            { key: 'nh3',            box: '#box-nh3',     el: '#sensor-nh3' }
+                        ];
 
-                        if (sensor.latest_sensor && sensor.latest_sensor.p) {
-                            $('#box-p').removeClass('hidden');
-                            $('#sensor-p').text(sensor.latest_sensor.p);
-                        } else {
-                            $('#box-p').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.k) {
-                            $('#box-k').removeClass('hidden');
-                            $('#sensor-k').text(sensor.latest_sensor.k);
-                        } else {
-                            $('#box-k').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.ph) {
-                            $('#box-ph').removeClass('hidden');
-                            $('#sensor-ph').text(sensor.latest_sensor.ph);
-                        } else {
-                            $('#box-ph').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.humidity) {
-                            $('#box-s-h').removeClass('hidden');
-                            $('#sensor-soil-humidity').text(sensor.latest_sensor.humidity);
-                        } else {
-                            $('#box-s-h').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.temperature) {
-                            $('#box-s-t').removeClass('hidden');
-                            $('#sensor-soil-temperature').text(sensor.latest_sensor.temperature);
-                        } else {
-                            $('#box-s-t').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.ec) {
-                            $('#box-ec').removeClass('hidden');
-                            $('#sensor-ec').text(sensor.latest_sensor.ec);
-                        } else {
-                            $('#box-ec').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.light) {
-                            $('#box-light').removeClass('hidden');
-                            $('#sensor-light').text(sensor.latest_sensor.light);
-                        } else {
-                            $('#box-light').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.air_humidity) {
-                            $('#box-a-h').removeClass('hidden');
-                            $('#sensor-air-humidity').text(sensor.latest_sensor.air_humidity);
-                        } else {
-                            $('#box-a-h').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.air_temperature) {
-                            $('#box-a-t').removeClass('hidden');
-                            $('#sensor-air-temperature').text(sensor.latest_sensor.air_temperature);
-                        } else {
-                            $('#box-a-t').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.co2) {
-                            $('#box-co2').removeClass('hidden');
-                            $('#sensor-co2').text(sensor.latest_sensor.co2);
-                        } else {
-                            $('#box-co2').addClass('hidden');
-                        }
-
-                        if (sensor.latest_sensor && sensor.latest_sensor.nh3) {
-                            $('#box-nh3').removeClass('hidden');
-                            $('#sensor-nh3').text(sensor.latest_sensor.nh3);
-                        } else {
-                            $('#box-nh3').addClass('hidden');
-                        }
+                        sensorMap.forEach(({ key, box, el }) => {
+                            const val = sensor.latest_sensor?.[key];
+                            if (val !== null && val !== undefined) {
+                                $(box).removeClass('hidden');
+                                $(el).text(val);
+                            } else {
+                                $(box).addClass('hidden');
+                            }
+                        });
 
                         const labels = sensor.sensors.map(d =>
                             dayjs.utc(d.created_at).tz('Asia/Bangkok').format('DD-MM-YYYY HH:mm')
