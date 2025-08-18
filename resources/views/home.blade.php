@@ -41,7 +41,7 @@
     <div id="map"></div>
 
     @include('modal.search')
-    @include('modal.mark-sensor')
+    @include('modal.mark-sensor-guest')
 
     <script>
         const checkLogin = '{{ Auth::check() }}';
