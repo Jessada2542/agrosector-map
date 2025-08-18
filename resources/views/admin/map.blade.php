@@ -23,7 +23,7 @@
     <div id="map"></div>
 
     @include('modal.search')
-    @include('modal.mark-sensor')
+    @include('modal.mark-sensor-admin')
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -357,12 +357,12 @@
                             p: 'Phosphorus (P)',
                             k: 'Potassium (K)',
                             ph: 'pH',
-                            sh: 'Soil Humidity',
-                            st: 'Soil Temperature',
+                            's-h': 'Soil Humidity',
+                            's-t': 'Soil Temperature',
                             ec: 'EC',
                             light: 'Light',
-                            ah: 'Air Humidity',
-                            at: 'Air Temperature',
+                            'a-h': 'Air Humidity',
+                            'a-t': 'Air Temperature',
                             co2: 'CO2',
                             nh3: 'NH3'
                         };

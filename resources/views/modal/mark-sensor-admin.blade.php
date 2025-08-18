@@ -131,11 +131,11 @@
                 </div>
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-s-h">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับความชื้นดิน (Soil Humidity)</p>
-                    <canvas id="grap-sensor-sh" class="lineChart w-full min-w-0"></canvas>
+                    <canvas id="grap-sensor-s-h" class="lineChart w-full min-w-0"></canvas>
                 </div>
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-s-t">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับอุณหภูมิดิน (Soil Temperature)</p>
-                    <canvas id="grap-sensor-st" class="lineChart w-full min-w-0"></canvas>
+                    <canvas id="grap-sensor-s-t" class="lineChart w-full min-w-0"></canvas>
                 </div>
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-ec">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับการนำไฟฟ้า (EC)</p>
@@ -147,11 +147,11 @@
                 </div>
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-a-h">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับความชื้น (Humidity)</p>
-                    <canvas id="grap-sensor-ah" class="lineChart w-full min-w-0"></canvas>
+                    <canvas id="grap-sensor-a-h" class="lineChart w-full min-w-0"></canvas>
                 </div>
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-a-t">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับอุณหภูมิ (Temperature)</p>
-                    <canvas id="grap-sensor-at" class="lineChart w-full min-w-0"></canvas>
+                    <canvas id="grap-sensor-a-t" class="lineChart w-full min-w-0"></canvas>
                 </div>
                 <div class="rounded-md overflow-hidden shadow-lg bg-white p-3" id="box-chart-co2">
                     <p class="text-green-800 text-sm font-semibold mb-2">ระดับคาร์บอนไดออกไซด์ (CO2)</p>
