@@ -77,11 +77,11 @@
                         <p id="sensor-ph" class="text-xl font-semibold text-purple-600">7.56</p>
                     </div>
                     <div id="box-s-h">
-                        <p class="text-gray-500 text-sm">ความชื้นดิ้น (%)</p>
+                        <p class="text-gray-500 text-sm">ความชื้นดิน (%)</p>
                         <p id="sensor-soil-humidity" class="text-xl font-semibold text-indigo-600">45.00</p>
                     </div>
                     <div id="box-s-t">
-                        <p class="text-gray-500 text-sm">อุณหภูมิดิ้น (°C)</p>
+                        <p class="text-gray-500 text-sm">อุณหภูมิดิน (°C)</p>
                         <p id="sensor-soil-temperature" class="text-xl font-semibold text-indigo-600">45.00</p>
                     </div>
                     <div id="box-ec">
