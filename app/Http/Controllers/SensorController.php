@@ -253,7 +253,8 @@ class SensorController extends Controller
         return response()->json([
             'status' => true,
             'data' => $sensorData,
-            'datetime' => Carbon::now('Asia/Bangkok')->toDateTimeString()
+            'datetime' => Carbon::now('Asia/Bangkok')->toDateTimeString(),
+            'Auth::check()' => Auth::check()
         ]);
     }
 
