@@ -31,6 +31,12 @@ class AuthController extends Controller
 
         if (!Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             if (!$user || !Hash::check($request->password, $user->password)) {
+                // ถ้า Auth::attempt() สำเร็จ
+                $user = User::where('username', $request->username)->firstOrFail();
+
+                // สร้าง Token สำหรับการใช้งาน API
+                $token = $user->createToken('auth_token')->plainTextToken;
+
                 return response()->json([
                     'status' => Response::HTTP_UNAUTHORIZED,
                     'message' => 'Invalid credentials'
