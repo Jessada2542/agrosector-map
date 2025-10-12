@@ -38,12 +38,16 @@ class AuthController extends Controller
         // Regenerate the session ID to prevent session fixation and persist login
         $request->session()->regenerate();
 
-        // Now Auth::user() will return the authenticated user on subsequent requests
+        // Try to get the authenticated user. In some setups Auth::user() may be null
+        // in the same request, so fall back to fetching the user by username.
         $user = Auth::user();
+        if (!$user) {
+            $user = \App\Models\User::where('username', $request->username)->first();
+        }
 
         // If this is an AJAX/API login you may want to return JSON; for typical
         // browser-based login redirect to the intended page so the session cookie is set.
-        if ($request->wantsJson()) {
+        if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'status' => true,
                 'message' => 'Login success',
