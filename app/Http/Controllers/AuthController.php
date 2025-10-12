@@ -27,33 +27,41 @@ class AuthController extends Controller
             return response()->json($validator->errors());
         }
 
-        $user = User::where('username', $request->username)->first();
-
+        // Attempt to authenticate using the web guard (session driver)
         if (!Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            if (!$user || !Hash::check($request->password, $user->password)) {
-                // ถ้า Auth::attempt() สำเร็จ
-                $user = User::where('username', $request->username)->firstOrFail();
-
-                // สร้าง Token สำหรับการใช้งาน API
-                $token = $user->createToken('auth_token')->plainTextToken;
-
-                return response()->json([
-                    'status' => Response::HTTP_UNAUTHORIZED,
-                    'message' => 'Invalid credentials'
-                ], Response::HTTP_UNAUTHORIZED);
-            }
+            return response()->json([
+                'status' => Response::HTTP_UNAUTHORIZED,
+                'message' => 'Invalid credentials'
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Login success',
-            'role' => $user->role_id,
-        ], Response::HTTP_OK);
+        // Regenerate the session ID to prevent session fixation and persist login
+        $request->session()->regenerate();
+
+        // Now Auth::user() will return the authenticated user on subsequent requests
+        $user = Auth::user();
+
+        // If this is an AJAX/API login you may want to return JSON; for typical
+        // browser-based login redirect to the intended page so the session cookie is set.
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Login success',
+                'role' => $user->role_id,
+            ], Response::HTTP_OK);
+        }
+
+        return redirect()->intended(route('map.index'));
     }
 
     public function logout()
     {
         Auth::logout();
+
+        // Invalidate the session and regenerate token to fully logout the user
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
         return redirect('/');
     }
 }
