@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>เข้าสู่ระบบ</title>
     <link href="{{ asset('/images/logo.png') }}" rel="shortcut icon">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -51,6 +52,12 @@
 
     <script>
         $(document).ready(function () {
+            // Set X-CSRF-TOKEN header for all AJAX requests
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $('#btn-login').click(function () {
                 const username = $('#username').val();
                 const password = $('#password').val();
@@ -96,10 +103,14 @@
                             });
                         }
                     },
-                    error: function () {
+                    error: function (jqXHR) {
+                        let title = 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ';
+                        if (jqXHR && jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                            title = jqXHR.responseJSON.message;
+                        }
                         Swal.fire({
                             icon: 'error',
-                            title: 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ',
+                            title: title,
                             showConfirmButton: false,
                             timer: 1500
                         });
