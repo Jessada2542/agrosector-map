@@ -222,29 +222,17 @@ class SensorController extends Controller
 
     public function data($id)
     {
-        if (Auth::check() && in_array(Auth::user()->role_id, [2, 3])) {
-            $sensorData = UserUseSensor::with([
-                'user',
-                'userSensor',
-                'userSensor.province',
-                'userSensor.district',
-                'userSensor.subdistrict',
-                'latestSensor',
-                'sensors'
-            ])->whereId($id)->first();
-        } else {
-            $sensorData = UserUseSensor::with([
-                'user',
-                'userSensor',
-                'userSensor.province',
-                'userSensor.district',
-                'userSensor.subdistrict',
-                'latestSensor',
-                'sensors' => function ($query) {
-                    $query->where('created_at', '>=', Carbon::now('Asia/Bangkok')->subDays(7)->toDateTimeString());
-                }
-            ])->whereId($id)->first();
-        }
+        $sensorData = UserUseSensor::with([
+            'user',
+            'userSensor',
+            'userSensor.province',
+            'userSensor.district',
+            'userSensor.subdistrict',
+            'latestSensor',
+            'sensors' /* => function ($query) {
+                $query->where('created_at', '>=', Carbon::now('Asia/Bangkok')->subDays(7)->toDateTimeString());
+            } */
+        ])->whereId($id)->first();
 
         if (!$sensorData) {
             return response()->json(['error' => 'Sensor not found'], 404);
