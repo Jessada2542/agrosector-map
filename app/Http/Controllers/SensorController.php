@@ -229,9 +229,33 @@ class SensorController extends Controller
             'userSensor.district',
             'userSensor.subdistrict',
             'latestSensor',
-            'sensors' /* => function ($query) {
+            'sensors' => function ($query) {
                 $query->where('created_at', '>=', Carbon::now('Asia/Bangkok')->subDays(7)->toDateTimeString());
-            } */
+            }
+        ])->whereId($id)->first();
+
+        if (!$sensorData) {
+            return response()->json(['error' => 'Sensor not found'], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $sensorData,
+            'datetime' => Carbon::now('Asia/Bangkok')->toDateTimeString(),
+            'Auth::check()' => Auth::check()
+        ]);
+    }
+
+    public function dataAdmin($id)
+    {
+        $sensorData = UserUseSensor::with([
+            'user',
+            'userSensor',
+            'userSensor.province',
+            'userSensor.district',
+            'userSensor.subdistrict',
+            'latestSensor',
+            'sensors'
         ])->whereId($id)->first();
 
         if (!$sensorData) {

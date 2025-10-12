@@ -121,7 +121,7 @@
             window.sensorCharts = window.sensorCharts || {};
 
             $.ajax({
-                url: `/api/sensor/data/${id}`,
+                url: `/sensor/data/${id}`,
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
