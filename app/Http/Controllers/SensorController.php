@@ -222,7 +222,7 @@ class SensorController extends Controller
 
     public function data($id)
     {
-        if (Auth::user()->role == 2) {
+        if (in_array(Auth::user()->role_id, [2, 3])) {
             $sensorData = UserUseSensor::with([
                 'user',
                 'userSensor',
