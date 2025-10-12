@@ -58,6 +58,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            // Ensure jQuery marks requests as AJAX for server-side detection
+            $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                jqXHR.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            });
             $('#btn-login').click(function () {
                 const username = $('#username').val();
                 const password = $('#password').val();
@@ -75,6 +80,7 @@
                 $.ajax({
                     url: '/login',
                     type: 'POST',
+                    dataType: 'json',
                     data: {
                         username: username,
                         password: password,
