@@ -47,7 +47,7 @@ class AuthController extends Controller
 
         // If this is an AJAX/API login you may want to return JSON; for typical
         // browser-based login redirect to the intended page so the session cookie is set.
-        if ($request->ajax() || $request->wantsJson()) {
+        if ($request->ajax() || $request->wantsJson() || $request->header('X-Requested-With') === 'XMLHttpRequest') {
             return response()->json([
                 'status' => true,
                 'message' => 'Login success',
