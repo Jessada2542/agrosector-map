@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\GeoCodesImport;
 use App\Models\GeoCode;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
