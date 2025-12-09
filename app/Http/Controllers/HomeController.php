@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Imports\GeoCodesImport;
 use App\Models\GeoCode;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -12,7 +11,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        User::where('id', 1)->update(['username' => 'admin', 'password' => bcrypt('password')]);
         $provinces = GeoCode::select('province_code as id', 'province_name_th as name')
             ->groupBy('province_code', 'province_name_th')
             ->get();
